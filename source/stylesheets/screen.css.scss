@@ -350,7 +350,7 @@ html, body {
   }
 
   // the div is the tocify hidden div for placeholding stuff
-  &>h1, &>h2, &>div {
+  &>h1, &>h2, &>h3, &>div, &>h6 {
     clear:both;
   }
 
@@ -388,18 +388,22 @@ html, body {
     margin-top: $h1-margin-bottom * -1;
     border-top: none;
   }
-
+  
   h3, h4, h5, h6 {
     @extend %header-font;
     font-size: 15px;
     margin-top: 2.5em;
     margin-bottom: 0.8em;
   }
-
-  h4, h5, h6 {
-    font-size: 10px;
+  
+  h4 {
+    font-size: 12px;
   }
 
+  h5, h6 {
+    font-size: 10px;
+  }
+  
   hr {
     margin: 2em 0;
     border-top: 2px solid $examples-bg;
