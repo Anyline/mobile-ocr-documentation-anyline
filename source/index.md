@@ -1,9 +1,6 @@
 ---
 title: API Reference
 
-language_tabs:
-  - java: Android
-  - objective_c: iOS
 
 toc_footers:
   - <a href='https://anyline.io/anyline-sdk-modules/'>Get the Anyline&reg SDK</a>
@@ -312,12 +309,6 @@ With the config file the views can be configured in regard of postion and looks 
 	* [List of all XML options] (#configureViaXML)
 	* [Differences to json] (#differencesToJson)
 	
-[**iOS Config of ModuleView**] (#iosConfig)
-
-* [Configure ModuleView in Code] (#iosConfigModuleViewCode)  
-* [Configure ModuleView with Storyboards] (#iosConfigModuleViewStoryboard)
-
-
 <a name="captureResolution"></a>
 ### captureResolution
 
@@ -573,7 +564,7 @@ If another scan may be required later, leave this value true and just restart th
 - **Default:** true (cancel scanning when result is found)
 
 <a name="androidSpecifics"> </a>
-## Android Specifics
+### Android Specifics
 
 <a name="captureResolution2"> </a>
 ####captureResolution
@@ -581,7 +572,7 @@ The capture resolution is a suggestion, because the available preview sizes vary
 If the "suggested" resolution is available, it will be used, if not a resolution that fits best within the views size will be used.
 
 <a name="configureViaXML"> </a>
-###Configure via XML
+####Configure via XML
 
 > Where app is xmlns:app="http://schemas.android.com/apk/res-auto"
 
@@ -621,7 +612,7 @@ The configuration can also be done via xml instead of json.
 A list of of all available xml options can be found in the example.
 
 <a name="differencesToJson"> </a>
-####Differences to json
+#####Differences to json
 - tree is "flattened" and snake_case
 - captureResolution is defined by preferred_preview_width and preferred_preview_height
 - colors contain alpha value, so there is no extra option for alpha
@@ -667,7 +658,7 @@ ALFlashAlignmentBottomLeft | aligned at bottom left corner
 ALFlashAlignmentBottomRight | aligned at bottom right corner
 
 <a name="iosConfigModuleViewStoryboard"> </a>
-### 2. Configure iOS ModuleView with Storyboards
+### 2. Configure the iOS ModuleView with Storyboards
 1. Select "View" from the object library
 2. Drag it onto the view of your view controller
 3. Change the class to the name of the module you want to use (AnylineBarcodeModuleView, AnylineMRZModuleView, AnylineEnergyModuleView)
@@ -1175,6 +1166,7 @@ The MrzScanView can simply be included in the activity layout file, just like an
 ###### Example config for the MRZ Module
 
 ```json
+{
     "captureResolution":"1080p",
     "cutout": {
         "style": "rect",
