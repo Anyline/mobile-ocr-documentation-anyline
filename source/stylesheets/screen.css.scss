@@ -37,6 +37,7 @@ html, body {
   -webkit-text-size-adjust: none; /* Never autoresize text */
 }
 
+
 ////////////////////////////////////////////////////////////////////////////////
 // TABLE OF CONTENTS
 ////////////////////////////////////////////////////////////////////////////////
@@ -195,6 +196,11 @@ html, body {
     &>li:last-child {
       box-shadow: none; // otherwise it'll overflow out of the subheader
     }
+	
+	ul {
+		margin-left:1em;
+	}
+	
   }
 
   .toc-footer {
@@ -354,6 +360,8 @@ html, body {
     clear:both;
   }
 
+
+
   h1 {
     @extend %header-font;
     font-size: 30px;
@@ -373,7 +381,7 @@ html, body {
 
   h2 {
     @extend %header-font;
-    font-size: 20px;
+    font-size: 24px;
     margin-top: 4em;
     margin-bottom: 0;
     border-top: 1px solid #ccc;
@@ -391,17 +399,17 @@ html, body {
   
   h3, h4, h5, h6 {
     @extend %header-font;
-    font-size: 15px;
+    font-size: 18px;
     margin-top: 2.5em;
     margin-bottom: 0.8em;
   }
   
   h4 {
-    font-size: 12px;
+    font-size: 15px;
   }
 
   h5, h6 {
-    font-size: 10px;
+    font-size: 13px;
   }
   
   hr {
@@ -426,7 +434,7 @@ html, body {
     }
 
     td {
-      padding: 10px;
+      padding: 6px;
     }
 
     tr:last-child {
@@ -514,10 +522,23 @@ html, body {
     padding: 2px;
     margin: -2px;
     border-radius: 4px;
-    border: 1px solid #F7E633;
+    border: 1px solid #5590A3;
     @include text-shadow(1px 1px 0 #666);
-    background: linear-gradient(to top left, #F7E633 0%, #F1D32F 100%);
+    background: linear-gradient(to top left, #5590A3 20%, #5590A3 60%);
   }
+  
+  a {
+  	text-decoration:none;
+	color:$nav-active-bg;
+  }
+  a:hover {
+  	color:red;
+  	text-decoration:underline;
+  }
+  a:visited {
+  	color:$nav-active-bg;
+  }
+  
 }
 
 ////////////////////////////////////////////////////////////////////////////////
