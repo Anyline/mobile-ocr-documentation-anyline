@@ -1,7 +1,6 @@
 ---
 title: API Reference
 
-
 toc_footers:
   - <a href='https://anyline.io/anyline-sdk-modules/'>Get the Anyline&reg SDK</a>
 
@@ -12,32 +11,34 @@ search: true
 # Introduction
 
 Anyline provides an easy-to-use SDK for applications to enable Optical Character Recognition (OCR) on mobile devices. 
-This API contains a [Quick Start Guide] (#getting-started) for all supported platforms, a detailed description for the [Anyline Config] (#anyline-config) as well as descriptions and examples for the available [modules] (#modules).
+This API contains a [Quick Start Guide] (#getting-started) for all supported platforms, a detailed description for the [Anyline Config] (#anyline-config) as well as descriptions and examples for the available [Modules] (#modules).
 
 ### Supported Platforms
 - Android
 - iOS
-- WP (by Q3 2015)
+- WP (by Q4 2015)
 	
 ### Available Modules
-- **Barcode & QR Code:**  Scan 16 international barcodes & QR codes
-- **Meter Reading:** Scan meter readings of various electric, gas, water or heat meters
-- **Passport (MRZ):**  Reliable scanning of data from passports' machine readable zones (MRZ)
-- **Custom:** We will support you when implementing other use cases for mobile OCR technology.
+- [**Barcode:**] (#barcodeModule)  Scan 16 international barcodes & QR codes
+- [**Energy:**] (#energyModule) Scan meter readings of various electric, gas, water or heat meters
+- [**MRZ:**] (#mrzModule)  Reliable scanning of data from passports' and IDs' machine readable zones (MRZ)
+- **Custom:** Got any other ideas? We will support you when implementing other use cases for mobile OCR technology.
 
 # Getting Started
 
+This section contains a a brief description of the files included in SDK bundle as well as a requirement description and a Quick Start Guide for all available platforms.
+
 ## Android ##
 
-The bundle contains the following parts: 
+The Android bundle contains the following parts: 
 
 
 
-- **AnylineSDK:**      contains the anyline-android-release.aar
-- **Documentation:**    contains java doc for the anyline-sdk
-- **AnylineSDKExamples:**      contains a simple app where each module is implemented, it can be installed right away
+- **AnylineSDK:**      contains the anyline-android-release.aar library
+- **Documentation:**    contains the java doc for the anyline-sdk
+- **AnylineSDKExamples:**      contains a simple app where an example for each module is implemented - it can be installed right away
 - **LICENSE:** 			third party license agreements
-- **README:**			containing a quick start - setup and module description
+- **README:**			contains a quick start - setup and module description
 
 
 ### Requirements
@@ -63,11 +64,11 @@ dependencies {
 }
 ```
 
-#### 1. Copy AnylineSDK.aar to your apps "libs" directory and modify the build.gradle as shown in the example.
+##### 1. Copy AnylineSDK.aar to your apps "libs" directory and modify the build.gradle as shown in the example.
 
 ###### &NewLine;  
 
-#### 2. Provide a config file (json or xml)
+##### 2. Provide a config file (json or xml)
 
 > Example barcode_view_config.json:
 
@@ -99,27 +100,27 @@ dependencies {
 }
 ```
 
-The config file enables a quick and easy adaption of the "Scan-View". You can either provide a json-file or use the XML-attributes directly in the layout file.
-The detailed description of all available attributes can be found in [Anyline Config] (#anyline-config)
+The config file enables a quick and easy adaption of the "Scan-View". You can either provide a json-file or use the XML-attributes in the layout file itself.
+A detailed description of all available attributes can be found in [Anyline Config] (#anyline-config)
 
-##### JSON
+###### JSON
 
-This config file must be located in the "assets" folder of your Android Project.
+This config file must be located in the **assets** folder of your Android project.
 
 Some of the most important config options may be:
 
-Paramter | Description 
+Parameter | Description 
 -------- | -----------
 captureResolution | the preferred camera preview size
-cutout | defining which area of the preview will be "cutout" (analysed to find bar/qr code)
-flash | defines the flash mode, where to place the flash symbol etc.
+cutout | defining which area of the preview will be "cutout" (analyzed to find bar/QR code)
+flash | defines the flash mode, where to place the flash symbol, etc.
 beepOnResult | enables sound on successful scanning process
 vibrateOnResult | provides haptic feedback for a successful scanning process
 blinkOnResult |  visual feedback for a successful scanning process
-cancelOnResult | if true, the scanning process will be stopped after one result and needs to be started manually again
+cancelOnResult | if true, the scanning process will be stopped after one result and needs to be restarted manually
 
 ###### XML
-> Example activity_layout.xml
+
 
 ```xml
 <RelativeLayout
@@ -148,12 +149,12 @@ cancelOnResult | if true, the scanning process will be stopped after one result 
 </RelativeLayout>
 ```
 
-Alternatively you may also configure the view (EnergyScanView, MrzScanView, BarcodeScanView) using XML-attributes in the layout-file.
+Alternatively to a json config, it is also possible to configure the view (EnergyScanView, MrzScanView, BarcodeScanView) using XML-attributes in the layout-file.
 
 ###### &NewLine;  
 
-####3.Init Anyline in your Activity
-There are module specific options - take a look at the description in the desired [module] (#modules) description.
+####3. Init Anyline in your Activity
+There are module specific options - take a look at the description of the desired module to get more detailed information.
 
 ####4. Enjoy scanning and have fun :)
 
@@ -162,7 +163,7 @@ There are module specific options - take a look at the description in the desire
 
 - **Framework:**        contains the Anyline.framework & AnylineResources.bundle
 - **Documentation:**    contains a html & docset version of an appledoc style interface documentation
-- **AnylineExamples:**  contains a simple app where each module is implemented, it can be installed right away
+- **AnylineExamples:**  contains a simple app where each module is implemented - it can be installed right away
 - **LICENSE:** 			third party license agreements
 - **README:**			containing a quick start - setup and module description
 - **RELEASE_NOTES**
@@ -182,24 +183,25 @@ Simply drag & drop Anyline.framework & AnylineResources.bundle into your project
 ![Add Frameworks](images/AddFramework.jpg)
 
 
-In the import screen select "Copy items if needed" and "Create groups" and add the files to your target.
+In the import screen select *Copy items if needed* and *Create groups* and add the files to your target.
 ![Copy Frameworks](images/CopyFramework.jpg)
 
 #### 2. Linking Frameworks
 
-After the framework and bundle got imported go to your project inspector. Under the "Build Phases" tab add the following libraries:
+After the framework and bundle got imported go to your project inspector. In the *Build Phases* tab, add the following libraries:
 
 - libc++.dylib
 - libstdc++.6.0.9.dylib
 - libiconv.dylib
 - AssetsLibrary.framework	
 
-After you have added them it should look like this (notice the AnylineResources bundle. If its not in "Copy Bundle Resources" add it):
+After adding the libraries, it should look like this (notice the AnylineResources bundle, if its not in *Copy Bundle Resources* add it):
 ![Link Frameworks](images/LinkFrameworks.jpg)
 
 #### 3. Linker Flags 
 
-In your project inspector switch to the "Build Settings" tab  and search for "Other Linker Flags". Under Other - "Other Linker Flags" add "-ObjC". 
+In your project inspector switch to the *Build Settings* tab  and search for *Other Linker Flags*. Select
+*Other - Other Linker Flags* and add *-&nbsp;ObjC*. 
 This flag causes the linker to load every object file in the library that defines an Objective-C class or category.
 
 ![Linker Flags](images/LinkerFlags.jpg)
@@ -207,17 +209,16 @@ This flag causes the linker to load every object file in the library that define
 
 ####4. Init an AnylineModuleView in your ViewController or Storyboard
 
-There are module specific options - take a look at the description in the desired [module] (#modules) description.
-
-
+There are module specific options - take a look at the description of the desired module to get more detailed information.
 
 ####5. Enjoy scanning and have fun :)
 
 
 # Anyline Config
 
-With the config file the views can be configured in regard of postion and looks of the cutout as well as flash behaviour, feedback on scan, etc. 
+With the config file the views can be configured in regard of position and looks of the *cutout* used for scanning as well as the behavior of flash and feedback mechanisms for scanning. This section contains a detailed description of the configurable items as well as two distinct ways for each platform to set up and configure the view.
 
+<a name="itemDescription"> </a>
 ## Item description
 
 ```json
@@ -302,17 +303,10 @@ With the config file the views can be configured in regard of postion and looks 
 * [blinkAnimationOnResult] (#blinkAnimationOnResult)  *boolean*
 * [cancelOnResult] (#cancelOnResult)  *boolean*
 
-[**Android Specifics**] (#androidSpecifics)
 
-* [captureResolution] (#captureResolution2)  *String*
-* [Configure via XML] (#configureViaXML)
-	* [List of all XML options] (#configureViaXML)
-	* [Differences to json] (#differencesToJson)
-	
-<a name="captureResolution"></a>
 ### captureResolution
 
-The Resolution of the preview frame.
+The resolution of the preview frame.
 
 **Possible values:**
 
@@ -326,6 +320,16 @@ value | description
  - The p is optional. 
  - The defined capture resolution is just the preferred resolution. If this resolution is not available the resolution that best fits inside the desired resolution should be used.
  
+<a name="captureResolution2"> </a>
+
+<aside class="notice">
+<b>Android specific</b>
+<br/>
+The capture resolution is more like a suggestion, because the available preview sizes vary from device to device. 
+If the "suggested" resolution is available, it will be used, if not a resolution that fits best within the views size will be used.
+</aside>
+ 
+ 
 <a name="cutout"></a>
 ###cutout
 
@@ -335,7 +339,7 @@ This contains all the settings for the overlay/cutout.
 <a name="cutout_width"></a>
 #### width 
 
-Specifies an exact desired pixel width (pixels in the frame, not on the display). If this is bigger than the views width, it will be limited to it. 
+Specifies an exact desired pixel width (pixels in the frame, not on the display). If this is bigger than the width of the view, it will be limited to it. 
 
 E.g. Android devices may have a 720p preview but only a 540p wide display. If a width of 600 is specified, the cutout will still only be 540. 
 
@@ -364,11 +368,13 @@ Specify the maximum height of the cutout in %.
 - **Range:**		1% - 100%
 - **Default:**		100%
 
-**_Why width and maxWidth and maxHeight but no height?_**
-
+<aside class="notice">
+<b>Why width and maxWidth and maxHeight but no height?</b>
+<br/>
 The form of the cutout can be defined by the ratio, so there is no direct need for width AND height parameter.
 But if there is only one width parameter where % or pixel value is allowed, it is not possible to limit the height to a certain percentage.
 That limits the usability in landscape mode quite a bit.
+</aside>
 
 <a name="cutout_ratioFromSize"></a>
 ####ratioFromSize
@@ -392,17 +398,17 @@ top | upper border of the cutout is at the upper border of the view
 top_half | offsetY = (viewHeight - cutoutHeight) / 3
 center | cutout is centered in the view vertically and horizontally
 bottom | lower border of the cutout is at the lower border of the view
-bottom_half | the same as tophalf just from below: offsetY = (viewHeight - cutoutHeight) / 3 * 2
+bottom_half | the same as top half just from below: offsetY = (viewHeight - cutoutHeight) / 3 * 2
 
 <a name="cutout_offset"></a>
 ####offset
 Move the cutout in x and y direction by the specified pixel value. 
 
-Put negative values to move left or up, positiv values to move right or down.
+Put negative values to move left or up, positive values to move right or down.
 
 The offset is limited to move the cutout to the start/end of the view.
  
-- **Type:** int (pixel value - pixels in the frame, not on the display)
+- **Type:** int (pixel value = pixels in the frame, not on the display)
 
 <a name="cutout_outerColor"></a>
 ####outerColor
@@ -438,7 +444,7 @@ The color of the stroke (used by rect or vector style).
 
 <a name="cutout_strokeWidth"> </a>
 ####strokeWidth
-The thickness of the stroke in a diplay independent unit 
+The thickness of the stroke in a display independent unit 
 
 - **Type:** int (density-independent pixel dp)
 
@@ -456,7 +462,7 @@ The name of the image resource (only used if type is image).
 
 <a name="cutout_cropPadding"> </a>
 ####cropPadding
-If the part that is cropped out of the frame differs from the visible cutout in width and height by the x or y padding.
+Adapts the size of the cropped area from the frame. It changes the visible cutout width and height by the x or y padding.
 
 Positive values mean that the crop will be smaller than the cutout.  Negative values mean that the crop will be bigger than the cutout.
 
@@ -470,7 +476,7 @@ This should only be used in combination with a fixed width (which also fits on a
 ####cropOffset
 Move the part that is cropped out of the frame away from the visible cutout by the x and y.
 
-Negative values to move left or up, positiv values to move right or down.
+Negative values to move left or up, positive values to move right or down.
 
 This should only be used in combination with a fixed width (which also fits on all supported devices), because this is a fixed value that will not be adjusted to anything.
 
@@ -478,10 +484,10 @@ This should only be used in combination with a fixed width (which also fits on a
 
 <a name="flash"> </a>
 ###flash
+Settings for a simple view that provides flash functionality.
 
 <a name="flash_mode"> </a>
 ####mode
-The settings for a simple view that provides flash functionality.
 
 Default images for flash on/off/auto are provided.
 
@@ -491,7 +497,7 @@ mode | description
 ---- | ------------
 none | flash view is not used and not visible
 manual | flash can be toggled manually  (default is off)
-auto | flash view also has an automatic option which is the default option. But it is still required to tell the view when it should turn on the flash in auto mode. (Exept for use-cases where additional abstraction is provided like the Energy-Meter-Module)
+auto | flash view also has an automatic option which is the default option. But it is still required to tell the view when it should turn on the flash in auto mode. (Except for use-cases where additional abstraction is provided like the Energy-Module)
 
 <a name="flash_alignment"> </a>
 ####alignment
@@ -558,21 +564,22 @@ True, if the view should display a short flash of white when a result is found.
 True, if the scanning process should be canceled when a result is found (=default setting).
 
 Set to false if multiple things should be scanned immediately after each other.
-If another scan may be required later, leave this value true and just restart the scanning process later
+If another scan may be required later, leave this value *true* and just restart the scanning process later
 
 - **Type:** boolean
 - **Default:** true (cancel scanning when result is found)
 
 <a name="androidSpecifics"> </a>
-### Android Specifics
+## Android Config
 
-<a name="captureResolution2"> </a>
-####captureResolution
-The capture resolution is a suggestion, because the available preview sizes vary from device to device. 
-If the "suggested" resolution is available, it will be used, if not a resolution that fits best within the views size will be used.
+There are two ways to configure the look and behavior of the scan view in Android.
+
+##### 1. Configuration via json
+
+The view can be configured using a json config file like seen above in the [item description] (#itemDescription). This file must be located in the assets folder of your Android project.
 
 <a name="configureViaXML"> </a>
-####Configure via XML
+##### 2. Configuration via XML
 
 > Where app is xmlns:app="http://schemas.android.com/apk/res-auto"
 
@@ -618,12 +625,12 @@ A list of of all available xml options can be found in the example.
 - colors contain alpha value, so there is no extra option for alpha
 
 <a name="iosConfig"> </a>
-## iOS Config of ModuleView
+## iOS Config 
 
-There are two methods to add the view for the models availbale.
+There are two methods to add the view for the models available.
 
 <a name="iosConfigModuleViewCode"> </a>
-### 1. Configure the iOS ModuleView in Code
+### 1. Configure in Code
 
 The view exposes the following properties:
  
@@ -632,14 +639,14 @@ value | description
 ----- | ----------
 strokeWidth	| sets the width of the views border
 strokeColor | sets the color of the views border
-cornerRadius | Sets the corner radius of the views border
+cornerRadius | sets the corner radius of the views border
 outerColor | sets the color of the space surrounding the view
 outerAlpha | sets the alpha of the space surrounding the view
-flashImage	| sets image the user uses to toggle the flash
+flashImage	| sets image used to toggle the flash
 flashButtonAlignment | sets the alignment of the flash button
-flashStatus	| read the status of the flash
-cancelOnResult | this property tells Anlyine if it should stop scanning once a result was found
-beepOnResul | true, if there should be a beep when a result was found
+flashStatus	| flag to check the status of the flash
+cancelOnResult | true, if Anyline should stop scanning once a result was found
+beepOnResult | true, if there should be a beep when a result was found
 blinkOnResult | true, if there should be a blinking alarm when a result was found
 vibrateOnResult	| true, if there should be a vibration alarm when a result was found
 
@@ -653,13 +660,13 @@ alignment | description
 ALFlashAlignmentTop | aligned at top, centered horizontally
 ALFlashAlignmentTopLeft | aligned at top left corner
 ALFlashAlignmentTopRight | aligned at top right corner
-ALFlashAlignmentBottom | aligned at bottom, centerd horizontally
+ALFlashAlignmentBottom | aligned at bottom, centered horizontally
 ALFlashAlignmentBottomLeft | aligned at bottom left corner
 ALFlashAlignmentBottomRight | aligned at bottom right corner
 
 <a name="iosConfigModuleViewStoryboard"> </a>
-### 2. Configure the iOS ModuleView with Storyboards
-1. Select "View" from the object library
+### 2. Configure with Storyboards
+1. Select *View* from the object library
 2. Drag it onto the view of your view controller
 3. Change the class to the name of the module you want to use (AnylineBarcodeModuleView, AnylineMRZModuleView, AnylineEnergyModuleView)
 
@@ -692,7 +699,7 @@ Drag the connector of you property to the newly created view.
 
 # Modules
 
-The Anyline-Modules are use-case specific abstractions for Anyline. Each module is designed to serve a specific purpose. Currently, the following modules are availble:
+The Anyline-Modules are use-case specific abstractions for Anyline. Each module is designed to serve a specific purpose. Currently, the following modules are available:
 
 - [Barcode] (#barcodeModule)
 - [Energy] (#energyModule)
@@ -701,10 +708,10 @@ The Anyline-Modules are use-case specific abstractions for Anyline. Each module 
 <a name="barcodeModule"> </a>
 ## Barcode 
 
-With the Anyline-Barcode-Module 16 different kinds of bar- and qr-codes can be scanned. The result will simply be a *String* representation of the code.
+With the Anyline Barcode-Module 16 different kinds of bar- and QR-codes can be scanned. The result will simply be a *string* representation of the code.
 
 #### Restrictions for the Barcode-Module Config:
-- Flash mode "auto" is not (yet) supported.
+- Flash mode *auto* is not (yet) supported.
 
 #### Available Barcode Formats:  
             
@@ -750,9 +757,9 @@ barcodeScanView.startScanning();
 
 There are three simple steps necessary to get started:
 
-1. If you do not use XML configuration set the [config-file] (#barcodeConfig) to your BarcodeScanView using the *setConfigFromAsset* method and make sure that the json config-file is located in the Android **assets** folder
-2. InitAnyline with your valid license key and a new instance of BarcodeResultListener, which can be used to handle the bar/qr code results.
-3. call *startScanning()*
+1. If you do not use XML configuration set the [config-file] (#barcodeConfig) to your BarcodeScanView using the *setConfigFromAsset* method and make sure that the json config-file is located in the Android assets folder.
+2. Call initAnyline with your valid license key and a new instance of BarcodeResultListener, which can be used to handle the bar/QR code results.
+3. Call *startScanning()*
 
 ###### &NewLine;
 
@@ -778,7 +785,7 @@ In an optional step, you can limit the barcode scanning to one or multiple barco
 </RelativeLayout>
 ```
 
-The BarcodeScanView can simply be included in the activity layout file, just like any other view. The view can be either configured here via XML or otherwise a config json file can be used to adapt the "Scan View", like seen
+The BarcodeScanView can simply be included in the activity layout file, just like any other view. The view can be either configured here via XML or otherwise a config json file can be used to adapt the scan view.
 
 <a name="barcodeConfig"> </a>
 ###### Example config for the Barcode Module
@@ -812,19 +819,19 @@ The BarcodeScanView can simply be included in the activity layout file, just lik
 }
 ```
 
-The config file enables a quick and easy adaption of the "Scan-View".
+The config file enables a quick and easy adaption of the scan view.
 
 Some of the most important config options may be:
 
 Parameter | Description
 --------- | -----------
 captureResolution | the preferred camera preview size
-cutout | defining which area of the preview will be "cutout" (analysed to find bar/qr code)
-flash | defines the flash mode, where to place the flash symbol etc.
-beepOnResult | enables sound
-vibrateOnResult | haptic feedback for a succesful scanning process
-blinkOnResult |visual feedback for a successful scanning process
-cancelOnResult | if true, the scanning process will be stopped after one result and needs to be started manually again
+cutout | defining which area of the preview will be "cutout" (analyzed to find bar/QR code)
+flash | defines the flash mode, where to place the flash symbol, etc.
+beepOnResult | enables acoustic feedback on successful scan
+vibrateOnResult | haptic feedback on successful scan
+blinkOnResult |visual feedback on successful scan
+cancelOnResult | true, if the scanning process should be stopped after one result; needs manual restart for additional scans
 
 A detailed description of all available config items can be found in [Anyline Config] (#anyline-config)
 
@@ -849,13 +856,7 @@ There are three steps necessary to get a scan result:
 }
 ```
 
-Create a property, initialize the module in the viewDidLoad method and add it to the view of the view controller.
-
-Supply the license key and set the delegate, which will receive a call once a result is found. 
-
-The boolean returned by the setup routine notifies if the Anyline set up was successful. If an error occured the error needs to be handled.
-
-If the setup was successful, set the barcode types that should be scanned. 
+Create a property, initialize the module in the viewDidLoad method and add it to the view of the view controller. Supply the license key and set the delegate, which will receive a call once a result is found. The boolean returned by the setup routine notifies you if the Anyline set up was successful. If an error occurred the error needs to be handled. If the setup was successful, set the barcode types that should be scanned. 
 
 Valid types are:
 
@@ -876,7 +877,7 @@ Valid types are:
 - kCodeTypeUPCE
 - kCodeTypeUPCEANExtension
 
-###### 2. Start scanning
+###### 2. Start the scanning process in viewDidAppear
 
 ```objective_c
 - (void)viewDidAppear:(BOOL)animated {
@@ -889,10 +890,10 @@ Valid types are:
     }
 }
 ```   
-Once Anyline is set up sucessful, start the scanning process in viewDidAppear.
+Once Anyline is set up successful, start the scanning process in viewDidAppear.
 If there is a problem starting the scanning process an error object will be set, so the error can be handled.
 
-###### 3. Receiving results
+###### 3. Implement the delegate method and receive results
 
 ```objective_c
 - (void)anylineBarcodeModuleView:(AnylineBarcodeModuleView *)anylineBarcodeModuleView
@@ -901,17 +902,17 @@ If there is a problem starting the scanning process an error object will be set,
     NSLog("Scan result: %@", scanResult);
 }
 ```
-When a valid result is found, it will call the delegate. The scan result will be a string containing the scanned code.
+When a valid result is found, it will call the delegate. The scan result will be a *string* containing the scanned code.
 
-
+<a name="energyModule"> </a>
 ## Energy 
 
-The Anyline-Energy-Module is capable of scanning analog electric- and gas-meter-readings.
-Moreover, it is possible to scan bar- and qr-codes as well as serial numbers for meter identification.
+The Anyline Energy-Module is capable of scanning analog electric- and gas-meter-readings.
+Moreover, it is possible to scan bar- and QR-codes as well as serial numbers for meter identification.
 
 For each successful scan, you will receive four result-attributes:
 
-- **scanMode:** the mode the result belongs to
+- **scanMode:** the mode the result belongs to (gas, electric, barcode)
 - **result**: the detected value as a String
 - **resultImage**:
 	 - scanMode = meter: the cropped image that has been used to scan the meter value
@@ -923,16 +924,16 @@ For each successful scan, you will receive four result-attributes:
     
 ###Android
 
-##### Restrictions for the Energy-Module Config
-- Capture resolution is currently fixed to 720p on android (optimized for good results on as many devices as possible).
+#### Restrictions for the Energy-Module Config
+- Capture resolution is currently fixed to 720p on Android (optimized for good results on as many devices as possible).
 - The size and ratio of the cutout is predefined and cannot be changed (sizes are optimized for best results)
-- The cutout should be placed fairly high (use alignment top and a small y offset), because this reduces reflections a lot if used with flash.
-- Flash mode "auto" is not (yet) supported.
+- The cutout should be placed fairly high (use alignment top and a small y offset), because this reduces reflections considerably when used with flash.
+- Flash mode *auto* is not (yet) supported.
 
 #### Example
 The following example files illustrate a simple use-case of the energy module.
 
-###### Example  Acitivity
+###### Example  Activity
 
 ```java
 energyScanView = (EnergyScanView) findViewById(R.id.energy_scan_view);
@@ -960,10 +961,10 @@ energyScanView.startScanning();
 
 In order to start the scan process, perform the following steps:
 
-1. If you prefer a json-file for configuration, use the *setConfigFromAsset* method and place the json-config in the Android **assets** folder, otherwise configure the view using the xml attributes in the activity layout file.
-2. set the scan mode; availabe are: ELECTRIC_METER, GAS_METER, BAR_CODE
-3. initAnyline with your valid license key and a new instance of EnergyResultListener, which is the callback for handling the results
-4. call *startScanning()* 
+1. If you prefer a json-file for configuration, use the *setConfigFromAsset* method and place the json-config in the Android assets folder, otherwise configure the view using the xml attributes in the activity layout file.
+2. Set the scan mode; available are: ELECTRIC_METER, GAS_METER, BAR_CODE
+3. Call *initAnyline* with your valid license key and a new instance of EnergyResultListener, which is the callback for handling the results
+4. Call *startScanning()* 
 
 
 ###### Example Activity Layout
@@ -999,9 +1000,11 @@ In order to start the scan process, perform the following steps:
 
 The EnergyScanView can simply be included in the activity layout.
 
-For custom configuration (e.g. cutout, flash, feedback for successful scanning, etc.) you can either use a json-file or XML-attributes like in the example. If you need more detailed information about all availbale config items see [Anyline Config] (#anyline-config).
+For custom configuration (e.g. cutout, flash, feedback on successful scan, etc.) you can either use a json-file or XML-attributes like in the example. If you need more detailed information about all available config items see [Anyline Config] (#anyline-config).
 
+<aside class="notice">
 Capture resolution is currently fixed to 720p on Android, which was optimized for good results on as many devices as possible.
+</aside>
 
 	
 	
@@ -1009,11 +1012,11 @@ Capture resolution is currently fixed to 720p on Android, which was optimized fo
 ###iOS	
 
 ####Restrictions for the Energy-Module Config:
-- Flash mode "auto" is not (yet) supported.
+- Flash mode *auto* is not (yet) supported.
 
 #### Example
 	
-In order to get scan results it is necessary to perform the following three steps:
+In order to get scan results, it is necessary to perform the following three steps:
 
 ###### 1. Initialize the module in viewDidLoad
 
@@ -1030,11 +1033,11 @@ In order to get scan results it is necessary to perform the following three step
 ```
 
 Create a property, initialize the module and add it to the view of our view controller.
-Afterwards supply the license key and set the delegate. The delegate will receive a call when a result is found. 
+Afterwards, supply the license key and set the delegate. The delegate will receive a call when a result is found. 
 If the Anyline set up returned an error the error object will be set and you can handle the error.
 Furthermore it is necessary to set the scan mode utilizing *setScanMode*. 
 
-Possible values are:
+Possible values:
  
 - ALElectricMeter 
 - ALGasMeter
@@ -1069,10 +1072,10 @@ If there is an error staring the scanning process the error object will be set a
 }
 ```
 
-Once Anyline has found a valid result the delegate will be called and you get an result object with four result attributes. 
+Once Anyline has found a valid result the delegate is called and you get an result object with four result attributes. 
 
 - **scanMode:** the mode the result belongs to
-- **scanResult**: the detected value as a String
+- **scanResult**: the detected value as *string*
 - **image**:
 	 - scanMode = meter: the cropped image that has been used to scan the meter value
 	 - scanMode = code: null
@@ -1081,39 +1084,40 @@ Once Anyline has found a valid result the delegate will be called and you get an
 	 - scanMode = code: null
 
 
+<a name="mrzModule"> </a>
 ## MRZ 
 
-The Anyline-MRZ-Module provides the functionality to scan passports and other IDs using the MRZ (machine-readable-zone).
+The Anyline MRZ-Module provides the functionality to scan passports and other IDs using the MRZ (Machine Readable Zone).
 
-For each scan result the module generates an Identification Object, containing all relevant information as well as the image of the scanned document.
+For each scan result the module generates an identification object, containing all relevant information as well as the image of the scanned document.
 
 <a name="scannedInfo"> </a>
 **Information scanned:**
 
 value | description
 ----- | -----------
-expirationDate | The expiration date of the document
-dob |	The date of birth
+expirationDate | expiration date of the document
+dob |	date of birth
 checkDigitDob | check digit for the date of birth
-checkDigitExpiration | Check digit for the expiration date
+checkDigitExpiration | check digit for the expiration date
 code |	country code
 surname	| surname
 givenNames| all given first names
-checkDigitDates	| Check digit for both dates
-type |	The type of the document that was read. (ID/P)
-checkDigitNumber |	Check digit for the document number
-checkDigitFinal	| Check digit
-sex	 | Gender of the person
+checkDigitDates	| check digit for both dates
+type |	type of the document that was read. (ID/P)
+checkDigitNumber |	check digit for the document number
+checkDigitFinal	| check digit
+sex	 | gender of the person
 
-
-*Please be aware that not every property is filled for every document type (e.g. an ID MRZ does not contain a sex, a passport does).*
-
+<aside class="notice">
+Please be aware that not every property is filled for every document type (e.g. an ID MRZ does not contain a sex, a passport does)
+</aside>
 
 ### Android
 
 #####Restrictions for the MRZ-Module Config:
 - The ratio of the cutout cannot be changed and is predefined to fit passports and IDs well.
-- Flash mode "auto" is not (yet) supported.
+- Flash mode *auto* is not (yet) supported.
 
 ####Example
 The following example files illustrate a simple use-case of the MRZ module.
@@ -1140,9 +1144,9 @@ mrzScanView.startScanning();
 
 There are three simple steps necessary to get started:
 
-1. If you do not use XML configuration set the [config-file] (#mrzConfig) to your mrzScanView using the *setConfigFromAsset* method and make sure that the json config-file is located in the Android **assets** folder
-2. InitAnyline with your valid license key and a new instance of  MrzResultListener, which will be used as callback for each successful scan.
-3. call *startScanning()*
+1. If you do not use XML configuration set the [config-file] (#mrzConfig) to your MrzScanView using the *setConfigFromAsset* method and make sure that the json config-file is located in the Android assets folder
+2. Call *initAnyline* with your valid license key and a new instance of MrzResultListener, which will be used as callback for each successful scan.
+3. Call *startScanning()*
 
 ###### Example Activity Layout
 
@@ -1160,7 +1164,7 @@ There are three simple steps necessary to get started:
 </RelativeLayout>
 ```
 
-The MrzScanView can simply be included in the activity layout file, just like any other view. The view can be either configured via XML or otherwise a config json file can be used to adapt the "Scan View".
+The MrzScanView can simply be included in the activity layout file, just like any other view. The view can be either configured via XML or with a config json.
 
 <a name="mrzConfig"> </a>
 ###### Example config for the MRZ Module
@@ -1199,7 +1203,7 @@ It is also possible to use xml-attributes instead of the json config file. For m
 ### iOS
 
 #####Restrictions for the MRZ-Module Config:
-- Flash mode "auto" is not (yet) supported.
+- Flash mode *auto* is not (yet) supported.
 
 #### Example
 
@@ -1218,11 +1222,7 @@ There are three steps necessary to get a scan result:
 }
 ```
 
-Create a property, initialize the module in the viewDidLoad method and add it to the view of the view controller.
-
-Supply the license key and set the delegate, which will receive a call once a result is found. 
-
-The boolean returned by the setup routine notifies if the Anyline set up was successful. If an error occured the error needs to be handled.
+Create a property, initialize the module in the viewDidLoad method and add it to the view of the view controller. Supply the license key and set the delegate, which will receive a call once a result is found. The boolean returned by the setup routine notifies you if the Anyline set up was successful. If an error occurred the error needs to be handled.
 
 
 ###### 2. Start scanning process in viewDidAppear

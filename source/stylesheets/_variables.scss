@@ -31,10 +31,10 @@ $nav-subitem-bg: #000;
 $nav-active-bg: #1F637A; // oldblue: #2467af;
 $lang-select-border: #fff;
 $lang-select-bg: #000;
-$lang-select-active-bg: #1F637A; // feel free to change this to blue or something
+$lang-select-active-bg: $nav-active-bg; // feel free to change this to blue or something
 $lang-select-pressed-bg: #111; // color of language tab bg when mouse is pressed
 $main-bg: #eee;
-$aside-notice-bg: #8fbcd4;
+$aside-notice-bg: #BADCE5; 
 $aside-warning-bg: #c97a7e;
 $aside-success-bg: #6ac174;
 $search-notice-bg: #c97a7e;

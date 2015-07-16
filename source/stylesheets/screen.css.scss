@@ -218,8 +218,8 @@ html, body {
     }
 
     li {
-      font-size: 0.8em;
-      line-height: 1.7;
+      font-size: 1em;
+      line-height: 2;
       text-decoration: none;
     }
   }
@@ -522,9 +522,9 @@ html, body {
     padding: 2px;
     margin: -2px;
     border-radius: 4px;
-    border: 1px solid #5590A3;
+    border: 1px solid #BADCE5;
     @include text-shadow(1px 1px 0 #666);
-    background: linear-gradient(to top left, #5590A3 20%, #5590A3 60%);
+    background: linear-gradient(to top left, #84B6C7 0%, #BADCE5 100%);
   }
   
   a {
@@ -532,7 +532,7 @@ html, body {
 	color:$nav-active-bg;
   }
   a:hover {
-  	color:red;
+  	color:$nav-active-bg;
   	text-decoration:underline;
   }
   a:visited {
