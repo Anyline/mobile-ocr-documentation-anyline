@@ -1,12 +1,8 @@
----
-title: API Reference
+# Anyline Mobile OCR Documentation
+ 
+ <a href='https://anyline.io/anyline-sdk-modules/'>Get the Anyline&reg SDK</a>
 
-toc_footers:
-  - <a href='https://anyline.io/anyline-sdk-modules/'>Get the Anyline&reg SDK</a>
-
-
-search: true
----
+ <a href='http://anyline.github.io/mobile-ocr-documentation-anyline/'>Online Documentation</a>
 
 # Introduction
 
