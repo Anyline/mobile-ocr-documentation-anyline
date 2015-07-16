@@ -1,10 +1,8 @@
-# Anyline Mobile OCR Documentation
- 
- <a href='https://anyline.io/anyline-sdk-modules/'>Get the Anyline&reg SDK</a>
+# Anyline Mobile OCR Documentation 
 
- <a href='http://anyline.github.io/mobile-ocr-documentation-anyline/'>Online Documentation</a>
+ <a href='https://anyline.io/anyline-sdk-modules/'>Get the Anyline SDK</a>
 
-# Introduction
+ <a href='https://anyline.github.io/mobile-ocr-documentation-anyline/'>View Online Documentation</a> - Traditional Markdown Documentation below.
 
 Anyline provides an easy-to-use SDK for applications to enable Optical Character Recognition (OCR) on mobile devices. 
 This API contains a [Quick Start Guide] (#getting-started) for all supported platforms, a detailed description for the [Anyline Config] (#anyline-config) as well as descriptions and examples for the available [Modules] (#modules).
