@@ -1,1 +1,1662 @@
-My GitHub Page
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Reference</title>
+
+    <link href="stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+      <script src="javascripts/all.js" type="text/javascript"></script>
+
+  </head>
+
+  <body class="index">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      <img src="images/logo.png" />
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="toc">
+      </div>
+        <ul class="toc-footer">
+            <li><a href='https://anyline.io/anyline-sdk-modules/'>Get the Anyline&reg SDK</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id="introduction">Introduction</h1>
+
+<p>Anyline provides an easy-to-use SDK for applications to enable Optical Character Recognition (OCR) on mobile devices. 
+This API contains a <a href="#getting-started">Quick Start Guide</a> for all supported platforms, a detailed description for the <a href="#anyline-config">Anyline Config</a> as well as descriptions and examples for the available <a href="#modules">Modules</a>.</p>
+
+<h3 id="supported-platforms">Supported Platforms</h3>
+
+<ul>
+<li>Android</li>
+<li>iOS</li>
+<li>WP (by Q4 2015)</li>
+</ul>
+
+<h3 id="available-modules">Available Modules</h3>
+
+<ul>
+<li><a href="#barcodeModule"><strong>Barcode:</strong></a>  Scan 16 international barcodes &amp; QR codes</li>
+<li><a href="#energyModule"><strong>Energy:</strong></a> Scan meter readings of various electric, gas, water or heat meters</li>
+<li><a href="#mrzModule"><strong>MRZ:</strong></a>  Reliable scanning of data from passports&rsquo; and IDs&rsquo; machine readable zones (MRZ)</li>
+<li><strong>Custom:</strong> Got any other ideas? We will support you when implementing other use cases for mobile OCR technology.</li>
+</ul>
+
+<h1 id="getting-started">Getting Started</h1>
+
+<p>This section contains a a brief description of the files included in SDK bundle as well as a requirement description and a Quick Start Guide for all available platforms.</p>
+
+<h2 id="android">Android</h2>
+
+<p>The Android bundle contains the following parts: </p>
+
+<ul>
+<li><strong>AnylineSDK:</strong>      contains the anyline-android-release.aar library</li>
+<li><strong>Documentation:</strong>    contains the java doc for the anyline-sdk</li>
+<li><strong>AnylineSDKExamples:</strong>      contains a simple app where an example for each module is implemented - it can be installed right away</li>
+<li><strong>LICENSE:</strong>          third party license agreements</li>
+<li><strong>README:</strong>           contains a quick start - setup and module description</li>
+</ul>
+
+<h3 id="requirements">Requirements</h3>
+
+<ul>
+<li>Android device with SDK &gt;= 15</li>
+<li>decent camera functionality (recommended: 720p and adequate auto focus)</li>
+</ul>
+
+<h3 id="quick-start-guide">Quick Start Guide</h3>
+
+<blockquote>
+<p>Add AnylineSDK to the dependencies in build.gradle</p>
+</blockquote>
+<pre class="highlight plaintext"><code>//root section of the file
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    compile(name:'AnyLineSDK', ext:'aar')
+    //... your other dependencies
+}
+</code></pre>
+
+<h5 id="1-copy-anylinesdk-aar-to-your-apps-quot-libs-quot-directory-and-modify-the-build-gradle-as-shown-in-the-example">1. Copy AnylineSDK.aar to your apps &ldquo;libs&rdquo; directory and modify the build.gradle as shown in the example.</h5>
+
+<h6 id="newline">&NewLine;</h6>
+
+<h5 id="2-provide-a-config-file-json-or-xml">2. Provide a config file (json or xml)</h5>
+
+<blockquote>
+<p>Example barcode_view_config.json:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"captureResolution"</span><span class="p">:</span><span class="s2">"720p"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"cutout"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"style"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rect"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"maxWidthPercent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"80%"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"alignment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"center"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"ratioFromSize"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"strokeWidth"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"cornerRadius"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"strokeColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FFFFFF"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"outerColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"outerAlpha"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.3</span><span class="w">
+     </span><span class="p">},</span><span class="w">
+     </span><span class="nt">"flash"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"mode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"manual"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"alignment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bottom_right"</span><span class="w">
+     </span><span class="p">},</span><span class="w">
+     </span><span class="nt">"beepOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+     </span><span class="nt">"vibrateOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+     </span><span class="nt">"blinkAnimationOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+     </span><span class="nt">"cancelOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>The config file enables a quick and easy adaption of the &ldquo;Scan-View&rdquo;. You can either provide a json-file or use the XML-attributes in the layout file itself.
+A detailed description of all available attributes can be found in <a href="#anyline-config">Anyline Config</a></p>
+
+<h6 id="json">JSON</h6>
+
+<p>This config file must be located in the <strong>assets</strong> folder of your Android project.</p>
+
+<p>Some of the most important config options may be:</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>captureResolution</td>
+<td>the preferred camera preview size</td>
+</tr>
+<tr>
+<td>cutout</td>
+<td>defining which area of the preview will be &ldquo;cutout&rdquo; (analyzed to find bar/QR code)</td>
+</tr>
+<tr>
+<td>flash</td>
+<td>defines the flash mode, where to place the flash symbol, etc.</td>
+</tr>
+<tr>
+<td>beepOnResult</td>
+<td>enables sound on successful scanning process</td>
+</tr>
+<tr>
+<td>vibrateOnResult</td>
+<td>provides haptic feedback for a successful scanning process</td>
+</tr>
+<tr>
+<td>blinkOnResult</td>
+<td>visual feedback for a successful scanning process</td>
+</tr>
+<tr>
+<td>cancelOnResult</td>
+<td>if true, the scanning process will be stopped after one result and needs to be restarted manually</td>
+</tr>
+</tbody></table>
+
+<h6 id="xml">XML</h6>
+<pre class="highlight xml"><code><span class="nt">&lt;RelativeLayout</span>
+     <span class="na">xmlns:android=</span><span class="s">"http://schemas.android.com/apk/res/android"</span>
+     <span class="na">xmlns:app=</span><span class="s">"http://schemas.android.com/apk/res-auto"</span>
+     <span class="na">android:layout_width=</span><span class="s">"match_parent"</span>
+     <span class="na">android:layout_height=</span><span class="s">"match_parent"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;at.nineyards.anyline.modules.energy.EnergyScanView</span>
+        <span class="na">android:id=</span><span class="s">"@+id/energy_scan_view"</span>
+        <span class="na">android:layout_width=</span><span class="s">"match_parent"</span>
+        <span class="na">android:layout_height=</span><span class="s">"match_parent"</span>
+        <span class="na">app:cutout_alignment=</span><span class="s">"top"</span>
+        <span class="na">app:cutout_style=</span><span class="s">"rect"</span>
+        <span class="na">app:cutout_outside_color=</span><span class="s">"#55000000"</span>
+        <span class="na">app:cutout_offset_y=</span><span class="s">"120"</span>
+        <span class="na">app:cutout_rect_corner_radius_in_dp=</span><span class="s">"4"</span>
+        <span class="na">app:cutout_stroke_width_in_dp=</span><span class="s">"2"</span>
+        <span class="na">app:cutout_stroke_color=</span><span class="s">"#FFFFFF"</span>
+        <span class="na">app:flash_mode=</span><span class="s">"manual"</span>
+        <span class="na">app:flash_alignment=</span><span class="s">"bottom_right"</span>
+        <span class="na">app:beep_on_result=</span><span class="s">"true"</span>
+        <span class="na">app:vibrate_on_result=</span><span class="s">"true"</span>
+        <span class="na">app:blink_animation_on_result=</span><span class="s">"true"</span>
+        <span class="na">app:cancel_on_result=</span><span class="s">"true"</span>
+     <span class="nt">/&gt;</span>
+<span class="nt">&lt;/RelativeLayout&gt;</span>
+</code></pre>
+
+<p>Alternatively to a json config, it is also possible to configure the view (EnergyScanView, MrzScanView, BarcodeScanView) using XML-attributes in the layout-file.</p>
+
+<h6 id="newline">&NewLine;</h6>
+
+<h4 id="3-init-anyline-in-your-activity">3. Init Anyline in your Activity</h4>
+
+<p>There are module specific options - take a look at the description of the desired module to get more detailed information.</p>
+
+<h4 id="4-enjoy-scanning-and-have-fun">4. Enjoy scanning and have fun :)</h4>
+
+<h2 id="ios">iOS</h2>
+
+<ul>
+<li><strong>Framework:</strong>        contains the Anyline.framework &amp; AnylineResources.bundle</li>
+<li><strong>Documentation:</strong>    contains a html &amp; docset version of an appledoc style interface documentation</li>
+<li><strong>AnylineExamples:</strong>  contains a simple app where each module is implemented - it can be installed right away</li>
+<li><strong>LICENSE:</strong>          third party license agreements</li>
+<li><strong>README:</strong>           containing a quick start - setup and module description</li>
+<li><strong>RELEASE_NOTES</strong></li>
+</ul>
+
+<h3 id="requirements">Requirements</h3>
+
+<ul>
+<li>minimum iOS 7.0</li>
+<li>minimum iPhone4s</li>
+</ul>
+
+<h3 id="quick-start-setup">Quick Start - Setup</h3>
+
+<h4 id="1-import-the-files">1. Import the files</h4>
+
+<p>Simply drag &amp; drop Anyline.framework &amp; AnylineResources.bundle into your project tree.
+<img alt="Add Frameworks" src="images/AddFramework.jpg" /></p>
+
+<p>In the import screen select <em>Copy items if needed</em> and <em>Create groups</em> and add the files to your target.
+<img alt="Copy Frameworks" src="images/CopyFramework.jpg" /></p>
+
+<h4 id="2-linking-frameworks">2. Linking Frameworks</h4>
+
+<p>After the framework and bundle got imported go to your project inspector. In the <em>Build Phases</em> tab, add the following libraries:</p>
+
+<ul>
+<li>libc++.dylib</li>
+<li>libstdc++.6.0.9.dylib</li>
+<li>libiconv.dylib</li>
+<li>AssetsLibrary.framework<br></li>
+</ul>
+
+<p>After adding the libraries, it should look like this (notice the AnylineResources bundle, if its not in <em>Copy Bundle Resources</em> add it):
+<img alt="Link Frameworks" src="images/LinkFrameworks.jpg" /></p>
+
+<h4 id="3-linker-flags">3. Linker Flags</h4>
+
+<p>In your project inspector switch to the <em>Build Settings</em> tab  and search for <em>Other Linker Flags</em>. Select
+<em>Other - Other Linker Flags</em> and add <em>-&nbsp;ObjC</em>. 
+This flag causes the linker to load every object file in the library that defines an Objective-C class or category.</p>
+
+<p><img alt="Linker Flags" src="images/LinkerFlags.jpg" /></p>
+
+<h4 id="4-init-an-anylinemoduleview-in-your-viewcontroller-or-storyboard">4. Init an AnylineModuleView in your ViewController or Storyboard</h4>
+
+<p>There are module specific options - take a look at the description of the desired module to get more detailed information.</p>
+
+<h4 id="5-enjoy-scanning-and-have-fun">5. Enjoy scanning and have fun :)</h4>
+
+<h1 id="anyline-config">Anyline Config</h1>
+
+<p>With the config file the views can be configured in regard of position and looks of the <em>cutout</em> used for scanning as well as the behavior of flash and feedback mechanisms for scanning. This section contains a detailed description of the configurable items as well as two distinct ways for each platform to set up and configure the view.</p>
+
+<p><a name="itemDescription"> </a></p>
+
+<h2 id="item-description">Item description</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+      </span><span class="nt">"captureResolution"</span><span class="p">:</span><span class="w"> </span><span class="s2">"720p"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"cutout"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"style"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rect"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">540</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"maxWidthPercent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"80%"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"maxHeightPercent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"80%"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"alignment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"center"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="s2">"Overlay"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"ratioFromSize"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">125</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">85</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"strokeWidth"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"strokeColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FFFFFF"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"cornerRadius"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"offset"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"x"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"y"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"cropPadding"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"x"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"y"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"cropOffset"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"x"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"y"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"outerColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"outerAlpha"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.3</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"flash"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"mode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"manual"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"alignment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bottom_right"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"imageOn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ic_flash_on"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"imageOff"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ic_flash_off"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"imageAuto"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ic_flash_auto"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"beepOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"vibrateOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"blinkAnimationOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"cancelOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<ul>
+<li><a href="#captureResolution">captureResolution</a>  <em>String</em></li>
+<li><a href="#cutout">cutout</a> 
+
+<ul>
+<li><a href="#cutout_width">width</a> <em>int</em></li>
+<li><a href="#cutout_maxWidthPercent">maxWidthPercent</a>  <em>String</em></li>
+<li><a href="#cutout_maxHeightPercent">maxHeightPercent</a>  <em>String</em></li>
+<li><a href="#cutout_ratioFromSize">ratioFromSize</a> 
+
+<ul>
+<li><a href="#cutout_ratioFromSize">width</a> <em>int</em></li>
+<li><a href="#cutout_ratioFromSize">height</a>  <em>int</em><br></li>
+</ul></li>
+<li><a href="#cutout_alignment">alignment</a>  <em>String</em></li>
+<li><a href="#cutout_offset">offset</a> 
+
+<ul>
+<li><a href="#cutout_offset">x</a>  <em>int</em></li>
+<li><a href="#cutout_offset">y</a> <em>int</em></li>
+</ul></li>
+<li><a href="#cutout_outerColor">outerColor</a>  <em>Hex-String</em>  - format: RRGGBB</li>
+<li><a href="#cutout_outerAlpha">outerAlpha</a>  <em>float</em></li>
+<li><a href="#cutout_style">style</a>  <em>String</em> </li>
+<li><a href="#cutout_strokeColor">strokeColor</a>  <em>Hex-String</em> - format: RRGGBB</li>
+<li><a href="#cutout_strokeWidth">strokeWidth</a>  <em>int</em></li>
+<li><a href="#cutout_cornerRadius">cornerRadius</a>  <em>int</em></li>
+<li><a href="#cutout_image">image</a>  <em>String</em></li>
+<li><a href="#cutout_cropPadding">cropPadding</a><br>
+
+<ul>
+<li><a href="#cutout_cropPadding">x</a>  <em>int</em></li>
+<li><a href="#cutout_cropPadding">y</a> <em>int</em></li>
+</ul></li>
+<li><a href="#cutout_cropOffset">cropOffset</a><br>
+
+<ul>
+<li><a href="#cutout_cropOffset">x</a>  <em>int</em></li>
+<li><a href="#cutout_cropOffset">y</a> <em>int</em></li>
+</ul></li>
+</ul></li>
+<li><a href="#flash">flash</a> 
+
+<ul>
+<li><a href="#flash_mode">mode</a>  <em>String</em></li>
+<li><a href="#flash_alignment">alignment</a>  <em>String</em></li>
+<li><a href="#flash_imageOn">imageOn</a>  <em>String</em></li>
+<li><a href="#flash_imageOff">imageOff</a>  <em>String</em></li>
+<li><a href="#flash_imageAuto">imageAuto</a>  <em>String</em></li>
+</ul></li>
+<li><a href="#beepOnResult">beepOnResult</a>  <em>boolean</em></li>
+<li><a href="#vibrateOnResult">vibrateOnResult</a>  <em>boolean</em></li>
+<li><a href="#blinkAnimationOnResult">blinkAnimationOnResult</a>  <em>boolean</em></li>
+<li><a href="#cancelOnResult">cancelOnResult</a>  <em>boolean</em></li>
+</ul>
+
+<h3 id="captureresolution">captureResolution</h3>
+
+<p>The resolution of the preview frame.</p>
+
+<p><strong>Possible values:</strong></p>
+
+<table><thead>
+<tr>
+<th>value</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1080p</td>
+<td>use 1920x1080 as preferred preview size</td>
+</tr>
+<tr>
+<td>720p</td>
+<td>use 1280x720 as preferred preview size</td>
+</tr>
+<tr>
+<td>480p</td>
+<td>use 480x854 as preferred preview size</td>
+</tr>
+</tbody></table>
+
+<ul>
+<li>The p is optional. </li>
+<li>The defined capture resolution is just the preferred resolution. If this resolution is not available the resolution that best fits inside the desired resolution should be used.</li>
+</ul>
+
+<p><a name="captureResolution2"> </a></p>
+
+<aside class="notice">
+<b>Android specific</b>
+<br/>
+The capture resolution is more like a suggestion, because the available preview sizes vary from device to device. 
+If the &ldquo;suggested&rdquo; resolution is available, it will be used, if not a resolution that fits best within the views size will be used.
+</aside>
+ 
+
+<p><a name="cutout"></a></p>
+
+<h3 id="cutout">cutout</h3>
+
+<p>This contains all the settings for the overlay/cutout.</p>
+
+<p><a name="cutout_width"></a></p>
+
+<h4 id="width">width</h4>
+
+<p>Specifies an exact desired pixel width (pixels in the frame, not on the display). If this is bigger than the width of the view, it will be limited to it. </p>
+
+<p>E.g. Android devices may have a 720p preview but only a 540p wide display. If a width of 600 is specified, the cutout will still only be 540. </p>
+
+<ul>
+<li><strong>Type:</strong>         int</li>
+<li><strong>Default:</strong>      none</li>
+</ul>
+
+<p><a name="cutout_maxWidthPercent"></a></p>
+
+<h4 id="maxwidthpercent">maxWidthPercent</h4>
+
+<p>Specifies the maximum width of the cutout in percent.</p>
+
+<p>This is the desired width if &lsquo;width&rsquo; parameter is not used.</p>
+
+<ul>
+<li><strong>Type:</strong>         String</li>
+<li><strong>Format:</strong>       ###%</li>
+<li><strong>Range:</strong>        1% - 100%</li>
+<li><strong>Default:</strong>      100%</li>
+</ul>
+
+<p><a name="cutout_maxHeightPercent"></a></p>
+
+<h4 id="maxheightpercent">maxHeightPercent</h4>
+
+<p>Specify the maximum height of the cutout in %.</p>
+
+<ul>
+<li><strong>Type:</strong>         String</li>
+<li><strong>Format:</strong>       ###%</li>
+<li><strong>Range:</strong>        1% - 100%</li>
+<li><strong>Default:</strong>      100%</li>
+</ul>
+
+<aside class="notice">
+<b>Why width and maxWidth and maxHeight but no height?</b>
+<br/>
+The form of the cutout can be defined by the ratio, so there is no direct need for width AND height parameter.
+But if there is only one width parameter where % or pixel value is allowed, it is not possible to limit the height to a certain percentage.
+That limits the usability in landscape mode quite a bit.
+</aside>
+
+<p><a name="cutout_ratioFromSize"></a></p>
+
+<h4 id="ratiofromsize">ratioFromSize</h4>
+
+<p>The ratio of the cutout can be defined by just setting this parameters width and height to the size of the real object that should be
+scanned.</p>
+
+<p>E.g. width = 100 height = 50 is the same as width = 200 height = 100, because only the ratio matters here.</p>
+
+<ul>
+<li><strong>Type of width and height:</strong> int</li>
+<li><strong>Default ratio:</strong>            1 (width = 1, height = 1)</li>
+</ul>
+
+<p><a name="cutout_alignment"></a> </p>
+
+<h4 id="alignment">alignment</h4>
+
+<p>The alignment of the cutout.</p>
+
+<p><strong>Possible values:</strong></p>
+
+<table><thead>
+<tr>
+<th>value</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>top</td>
+<td>upper border of the cutout is at the upper border of the view</td>
+</tr>
+<tr>
+<td>top_half</td>
+<td>offsetY = (viewHeight - cutoutHeight) / 3</td>
+</tr>
+<tr>
+<td>center</td>
+<td>cutout is centered in the view vertically and horizontally</td>
+</tr>
+<tr>
+<td>bottom</td>
+<td>lower border of the cutout is at the lower border of the view</td>
+</tr>
+<tr>
+<td>bottom_half</td>
+<td>the same as top half just from below: offsetY = (viewHeight - cutoutHeight) / 3 * 2</td>
+</tr>
+</tbody></table>
+
+<p><a name="cutout_offset"></a></p>
+
+<h4 id="offset">offset</h4>
+
+<p>Move the cutout in x and y direction by the specified pixel value. </p>
+
+<p>Put negative values to move left or up, positive values to move right or down.</p>
+
+<p>The offset is limited to move the cutout to the start/end of the view.</p>
+
+<ul>
+<li><strong>Type:</strong> int (pixel value = pixels in the frame, not on the display)</li>
+</ul>
+
+<p><a name="cutout_outerColor"></a></p>
+
+<h4 id="outercolor">outerColor</h4>
+
+<p>The color of the area outside the cutout.</p>
+
+<ul>
+<li><strong>Type:</strong> Hex-String </li>
+<li><strong>Format:</strong> RRGGBB</li>
+</ul>
+
+<p><a name="cutout_outerAlpha"></a></p>
+
+<h4 id="outeralpha">outerAlpha</h4>
+
+<p>The alpha value for the color outside of the cutout.</p>
+
+<ul>
+<li><strong>Type:</strong> float</li>
+<li><strong>Range:</strong> 0-1 
+
+<ul>
+<li>0 = view is completely transparent</li>
+<li>1 = view is completely opaque</li>
+</ul></li>
+</ul>
+
+<p><a name="cutout_style"></a></p>
+
+<h4 id="style">style</h4>
+
+<p>The type of the cutout.</p>
+
+<table><thead>
+<tr>
+<th>style</th>
+<th>description</th>
+<th>related parameters</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>rect</td>
+<td>a rectangle is drawn around the cutout-area</td>
+<td>strokeWidth, strokeColor, cornerRadius</td>
+</tr>
+<tr>
+<td>image</td>
+<td>a given image is drawn inside the cutout-area (resized to fit)</td>
+<td>image</td>
+</tr>
+</tbody></table>
+
+<p><a name="cutout_strokeColor"> </a></p>
+
+<h4 id="strokecolor">strokeColor</h4>
+
+<p>The color of the stroke (used by rect or vector style).</p>
+
+<ul>
+<li><strong>Type:</strong> Hex-String </li>
+<li><strong>Format:</strong> RRGGBB</li>
+</ul>
+
+<p><a name="cutout_strokeWidth"> </a></p>
+
+<h4 id="strokewidth">strokeWidth</h4>
+
+<p>The thickness of the stroke in a display independent unit </p>
+
+<ul>
+<li><strong>Type:</strong> int (density-independent pixel dp)</li>
+</ul>
+
+<p><a name="cutout_cornerRadius"> </a></p>
+
+<h4 id="cornerradius">cornerRadius</h4>
+
+<p>The radius to round the corners of the rect (only used if type is rect).</p>
+
+<ul>
+<li><strong>Type:</strong> int (density-independent pixel dp)</li>
+</ul>
+
+<p><a name="cutout_image"> </a></p>
+
+<h4 id="image">image</h4>
+
+<p>The name of the image resource (only used if type is image).</p>
+
+<ul>
+<li><strong>Type:</strong> String</li>
+</ul>
+
+<p><a name="cutout_cropPadding"> </a></p>
+
+<h4 id="croppadding">cropPadding</h4>
+
+<p>Adapts the size of the cropped area from the frame. It changes the visible cutout width and height by the x or y padding.</p>
+
+<p>Positive values mean that the crop will be smaller than the cutout.  Negative values mean that the crop will be bigger than the cutout.</p>
+
+<p>The padding is all around the cutout so cropWidth = cutoutWidth - 2 * xPadding.</p>
+
+<p>This should only be used in combination with a fixed width (which also fits on all supported devices), because this is a fixed value that will not be adjusted to anything.</p>
+
+<ul>
+<li><strong>Type:</strong> int (pixel value)</li>
+</ul>
+
+<p><a name="cutout_cropOffset"> </a></p>
+
+<h4 id="cropoffset">cropOffset</h4>
+
+<p>Move the part that is cropped out of the frame away from the visible cutout by the x and y.</p>
+
+<p>Negative values to move left or up, positive values to move right or down.</p>
+
+<p>This should only be used in combination with a fixed width (which also fits on all supported devices), because this is a fixed value that will not be adjusted to anything.</p>
+
+<ul>
+<li><strong>Type:</strong> int (pixel value)</li>
+</ul>
+
+<p><a name="flash"> </a></p>
+
+<h3 id="flash">flash</h3>
+
+<p>Settings for a simple view that provides flash functionality.</p>
+
+<p><a name="flash_mode"> </a></p>
+
+<h4 id="mode">mode</h4>
+
+<p>Default images for flash on/off/auto are provided.</p>
+
+<p><strong>Possible values:</strong> </p>
+
+<table><thead>
+<tr>
+<th>mode</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>none</td>
+<td>flash view is not used and not visible</td>
+</tr>
+<tr>
+<td>manual</td>
+<td>flash can be toggled manually  (default is off)</td>
+</tr>
+<tr>
+<td>auto</td>
+<td>flash view also has an automatic option which is the default option. But it is still required to tell the view when it should turn on the flash in auto mode. (Except for use-cases where additional abstraction is provided like the Energy-Module)</td>
+</tr>
+</tbody></table>
+
+<p><a name="flash_alignment"> </a></p>
+
+<h4 id="alignment">alignment</h4>
+
+<p>The alignment of the flash view.</p>
+
+<table><thead>
+<tr>
+<th>alignment</th>
+<th>meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>top</td>
+<td>at the top centered horizontally</td>
+</tr>
+<tr>
+<td>top_left</td>
+<td>at the top left corner</td>
+</tr>
+<tr>
+<td>top_right</td>
+<td>at the top right corner</td>
+</tr>
+<tr>
+<td>bottom</td>
+<td>at the bottom centered horizontally</td>
+</tr>
+<tr>
+<td>bottom_left</td>
+<td>at the bottom left corner</td>
+</tr>
+<tr>
+<td>bottom_right</td>
+<td>at the bottom right corner</td>
+</tr>
+</tbody></table>
+
+<p><a name="flash_imageOn"> </a></p>
+
+<h4 id="imageon">imageOn</h4>
+
+<p>The name of the custom image resource to show when the flash is on.</p>
+
+<p>The image will not be resized and should be provided in an appropriate size.</p>
+
+<ul>
+<li><strong>Type:</strong> String</li>
+</ul>
+
+<p><a name="flash_imageOff"> </a></p>
+
+<h4 id="imageoff">imageOff</h4>
+
+<p>The name of the custom image resource to show when the flash is off.</p>
+
+<p>The image will not be resized and should be provided in an appropriate size.</p>
+
+<ul>
+<li><strong>Type:</strong> String</li>
+</ul>
+
+<p><a name="flash_imageAuto"> </a></p>
+
+<h4 id="imageauto">imageAuto</h4>
+
+<p>The name of the custom image resource to show when the flash is in auto mode.</p>
+
+<p>The image will not be resized and should be provided in an appropriate size.</p>
+
+<ul>
+<li><strong>Type:</strong> String</li>
+</ul>
+
+<h3 id="special-options-for-modules">Special options for Modules</h3>
+
+<p>Modules can use these additional options to configure some things that should happen when a result was found.</p>
+
+<p><a name="beepOnResult"> </a></p>
+
+<h4 id="beeponresult">beepOnResult</h4>
+
+<p>True, if there should be a beep when a result is found.</p>
+
+<ul>
+<li><strong>Type:</strong> boolean</li>
+</ul>
+
+<p><a name="vibrateOnResult"> </a></p>
+
+<h4 id="vibrateonresult">vibrateOnResult</h4>
+
+<p>True, if there should be a vibration alarm when a result is found.</p>
+
+<ul>
+<li><strong>Type:</strong> boolean</li>
+</ul>
+
+<p><a name="blinkAnimationOnResult"> </a></p>
+
+<h4 id="blinkanimationonresult">blinkAnimationOnResult</h4>
+
+<p>True, if the view should display a short flash of white when a result is found.</p>
+
+<ul>
+<li><strong>Type:</strong> boolean</li>
+</ul>
+
+<p><a name="cancelOnResult"> </a></p>
+
+<h4 id="cancelonresult">cancelOnResult</h4>
+
+<p>True, if the scanning process should be canceled when a result is found (=default setting).</p>
+
+<p>Set to false if multiple things should be scanned immediately after each other.
+If another scan may be required later, leave this value <em>true</em> and just restart the scanning process later</p>
+
+<ul>
+<li><strong>Type:</strong> boolean</li>
+<li><strong>Default:</strong> true (cancel scanning when result is found)</li>
+</ul>
+
+<p><a name="androidSpecifics"> </a></p>
+
+<h2 id="android-config">Android Config</h2>
+
+<p>There are two ways to configure the look and behavior of the scan view in Android.</p>
+
+<h5 id="1-configuration-via-json">1. Configuration via json</h5>
+
+<p>The view can be configured using a json config file like seen above in the <a href="#itemDescription">item description</a>. This file must be located in the assets folder of your Android project.</p>
+
+<p><a name="configureViaXML"> </a></p>
+
+<h5 id="2-configuration-via-xml">2. Configuration via XML</h5>
+
+<blockquote>
+<p>Where app is xmlns:app=&ldquo;http://schemas.android.com/apk/res-auto&rdquo;</p>
+</blockquote>
+<pre class="highlight xml"><code>app:preferred_preview_width="720"
+app:preferred_preview_height="1280"
+app:cutout_alignment="top"
+app:cutout_style="rect"
+app:cutout_outside_color="#55000000"
+app:cutout_offset_x="0"
+app:cutout_offset_y="160"
+app:cutout_crop_padding_x="0"
+app:cutout_crop_padding_y="0"
+app:cutout_crop_offset_x="0"
+app:cutout_crop_offset_y="0"
+app:cutout_width="540"
+app:cutout_max_width_percent="90"
+app:cutout_max_height_percent="90"
+app:cutout_ratio_from_size_width="540"
+app:cutout_ratio_from_size_height="98"
+app:cutout_rect_corner_radius_in_dp="4"
+app:cutout_stroke_width_in_dp="2"
+app:cutout_stroke_color="#FFFFFF"
+app:flash_mode="manual"
+app:flash_alignment="bottom_right"
+app:flash_image_on="@drawable/flash_icon"
+app:flash_image_off="@drawable/flash_icon_off"
+app:flash_image_auto="@drawable/flash_icon_auto"
+app:beep_on_result="true"
+app:vibrate_on_result="true"
+app:blink_animation_on_result="true"
+app:cancel_on_result="true"
+</code></pre>
+
+<p>The configuration can also be done via xml instead of json.</p>
+
+<p>A list of of all available xml options can be found in the example.</p>
+
+<p><a name="differencesToJson"> </a></p>
+
+<h5 id="differences-to-json">Differences to json</h5>
+
+<ul>
+<li>tree is &ldquo;flattened&rdquo; and snake_case</li>
+<li>captureResolution is defined by preferred_preview_width and preferred_preview_height</li>
+<li>colors contain alpha value, so there is no extra option for alpha</li>
+</ul>
+
+<p><a name="iosConfig"> </a></p>
+
+<h2 id="ios-config">iOS Config</h2>
+
+<p>There are two methods to add the view for the models available.</p>
+
+<p><a name="iosConfigModuleViewCode"> </a></p>
+
+<h3 id="1-configure-in-code">1. Configure in Code</h3>
+
+<p>The view exposes the following properties:</p>
+
+<table><thead>
+<tr>
+<th>value</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>strokeWidth</td>
+<td>sets the width of the views border</td>
+</tr>
+<tr>
+<td>strokeColor</td>
+<td>sets the color of the views border</td>
+</tr>
+<tr>
+<td>cornerRadius</td>
+<td>sets the corner radius of the views border</td>
+</tr>
+<tr>
+<td>outerColor</td>
+<td>sets the color of the space surrounding the view</td>
+</tr>
+<tr>
+<td>outerAlpha</td>
+<td>sets the alpha of the space surrounding the view</td>
+</tr>
+<tr>
+<td>flashImage</td>
+<td>sets image used to toggle the flash</td>
+</tr>
+<tr>
+<td>flashButtonAlignment</td>
+<td>sets the alignment of the flash button</td>
+</tr>
+<tr>
+<td>flashStatus</td>
+<td>flag to check the status of the flash</td>
+</tr>
+<tr>
+<td>cancelOnResult</td>
+<td>true, if Anyline should stop scanning once a result was found</td>
+</tr>
+<tr>
+<td>beepOnResult</td>
+<td>true, if there should be a beep when a result was found</td>
+</tr>
+<tr>
+<td>blinkOnResult</td>
+<td>true, if there should be a blinking alarm when a result was found</td>
+</tr>
+<tr>
+<td>vibrateOnResult</td>
+<td>true, if there should be a vibration alarm when a result was found</td>
+</tr>
+</tbody></table>
+
+<h5 id="flashbuttonalignment">flashButtonAlignment</h5>
+
+<p>specifies the alignment of the flash button</p>
+
+<p><strong>Possible values:</strong></p>
+
+<table><thead>
+<tr>
+<th>alignment</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ALFlashAlignmentTop</td>
+<td>aligned at top, centered horizontally</td>
+</tr>
+<tr>
+<td>ALFlashAlignmentTopLeft</td>
+<td>aligned at top left corner</td>
+</tr>
+<tr>
+<td>ALFlashAlignmentTopRight</td>
+<td>aligned at top right corner</td>
+</tr>
+<tr>
+<td>ALFlashAlignmentBottom</td>
+<td>aligned at bottom, centered horizontally</td>
+</tr>
+<tr>
+<td>ALFlashAlignmentBottomLeft</td>
+<td>aligned at bottom left corner</td>
+</tr>
+<tr>
+<td>ALFlashAlignmentBottomRight</td>
+<td>aligned at bottom right corner</td>
+</tr>
+</tbody></table>
+
+<p><a name="iosConfigModuleViewStoryboard"> </a></p>
+
+<h3 id="2-configure-with-storyboards">2. Configure with Storyboards</h3>
+
+<ol>
+<li>Select <em>View</em> from the object library</li>
+<li>Drag it onto the view of your view controller</li>
+<li>Change the class to the name of the module you want to use (AnylineBarcodeModuleView, AnylineMRZModuleView, AnylineEnergyModuleView)</li>
+</ol>
+
+<p><img alt="AddView" src="images/docAddView.jpg" /></p>
+
+<h5 id="changing-the-appearance">Changing the appearance</h5>
+
+<p>The appearance of the view can be changed in the attributes inspector.</p>
+
+<p><img alt="ConfigView" src="images/docConfigView.jpg" /></p>
+
+<h6 id="creating-the-property">Creating the property</h6>
+
+<blockquote>
+<p>Module Outlet</p>
+</blockquote>
+<pre class="highlight objective_c"><code><span class="k">@interface</span> <span class="nc">MainViewController</span> <span class="p">:</span> <span class="nc">UIViewController</span>
+
+<span class="k">@property</span> <span class="p">(</span><span class="n">weak</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="n">IBOutlet</span> <span class="n">AnylineBarcodeModuleView</span> <span class="o">*</span><span class="n">moduleView</span><span class="p">;</span>
+
+<span class="k">@end</span>
+</code></pre>
+
+<p>Define the outlet of the view in the interface of the view controller.</p>
+
+<h6 id="connecting-the-module-view-to-your-view-controller">Connecting the module view to your view controller</h6>
+
+<p>Drag the connector of you property to the newly created view. </p>
+
+<p><img alt="Connect" src="images/docConnect.jpg" /></p>
+
+<h1 id="modules">Modules</h1>
+
+<p>The Anyline-Modules are use-case specific abstractions for Anyline. Each module is designed to serve a specific purpose. Currently, the following modules are available:</p>
+
+<ul>
+<li><a href="#barcodeModule">Barcode</a></li>
+<li><a href="#energyModule">Energy</a></li>
+<li><a href="#mrzModule">MRZ (Machine Readable Zone)</a></li>
+</ul>
+
+<p><a name="barcodeModule"> </a></p>
+
+<h2 id="barcode">Barcode</h2>
+
+<p>With the Anyline Barcode-Module 16 different kinds of bar- and QR-codes can be scanned. The result will simply be a <em>string</em> representation of the code.</p>
+
+<h4 id="restrictions-for-the-barcode-module-config">Restrictions for the Barcode-Module Config:</h4>
+
+<ul>
+<li>Flash mode <em>auto</em> is not (yet) supported.</li>
+</ul>
+
+<h4 id="available-barcode-formats">Available Barcode Formats:</h4>
+
+<ul>
+<li>AZTEC</li>
+<li>CODABAR</li>
+<li>CODE_39</li>
+<li>CODE_93</li>
+<li>CODE_128</li>
+<li>DATA_MATRIX</li>
+<li>EAN_8</li>
+<li>EAN_13</li>
+<li>ITF</li>
+<li>PDF_417</li>
+<li>QR_CODE</li>
+<li>RSS_14</li>
+<li>RSS_EXPANDED</li>
+<li>UPC_A</li>
+<li>UPC_E</li>
+<li>UPC_EAN_EXTENSION</li>
+</ul>
+
+<h3 id="android">Android</h3>
+
+<h4 id="example">Example</h4>
+
+<p>The following example files illustrate a simple use-case of the barcode module.</p>
+
+<h6 id="example-activity">Example  Activity</h6>
+<pre class="highlight java"><code><span class="n">barcodeScanView</span> <span class="o">=</span> <span class="o">(</span><span class="n">BarcodeScanView</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">barcode_scan_view</span><span class="o">);</span>
+<span class="n">barcodeScanView</span><span class="o">.</span><span class="na">setConfigFromAsset</span><span class="o">(</span><span class="s">"barcode_view_config.json"</span><span class="o">);</span>
+
+<span class="c1">// initialize Anyline with your license key and a Listener that is called if a result is found</span>
+<span class="n">barcodeScanView</span><span class="o">.</span><span class="na">initAnyline</span><span class="o">(</span><span class="n">ANYLINE_LICENSE</span><span class="o">,</span> <span class="k">new</span> <span class="n">BarcodeResultListener</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">onResult</span><span class="o">(</span><span class="n">String</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// This is called when a result is found.</span>
+
+    <span class="o">}</span>
+<span class="o">});</span>
+<span class="n">barcodeScanView</span><span class="o">.</span><span class="na">startScanning</span><span class="o">();</span>
+</code></pre>
+
+<p>There are three simple steps necessary to get started:</p>
+
+<ol>
+<li>If you do not use XML configuration set the <a href="#barcodeConfig">config-file</a> to your BarcodeScanView using the <em>setConfigFromAsset</em> method and make sure that the json config-file is located in the Android assets folder.</li>
+<li>Call initAnyline with your valid license key and a new instance of BarcodeResultListener, which can be used to handle the bar/QR code results.</li>
+<li>Call <em>startScanning()</em></li>
+</ol>
+
+<h6 id="newline">&NewLine;</h6>
+<pre class="highlight java"><code><span class="c1">// limit the barcode scanner to QR codes or CODE_128 codes</span>
+<span class="n">barcodeScanView</span><span class="o">.</span><span class="na">setBarcodeFormats</span><span class="o">(</span><span class="n">BarcodeScanView</span><span class="o">.</span><span class="na">BarcodeFormat</span><span class="o">.</span><span class="na">QR_CODE</span><span class="o">,</span> <span class="n">BarcodeScanView</span><span class="o">.</span><span class="na">BarcodeFormat</span><span class="o">.</span><span class="na">CODE_128</span><span class="o">);</span>
+</code></pre>
+
+<p>In an optional step, you can limit the barcode scanning to one or multiple barcode formats with setBarcodeFormats(BarcodeScanView.BarcodeFormat&hellip;);</p>
+
+<h6 id="example-activity-layout">Example Activity Layout</h6>
+<pre class="highlight xml"><code><span class="nt">&lt;RelativeLayout</span>
+    <span class="na">xmlns:android=</span><span class="s">"http://schemas.android.com/apk/res/android"</span>
+    <span class="na">android:layout_width=</span><span class="s">"match_parent"</span>
+    <span class="na">android:layout_height=</span><span class="s">"match_parent"</span><span class="nt">&gt;</span>
+
+ <span class="nt">&lt;at.nineyards.anyline.modules.barcode.BarcodeScanView</span>
+    <span class="na">android:id=</span><span class="s">"@+id/barcode_scan_view"</span>
+    <span class="na">android:layout_width=</span><span class="s">"match_parent"</span>
+    <span class="na">android:layout_height=</span><span class="s">"match_parent"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/RelativeLayout&gt;</span>
+</code></pre>
+
+<p>The BarcodeScanView can simply be included in the activity layout file, just like any other view. The view can be either configured here via XML or otherwise a config json file can be used to adapt the scan view.</p>
+
+<p><a name="barcodeConfig"> </a></p>
+
+<h6 id="example-config-for-the-barcode-module">Example config for the Barcode Module</h6>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"captureResolution"</span><span class="p">:</span><span class="s2">"720p"</span><span class="p">,</span><span class="w">
+
+  </span><span class="nt">"cutout"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"style"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rect"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"maxWidthPercent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"80%"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"alignment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"center"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ratioFromSize"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"strokeWidth"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"cornerRadius"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"strokeColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FFFFFF"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"outerColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"outerAlpha"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.3</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"flash"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"mode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"manual"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"alignment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bottom_right"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"beepOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"vibrateOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"blinkAnimationOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"cancelOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>The config file enables a quick and easy adaption of the scan view.</p>
+
+<p>Some of the most important config options may be:</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>captureResolution</td>
+<td>the preferred camera preview size</td>
+</tr>
+<tr>
+<td>cutout</td>
+<td>defining which area of the preview will be &ldquo;cutout&rdquo; (analyzed to find bar/QR code)</td>
+</tr>
+<tr>
+<td>flash</td>
+<td>defines the flash mode, where to place the flash symbol, etc.</td>
+</tr>
+<tr>
+<td>beepOnResult</td>
+<td>enables acoustic feedback on successful scan</td>
+</tr>
+<tr>
+<td>vibrateOnResult</td>
+<td>haptic feedback on successful scan</td>
+</tr>
+<tr>
+<td>blinkOnResult</td>
+<td>visual feedback on successful scan</td>
+</tr>
+<tr>
+<td>cancelOnResult</td>
+<td>true, if the scanning process should be stopped after one result; needs manual restart for additional scans</td>
+</tr>
+</tbody></table>
+
+<p>A detailed description of all available config items can be found in <a href="#anyline-config">Anyline Config</a></p>
+
+<p>It is also possible to use xml-attributes instead of the json config file. For more detailed information see <a href="#configureViaXML">XML Configuration</a></p>
+
+<h3 id="ios">iOS</h3>
+
+<p>There are three steps necessary to get a scan result:</p>
+
+<h6 id="1-initialize-the-module-in-viewdidload">1. Initialize the module in viewDidLoad</h6>
+<pre class="highlight objective_c"><code><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">viewDidLoad</span> <span class="p">{</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">barcodeModule</span> <span class="o">=</span> <span class="p">[[</span><span class="n">AnylineBarcodeModuleView</span> <span class="nf">alloc</span><span class="p">]</span> <span class="nf">initWithFrame</span><span class="p">:</span><span class="n">CGRectMake</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">640</span><span class="p">,</span> <span class="mi">640</span><span class="p">)];</span>
+   <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">view</span> <span class="nf">addSubview</span><span class="p">:</span><span class="n">self</span><span class="p">.</span><span class="n">barcodeModule</span><span class="p">];</span>
+    <span class="n">BOOL</span> <span class="n">success</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">barcodeModule</span> <span class="nf">setupWithLicenseKey</span><span class="p">:</span><span class="n">kMyLicenseKey</span> <span class="nf">delegate</span><span class="p">:</span><span class="n">self</span> <span class="nf">error</span><span class="p">:</span><span class="o">&amp;</span><span class="n">error</span><span class="p">];</span>
+    <span class="k">if</span><span class="p">(</span> <span class="o">!</span><span class="n">success</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Handle the error here
+</span>    <span class="p">}</span>
+    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">barcodeModule</span> <span class="nf">setBarcodeFormats</span><span class="p">:@[</span><span class="n">kCodeTypeEAN8</span><span class="p">,</span> <span class="n">kCodeTypeEAN13</span><span class="p">,</span> <span class="n">kCodeTypeQR</span><span class="p">]]</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>Create a property, initialize the module in the viewDidLoad method and add it to the view of the view controller. Supply the license key and set the delegate, which will receive a call once a result is found. The boolean returned by the setup routine notifies you if the Anyline set up was successful. If an error occurred the error needs to be handled. If the setup was successful, set the barcode types that should be scanned. </p>
+
+<p>Valid types are:</p>
+
+<ul>
+<li>kCodeTypeAztec</li>
+<li>kCodeTypeCodabar </li>
+<li>kCodeTypeCode39</li>
+<li>kCodeTypeCode93 </li>
+<li>kCodeTypeCode128,</li>
+<li>kCodeTypeDataMatrix</li>
+<li>kCodeTypeEAN8</li>
+<li>kCodeTypeEAN13 </li>
+<li>kCodeTypeITF</li>
+<li>kCodeTypePDF417 </li>
+<li>kCodeTypeQR,</li>
+<li>kCodeTypeRSS14 </li>
+<li>kCodeTypeRSSExpanded</li>
+<li>kCodeTypeUPCA</li>
+<li>kCodeTypeUPCE</li>
+<li>kCodeTypeUPCEANExtension</li>
+</ul>
+
+<h6 id="2-start-the-scanning-process-in-viewdidappear">2. Start the scanning process in viewDidAppear</h6>
+<pre class="highlight objective_c"><code><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewDidAppear</span><span class="p">:(</span><span class="n">BOOL</span><span class="p">)</span><span class="nv">animated</span> <span class="p">{</span>
+    <span class="p">[</span><span class="n">super</span> <span class="nf">viewDidAppear</span><span class="p">:</span><span class="n">animated</span><span class="p">];</span>
+    <span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">;</span>
+    <span class="n">BOOL</span> <span class="n">success</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">barcodeModule</span> <span class="nf">startScanningAndReturnError</span><span class="p">:</span><span class="o">&amp;</span><span class="n">error</span><span class="p">];</span>
+    <span class="n">NSAssert</span><span class="p">(</span><span class="n">success</span><span class="p">,</span> <span class="s">@"Start failed: %@"</span><span class="p">,</span><span class="n">error</span><span class="p">.</span><span class="n">debugDescription</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span> <span class="o">!</span><span class="n">success</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Handle the error here
+</span>    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>Once Anyline is set up successful, start the scanning process in viewDidAppear.
+If there is a problem starting the scanning process an error object will be set, so the error can be handled.</p>
+
+<h6 id="3-implement-the-delegate-method-and-receive-results">3. Implement the delegate method and receive results</h6>
+<pre class="highlight objective_c"><code><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">anylineBarcodeModuleView</span><span class="p">:(</span><span class="n">AnylineBarcodeModuleView</span> <span class="o">*</span><span class="p">)</span><span class="nv">anylineBarcodeModuleView</span>
+               <span class="nf">didFindScanResult</span><span class="p">:(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">scanResult</span>
+                         <span class="nf">atImage</span><span class="p">:(</span><span class="n">UIImage</span> <span class="o">*</span><span class="p">)</span><span class="nv">image</span> <span class="p">{</span>
+    <span class="n">NSLog</span><span class="p">(</span><span class="s">"Scan result: %@"</span><span class="p">,</span> <span class="n">scanResult</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>When a valid result is found, it will call the delegate. The scan result will be a <em>string</em> containing the scanned code.</p>
+
+<p><a name="energyModule"> </a></p>
+
+<h2 id="energy">Energy</h2>
+
+<p>The Anyline Energy-Module is capable of scanning analog electric- and gas-meter-readings.
+Moreover, it is possible to scan bar- and QR-codes as well as serial numbers for meter identification.</p>
+
+<p>For each successful scan, you will receive four result-attributes:</p>
+
+<ul>
+<li><strong>scanMode:</strong> the mode the result belongs to (gas, electric, barcode)</li>
+<li><strong>result</strong>: the detected value as a String</li>
+<li><strong>resultImage</strong>:
+
+<ul>
+<li>scanMode = meter: the cropped image that has been used to scan the meter value</li>
+<li>scanMode = code: null</li>
+</ul></li>
+<li><strong>fullImage</strong>:
+
+<ul>
+<li>scanMode = meter: the full image (before cropping)</li>
+<li>scanMode = code: null</li>
+</ul></li>
+</ul>
+
+<h3 id="android">Android</h3>
+
+<h4 id="restrictions-for-the-energy-module-config">Restrictions for the Energy-Module Config</h4>
+
+<ul>
+<li>Capture resolution is currently fixed to 720p on Android (optimized for good results on as many devices as possible).</li>
+<li>The size and ratio of the cutout is predefined and cannot be changed (sizes are optimized for best results)</li>
+<li>The cutout should be placed fairly high (use alignment top and a small y offset), because this reduces reflections considerably when used with flash.</li>
+<li>Flash mode <em>auto</em> is not (yet) supported.</li>
+</ul>
+
+<h4 id="example">Example</h4>
+
+<p>The following example files illustrate a simple use-case of the energy module.</p>
+
+<h6 id="example-activity">Example  Activity</h6>
+<pre class="highlight java"><code><span class="n">energyScanView</span> <span class="o">=</span> <span class="o">(</span><span class="n">EnergyScanView</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">energy_scan_view</span><span class="o">);</span>
+
+<span class="c1">// set the scan mode to start with</span>
+<span class="n">energyScanView</span><span class="o">.</span><span class="na">setScanMode</span><span class="o">(</span><span class="n">EnergyScanView</span><span class="o">.</span><span class="na">ScanMode</span><span class="o">.</span><span class="na">ELECTRIC_METER</span><span class="o">);</span>
+
+<span class="c1">// initialize Anyline with your license key and a Listener that is called if a result is found</span>
+<span class="n">energyScanView</span><span class="o">.</span><span class="na">initAnyline</span><span class="o">(</span><span class="n">ANYLINE_LICENSE</span><span class="o">,</span> <span class="k">new</span> <span class="n">EnergyResultListener</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">onResult</span><span class="o">(</span><span class="n">EnergyScanView</span><span class="o">.</span><span class="na">ScanMode</span> <span class="n">scanMode</span><span class="o">,</span> <span class="n">String</span> <span class="n">result</span><span class="o">,</span>
+                         <span class="n">AnylineImage</span> <span class="n">resultImage</span><span class="o">,</span> <span class="n">AnylineImage</span> <span class="n">fullImage</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="c1">// This is called when a result is found.</span>
+        <span class="c1">// The scanMode is the mode the result was found for. The result is the actual result.</span>
+        <span class="c1">// If the a meter reading was scanned two images are provided as well, one shows the targeted area only</span>
+        <span class="c1">// the other shows the full image. (Images are null in barcode mode)</span>
+        <span class="c1">// The result for meter readings is a String with leading zeros (if any) and no decimals.</span>
+
+    <span class="o">}</span>
+<span class="o">});</span>
+<span class="n">energyScanView</span><span class="o">.</span><span class="na">startScanning</span><span class="o">();</span>
+</code></pre>
+
+<p>In order to start the scan process, perform the following steps:</p>
+
+<ol>
+<li>If you prefer a json-file for configuration, use the <em>setConfigFromAsset</em> method and place the json-config in the Android assets folder, otherwise configure the view using the xml attributes in the activity layout file.</li>
+<li>Set the scan mode; available are: ELECTRIC_METER, GAS_METER, BAR_CODE</li>
+<li>Call <em>initAnyline</em> with your valid license key and a new instance of EnergyResultListener, which is the callback for handling the results</li>
+<li>Call <em>startScanning()</em> </li>
+</ol>
+
+<h6 id="example-activity-layout">Example Activity Layout</h6>
+<pre class="highlight xml"><code><span class="nt">&lt;RelativeLayout</span>
+    <span class="na">xmlns:android=</span><span class="s">"http://schemas.android.com/apk/res/android"</span>
+    <span class="na">xmlns:app=</span><span class="s">"http://schemas.android.com/apk/res-auto"</span>
+    <span class="na">android:layout_width=</span><span class="s">"match_parent"</span>
+    <span class="na">android:layout_height=</span><span class="s">"match_parent"</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;at.nineyards.anyline.modules.energy.EnergyScanView</span>
+    <span class="na">android:id=</span><span class="s">"@+id/energy_scan_view"</span>
+    <span class="na">android:layout_width=</span><span class="s">"match_parent"</span>
+    <span class="na">android:layout_height=</span><span class="s">"match_parent"</span>
+    <span class="na">app:cutout_alignment=</span><span class="s">"top"</span>
+    <span class="na">app:cutout_style=</span><span class="s">"rect"</span>
+    <span class="na">app:cutout_outside_color=</span><span class="s">"#55000000"</span>
+    <span class="na">app:cutout_offset_y=</span><span class="s">"120"</span>
+    <span class="na">app:cutout_rect_corner_radius_in_dp=</span><span class="s">"4"</span>
+    <span class="na">app:cutout_stroke_width_in_dp=</span><span class="s">"2"</span>
+    <span class="na">app:cutout_stroke_color=</span><span class="s">"#FFFFFF"</span>
+    <span class="na">app:flash_mode=</span><span class="s">"manual"</span>
+    <span class="na">app:flash_alignment=</span><span class="s">"bottom_right"</span>
+    <span class="na">app:beep_on_result=</span><span class="s">"true"</span>
+    <span class="na">app:vibrate_on_result=</span><span class="s">"true"</span>
+    <span class="na">app:blink_animation_on_result=</span><span class="s">"true"</span>
+    <span class="na">app:cancel_on_result=</span><span class="s">"true"</span>
+    <span class="nt">/&gt;</span>
+
+<span class="nt">&lt;/RelativeLayout&gt;</span>
+</code></pre>
+
+<p>The EnergyScanView can simply be included in the activity layout.</p>
+
+<p>For custom configuration (e.g. cutout, flash, feedback on successful scan, etc.) you can either use a json-file or XML-attributes like in the example. If you need more detailed information about all available config items see <a href="#anyline-config">Anyline Config</a>.</p>
+
+<aside class="notice">
+Capture resolution is currently fixed to 720p on Android, which was optimized for good results on as many devices as possible.
+</aside>
+
+<h3 id="ios">iOS</h3>
+
+<h4 id="restrictions-for-the-energy-module-config">Restrictions for the Energy-Module Config:</h4>
+
+<ul>
+<li>Flash mode <em>auto</em> is not (yet) supported.</li>
+</ul>
+
+<h4 id="example">Example</h4>
+
+<p>In order to get scan results, it is necessary to perform the following three steps:</p>
+
+<h6 id="1-initialize-the-module-in-viewdidload">1. Initialize the module in viewDidLoad</h6>
+<pre class="highlight objective_c"><code><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">viewDidLoad</span> <span class="p">{</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">energyModule</span> <span class="o">=</span> <span class="p">[[</span><span class="n">AnylineEnergyModuleView</span> <span class="nf">alloc</span><span class="p">]</span> <span class="nf">initWithFrame</span><span class="p">:</span><span class="n">CGRectMake</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">640</span><span class="p">,</span> <span class="mi">640</span><span class="p">)];</span>
+   <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">view</span> <span class="nf">addSubview</span><span class="p">:</span><span class="n">self</span><span class="p">.</span><span class="n">energyModule</span><span class="p">];</span>
+    <span class="n">BOOL</span> <span class="n">success</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">energyModule</span> <span class="nf">setupWithLicenseKey</span><span class="p">:</span><span class="n">kMyLicenseKey</span> <span class="nf">delegate</span><span class="p">:</span><span class="n">self</span> <span class="nf">error</span><span class="p">:</span><span class="o">&amp;</span><span class="n">error</span><span class="p">];</span>
+    <span class="k">if</span><span class="p">(</span> <span class="o">!</span><span class="n">success</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Handle the error here
+</span>    <span class="p">}</span>
+    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">energyModule</span> <span class="nf">setScanMode</span><span class="p">:</span><span class="n">ALElectricMeter</span><span class="p">];</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>Create a property, initialize the module and add it to the view of our view controller.
+Afterwards, supply the license key and set the delegate. The delegate will receive a call when a result is found. 
+If the Anyline set up returned an error the error object will be set and you can handle the error.
+Furthermore it is necessary to set the scan mode utilizing <em>setScanMode</em>. </p>
+
+<p>Possible values:</p>
+
+<ul>
+<li>ALElectricMeter </li>
+<li>ALGasMeter</li>
+<li>ALBarcode </li>
+<li>ALSerialNumber</li>
+</ul>
+
+<h6 id="2-start-the-scanning-process-in-viewdidappear">2. Start the scanning process in viewDidAppear</h6>
+<pre class="highlight objective_c"><code><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewDidAppear</span><span class="p">:(</span><span class="n">BOOL</span><span class="p">)</span><span class="nv">animated</span> <span class="p">{</span>
+    <span class="p">[</span><span class="n">super</span> <span class="nf">viewDidAppear</span><span class="p">:</span><span class="n">animated</span><span class="p">];</span>
+    <span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">;</span>
+    <span class="n">BOOL</span> <span class="n">success</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">energyModule</span> <span class="nf">startScanningAndReturnError</span><span class="p">:</span><span class="o">&amp;</span><span class="n">error</span><span class="p">];</span>
+    <span class="n">NSAssert</span><span class="p">(</span><span class="n">success</span><span class="p">,</span> <span class="s">@"Start failed: %@"</span><span class="p">,</span><span class="n">error</span><span class="p">.</span><span class="n">debugDescription</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span> <span class="o">!</span><span class="n">success</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Handle the error here
+</span>    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>If there is an error staring the scanning process the error object will be set and you can handle the error.</p>
+
+<h6 id="3-implement-the-delegate-method-and-receive-results">3. Implement the delegate method and receive results</h6>
+<pre class="highlight objective_c"><code><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">anylineEnergyModuleView</span><span class="p">:(</span><span class="n">AnylineEnergyModuleView</span> <span class="o">*</span><span class="p">)</span><span class="nv">anylineEnergyModuleView</span>
+              <span class="nf">didFindScanResult</span><span class="p">:(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">scanResult</span>
+                      <span class="nf">cropImage</span><span class="p">:(</span><span class="n">UIImage</span> <span class="o">*</span><span class="p">)</span><span class="nv">image</span>
+                      <span class="nf">fullImage</span><span class="p">:(</span><span class="n">UIImage</span> <span class="o">*</span><span class="p">)</span><span class="nv">fullImage</span>
+                         <span class="nf">inMode</span><span class="p">:(</span><span class="n">ALScanMode</span><span class="p">)</span><span class="nv">scanMode</span><span class="p">;</span> <span class="p">{</span>
+    <span class="n">NSLog</span><span class="p">(</span><span class="s">"Scan result: %@"</span><span class="p">,</span> <span class="n">scanResult</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>Once Anyline has found a valid result the delegate is called and you get an result object with four result attributes. </p>
+
+<ul>
+<li><strong>scanMode:</strong> the mode the result belongs to</li>
+<li><strong>scanResult</strong>: the detected value as <em>string</em></li>
+<li><strong>image</strong>:
+
+<ul>
+<li>scanMode = meter: the cropped image that has been used to scan the meter value</li>
+<li>scanMode = code: null</li>
+</ul></li>
+<li><strong>fullImage</strong>:
+
+<ul>
+<li>scanMode = meter: the full image (before cropping)</li>
+<li>scanMode = code: null</li>
+</ul></li>
+</ul>
+
+<p><a name="mrzModule"> </a></p>
+
+<h2 id="mrz">MRZ</h2>
+
+<p>The Anyline MRZ-Module provides the functionality to scan passports and other IDs using the MRZ (Machine Readable Zone).</p>
+
+<p>For each scan result the module generates an identification object, containing all relevant information as well as the image of the scanned document.</p>
+
+<p><a name="scannedInfo"> </a>
+<strong>Information scanned:</strong></p>
+
+<table><thead>
+<tr>
+<th>value</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>expirationDate</td>
+<td>expiration date of the document</td>
+</tr>
+<tr>
+<td>dob</td>
+<td>date of birth</td>
+</tr>
+<tr>
+<td>checkDigitDob</td>
+<td>check digit for the date of birth</td>
+</tr>
+<tr>
+<td>checkDigitExpiration</td>
+<td>check digit for the expiration date</td>
+</tr>
+<tr>
+<td>code</td>
+<td>country code</td>
+</tr>
+<tr>
+<td>surname</td>
+<td>surname</td>
+</tr>
+<tr>
+<td>givenNames</td>
+<td>all given first names</td>
+</tr>
+<tr>
+<td>checkDigitDates</td>
+<td>check digit for both dates</td>
+</tr>
+<tr>
+<td>type</td>
+<td>type of the document that was read. (ID/P)</td>
+</tr>
+<tr>
+<td>checkDigitNumber</td>
+<td>check digit for the document number</td>
+</tr>
+<tr>
+<td>checkDigitFinal</td>
+<td>check digit</td>
+</tr>
+<tr>
+<td>sex</td>
+<td>gender of the person</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+Please be aware that not every property is filled for every document type (e.g. an ID MRZ does not contain a sex, a passport does)
+</aside>
+
+<h3 id="android">Android</h3>
+
+<h5 id="restrictions-for-the-mrz-module-config">Restrictions for the MRZ-Module Config:</h5>
+
+<ul>
+<li>The ratio of the cutout cannot be changed and is predefined to fit passports and IDs well.</li>
+<li>Flash mode <em>auto</em> is not (yet) supported.</li>
+</ul>
+
+<h4 id="example">Example</h4>
+
+<p>The following example files illustrate a simple use-case of the MRZ module.</p>
+
+<h6 id="example-activity">Example Activity</h6>
+<pre class="highlight java"><code><span class="n">mrzResultView</span> <span class="o">=</span> <span class="o">(</span><span class="n">MrzScanView</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">mrz_result</span><span class="o">);</span>
+<span class="n">mrzScanView</span><span class="o">.</span><span class="na">setConfigFromAsset</span><span class="o">(</span><span class="s">"mrz_view_config.json"</span><span class="o">);</span>
+
+<span class="c1">// initialize Anyline with your license key and a Listener that is called if a result is found</span>
+<span class="n">mrzScanView</span><span class="o">.</span><span class="na">initAnyline</span><span class="o">(</span><span class="n">ANYLINE_LICENSE</span><span class="o">,</span> <span class="k">new</span> <span class="n">MrzResultListener</span><span class="o">()</span> <span class="o">{</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">onResult</span><span class="o">(</span><span class="n">Identification</span> <span class="n">mrzResult</span><span class="o">,</span> <span class="n">AnylineImage</span> <span class="n">anylineImage</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="c1">// This is called when a result is found.</span>
+        <span class="c1">// The Identification includes all the data read from the MRZ</span>
+        <span class="c1">// as scanned and the given image shows the scanned ID/Passport</span>
+    <span class="o">}</span>
+<span class="o">});</span>
+<span class="n">mrzScanView</span><span class="o">.</span><span class="na">startScanning</span><span class="o">();</span>
+</code></pre>
+
+<p>There are three simple steps necessary to get started:</p>
+
+<ol>
+<li>If you do not use XML configuration set the <a href="#mrzConfig">config-file</a> to your MrzScanView using the <em>setConfigFromAsset</em> method and make sure that the json config-file is located in the Android assets folder</li>
+<li>Call <em>initAnyline</em> with your valid license key and a new instance of MrzResultListener, which will be used as callback for each successful scan.</li>
+<li>Call <em>startScanning()</em></li>
+</ol>
+
+<h6 id="example-activity-layout">Example Activity Layout</h6>
+<pre class="highlight xml"><code><span class="nt">&lt;RelativeLayout</span>
+    <span class="na">xmlns:android=</span><span class="s">"http://schemas.android.com/apk/res/android"</span>
+    <span class="na">xmlns:tools=</span><span class="s">"http://schemas.android.com/tools"</span>
+    <span class="na">android:layout_width=</span><span class="s">"match_parent"</span>
+    <span class="na">android:layout_height=</span><span class="s">"match_parent"</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;at.nineyards.anyline.modules.mrz.MrzScanView</span>
+        <span class="na">android:id=</span><span class="s">"@+id/mrz_view"</span>
+        <span class="na">android:layout_width=</span><span class="s">"match_parent"</span>
+        <span class="na">android:layout_height=</span><span class="s">"match_parent"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/RelativeLayout&gt;</span>
+</code></pre>
+
+<p>The MrzScanView can simply be included in the activity layout file, just like any other view. The view can be either configured via XML or with a config json.</p>
+
+<p><a name="mrzConfig"> </a></p>
+
+<h6 id="example-config-for-the-mrz-module">Example config for the MRZ Module</h6>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"captureResolution"</span><span class="p">:</span><span class="s2">"1080p"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"cutout"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"style"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rect"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"maxWidthPercent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"90%"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"maxHeightPercent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"90%"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"alignment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"top_half"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"strokeWidth"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"cornerRadius"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"strokeColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FFFFFF"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"outerColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"outerAlpha"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.3</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"flash"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"mode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"manual"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"alignment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bottom_right"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"beepOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"vibrateOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"blinkAnimationOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"cancelOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>A detailed description of all available config items can be found in <a href="#anyline-config">Anyline Config</a></p>
+
+<p>It is also possible to use xml-attributes instead of the json config file. For more detailed information see <a href="#configureViaXML">XML Configuration</a></p>
+
+<h3 id="ios">iOS</h3>
+
+<h5 id="restrictions-for-the-mrz-module-config">Restrictions for the MRZ-Module Config:</h5>
+
+<ul>
+<li>Flash mode <em>auto</em> is not (yet) supported.</li>
+</ul>
+
+<h4 id="example">Example</h4>
+
+<p>There are three steps necessary to get a scan result:</p>
+
+<h6 id="1-initialize-the-module-in-viewdidload">1. Initialize the module in viewDidLoad</h6>
+<pre class="highlight objective_c"><code><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">viewDidLoad</span> <span class="p">{</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">mrzModule</span> <span class="o">=</span> <span class="p">[[</span><span class="n">AnylineMRZModuleView</span> <span class="nf">alloc</span><span class="p">]</span> <span class="nf">initWithFrame</span><span class="p">:</span><span class="n">CGRectMake</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">640</span><span class="p">,</span> <span class="mi">640</span><span class="p">)];</span>
+   <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">view</span> <span class="nf">addSubview</span><span class="p">:</span><span class="n">self</span><span class="p">.</span><span class="n">mrzModule</span><span class="p">];</span>
+    <span class="n">BOOL</span> <span class="n">success</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">mrzModule</span> <span class="nf">setupWithLicenseKey</span><span class="p">:</span><span class="n">kMyLicenseKey</span> <span class="nf">delegate</span><span class="p">:</span><span class="n">self</span> <span class="nf">error</span><span class="p">:</span><span class="o">&amp;</span><span class="n">error</span><span class="p">];</span>
+    <span class="k">if</span><span class="p">(</span> <span class="o">!</span><span class="n">success</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Handle the error here
+</span>    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>Create a property, initialize the module in the viewDidLoad method and add it to the view of the view controller. Supply the license key and set the delegate, which will receive a call once a result is found. The boolean returned by the setup routine notifies you if the Anyline set up was successful. If an error occurred the error needs to be handled.</p>
+
+<h6 id="2-start-scanning-process-in-viewdidappear">2. Start scanning process in viewDidAppear</h6>
+<pre class="highlight objective_c"><code><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewDidAppear</span><span class="p">:(</span><span class="n">BOOL</span><span class="p">)</span><span class="nv">animated</span> <span class="p">{</span>
+    <span class="p">[</span><span class="n">super</span> <span class="nf">viewDidAppear</span><span class="p">:</span><span class="n">animated</span><span class="p">];</span>
+    <span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">;</span>
+    <span class="n">BOOL</span> <span class="n">success</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">mrzModule</span> <span class="nf">startScanningAndReturnError</span><span class="p">:</span><span class="o">&amp;</span><span class="n">error</span><span class="p">];</span>
+    <span class="n">NSAssert</span><span class="p">(</span><span class="n">success</span><span class="p">,</span> <span class="s">@"Start failed: %@"</span><span class="p">,</span><span class="n">error</span><span class="p">.</span><span class="n">debugDescription</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span> <span class="o">!</span><span class="n">success</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Handle the error here
+</span>    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>If there is a problem starting the scanning process an error object will be set, so the error can be handled.</p>
+
+<h6 id="3-implement-the-delegate-method-and-receive-results">3. Implement the delegate method and receive results</h6>
+<pre class="highlight objective_c"><code><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">anylineMRZModuleView</span><span class="p">:(</span><span class="n">AnylineMRZModuleView</span> <span class="o">*</span><span class="p">)</span><span class="nv">anylineMRZModuleView</span>
+           <span class="nf">didFindScanResult</span><span class="p">:(</span><span class="n">ALIdentification</span> <span class="o">*</span><span class="p">)</span><span class="nv">scanResult</span>
+                     <span class="nf">atImage</span><span class="p">:(</span><span class="n">UIImage</span> <span class="o">*</span><span class="p">)</span><span class="nv">image</span><span class="p">;</span> <span class="p">{</span>
+    <span class="n">NSLog</span><span class="p">(</span><span class="s">"Scan result: %@"</span><span class="p">,</span> <span class="n">scanResult</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>When a valid result is found, it will call the delegate. ScanResult is an object of type ALIdentification containing the <a href="#scannedInfo">information scanned.</a></p>
+
+      </div>
+      <div class="dark-box">
+      </div>
+    </div>
+  </body>
+</html>
