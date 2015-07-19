@@ -51,8 +51,8 @@ This API contains a <a href="#getting-started">Quick Start Guide</a> for all sup
 <h3 id="available-modules">Available Modules</h3>
 
 <ul>
-<li><a href="#barcodeModule"><strong>Barcode:</strong></a>  Scan 16 international barcodes &amp; QR codes</li>
-<li><a href="#energyModule"><strong>Energy:</strong></a> Scan meter readings of various electric, gas, water or heat meters</li>
+<li><a href="#barcodeModule"><strong>Barcode:</strong></a>  Scan 16 international barcodes &amp; QR codes.</li>
+<li><a href="#energyModule"><strong>Energy:</strong></a> Scan meter readings of various electric and gas meters.</li>
 <li><a href="#mrzModule"><strong>MRZ:</strong></a>  Reliable scanning of data from passports&rsquo; and IDs&rsquo; machine readable zones (MRZ)</li>
 <li><strong>Custom:</strong> Got any other ideas? We will support you when implementing other use cases for mobile OCR technology.</li>
 </ul>
@@ -163,19 +163,19 @@ A detailed description of all available attributes can be found in <a href="#any
 </tr>
 <tr>
 <td>beepOnResult</td>
-<td>enables sound on successful scanning process</td>
+<td>enables sound on successful scanning process (for modules only)</td>
 </tr>
 <tr>
 <td>vibrateOnResult</td>
-<td>provides haptic feedback for a successful scanning process</td>
+<td>provides haptic feedback for a successful scanning process (for modules only)</td>
 </tr>
 <tr>
 <td>blinkOnResult</td>
-<td>visual feedback for a successful scanning process</td>
+<td>visual feedback for a successful scanning process (for modules only)</td>
 </tr>
 <tr>
 <td>cancelOnResult</td>
-<td>if true, the scanning process will be stopped after one result and needs to be restarted manually</td>
+<td>if true, the scanning process will be stopped after one result and needs to be restarted manually (for modules only)</td>
 </tr>
 </tbody></table>
 
@@ -693,7 +693,7 @@ scanned.</p>
 </tr>
 <tr>
 <td>auto</td>
-<td>flash view also has an automatic option which is the default option. But it is still required to tell the view when it should turn on the flash in auto mode. (Except for use-cases where additional abstraction is provided like the Energy-Module)</td>
+<td>flash view also has an automatic option. But it is still required to tell the view when it should turn on the flash in auto mode. (Except for use-cases where additional abstraction is provided like the Energy-Module)</td>
 </tr>
 </tbody></table>
 
@@ -1262,7 +1262,7 @@ If there is a problem starting the scanning process an error object will be set,
 <h2 id="energy">Energy</h2>
 
 <p>The Anyline Energy-Module is capable of scanning analog electric- and gas-meter-readings.
-Moreover, it is possible to scan bar- and QR-codes as well as serial numbers for meter identification.</p>
+It is also possible to scan bar- and QR-codes (usefull for identifying meters).</p>
 
 <p>For each successful scan, you will receive four result-attributes:</p>
 
