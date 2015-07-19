@@ -908,7 +908,7 @@ When a valid result is found, it will call the delegate. The scan result will be
 ## Energy 
 
 The Anyline Energy-Module is capable of scanning analog electric- and gas-meter-readings.
-It is also possible to scan bar- and QR-codes (usefull for identifying meters).
+It is also possible to scan bar- and QR-codes (useful for identifying meters).
 
 For each successful scan, you will receive four result-attributes:
 
