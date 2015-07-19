@@ -13,8 +13,8 @@ This API contains a [Quick Start Guide] (#getting-started) for all supported pla
 - WP (by Q4 2015)
 	
 ### Available Modules
-- [**Barcode:**] (#barcodeModule)  Scan 16 international barcodes & QR codes
-- [**Energy:**] (#energyModule) Scan meter readings of various electric, gas, water or heat meters
+- [**Barcode:**] (#barcodeModule)  Scan 16 international barcodes & QR codes.
+- [**Energy:**] (#energyModule) Scan meter readings of various electric and gas meters.
 - [**MRZ:**] (#mrzModule)  Reliable scanning of data from passports' and IDs' machine readable zones (MRZ)
 - **Custom:** Got any other ideas? We will support you when implementing other use cases for mobile OCR technology.
 
@@ -108,10 +108,10 @@ Parameter | Description
 captureResolution | the preferred camera preview size
 cutout | defining which area of the preview will be "cutout" (analyzed to find bar/QR code)
 flash | defines the flash mode, where to place the flash symbol, etc.
-beepOnResult | enables sound on successful scanning process
-vibrateOnResult | provides haptic feedback for a successful scanning process
-blinkOnResult |  visual feedback for a successful scanning process
-cancelOnResult | if true, the scanning process will be stopped after one result and needs to be restarted manually
+beepOnResult | enables sound on successful scanning process (for modules only)
+vibrateOnResult | provides haptic feedback for a successful scanning process (for modules only)
+blinkOnResult |  visual feedback for a successful scanning process (for modules only)
+cancelOnResult | if true, the scanning process will be stopped after one result and needs to be restarted manually (for modules only)
 
 ###### XML
 
@@ -491,7 +491,7 @@ mode | description
 ---- | ------------
 none | flash view is not used and not visible
 manual | flash can be toggled manually  (default is off)
-auto | flash view also has an automatic option which is the default option. But it is still required to tell the view when it should turn on the flash in auto mode. (Except for use-cases where additional abstraction is provided like the Energy-Module)
+auto | flash view also has an automatic option. But it is still required to tell the view when it should turn on the flash in auto mode. (Except for use-cases where additional abstraction is provided like the Energy-Module)
 
 <a name="flash_alignment"> </a>
 ####alignment
@@ -902,7 +902,7 @@ When a valid result is found, it will call the delegate. The scan result will be
 ## Energy 
 
 The Anyline Energy-Module is capable of scanning analog electric- and gas-meter-readings.
-Moreover, it is possible to scan bar- and QR-codes as well as serial numbers for meter identification.
+It is also possible to scan bar- and QR-codes (useful for identifying meters).
 
 For each successful scan, you will receive four result-attributes:
 
@@ -1244,4 +1244,3 @@ If there is a problem starting the scanning process an error object will be set,
 }
 ```
 When a valid result is found, it will call the delegate. ScanResult is an object of type ALIdentification containing the [information scanned.] (#scannedInfo)
-
