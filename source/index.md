@@ -711,7 +711,7 @@ The Anyline-Modules are use-case specific abstractions for Anyline. Each module 
 With the Anyline Barcode-Module 16 different kinds of bar- and QR-codes can be scanned. The result will simply be a *string* representation of the code.
 
 #### Restrictions for the Barcode-Module Config:
-- Flash mode *auto* is not (yet) supported.
+- Flash mode *auto* is still in alpha stage therefore *manual* mode is preferred
 
 #### Available Barcode Formats:  
             
@@ -908,7 +908,7 @@ When a valid result is found, it will call the delegate. The scan result will be
 ## Energy 
 
 The Anyline Energy-Module is capable of scanning analog electric- and gas-meter-readings.
-It is also possible to scan bar- and QR-codes (usefull for identifying meters).
+It is also possible to scan bar- and QR-codes (useful for identifying meters).
 
 For each successful scan, you will receive four result-attributes:
 
@@ -928,7 +928,7 @@ For each successful scan, you will receive four result-attributes:
 - Capture resolution is currently fixed to 720p on Android (optimized for good results on as many devices as possible).
 - The size and ratio of the cutout is predefined and cannot be changed (sizes are optimized for best results)
 - The cutout should be placed fairly high (use alignment top and a small y offset), because this reduces reflections considerably when used with flash.
-- Flash mode *auto* is not (yet) supported.
+- Flash mode *auto* is still in alpha stage therefore *manual* mode is preferred
 
 #### Example
 The following example files illustrate a simple use-case of the energy module.
@@ -1012,7 +1012,7 @@ Capture resolution is currently fixed to 720p on Android, which was optimized fo
 ###iOS	
 
 ####Restrictions for the Energy-Module Config:
-- Flash mode *auto* is not (yet) supported.
+- Flash mode *auto* is still in alpha stage therefore *manual* mode is preferred
 
 #### Example
 	
@@ -1117,7 +1117,7 @@ Please be aware that not every property is filled for every document type (e.g. 
 
 #####Restrictions for the MRZ-Module Config:
 - The ratio of the cutout cannot be changed and is predefined to fit passports and IDs well.
-- Flash mode *auto* is not (yet) supported.
+- Flash mode *auto* is still in alpha stage therefore *manual* mode is preferred
 
 ####Example
 The following example files illustrate a simple use-case of the MRZ module.
@@ -1203,7 +1203,7 @@ It is also possible to use xml-attributes instead of the json config file. For m
 ### iOS
 
 #####Restrictions for the MRZ-Module Config:
-- Flash mode *auto* is not (yet) supported.
+- Flash mode *auto* is still in alpha stage therefore *manual* mode is preferred
 
 #### Example
 
