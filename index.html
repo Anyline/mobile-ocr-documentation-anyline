@@ -35,10 +35,12 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id="introduction">Introduction</h1>
+        <!-- Content is split up in multiple files listed above, which can be found in the includes directory -->
+
+<h1 id="introduction">Introduction</h1>
 
 <p>Anyline provides an easy-to-use SDK for applications to enable Optical Character Recognition (OCR) on mobile devices. 
-This API contains a <a href="#getting-started">Quick Start Guide</a> for all supported platforms, a detailed description for the <a href="#anyline-config">Anyline Config</a> as well as descriptions and examples for the available <a href="#modules">Modules</a>.</p>
+This API contains a <a href="#getting-started">Quick Start Guide</a> for all supported platforms, a detailed description for the <a href="#anyline-config">Anyline Config</a> as well as descriptions and examples for the available <a href="#modules">Modules</a>.<br/></p>
 
 <h3 id="supported-platforms">Supported Platforms</h3>
 
@@ -47,6 +49,8 @@ This API contains a <a href="#getting-started">Quick Start Guide</a> for all sup
 <li>iOS</li>
 <li>WP (by Q4 2015)</li>
 </ul>
+
+<p>Anyline is also available as <a href="#cordova-plugin">Cordova Plugin</a>.</p>
 
 <h3 id="available-modules">Available Modules</h3>
 
@@ -57,7 +61,7 @@ This API contains a <a href="#getting-started">Quick Start Guide</a> for all sup
 <li><strong>Custom:</strong> Got any other ideas? We will support you when implementing other use cases for mobile OCR technology.</li>
 </ul>
 
-<h1 id="getting-started">Getting Started</h1>
+          <h1 id="getting-started">Getting Started</h1>
 
 <p>This section contains a a brief description of the files included in SDK bundle as well as a requirement description and a Quick Start Guide for all available platforms.</p>
 
@@ -272,7 +276,107 @@ This flag causes the linker to load every object file in the library that define
 
 <h4 id="5-enjoy-scanning-and-have-fun">5. Enjoy scanning and have fun :)</h4>
 
-<h1 id="anyline-config">Anyline Config</h1>
+<h2 id="cordova-plugin">Cordova Plugin</h2>
+
+<p>The Cordova bundle contains the following parts: </p>
+
+<ul>
+<li><strong>anylinesdk-plugin:</strong>      contains the anylinesdk cordova-plugin that can be added to your project</li>
+<li><strong>example:</strong>    a simple cordova example project, demonstrating how the anylinesdk cordova-plugin can be used</li>
+<li><strong>PLUGIN_USAGE:</strong>     quick start guide</li>
+</ul>
+
+<h3 id="requirements">Requirements</h3>
+
+<h4 id="android">Android</h4>
+
+<ul>
+<li>Android device with SDK &gt;= 15</li>
+<li>decent camera functionality (recommended: 720p and adequate auto focus)</li>
+</ul>
+
+<h4 id="ios">iOS</h4>
+
+<ul>
+<li>minimum iOS 7.0</li>
+<li>minimum iPhone4s</li>
+</ul>
+
+<h3 id="quick-start-setup">Quick Start - Setup</h3>
+
+<p>This is just a simple setup guide to integrate the anylinesdk-plugin in an existing Cordova project.<br/>
+For more information about Cordova, how to use plugins, etc. see <a target="_blank" href="https://cordova.apache.org/">https://cordova.apache.org/</a>.</p>
+
+<h6 id="1-add-the-anylinesdk-plugin-to-your-existing-cordova-project">1. Add the anylinesdk-plugin to your existing cordova project</h6>
+<pre class="highlight plaintext"><code>cordova plugin add PATH_TO_DIR/anylinesdk-plugin/
+</code></pre>
+
+<p>Copy the <i>anylinesdk-plugin</i> folder and add the plugin to your Cordova project. Make sure you have added at least on of the platforms (Android, iOS) to your project.</p>
+
+<h6 id="2-modify-the-config-xml">2. Modify the config.xml</h6>
+<pre class="highlight xml"><code><span class="nt">&lt;feature</span> <span class="na">name=</span><span class="s">"AnylineSDK"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"android-package"</span> <span class="na">value=</span><span class="s">"io.anyline.cordova.AnylinePlugin"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"onload"</span> <span class="na">value=</span><span class="s">"true"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"ios-package"</span> <span class="na">value=</span><span class="s">"AnylineSDKPlugin"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"id"</span> <span class="na">value=</span><span class="s">"io.anyline.cordova"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/feature&gt;</span>
+</code></pre>
+
+<p>Add the following code to your (auto-generated) <i>config.xml</i> of your Cordova project, declaring the feature &ldquo;AnylineSDK&rdquo;.</p>
+
+<h6 id="3-copy-the-js-files-or-create-custom-js-file">3. Copy the js-files or create custom js-file</h6>
+
+<p>The <i>example</i> project provides sample scripts which are optimized for each module. The js-files can be found in <i>example/www/js/</i>.<p/>
+You can either reuse those sample scripts or create your own and adapt them to your needs. <br/>
+Just make sure the script is called in the <i>index.html</i> of the Cordova project.<p/></p>
+<pre class="highlight html"><code>cordova.exec(onResult, onError, "AnylineSDK", scanMode, config);
+</code></pre>
+
+<p><p/>
+<a name="cordova-example"></a>
+Basically, there is one simple exec-call to the AnylineSDK with the following parameters:</p>
+
+<ul>
+<li><b>onResult</b>: a function that is called on a scan result</li>
+<li><b>onError</b>: a function that is called on error or when the user canceled the scanning</li>
+<li><b>AnylineSDK</b>: add this <em>string</em> to make sure the anyline-sdk plugin is called</li>
+<li><b>scanMode</b>: one of &ldquo;<i>scanMRZ</i>&rdquo;, &ldquo;<i>scanBarcode</i>&rdquo;, &ldquo;<i>scanElectricMeter</i>&rdquo;, &ldquo;<i>scanGasMeter</i>&rdquo;</li>
+<li><b>config</b>: an array
+
+<ul>
+<li><b>config[0]</b>: the license key</li>
+<li><b>config[1]</b>: the <a href="#anyline-config">json config</a> for the view, passed as json-array</li>
+</ul></li>
+</ul>
+
+<blockquote>
+<p>Example for <strong>config</strong> from MRZ:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">    </span><span class="p">[</span><span class="s2">"YOUR_LICENSE_KEY"</span><span class="p">,</span><span class="w">  
+    </span><span class="p">{</span><span class="w"> </span><span class="nt">"captureResolution"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1080p"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"cutout"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> 
+                </span><span class="nt">"style"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rect"</span><span class="p">,</span><span class="w"> 
+                </span><span class="nt">"maxWidthPercent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"90%"</span><span class="p">,</span><span class="w"> 
+                </span><span class="nt">"maxHeightPercent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"90%"</span><span class="p">,</span><span class="w"> 
+                </span><span class="nt">"alignment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"top_half"</span><span class="p">,</span><span class="w"> 
+                </span><span class="nt">"strokeWidth"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> 
+                </span><span class="nt">"cornerRadius"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> 
+                </span><span class="nt">"strokeColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FFFFFF"</span><span class="p">,</span><span class="w"> 
+                </span><span class="nt">"outerColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000"</span><span class="p">,</span><span class="w"> 
+                </span><span class="nt">"outerAlpha"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.3</span><span class="w"> </span><span class="p">},</span><span class="w"> 
+        </span><span class="nt">"flash"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> 
+                </span><span class="nt">"mode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"manual"</span><span class="p">,</span><span class="w"> 
+                </span><span class="nt">"alignment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bottom_right"</span><span class="w"> </span><span class="p">},</span><span class="w"> 
+        </span><span class="nt">"beepOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"vibrateOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"blinkAnimationOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"cancelOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> 
+    </span><span class="p">}]</span><span class="w">
+</span></code></pre>
+
+<h6 id="4-run-your-cordova-project-enjoy-scanning-and-have-fun">4. Run your cordova project: Enjoy scanning and have fun :)</h6>
+
+          <h1 id="anyline-config">Anyline Config</h1>
 
 <p>With the config file the views can be configured in regard of position and looks of the <em>cutout</em> used for scanning as well as the behavior of flash and feedback mechanisms for scanning. This section contains a detailed description of the configurable items as well as two distinct ways for each platform to set up and configure the view.</p>
 
@@ -825,13 +929,13 @@ If another scan may be required later, leave this value <em>true</em> and just r
 
 <p>There are two ways to configure the look and behavior of the scan view in Android.</p>
 
-<h5 id="1-configuration-via-json">1. Configuration via json</h5>
+<h3 id="1-configuration-via-json">1. Configuration via json</h3>
 
 <p>The view can be configured using a json config file like seen above in the <a href="#itemDescription">item description</a>. This file must be located in the assets folder of your Android project.</p>
 
 <p><a name="configureViaXML"> </a></p>
 
-<h5 id="2-configuration-via-xml">2. Configuration via XML</h5>
+<h3 id="2-configuration-via-xml">2. Configuration via XML</h3>
 
 <blockquote>
 <p>Where app is xmlns:app=&ldquo;http://schemas.android.com/apk/res-auto&rdquo;</p>
@@ -1024,7 +1128,11 @@ app:cancel_on_result="true"
 
 <p><img alt="Connect" src="images/docConnect.jpg" /></p>
 
-<h1 id="modules">Modules</h1>
+<h2 id="cordova-plugin-config">Cordova Plugin Config</h2>
+
+<p>The configuration for the anyline-sdk plugin is part of the AnylineSDK call. The config is just passed as a json-array, see also the <a href="#cordova-example">example in the Quick Start</a>.</p>
+
+          <h1 id="modules">Modules</h1>
 
 <p>The Anyline-Modules are use-case specific abstractions for Anyline. Each module is designed to serve a specific purpose. Currently, the following modules are available:</p>
 
@@ -1257,6 +1365,40 @@ If there is a problem starting the scanning process an error object will be set,
 
 <p>When a valid result is found, it will call the delegate. The scan result will be a <em>string</em> containing the scanned code.</p>
 
+<h3 id="cordova-plugin">Cordova Plugin</h3>
+
+<h6 id="example-call-for-the-barcode-module">Example call for the Barcode Module</h6>
+
+<p>Call the exec method with <i><b>scanBarcode</b></i> (all other parameters are as explained in <a href="#cordova-example">Quick Start</a>).</p>
+<pre class="highlight java"><code><span class="n">cordova</span><span class="o">.</span><span class="na">exec</span><span class="o">(</span><span class="n">onResult</span><span class="o">,</span> <span class="n">onError</span><span class="o">,</span> <span class="s">"AnylineSDK"</span><span class="o">,</span> <span class="s">"scanBarcode"</span><span class="o">,</span> 
+    <span class="o">[</span><span class="s">"YOUR_LICENSE_KEY"</span><span class="o">,</span> <span class="c1">// Replace with your license key</span>
+    <span class="o">{</span>   <span class="s">"captureResolution"</span><span class="o">:</span> <span class="s">"720p"</span><span class="o">,</span>
+        <span class="s">"cutout"</span><span class="o">:</span> <span class="o">{</span>
+            <span class="s">"style"</span><span class="o">:</span> <span class="s">"rect"</span><span class="o">,</span>
+            <span class="s">"maxWidthPercent"</span><span class="o">:</span> <span class="s">"80%"</span><span class="o">,</span>
+            <span class="s">"maxHeightPercent"</span><span class="o">:</span> <span class="s">"80%"</span><span class="o">,</span>
+            <span class="s">"alignment"</span><span class="o">:</span> <span class="s">"center"</span><span class="o">,</span>
+            <span class="s">"ratioFromSize"</span><span class="o">:</span> <span class="o">{</span>
+                <span class="s">"width"</span><span class="o">:</span> <span class="mi">100</span><span class="o">,</span>
+                <span class="s">"height"</span><span class="o">:</span> <span class="mi">80</span>
+            <span class="o">},</span>
+        <span class="s">"strokeWidth"</span><span class="o">:</span> <span class="mi">4</span><span class="o">,</span>
+        <span class="s">"cornerRadius"</span><span class="o">:</span> <span class="mi">10</span><span class="o">,</span>
+        <span class="s">"strokeColor"</span><span class="o">:</span> <span class="s">"FFFFFF"</span><span class="o">,</span>
+        <span class="s">"outerColor"</span><span class="o">:</span> <span class="s">"000000"</span><span class="o">,</span>
+        <span class="s">"outerAlpha"</span><span class="o">:</span> <span class="mf">0.3</span>
+        <span class="o">},</span>
+       <span class="s">"flash"</span><span class="o">:</span> <span class="o">{</span>
+            <span class="s">"mode"</span><span class="o">:</span> <span class="s">"manual"</span><span class="o">,</span>
+            <span class="s">"alignment"</span><span class="o">:</span> <span class="s">"bottom_right"</span>
+      <span class="o">},</span>
+      <span class="s">"beepOnResult"</span><span class="o">:</span> <span class="kc">true</span><span class="o">,</span>
+      <span class="s">"vibrateOnResult"</span><span class="o">:</span> <span class="kc">true</span><span class="o">,</span>
+      <span class="s">"blinkAnimationOnResult"</span><span class="o">:</span> <span class="kc">true</span><span class="o">,</span>
+      <span class="s">"cancelOnResult"</span><span class="o">:</span> <span class="kc">false</span>
+   <span class="o">}]);</span>
+</code></pre>
+
 <p><a name="energyModule"> </a></p>
 
 <h2 id="energy">Energy</h2>
@@ -1447,6 +1589,39 @@ Furthermore it is necessary to set the scan mode utilizing <em>setScanMode</em>.
 <li>scanMode = code: null</li>
 </ul></li>
 </ul>
+
+<h3 id="cordova-plugin">Cordova Plugin</h3>
+
+<h6 id="example-call-for-the-energy-module">Example call for the Energy Module</h6>
+
+<p>There is a distinction between scanning electric and gas meter: 
+Call the exec method either with <i><b>scanElectricMeter</b></i> or <i><b>scanGasMeter</b></i> (all other parameters are as explained in <a href="#cordova-example">Quick Start</a>).</p>
+<pre class="highlight java"><code><span class="n">cordova</span><span class="o">.</span><span class="na">exec</span><span class="o">(</span><span class="n">onResult</span><span class="o">,</span> <span class="n">onError</span><span class="o">,</span> <span class="s">"AnylineSDK"</span><span class="o">,</span> <span class="s">"scanElectricMeter"</span><span class="o">,</span> 
+    <span class="o">[</span><span class="s">"YOUR_LICENSE_KEY"</span><span class="o">,</span> <span class="c1">// Replace with your license key</span>
+    <span class="o">{</span>   <span class="s">"captureResolution"</span><span class="o">:</span> <span class="s">"720p"</span><span class="o">,</span>
+          <span class="s">"cutout"</span><span class="o">:</span> <span class="o">{</span>
+            <span class="s">"style"</span><span class="o">:</span> <span class="s">"rect"</span><span class="o">,</span>
+            <span class="s">"alignment"</span><span class="o">:</span> <span class="s">"top"</span><span class="o">,</span>
+            <span class="s">"offset"</span><span class="o">:</span> <span class="o">{</span>
+                <span class="s">"x"</span><span class="o">:</span> <span class="mi">0</span><span class="o">,</span>
+                <span class="s">"y"</span><span class="o">:</span> <span class="mi">120</span>
+            <span class="o">},</span>
+            <span class="s">"strokeWidth"</span><span class="o">:</span> <span class="mi">2</span><span class="o">,</span>
+            <span class="s">"cornerRadius"</span><span class="o">:</span> <span class="mi">4</span><span class="o">,</span>
+            <span class="s">"strokeColor"</span><span class="o">:</span> <span class="s">"FFFFFF"</span><span class="o">,</span>
+            <span class="s">"outerColor"</span><span class="o">:</span> <span class="s">"000000"</span><span class="o">,</span>
+            <span class="s">"outerAlpha"</span><span class="o">:</span> <span class="mf">0.3</span>
+          <span class="o">},</span>
+          <span class="s">"flash"</span><span class="o">:</span> <span class="o">{</span>
+            <span class="s">"mode"</span><span class="o">:</span> <span class="s">"manual"</span><span class="o">,</span>
+            <span class="s">"alignment"</span><span class="o">:</span> <span class="s">"bottom_right"</span>
+          <span class="o">},</span>
+          <span class="s">"beepOnResult"</span><span class="o">:</span> <span class="kc">true</span><span class="o">,</span>
+          <span class="s">"vibrateOnResult"</span><span class="o">:</span> <span class="kc">true</span><span class="o">,</span>
+          <span class="s">"blinkAnimationOnResult"</span><span class="o">:</span> <span class="kc">true</span><span class="o">,</span>
+          <span class="s">"cancelOnResult"</span><span class="o">:</span> <span class="kc">true</span>
+    <span class="o">}]);</span>
+</code></pre>
 
 <p><a name="mrzModule"> </a></p>
 
@@ -1653,6 +1828,36 @@ Please be aware that not every property is filled for every document type (e.g. 
 </code></pre>
 
 <p>When a valid result is found, it will call the delegate. ScanResult is an object of type ALIdentification containing the <a href="#scannedInfo">information scanned.</a></p>
+
+<h3 id="cordova-plugin">Cordova Plugin</h3>
+
+<h6 id="example-call-for-the-mrz-module">Example call for the MRZ Module</h6>
+
+<p>Call the exec method with <i><b>scanMRZ</b></i> (all other parameters are as explained in <a href="#cordova-example">Quick Start</a>).</p>
+<pre class="highlight java"><code><span class="n">cordova</span><span class="o">.</span><span class="na">exec</span><span class="o">(</span><span class="n">onResult</span><span class="o">,</span> <span class="n">onError</span><span class="o">,</span> <span class="s">"AnylineSDK"</span><span class="o">,</span> <span class="s">"scanMRZ"</span><span class="o">,</span>    
+  <span class="o">[</span><span class="s">"YOUR_LICENSE_KEY"</span><span class="o">,</span> <span class="c1">// Replace with your license key</span>
+  <span class="o">{</span>   <span class="s">"captureResolution"</span><span class="o">:</span> <span class="s">"1080p"</span><span class="o">,</span>
+      <span class="s">"cutout"</span><span class="o">:</span> <span class="o">{</span>
+        <span class="s">"style"</span><span class="o">:</span> <span class="s">"rect"</span><span class="o">,</span>
+        <span class="s">"maxWidthPercent"</span><span class="o">:</span> <span class="s">"90%"</span><span class="o">,</span>
+        <span class="s">"maxHeightPercent"</span><span class="o">:</span> <span class="s">"90%"</span><span class="o">,</span>
+        <span class="s">"alignment"</span><span class="o">:</span> <span class="s">"top_half"</span><span class="o">,</span>
+        <span class="s">"strokeWidth"</span><span class="o">:</span> <span class="mi">2</span><span class="o">,</span>
+        <span class="s">"cornerRadius"</span><span class="o">:</span> <span class="mi">4</span><span class="o">,</span>
+        <span class="s">"strokeColor"</span><span class="o">:</span> <span class="s">"FFFFFF"</span><span class="o">,</span>
+        <span class="s">"outerColor"</span><span class="o">:</span> <span class="s">"000000"</span><span class="o">,</span>
+        <span class="s">"outerAlpha"</span><span class="o">:</span> <span class="mf">0.3</span>
+     <span class="o">},</span>
+     <span class="s">"flash"</span><span class="o">:</span> <span class="o">{</span>
+     <span class="s">"mode"</span><span class="o">:</span> <span class="s">"manual"</span><span class="o">,</span>
+     <span class="s">"alignment"</span><span class="o">:</span> <span class="s">"bottom_right"</span>
+     <span class="o">},</span>
+     <span class="s">"beepOnResult"</span><span class="o">:</span> <span class="kc">true</span><span class="o">,</span>
+     <span class="s">"vibrateOnResult"</span><span class="o">:</span> <span class="kc">true</span><span class="o">,</span>
+     <span class="s">"blinkAnimationOnResult"</span><span class="o">:</span> <span class="kc">true</span><span class="o">,</span>
+     <span class="s">"cancelOnResult"</span><span class="o">:</span> <span class="kc">true</span>
+  <span class="o">}]);</span>
+</code></pre>
 
       </div>
       <div class="dark-box">
