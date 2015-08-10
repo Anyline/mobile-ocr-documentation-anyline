@@ -484,7 +484,7 @@ checkDigitFinal	| check digit
 sex	 | gender of the person
 
 <aside class="notice">
-Please be aware that not every property is filled for every document type (e.g. an ID MRZ does not contain a sex, a passport does)
+Please be aware that not every property is filled for every document type (e.g. some ID MRZ do not contain a sex information)
 </aside>
 
 ### Android
