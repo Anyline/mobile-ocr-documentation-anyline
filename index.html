@@ -50,7 +50,8 @@ This API contains a <a href="#getting-started">Quick Start Guide</a> for all sup
 <li>WP (by Q4 2015)</li>
 </ul>
 
-<p>Anyline is also available as <a href="#cordova-plugin">Cordova Plugin</a>.</p>
+<p>Anyline is also available as <a href="#cordova-plugin">Cordova Plugin</a>. 
+(Xamarin Support Q4 2015).</p>
 
 <h3 id="available-modules">Available Modules</h3>
 
@@ -63,9 +64,29 @@ This API contains a <a href="#getting-started">Quick Start Guide</a> for all sup
 
           <h1 id="getting-started">Getting Started</h1>
 
-<p>This section contains a a brief description of the files included in SDK bundle as well as a requirement description and a Quick Start Guide for all available platforms.</p>
+<p>This section helps you to get started scanning using the Anyline SDK and a brief description of the files included in SDK bundle as well as a requirement description and a Quick Start Guide for all available platforms.</p>
 
-<h2 id="android">Android</h2>
+<h2 id="obtaining-a-anyline-sdk-licence-key">Obtaining a Anyline SDK Licence Key</h2>
+
+<p>The best way to use Anyline is to purchase your personal licence in our <a href="https://www.anyline.io/anyline-sdk-modules/">Anyline Store</a>. Each key is bound to a specific application by the Bundle Identifier (iOS) or the ApplicationId (Android).</p>
+
+<h3 id="ios-bundle-identifier">iOS Bundle Identifier</h3>
+
+<p>The iOS Bundle Identifier is best found in Xcode in the Project Overview / General.</p>
+
+<p><img alt="BundleIDiOS" src="images/bundleIDiOS.png" /></p>
+
+<h3 id="android-applicationid">Android ApplicationId</h3>
+
+<p>The Android ApplicationId is found in the build.gradle file as android / defaultConfig / applicationId.</p>
+
+<p><img alt="BundleIDAndroid" src="images/bundleIDAndroid.png" /></p>
+
+<p>If you do not use the ApplicationId in your build.gradle file you may use the package name shown in the AndroidManifest.xml.</p>
+
+<p><img alt="BundleIdAndroid2" src="images/bundleIDAndroid2.png" /></p>
+
+<h2 id="android-getting-started">Android Getting Started</h2>
 
 <p>The Android bundle contains the following parts: </p>
 
@@ -220,7 +241,7 @@ A detailed description of all available attributes can be found in <a href="#any
 
 <h4 id="4-enjoy-scanning-and-have-fun">4. Enjoy scanning and have fun :)</h4>
 
-<h2 id="ios">iOS</h2>
+<h2 id="ios-getting-started">iOS Getting Started</h2>
 
 <ul>
 <li><strong>Framework:</strong>        contains the Anyline.framework &amp; AnylineResources.bundle</li>
