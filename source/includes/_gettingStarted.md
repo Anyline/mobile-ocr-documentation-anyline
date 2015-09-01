@@ -2,9 +2,9 @@
 
 This section helps you to get started scanning using the Anyline SDK and a brief description of the files included in SDK bundle as well as a requirement description and a Quick Start Guide for all available platforms.
 
-## Obtaining a Anyline SDK Licence Key
+## Obtaining an Anyline SDK Licence Key
 
-The best way to use Anyline is to purchase your personal licence in our [Anyline Store](https://www.anyline.io/anyline-sdk-modules/). Each key is bound to a specific application by the Bundle Identifier (iOS) or the ApplicationId (Android).
+The best way to use Anyline is to purchase your personal licence in our [Anyline Store](https://www.anyline.io/store/). Each key is bound to a specific application by the Bundle Identifier (iOS) or the ApplicationId (Android).
 
 ### iOS Bundle Identifier
 The iOS Bundle Identifier is best found in Xcode in the Project Overview / General.
