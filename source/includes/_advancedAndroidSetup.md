@@ -2,11 +2,11 @@
 
 ## How to Split APK into several smaller ones
 
-It is possible to split it up into multiple APKs and upload them all to the playstore.
+It is possible to split your app into multiple APKs and upload them all to the playstore.
 The playstore will pick the correct APK to download.
-This is currently not recommended by Google unless the APK is bigger than 50MB. (see: http://developer.android.com/google/play/publishing/multiple-apks.html)
+This is currently not recommended by Google unless the APK is bigger than 50MB. (see: [Google developer page on multiple APKs](http://developer.android.com/google/play/publishing/multiple-apks.html))
 The following can be added in the android section of the build.gradle
-to generate a separate APK for every supported cpu architecture.
+to generate a separate APK for every supported CPU architecture (ABI).
 
 ```groovy
     //at the end of the android section
@@ -54,18 +54,17 @@ to generate a separate APK for every supported cpu architecture.
     }
 ```
 
-This will result in 5 APKs. 4 for every supported architecture and 1 big APK with everything.  
+This example will generate 5 APKs. 4 for every supported ABI and 1 big APK with everything.
 The APKs need to have a different version, for the playstore to be able to deliver the correct one.
-The playstore chooses the highest compatible version so armeabi-v7a must be higher den armeabi
-otherwise armeabi will be used if the device can use that too and x86 must be higher than armeabi-v7a (also because x86 devices can usually also use armeabi native libraries).
+The playstore chooses the highest compatible version so *armeabi-v7a* must be higher than *armeabi*
+and *x86* must be higher than *armeabi-v7a* (because x86 devices can usually also use *armeabi* libraries).
 
 
-The versioning in this example is a bit different than the one suggested on different places online, on sites like https://software.intel.com/en-us/android/articles/google-play-supports-cpu-architecture-filtering-for-multiple-APK.
-Because it is strange that an old x86 version has a higher number than any newer other version,
-this could be problematic if you change from multiple APK to single APK later on.
+The versioning in this example is a bit different than the one suggested on different places like [this site from Intel](https://software.intel.com/en-us/android/articles/google-play-supports-cpu-architecture-filtering-for-multiple-APK).
+Because it is not optimal that an old x86 version has a higher number than any newer other version,
+this could be problematic if you change from multiple APKs to a single APK later on.
 
-The above is just an example, it is also possible that you use 3 APKs, x86, armeabi-v7a, and one with mips + armeabi.
-Less than 3 can not be recommended, because 2 would have to be armeabi-v7a and rest or fat,
-but than x86 devices that also support armeabi-v7a will use armeabi-v7a, all though the other one would be better.
-The splitting also has advantages during development, because you can chose the product flavor you want to use
+The example shows one possibility, you can also use 3 APKs: *x86*, *armeabi-v7a*, and one with *mips* + *armeabi*.
+
+The splitting has advantages during development, because you can chose the product flavor you want to use
 and that reduces the build and upload time a bit.
