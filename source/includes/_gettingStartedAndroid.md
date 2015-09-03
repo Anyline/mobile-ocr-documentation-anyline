@@ -16,9 +16,34 @@ The Android bundle contains the following parts:
 
 
 ### Quick Start Guide
+
+#### 1. Add AnylineSDK as dependcency
+
+##### Via Maven
 > Add AnylineSDK to the dependencies in build.gradle
 
-```plaintext
+```groovy
+//root section of the file
+repositories {
+    //add the anyline maven repo
+    maven { url 'https://anylinesdk.blob.core.windows.net/maven/'}
+}
+
+dependencies {
+    //add the anyline sdk as dependency (maybe adapt version name)
+    compile 'io.anyline:anylinesdk:3.2.0@aar'
+    //... your other dependencies
+}
+```  
+###### &NewLine;
+
+##### Or via local copy of the aar
+
+Copy the .aar to the libs directory of your project (app/libs) and adapt build.gradle.
+
+> Add AnylineSDK to the dependencies in build.gradle
+
+```groovy
 //root section of the file
 repositories {
     flatDir {
@@ -27,13 +52,10 @@ repositories {
 }
 
 dependencies {
-    compile(name:'AnyLineSDK', ext:'aar')
+    compile(name:'anylinesdk-3.2.0', ext:'aar')
     //... your other dependencies
 }
 ```
-
-##### 1. Copy AnylineSDK.aar to your apps "libs" directory and modify the build.gradle as shown in the example.
-
 ###### &NewLine;  
 
 ##### 2. Provide a config file (json or xml)
@@ -121,7 +143,7 @@ Alternatively to a json config, it is also possible to configure the view (Energ
 
 ###### &NewLine;  
 
-####3. Init Anyline in your Activity
+#### 3. Init Anyline in your Activity
 There are module specific options - take a look at the description of the desired module to get more detailed information.
 
-####4. Enjoy scanning and have fun :)
+#### 4. Enjoy scanning and have fun :)
