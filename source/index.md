@@ -8,7 +8,10 @@ toc_footers:
 search: true
 
 includes:
-- gettingStarted
+- gettingStartedLicense
+- gettingStartedAndroid
+- gettingStartedIOS
+- gettingStartedCordova
 - anylineConfig
 - modules
 - advancedAndroidSetup
