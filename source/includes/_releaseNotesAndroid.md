@@ -14,15 +14,18 @@
 ### Fixed ###
 - CameraOpenListener in Modules not called
 
+
 ## Anyline SDK 3.1.1 ##
 Release Date 07.09.2015
 
 - fixed a reporting bug
 
+
 ## Anyline SDK 3.1 ##
 Release Date 01.09.2015
 
 - RC4 promoted to final 3.1 release
+
 
 ## Anyline SDK 3.1 RC4 ##
 Release Date 24.07.2015
@@ -58,19 +61,20 @@ identification.getCheckDigitExpiration();
 identification.getCheckDigitExpirationDate();
 ```
 
+
 ## Anyline SDK 3.1 RC3 ##
 Release Date 15.07.2015
 
 ### Improved ###
 - Added support for all machine readable german passports in MRZ module
-- Refined ID recognition in MRZ module 
+- Refined ID recognition in MRZ module
 
 
 ## Anyline SDK 3.1 RC2 ##
 Release Date 14.07.2015
 
 ### New ###
-- Added general support for german passports in MRZ module 
+- Added general support for german passports in MRZ module
 
 
 ## Anyline SDK 3.1 RC 1##
@@ -115,6 +119,7 @@ Release Date 07.07.2015
 - Extend Rect
 - Count Results
 - Match Result to Spec
+
 
 ## Anyline SDK 2.5.0 ##
 Release Date 30.01.2014
@@ -184,7 +189,7 @@ Release Date 04.12.2014
 
 ### Fixed ###
 - Values Stack bugfix
-- Memory leaks with arm64 
+- Memory leaks with arm64
 - rare occurring crashes fixed
 - Digit DataPoint fixes
 
