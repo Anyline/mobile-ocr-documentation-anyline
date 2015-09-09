@@ -40,6 +40,7 @@ With the Anyline Barcode-Module 16 different kinds of bar- and QR-codes can be s
 The following example files illustrate a simple use-case of the barcode module.
 
 ###### Example  Activity
+> in onCreate or onActivityCreated lifecycle methods
 
 ```java
 barcodeScanView = (BarcodeScanView) findViewById(R.id.barcode_scan_view);
@@ -48,19 +49,31 @@ barcodeScanView.setConfigFromAsset("barcode_view_config.json");
 // initialize Anyline with your license key and a Listener that is called if a result is found
 barcodeScanView.initAnyline(getString(R.string.anyline_license_key), new BarcodeResultListener() {
     @Override
-    public void onResult(String result) {
+    public void onResult(String result, AnylineImage resultImage) {
         // This is called when a result is found.
-
     }
 });
+```
+> in onResume()
+
+```java
 barcodeScanView.startScanning();
 ```
 
-There are three simple steps necessary to get started:
+> in onPause()
+
+```java
+barcodeScanView.cancelScanning();
+//IMPORTANT: always release the camera in onPause
+barcodeScanView.releaseCameraInBackground();
+```
+
+There are four simple steps necessary to get started:
 
 1. If you do not use XML configuration set the [config-file] (#barcodeConfig) to your BarcodeScanView using the *setConfigFromAsset* method and make sure that the json config-file is located in the Android assets folder.
 2. Call initAnyline with your valid license key and a new instance of BarcodeResultListener, which can be used to handle the bar/QR code results.
 3. Call *startScanning()*
+4. When done call *cancelScanning()* and *releaseCameraInBackground()* or *releaseCamera()*
 
 ###### &NewLine;
 
@@ -272,6 +285,7 @@ For each successful scan, you will receive four result-attributes:
 The following example files illustrate a simple use-case of the energy module.
 
 ###### Example  Activity
+> in onCreate or onActivityCreated lifecycle methods
 
 ```java
 energyScanView = (EnergyScanView) findViewById(R.id.energy_scan_view);
@@ -293,9 +307,20 @@ energyScanView.initAnyline(getString(R.string.anyline_license_key), new EnergyRe
 
     }
 });
+```
+> in onResume()
+
+```java
 energyScanView.startScanning();
 ```
 
+> in onPause()
+
+```java
+energyScanView.cancelScanning();
+//IMPORTANT: always release the camera in onPause
+energyScanView.releaseCameraInBackground();
+```
 
 In order to start the scan process, perform the following steps:
 
@@ -303,6 +328,7 @@ In order to start the scan process, perform the following steps:
 2. Set the scan mode; available are: ELECTRIC_METER, GAS_METER, BAR_CODE
 3. Call *initAnyline* with your valid license key and a new instance of EnergyResultListener, which is the callback for handling the results
 4. Call *startScanning()*
+5. When done call *cancelScanning()* and *releaseCameraInBackground()* or *releaseCamera()*
 
 
 ###### Example Activity Layout
@@ -497,6 +523,7 @@ Please be aware that not every property is filled for every document type (e.g. 
 The following example files illustrate a simple use-case of the MRZ module.
 
 ###### Example Activity
+> in onCreate or onActivityCreated lifecycle methods
 
 ```java
 mrzResultView = (MrzScanView) findViewById(R.id.mrz_result);
@@ -515,12 +542,26 @@ mrzScanView.initAnyline(getString(R.string.anyline_license_key), new MrzResultLi
 });
 mrzScanView.startScanning();
 ```
+> in onResume()
 
-There are three simple steps necessary to get started:
+```java
+mrzScanView.startScanning();
+```
+
+> in onPause()
+
+```java
+mrzScanView.cancelScanning();
+//IMPORTANT: always release the camera in onPause
+mrzScanView.releaseCameraInBackground();
+```
+
+There are four simple steps necessary to get started:
 
 1. If you do not use XML configuration set the [config-file] (#mrzConfig) to your MrzScanView using the *setConfigFromAsset* method and make sure that the json config-file is located in the Android assets folder
 2. Call *initAnyline* with your valid license key and a new instance of MrzResultListener, which will be used as callback for each successful scan.
 3. Call *startScanning()*
+4. When done call *cancelScanning()* and *releaseCameraInBackground()* or *releaseCamera()*
 
 ###### Example Activity Layout
 
