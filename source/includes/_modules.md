@@ -106,30 +106,29 @@ The BarcodeScanView can simply be included in the activity layout file, just lik
 
 ```json
 {
-  "captureResolution":"720p",
-
-  "cutout": {
-    "style": "rect",
-    "maxWidthPercent": "80%",
-    "alignment": "center",
-    "ratioFromSize": {
-      "width": 100,
-      "height": 80
+    "captureResolution": "720p",
+    "cutout": {
+        "style": "rect",
+        "maxWidthPercent": "80%",
+        "alignment": "center",
+        "ratioFromSize": {
+            "width": 100,
+            "height": 80
+        },
+        "strokeWidth": 2,
+        "cornerRadius": 4,
+        "strokeColor": "FFFFFF",
+        "outerColor": "000000",
+        "outerAlpha": 0.3
     },
-    "strokeWidth": 2,
-    "cornerRadius": 4,
-    "strokeColor": "FFFFFF",
-    "outerColor": "000000",
-    "outerAlpha": 0.3
-  },
-  "flash": {
-    "mode": "manual",
-    "alignment": "bottom_right"
-  },
-  "beepOnResult": true,
-  "vibrateOnResult": true,
-  "blinkAnimationOnResult": true,
-  "cancelOnResult": true
+    "flash": {
+        "mode": "manual",
+        "alignment": "bottom_right"
+    },
+    "beepOnResult": true,
+    "vibrateOnResult": true,
+    "blinkAnimationOnResult": true,
+    "cancelOnResult": true
 }
 ```
 
@@ -225,32 +224,36 @@ Call the exec method with <i><b>scanBarcode</b></i> (all other parameters are as
 
 ```java
 cordova.exec(onResult, onError, "AnylineSDK", "scanBarcode",
-	["YOUR_LICENSE_KEY", // Replace with your license key
-	{   "captureResolution": "720p",
- 	 	"cutout": {
-    		"style": "rect",
-   		 	"maxWidthPercent": "80%",
-    		"maxHeightPercent": "80%",
-   		 	"alignment": "center",
-   		 	"ratioFromSize": {
-      			"width": 100,
-      	  	  	"height": 80
-    		},
-    	"strokeWidth": 4,
-    	"cornerRadius": 10,
-    	"strokeColor": "FFFFFF",
-    	"outerColor": "000000",
-    	"outerAlpha": 0.3
-  		},
- 	   "flash": {
-   			"mode": "manual",
-    		"alignment": "bottom_right"
-  	  },
-  	  "beepOnResult": true,
-  	  "vibrateOnResult": true,
-  	  "blinkAnimationOnResult": true,
-  	  "cancelOnResult": false
-   }]);
+    [
+        "YOUR_LICENSE_KEY",
+        {
+            "captureResolution": "720p",
+            "cutout": {
+                "style": "rect",
+                "maxWidthPercent": "80%",
+                "maxHeightPercent": "80%",
+                "alignment": "center",
+                "ratioFromSize": {
+                    "width": 100,
+                    "height": 80
+                },
+                "strokeWidth": 4,
+                "cornerRadius": 10,
+                "strokeColor": "FFFFFF",
+                "outerColor": "000000",
+                "outerAlpha": 0.3
+            },
+            "flash": {
+                "mode": "manual",
+                "alignment": "bottom_right"
+            },
+            "beepOnResult": true,
+            "vibrateOnResult": true,
+            "blinkAnimationOnResult": true,
+            "cancelOnResult": false
+        }
+    ]
+);
 ```
 
 
@@ -456,30 +459,34 @@ Call the exec method either with <i><b>scanElectricMeter</b></i> or <i><b>scanGa
 
 ```java
 cordova.exec(onResult, onError, "AnylineSDK", "scanElectricMeter",
-	["YOUR_LICENSE_KEY", // Replace with your license key
-	{   "captureResolution": "720p",
-	      "cutout": {
-	        "style": "rect",
-	        "alignment": "top",
-	        "offset": {
-	            "x": 0,
-	            "y": 120
-	        },
-	        "strokeWidth": 2,
-	        "cornerRadius": 4,
-	        "strokeColor": "FFFFFF",
-	        "outerColor": "000000",
-	        "outerAlpha": 0.3
-	      },
-	      "flash": {
-	        "mode": "manual",
-	        "alignment": "bottom_right"
-	      },
-	      "beepOnResult": true,
-	      "vibrateOnResult": true,
-	      "blinkAnimationOnResult": true,
-	      "cancelOnResult": true
-	}]);
+    [
+        "YOUR_LICENSE_KEY",
+        {
+            "captureResolution": "720p",
+            "cutout": {
+                "style": "rect",
+                "alignment": "top",
+                "offset": {
+                    "x": 0,
+                    "y": 120
+                },
+                "strokeWidth": 2,
+                "cornerRadius": 4,
+                "strokeColor": "FFFFFF",
+                "outerColor": "000000",
+                "outerAlpha": 0.3
+            },
+            "flash": {
+                "mode": "manual",
+                "alignment": "bottom_right"
+            },
+            "beepOnResult": true,
+            "vibrateOnResult": true,
+            "blinkAnimationOnResult": true,
+            "cancelOnResult": true
+        }
+    ]
+);
 ```
 
 
@@ -586,7 +593,7 @@ The MrzScanView can simply be included in the activity layout file, just like an
 
 ```json
 {
-    "captureResolution":"1080p",
+    "captureResolution": "1080p",
     "cutout": {
         "style": "rect",
         "maxWidthPercent": "90%",
@@ -674,26 +681,30 @@ Call the exec method with <i><b>scanMRZ</b></i> (all other parameters are as exp
 
 ```java
 cordova.exec(onResult, onError, "AnylineSDK", "scanMRZ", 	
-  ["YOUR_LICENSE_KEY", // Replace with your license key
-  {   "captureResolution": "1080p",
-      "cutout": {
-        "style": "rect",
-        "maxWidthPercent": "90%",
-        "maxHeightPercent": "90%",
-       	"alignment": "top_half",
-       	"strokeWidth": 2,
-        "cornerRadius": 4,
-        "strokeColor": "FFFFFF",
-        "outerColor": "000000",
-        "outerAlpha": 0.3
-     },
-     "flash": {
-     "mode": "manual",
-     "alignment": "bottom_right"
-     },
-     "beepOnResult": true,
-     "vibrateOnResult": true,
-     "blinkAnimationOnResult": true,
-     "cancelOnResult": true
-  }]);
+    [
+        "YOUR_LICENSE_KEY",
+        {
+            "captureResolution": "1080p",
+            "cutout": {
+                "style": "rect",
+                "maxWidthPercent": "90%",
+                "maxHeightPercent": "90%",
+                "alignment": "top_half",
+                "strokeWidth": 2,
+                "cornerRadius": 4,
+                "strokeColor": "FFFFFF",
+                "outerColor": "000000",
+                "outerAlpha": 0.3
+            },
+            "flash": {
+                "mode": "manual",
+                "alignment": "bottom_right"
+            },
+            "beepOnResult": true,
+            "vibrateOnResult": true,
+            "blinkAnimationOnResult": true,
+            "cancelOnResult": true
+        }
+    ]
+);
 ```
