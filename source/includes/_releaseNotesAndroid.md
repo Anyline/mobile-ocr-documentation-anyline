@@ -1,6 +1,12 @@
 # Anyline SDK Android Release Notes #
 
-## Anyline SDK 3.2 RC1##
+## Anyline SDK 3.2 RC2 ##
+
+### Fixed ###
+- crash on Android < 4.3
+- crash when community edition was resumed from background
+
+## Anyline SDK 3.2 RC1 ##
 
 ### New ###
 - Community Version
