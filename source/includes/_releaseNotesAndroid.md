@@ -1,5 +1,9 @@
 # Anyline SDK Android Release Notes #
 
+## Anyline SDK 3.2 RC3 ##
+
+- different logo for watermark
+
 ## Anyline SDK 3.2 RC2 ##
 
 ### Fixed ###
@@ -10,7 +14,6 @@
 
 ### New ###
 - Community Version
-- early alpha of the Debit-Card-Module
 - New Licensing (Update requires new License Key)
 - New internal build system with nightly tests
 
