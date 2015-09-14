@@ -22,6 +22,7 @@
 
 ### Fixed ###
 - CameraOpenListener in Modules not called
+- Setting barcode format in barcode module has no effect
 
 
 ## Anyline SDK 3.1.1 ##
