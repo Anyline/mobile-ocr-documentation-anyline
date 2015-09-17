@@ -1,7 +1,13 @@
 # Anyline SDK Android Release Notes #
 
-## Anyline SDK 3.2 RC3 ##
+## Anyline SDK 3.2 RC4 ##
 
+### Fixed ###
+- Crash on device without flash (and flashmode not none)
+
+
+## Anyline SDK 3.2 RC3 ##
+Release Date 2015-09-17
 - different logo for watermark
 
 ## Anyline SDK 3.2 RC2 ##
@@ -26,19 +32,19 @@
 
 
 ## Anyline SDK 3.1.1 ##
-Release Date 07.09.2015
+Release Date 2015-09-07
 
 - fixed a reporting bug
 
 
 ## Anyline SDK 3.1 ##
-Release Date 01.09.2015
+Release Date 2015-09-01
 
 - RC4 promoted to final 3.1 release
 
 
 ## Anyline SDK 3.1 RC4 ##
-Release Date 24.07.2015
+Release Date 2015-07-24
 
 ### Fixed ###
 - ID Card MRZ Scanning does not work on multiple surnames
@@ -73,7 +79,7 @@ identification.getCheckDigitExpirationDate();
 
 
 ## Anyline SDK 3.1 RC3 ##
-Release Date 15.07.2015
+Release Date 2015-07-15
 
 ### Improved ###
 - Added support for all machine readable german passports in MRZ module
@@ -81,14 +87,14 @@ Release Date 15.07.2015
 
 
 ## Anyline SDK 3.1 RC2 ##
-Release Date 14.07.2015
+Release Date 2015-07-14
 
 ### New ###
 - Added general support for german passports in MRZ module
 
 
 ## Anyline SDK 3.1 RC 1##
-Release Date 07.07.2015
+Release Date 2015-07-07
 
 ### New ###
 - Ported 50 Operations to C++
@@ -132,7 +138,7 @@ Release Date 07.07.2015
 
 
 ## Anyline SDK 2.5.0 ##
-Release Date 30.01.2014
+Release Date 2015-01-30
 
 ### New ###
 - Filter Contours Area Operation
@@ -156,7 +162,7 @@ Release Date 30.01.2014
 
 
 ## Anyline SDK 2.4.2 ##
-Release Date 04.12.2014
+Release Date 2015-01-07
 
 ### New ###
 - Cut Thresholding Operation
@@ -175,7 +181,7 @@ Release Date 04.12.2014
 
 
 ## Anyline SDK 2.4.1 ##
-Release Date 04.12.2014
+Release Date 2014-12-04
 
 ### New ###
 - Watershed Operation
@@ -205,7 +211,7 @@ Release Date 04.12.2014
 
 
 ## Anyline SDK 2.4 ##
-Release Date 28.10.2014
+Release Date 2014-10-28
 
 ### New ###
 - Mean Color in Rect Operation
@@ -226,7 +232,7 @@ Release Date 28.10.2014
 
 
 ## Anyline SDK 2.3.5 ##
-Release Date 01.10.2014
+Release Date 2014-10-01
 
 ### Improved ###
 - better OCR training capabilities
@@ -236,7 +242,7 @@ Release Date 01.10.2014
 
 
 ## Anyline SDK 2.3.4 ##
-Release Date 23.09.2014
+Release Date 2014-09-23
 
 ### New ###
 - Square Angle Correction Operation
@@ -254,7 +260,7 @@ Release Date 23.09.2014
 
 
 ## Anyline SDK 2.3.3 ##
-Release Date 11.09.2014
+Release Date 2014-09-11
 
 ### New ###
 - Adaptive Luminance Thresholding Operation
@@ -272,7 +278,7 @@ Release Date 11.09.2014
 
 
 ## Anyline SDK 2.3.2 ##
-Release Date 23.08.2014
+Release Date 2014-08-23
 
 ### New ###
 - Adapt Digit Position Operation with bounding rects
@@ -289,7 +295,7 @@ Release Date 23.08.2014
 
 
 ## Anyline SDK 2.3.1 ##
-Release Date 12.08.2014
+Release Date 2014-08-12
 
 ### New ###
 - new GetEqualCount Operation
@@ -309,7 +315,7 @@ Release Date 12.08.2014
 
 
 ## Anyline SDK 2.3 ##
-Release Date 05.08.2014
+Release Date 2014-08-05
 
 ### New ###
 - modernised scripting language
@@ -329,7 +335,7 @@ Release Date 05.08.2014
 
 
 ## Anyline SDK 2.2.1 ##
-Release Date 29.07.2014
+Release Date 2014-07-29
 
 ### Improved ###
 - Exception handling
@@ -340,7 +346,7 @@ Release Date 29.07.2014
 
 
 ## Anyline SDK 2.2 ##
-Release Date 14.07.2014
+Release Date 2014-07-14
 
 ### Improved ###
 - better Image handling
@@ -350,7 +356,7 @@ Release Date 14.07.2014
 
 
 ## Anyline SDK 2.1 ##
-Release Date 04.06.2014
+Release Date 2014-06-04
 
 ### New ###
 - iOS Interface Documentation added
@@ -367,7 +373,7 @@ Release Date 04.06.2014
 
 
 ## Anyline SDK 2.0 ##
-Release Date 29.04.2014
+Release Date 2014-04-29
 
 ### New ###
 - Completely refactored the Anyline Framework.
@@ -380,14 +386,14 @@ Release Date 29.04.2014
 
 
 ## Anyline SDK 1.1 ##
-Release Date 05.02.2014
+Release Date 2014-02-05
 
 ### Improved ###
 - Improved Display Overlay View with round corners.
 
 
 ## Anyline SDK 1.0 ##
-Release Date 10.01.2014
+Release Date 2014-01-10
 
 ### New ###
 - Initial working version of Anyline for 7-segments.
