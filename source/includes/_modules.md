@@ -373,7 +373,15 @@ For custom configuration (e.g. cutout, flash, feedback on successful scan, etc.)
 Capture resolution is currently fixed to 720p on Android, which was optimized for good results on as many devices as possible.
 </aside>
 
+###### Reporting
 
+The reporting of Analog Meter Results in the Community Edition (including an image of a scanned meter)
+helps us to improving our product, and the customer experience.
+It is possible to turn that feature off by calling *setReportingEnabled(false)* on the EnergyScanView.
+
+```java
+energyScanView.setReportingEnabled(false);
+```
 
 
 ### iOS

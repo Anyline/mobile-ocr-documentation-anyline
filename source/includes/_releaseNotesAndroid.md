@@ -1,10 +1,21 @@
 # Anyline SDK Android Release Notes #
 
+## Anyline SDK 3.2 RC5 ##
+Release Date 2015-09-23
+
+### Fixed ###
+- a problem with auto flash in energy module
+
+### Changed ###
+- libraries for MIPS architecture no longer included (can be provided by request though)
+
+### New ###
+- Added default reporting to Energy module (can be disabled)
+
 ## Anyline SDK 3.2 RC4 ##
 
 ### Fixed ###
 - Crash on device without flash (and flashmode not none)
-
 
 ## Anyline SDK 3.2 RC3 ##
 Release Date 2015-09-17
