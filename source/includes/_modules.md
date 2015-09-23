@@ -457,6 +457,16 @@ Once Anyline has found a valid result the delegate is called and you get an resu
 - **fullImage**:
 	 - scanMode = meter: the full image (before cropping)
 	 - scanMode = code: null
+     
+###### Reporting
+
+The reporting of Analog Meter Results in the Community Edition (including an image of a scanned meter)
+helps us to improving our product, and the customer experience.
+It is possible to turn that feature off by calling *-(void)enableReporting:(BOOL)enable* on the AnylineEnergyModuleView.
+
+```objective_c
+[self.anylineEnergyView enableReporting:NO];
+```
 
 ### Cordova Plugin
 
