@@ -7,7 +7,7 @@ The Anyline-Modules are use-case specific abstractions for Anyline. Each module 
 - [MRZ (Machine Readable Zone)] (#mrzModule)
 
 <a name="barcodeModule"> </a>
-## Barcode 
+## Barcode
 
 With the Anyline Barcode-Module 16 different kinds of bar- and QR-codes can be scanned. The result will simply be a *string* representation of the code.
 
@@ -15,7 +15,7 @@ With the Anyline Barcode-Module 16 different kinds of bar- and QR-codes can be s
 - Flash mode *auto* is still in alpha stage therefore *manual* mode is preferred
 
 #### Available Barcode Formats:  
-            
+
 - AZTEC
 - CODABAR
 - CODE_39
@@ -33,34 +33,47 @@ With the Anyline Barcode-Module 16 different kinds of bar- and QR-codes can be s
 - UPC_E
 - UPC_EAN_EXTENSION
 
-### Android 
+### Android
 
 #### Example
 
 The following example files illustrate a simple use-case of the barcode module.
 
 ###### Example  Activity
+> in onCreate or onActivityCreated lifecycle methods
 
 ```java
 barcodeScanView = (BarcodeScanView) findViewById(R.id.barcode_scan_view);
 barcodeScanView.setConfigFromAsset("barcode_view_config.json");
- 
+
 // initialize Anyline with your license key and a Listener that is called if a result is found
-barcodeScanView.initAnyline(ANYLINE_LICENSE, new BarcodeResultListener() {
+barcodeScanView.initAnyline(getString(R.string.anyline_license_key), new BarcodeResultListener() {
     @Override
-    public void onResult(String result) {
+    public void onResult(String result, AnylineImage resultImage) {
         // This is called when a result is found.
- 
     }
 });
+```
+> in onResume()
+
+```java
 barcodeScanView.startScanning();
 ```
 
-There are three simple steps necessary to get started:
+> in onPause()
+
+```java
+barcodeScanView.cancelScanning();
+//IMPORTANT: always release the camera in onPause
+barcodeScanView.releaseCameraInBackground();
+```
+
+There are four simple steps necessary to get started:
 
 1. If you do not use XML configuration set the [config-file] (#barcodeConfig) to your BarcodeScanView using the *setConfigFromAsset* method and make sure that the json config-file is located in the Android assets folder.
 2. Call initAnyline with your valid license key and a new instance of BarcodeResultListener, which can be used to handle the bar/QR code results.
 3. Call *startScanning()*
+4. When done call *cancelScanning()* and *releaseCameraInBackground()* or *releaseCamera()*
 
 ###### &NewLine;
 
@@ -78,7 +91,7 @@ In an optional step, you can limit the barcode scanning to one or multiple barco
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
- 
+
  <at.nineyards.anyline.modules.barcode.BarcodeScanView
     android:id="@+id/barcode_scan_view"
     android:layout_width="match_parent"
@@ -93,30 +106,29 @@ The BarcodeScanView can simply be included in the activity layout file, just lik
 
 ```json
 {
-  "captureResolution":"720p",
- 
-  "cutout": {
-    "style": "rect",
-    "maxWidthPercent": "80%",
-    "alignment": "center",
-    "ratioFromSize": {
-      "width": 100,
-      "height": 80
+    "captureResolution": "720p",
+    "cutout": {
+        "style": "rect",
+        "maxWidthPercent": "80%",
+        "alignment": "center",
+        "ratioFromSize": {
+            "width": 100,
+            "height": 80
+        },
+        "strokeWidth": 2,
+        "cornerRadius": 4,
+        "strokeColor": "FFFFFF",
+        "outerColor": "000000",
+        "outerAlpha": 0.3
     },
-    "strokeWidth": 2,
-    "cornerRadius": 4,
-    "strokeColor": "FFFFFF",
-    "outerColor": "000000",
-    "outerAlpha": 0.3
-  },
-  "flash": {
-    "mode": "manual",
-    "alignment": "bottom_right"
-  },
-  "beepOnResult": true,
-  "vibrateOnResult": true,
-  "blinkAnimationOnResult": true,
-  "cancelOnResult": true
+    "flash": {
+        "mode": "manual",
+        "alignment": "bottom_right"
+    },
+    "beepOnResult": true,
+    "vibrateOnResult": true,
+    "blinkAnimationOnResult": true,
+    "cancelOnResult": true
 }
 ```
 
@@ -157,22 +169,22 @@ There are three steps necessary to get a scan result:
 }
 ```
 
-Create a property, initialize the module in the viewDidLoad method and add it to the view of the view controller. Supply the license key and set the delegate, which will receive a call once a result is found. The boolean returned by the setup routine notifies you if the Anyline set up was successful. If an error occurred the error needs to be handled. If the setup was successful, set the barcode types that should be scanned. 
+Create a property, initialize the module in the viewDidLoad method and add it to the view of the view controller. Supply the license key and set the delegate, which will receive a call once a result is found. The boolean returned by the setup routine notifies you if the Anyline set up was successful. If an error occurred the error needs to be handled. If the setup was successful, set the barcode types that should be scanned.
 
 Valid types are:
 
 - kCodeTypeAztec
-- kCodeTypeCodabar 
+- kCodeTypeCodabar
 - kCodeTypeCode39
-- kCodeTypeCode93 
+- kCodeTypeCode93
 - kCodeTypeCode128,
 - kCodeTypeDataMatrix
 - kCodeTypeEAN8
-- kCodeTypeEAN13 
+- kCodeTypeEAN13
 - kCodeTypeITF
-- kCodeTypePDF417 
+- kCodeTypePDF417
 - kCodeTypeQR,
-- kCodeTypeRSS14 
+- kCodeTypeRSS14
 - kCodeTypeRSSExpanded
 - kCodeTypeUPCA
 - kCodeTypeUPCE
@@ -211,39 +223,43 @@ When a valid result is found, it will call the delegate. The scan result will be
 Call the exec method with <i><b>scanBarcode</b></i> (all other parameters are as explained in [Quick Start] (#cordova-example)).
 
 ```java
-cordova.exec(onResult, onError, "AnylineSDK", "scanBarcode", 
-	["YOUR_LICENSE_KEY", // Replace with your license key
-	{   "captureResolution": "720p",
- 	 	"cutout": {
-    		"style": "rect",
-   		 	"maxWidthPercent": "80%",
-    		"maxHeightPercent": "80%",
-   		 	"alignment": "center",
-   		 	"ratioFromSize": {
-      			"width": 100,
-      	  	  	"height": 80
-    		},
-    	"strokeWidth": 4,
-    	"cornerRadius": 10,
-    	"strokeColor": "FFFFFF",
-    	"outerColor": "000000",
-    	"outerAlpha": 0.3
-  		},
- 	   "flash": {
-   			"mode": "manual",
-    		"alignment": "bottom_right"
-  	  },
-  	  "beepOnResult": true,
-  	  "vibrateOnResult": true,
-  	  "blinkAnimationOnResult": true,
-  	  "cancelOnResult": false
-   }]);
+cordova.exec(onResult, onError, "AnylineSDK", "scanBarcode",
+    [
+        "YOUR_LICENSE_KEY",
+        {
+            "captureResolution": "720p",
+            "cutout": {
+                "style": "rect",
+                "maxWidthPercent": "80%",
+                "maxHeightPercent": "80%",
+                "alignment": "center",
+                "ratioFromSize": {
+                    "width": 100,
+                    "height": 80
+                },
+                "strokeWidth": 4,
+                "cornerRadius": 10,
+                "strokeColor": "FFFFFF",
+                "outerColor": "000000",
+                "outerAlpha": 0.3
+            },
+            "flash": {
+                "mode": "manual",
+                "alignment": "bottom_right"
+            },
+            "beepOnResult": true,
+            "vibrateOnResult": true,
+            "blinkAnimationOnResult": true,
+            "cancelOnResult": false
+        }
+    ]
+);
 ```
 
 
 
 <a name="energyModule"> </a>
-## Energy 
+## Energy
 
 The Anyline Energy-Module is capable of scanning analog electric- and gas-meter-readings.
 It is also possible to scan bar- and QR-codes (useful for identifying meters).
@@ -259,7 +275,7 @@ For each successful scan, you will receive four result-attributes:
 	 - scanMode = meter: the full image (before cropping)
 	 - scanMode = code: null
 
-    
+
 ### Android
 
 #### Restrictions for the Energy-Module Config
@@ -272,37 +288,50 @@ For each successful scan, you will receive four result-attributes:
 The following example files illustrate a simple use-case of the energy module.
 
 ###### Example  Activity
+> in onCreate or onActivityCreated lifecycle methods
 
 ```java
 energyScanView = (EnergyScanView) findViewById(R.id.energy_scan_view);
- 
+
 // set the scan mode to start with
 energyScanView.setScanMode(EnergyScanView.ScanMode.ELECTRIC_METER);
- 
+
 // initialize Anyline with your license key and a Listener that is called if a result is found
-energyScanView.initAnyline(ANYLINE_LICENSE, new EnergyResultListener() {
+energyScanView.initAnyline(getString(R.string.anyline_license_key), new EnergyResultListener() {
     @Override
     public void onResult(EnergyScanView.ScanMode scanMode, String result,
                          AnylineImage resultImage, AnylineImage fullImage) {
- 
+
         // This is called when a result is found.
         // The scanMode is the mode the result was found for. The result is the actual result.
         // If the a meter reading was scanned two images are provided as well, one shows the targeted area only
         // the other shows the full image. (Images are null in barcode mode)
         // The result for meter readings is a String with leading zeros (if any) and no decimals.
- 
+
     }
 });
+```
+> in onResume()
+
+```java
 energyScanView.startScanning();
 ```
 
+> in onPause()
+
+```java
+energyScanView.cancelScanning();
+//IMPORTANT: always release the camera in onPause
+energyScanView.releaseCameraInBackground();
+```
 
 In order to start the scan process, perform the following steps:
 
 1. If you prefer a json-file for configuration, use the *setConfigFromAsset* method and place the json-config in the Android assets folder, otherwise configure the view using the xml attributes in the activity layout file.
 2. Set the scan mode; available are: ELECTRIC_METER, GAS_METER, BAR_CODE
 3. Call *initAnyline* with your valid license key and a new instance of EnergyResultListener, which is the callback for handling the results
-4. Call *startScanning()* 
+4. Call *startScanning()*
+5. When done call *cancelScanning()* and *releaseCameraInBackground()* or *releaseCamera()*
 
 
 ###### Example Activity Layout
@@ -313,7 +342,7 @@ In order to start the scan process, perform the following steps:
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
- 
+
 <at.nineyards.anyline.modules.energy.EnergyScanView
     android:id="@+id/energy_scan_view"
     android:layout_width="match_parent"
@@ -332,7 +361,7 @@ In order to start the scan process, perform the following steps:
     app:blink_animation_on_result="true"
     app:cancel_on_result="true"
     />
- 
+
 </RelativeLayout>
 ```
 
@@ -344,16 +373,24 @@ For custom configuration (e.g. cutout, flash, feedback on successful scan, etc.)
 Capture resolution is currently fixed to 720p on Android, which was optimized for good results on as many devices as possible.
 </aside>
 
-	
-	
-	
-### iOS	
+###### Reporting
+
+The reporting of Analog Meter Results in the Community Edition (including an image of a scanned meter)
+helps us to improving our product, and the customer experience.
+It is possible to turn that feature off by calling *setReportingEnabled(false)* on the EnergyScanView.
+
+```java
+energyScanView.setReportingEnabled(false);
+```
+
+
+### iOS
 
 #### Restrictions for the Energy-Module Config:
 - Flash mode *auto* is still in alpha stage therefore *manual* mode is preferred
 
 #### Example
-	
+
 In order to get scan results, it is necessary to perform the following three steps:
 
 ###### 1. Initialize the module in viewDidLoad
@@ -371,15 +408,15 @@ In order to get scan results, it is necessary to perform the following three ste
 ```
 
 Create a property, initialize the module and add it to the view of our view controller.
-Afterwards, supply the license key and set the delegate. The delegate will receive a call when a result is found. 
+Afterwards, supply the license key and set the delegate. The delegate will receive a call when a result is found.
 If the Anyline set up returned an error the error object will be set and you can handle the error.
-Furthermore it is necessary to set the scan mode utilizing *setScanMode*. 
+Furthermore it is necessary to set the scan mode utilizing *setScanMode*.
 
 Possible values:
- 
-- ALElectricMeter 
+
+- ALElectricMeter
 - ALGasMeter
-- ALBarcode 
+- ALBarcode
 - ALSerialNumber
 
 ###### 2. Start the scanning process in viewDidAppear
@@ -398,7 +435,7 @@ Possible values:
 If there is an error staring the scanning process the error object will be set and you can handle the error.
 
 ###### 3. Implement the delegate method and receive results
-    
+
 
 ```objective_c
 - (void)anylineEnergyModuleView:(AnylineEnergyModuleView *)anylineEnergyModuleView
@@ -410,7 +447,7 @@ If there is an error staring the scanning process the error object will be set a
 }
 ```
 
-Once Anyline has found a valid result the delegate is called and you get an result object with four result attributes. 
+Once Anyline has found a valid result the delegate is called and you get an result object with four result attributes.
 
 - **scanMode:** the mode the result belongs to
 - **scanResult**: the detected value as *string*
@@ -420,46 +457,60 @@ Once Anyline has found a valid result the delegate is called and you get an resu
 - **fullImage**:
 	 - scanMode = meter: the full image (before cropping)
 	 - scanMode = code: null
+     
+###### Reporting
+
+The reporting of Analog Meter Results in the Community Edition (including an image of a scanned meter)
+helps us to improving our product, and the customer experience.
+It is possible to turn that feature off by calling *-(void)enableReporting:(BOOL)enable* on the AnylineEnergyModuleView.
+
+```objective_c
+[self.anylineEnergyView enableReporting:NO];
+```
 
 ### Cordova Plugin
 
 ###### Example call for the Energy Module
 
-There is a distinction between scanning electric and gas meter: 
+There is a distinction between scanning electric and gas meter:
 Call the exec method either with <i><b>scanElectricMeter</b></i> or <i><b>scanGasMeter</b></i> (all other parameters are as explained in [Quick Start] (#cordova-example)).
 
 ```java
-cordova.exec(onResult, onError, "AnylineSDK", "scanElectricMeter", 
-	["YOUR_LICENSE_KEY", // Replace with your license key
-	{   "captureResolution": "720p",
-	      "cutout": {
-	        "style": "rect",
-	        "alignment": "top",
-	        "offset": {
-	            "x": 0,
-	            "y": 120
-	        },
-	        "strokeWidth": 2,
-	        "cornerRadius": 4,
-	        "strokeColor": "FFFFFF",
-	        "outerColor": "000000",
-	        "outerAlpha": 0.3
-	      },
-	      "flash": {
-	        "mode": "manual",
-	        "alignment": "bottom_right"
-	      },
-	      "beepOnResult": true,
-	      "vibrateOnResult": true,
-	      "blinkAnimationOnResult": true,
-	      "cancelOnResult": true
-	}]);
+cordova.exec(onResult, onError, "AnylineSDK", "scanElectricMeter",
+    [
+        "YOUR_LICENSE_KEY",
+        {
+            "captureResolution": "720p",
+            "cutout": {
+                "style": "rect",
+                "alignment": "top",
+                "offset": {
+                    "x": 0,
+                    "y": 120
+                },
+                "strokeWidth": 2,
+                "cornerRadius": 4,
+                "strokeColor": "FFFFFF",
+                "outerColor": "000000",
+                "outerAlpha": 0.3
+            },
+            "flash": {
+                "mode": "manual",
+                "alignment": "bottom_right"
+            },
+            "beepOnResult": true,
+            "vibrateOnResult": true,
+            "blinkAnimationOnResult": true,
+            "cancelOnResult": true
+        }
+    ]
+);
 ```
 
 
 
 <a name="mrzModule"> </a>
-## MRZ 
+## MRZ
 
 The Anyline MRZ-Module provides the functionality to scan passports and other IDs using the MRZ (Machine Readable Zone).
 
@@ -497,17 +548,18 @@ Please be aware that not every property is filled for every document type (e.g. 
 The following example files illustrate a simple use-case of the MRZ module.
 
 ###### Example Activity
+> in onCreate or onActivityCreated lifecycle methods
 
 ```java
 mrzResultView = (MrzScanView) findViewById(R.id.mrz_result);
 mrzScanView.setConfigFromAsset("mrz_view_config.json");
- 
+
 // initialize Anyline with your license key and a Listener that is called if a result is found
-mrzScanView.initAnyline(ANYLINE_LICENSE, new MrzResultListener() {
- 
+mrzScanView.initAnyline(getString(R.string.anyline_license_key), new MrzResultListener() {
+
     @Override
     public void onResult(Identification mrzResult, AnylineImage anylineImage) {
- 
+
         // This is called when a result is found.
         // The Identification includes all the data read from the MRZ
         // as scanned and the given image shows the scanned ID/Passport
@@ -515,12 +567,26 @@ mrzScanView.initAnyline(ANYLINE_LICENSE, new MrzResultListener() {
 });
 mrzScanView.startScanning();
 ```
+> in onResume()
 
-There are three simple steps necessary to get started:
+```java
+mrzScanView.startScanning();
+```
+
+> in onPause()
+
+```java
+mrzScanView.cancelScanning();
+//IMPORTANT: always release the camera in onPause
+mrzScanView.releaseCameraInBackground();
+```
+
+There are four simple steps necessary to get started:
 
 1. If you do not use XML configuration set the [config-file] (#mrzConfig) to your MrzScanView using the *setConfigFromAsset* method and make sure that the json config-file is located in the Android assets folder
 2. Call *initAnyline* with your valid license key and a new instance of MrzResultListener, which will be used as callback for each successful scan.
 3. Call *startScanning()*
+4. When done call *cancelScanning()* and *releaseCameraInBackground()* or *releaseCamera()*
 
 ###### Example Activity Layout
 
@@ -530,7 +596,7 @@ There are three simple steps necessary to get started:
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
- 
+
     <at.nineyards.anyline.modules.mrz.MrzScanView
         android:id="@+id/mrz_view"
         android:layout_width="match_parent"
@@ -545,7 +611,7 @@ The MrzScanView can simply be included in the activity layout file, just like an
 
 ```json
 {
-    "captureResolution":"1080p",
+    "captureResolution": "1080p",
     "cutout": {
         "style": "rect",
         "maxWidthPercent": "90%",
@@ -633,27 +699,30 @@ Call the exec method with <i><b>scanMRZ</b></i> (all other parameters are as exp
 
 ```java
 cordova.exec(onResult, onError, "AnylineSDK", "scanMRZ", 	
-  ["YOUR_LICENSE_KEY", // Replace with your license key
-  {   "captureResolution": "1080p",
-      "cutout": {
-        "style": "rect",
-        "maxWidthPercent": "90%",
-        "maxHeightPercent": "90%",
-       	"alignment": "top_half",
-       	"strokeWidth": 2,
-        "cornerRadius": 4,
-        "strokeColor": "FFFFFF",
-        "outerColor": "000000",
-        "outerAlpha": 0.3
-     },
-     "flash": {
-     "mode": "manual",
-     "alignment": "bottom_right"
-     },
-     "beepOnResult": true,
-     "vibrateOnResult": true,
-     "blinkAnimationOnResult": true,
-     "cancelOnResult": true
-  }]);
+    [
+        "YOUR_LICENSE_KEY",
+        {
+            "captureResolution": "1080p",
+            "cutout": {
+                "style": "rect",
+                "maxWidthPercent": "90%",
+                "maxHeightPercent": "90%",
+                "alignment": "top_half",
+                "strokeWidth": 2,
+                "cornerRadius": 4,
+                "strokeColor": "FFFFFF",
+                "outerColor": "000000",
+                "outerAlpha": 0.3
+            },
+            "flash": {
+                "mode": "manual",
+                "alignment": "bottom_right"
+            },
+            "beepOnResult": true,
+            "vibrateOnResult": true,
+            "blinkAnimationOnResult": true,
+            "cancelOnResult": true
+        }
+    ]
+);
 ```
-
