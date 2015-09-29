@@ -39,7 +39,7 @@
 
 <h1 id="introduction">Introduction</h1>
 
-<p>Anyline provides an easy-to-use SDK for applications to enable Optical Character Recognition (OCR) on mobile devices. 
+<p>Anyline provides an easy-to-use SDK for applications to enable Optical Character Recognition (OCR) on mobile devices.
 This API contains a <a href="#getting-started">Quick Start Guide</a> for all supported platforms, a detailed description for the <a href="#anyline-config">Anyline Config</a> as well as descriptions and examples for the available <a href="#modules">Modules</a>.<br/></p>
 
 <h3 id="supported-platforms">Supported Platforms</h3>
@@ -50,7 +50,7 @@ This API contains a <a href="#getting-started">Quick Start Guide</a> for all sup
 <li>WP (by Q4 2015)</li>
 </ul>
 
-<p>Anyline is also available as <a href="#cordova-plugin">Cordova Plugin</a>. 
+<p>Anyline is also available as <a href="#cordova-plugin">Cordova Plugin</a>.
 (Xamarin Support Q4 2015).</p>
 
 <h3 id="available-modules">Available Modules</h3>
@@ -66,9 +66,9 @@ This API contains a <a href="#getting-started">Quick Start Guide</a> for all sup
 
 <p>This section helps you to get started scanning using the Anyline SDK and a brief description of the files included in SDK bundle as well as a requirement description and a Quick Start Guide for all available platforms.</p>
 
-<h2 id="obtaining-an-anyline-sdk-licence-key">Obtaining an Anyline SDK Licence Key</h2>
+<h2 id="obtaining-an-anyline-sdk-license-key">Obtaining an Anyline SDK License Key</h2>
 
-<p>The best way to use Anyline is to purchase your personal licence in our <a href="https://www.anyline.io/store/">Anyline Store</a>. Each key is bound to a specific application by the Bundle Identifier (iOS) or the ApplicationId (Android).</p>
+<p>The best way to use Anyline is to purchase your personal license in our <a href="https://www.anyline.io/store/">Anyline Store</a>. Each key is bound to a specific application by the Bundle Identifier (iOS) or the ApplicationId (Android).</p>
 
 <h3 id="ios-bundle-identifier">iOS Bundle Identifier</h3>
 
@@ -86,9 +86,9 @@ This API contains a <a href="#getting-started">Quick Start Guide</a> for all sup
 
 <p><img alt="BundleIdAndroid2" src="images/bundleIDAndroid2.png" /></p>
 
-<h2 id="android-getting-started">Android Getting Started</h2>
+          <h2 id="android-getting-started">Android Getting Started</h2>
 
-<p>The Android bundle contains the following parts: </p>
+<p>The Android bundle contains the following parts:</p>
 
 <ul>
 <li><strong>AnylineSDK:</strong>      contains the anyline-android-release.aar library</li>
@@ -107,23 +107,47 @@ This API contains a <a href="#getting-started">Quick Start Guide</a> for all sup
 
 <h3 id="quick-start-guide">Quick Start Guide</h3>
 
+<h4 id="1-add-anylinesdk-as-dependcency">1. Add AnylineSDK as dependcency</h4>
+
+<h5 id="via-maven">Via Maven</h5>
+
 <blockquote>
 <p>Add AnylineSDK to the dependencies in build.gradle</p>
 </blockquote>
-<pre class="highlight plaintext"><code>//root section of the file
-repositories {
-    flatDir {
-        dirs 'libs'
-    }
-}
+<pre class="highlight groovy"><code><span class="c1">//root section of the file
+</span><span class="n">repositories</span> <span class="o">{</span>
+    <span class="c1">//add the anyline maven repo
+</span>    <span class="n">maven</span> <span class="o">{</span> <span class="n">url</span> <span class="s1">'https://anylinesdk.blob.core.windows.net/maven/'</span><span class="o">}</span>
+<span class="o">}</span>
 
-dependencies {
-    compile(name:'AnyLineSDK', ext:'aar')
-    //... your other dependencies
-}
+<span class="n">dependencies</span> <span class="o">{</span>
+    <span class="c1">//add the anyline sdk as dependency (maybe adapt version name)
+</span>    <span class="n">compile</span> <span class="s1">'io.anyline:anylinesdk:3.2.0@aar'</span>
+    <span class="c1">//... your other dependencies
+</span><span class="o">}</span>
 </code></pre>
 
-<h5 id="1-copy-anylinesdk-aar-to-your-apps-quot-libs-quot-directory-and-modify-the-build-gradle-as-shown-in-the-example">1. Copy AnylineSDK.aar to your apps &ldquo;libs&rdquo; directory and modify the build.gradle as shown in the example.</h5>
+<h6 id="newline">&NewLine;</h6>
+
+<h5 id="or-via-local-copy-of-the-aar">Or via local copy of the aar</h5>
+
+<p>Copy the .aar to the libs directory of your project (app/libs) and adapt build.gradle.</p>
+
+<blockquote>
+<p>Add AnylineSDK to the dependencies in build.gradle</p>
+</blockquote>
+<pre class="highlight groovy"><code><span class="c1">//root section of the file
+</span><span class="n">repositories</span> <span class="o">{</span>
+    <span class="n">flatDir</span> <span class="o">{</span>
+        <span class="n">dirs</span> <span class="s1">'libs'</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="n">dependencies</span> <span class="o">{</span>
+    <span class="n">compile</span><span class="o">(</span><span class="nl">name:</span><span class="s1">'anylinesdk-3.2.0'</span><span class="o">,</span> <span class="nl">ext:</span><span class="s1">'aar'</span><span class="o">)</span>
+    <span class="c1">//... your other dependencies
+</span><span class="o">}</span>
+</code></pre>
 
 <h6 id="newline">&NewLine;</h6>
 
@@ -235,13 +259,32 @@ A detailed description of all available attributes can be found in <a href="#any
 
 <h6 id="newline">&NewLine;</h6>
 
-<h4 id="3-init-anyline-in-your-activity">3. Init Anyline in your Activity</h4>
+<h4 id="3-add-your-license">3. Add your license</h4>
+
+<p>Add your license to your string resources (can be a separate xml file).</p>
+<pre class="highlight plaintext"><code>&lt;string name="anyline_license_key" translatable="false"&gt;
+    icaCo34adsfasdferJBAerisdlfkjerj1234adsflkerhlakherDAdfjlafherGs\n
+    h4ll0we1t7h1s1sno74r34ll1c3n53yO00asdfkaer455alksdfASDSlallernde\n
+    YXRmb3JtIjogWyAiQW5kcm9pZCIgXSwgInNjb3BlIjogWyAiQUxMIiBdLCAidG9s\n
+    icaCo34adsfasdferJBAerisdlfkjerj1234adsflkerhlakherDAdfjlafherGs\n
+    cHhoTm9UZ0g1cys3M2dhUW1SMUpXblJLWEhFeE02eHRNWHpaNEViWXdXODFmWmRl\n
+    YXRmb3JtIjogWyAiQW5kcm9pZCIgXSwgInNjb3BlIjogWyAiQUxMIiBdLCAidG9s\n
+    c0xjNEwzbjBLV0tnOG80NzdGSHA3OHUydWFVCkRqUUU4S0RWK240RkFVZ3FnUHg5\n
+    icaCo34adsfasdferJBAerisdlfkjerj1234adsflkerhlakherDAdfjlafherGs\n
+    aWNldnRTZEU2Q3hkYldZUVdpQjNkUXFqckxuWW0vaE1CSEx2OHRUdWpyN09MWDhC\n
+    h4ll0we1t7h1s1sno74r34ll1c3n53yO00asdfkaer455alksdfASDSlallernde\n
+    icaCo34adsfasdferJBAerisdlfkjerj1234adsflkerhlakherDAdfjlafherGs\n
+    SEptQVE9PQo=\n
+&lt;/string&gt;
+</code></pre>
+
+<h4 id="4-init-anyline-in-your-activity">4. Init Anyline in your Activity</h4>
 
 <p>There are module specific options - take a look at the description of the desired module to get more detailed information.</p>
 
-<h4 id="4-enjoy-scanning-and-have-fun">4. Enjoy scanning and have fun :)</h4>
+<h4 id="5-enjoy-scanning-and-have-fun">5. Enjoy scanning and have fun :)</h4>
 
-<h2 id="ios-getting-started">iOS Getting Started</h2>
+          <h2 id="ios-getting-started">iOS Getting Started</h2>
 
 <ul>
 <li><strong>Framework:</strong>        contains the Anyline.framework &amp; AnylineResources.bundle</li>
@@ -277,7 +320,7 @@ A detailed description of all available attributes can be found in <a href="#any
 <li>libc++.dylib</li>
 <li>libstdc++.6.0.9.dylib</li>
 <li>libiconv.dylib</li>
-<li>AssetsLibrary.framework<br></li>
+<li>AssetsLibrary.framework</li>
 </ul>
 
 <p>After adding the libraries, it should look like this (notice the AnylineResources bundle, if its not in <em>Copy Bundle Resources</em> add it):
@@ -286,7 +329,7 @@ A detailed description of all available attributes can be found in <a href="#any
 <h4 id="3-linker-flags">3. Linker Flags</h4>
 
 <p>In your project inspector switch to the <em>Build Settings</em> tab  and search for <em>Other Linker Flags</em>. Select
-<em>Other - Other Linker Flags</em> and add <em>-&nbsp;ObjC</em>. 
+<em>Other - Other Linker Flags</em> and add <em>-&nbsp;ObjC</em>.
 This flag causes the linker to load every object file in the library that defines an Objective-C class or category.</p>
 
 <p><img alt="Linker Flags" src="images/LinkerFlags.jpg" /></p>
@@ -297,9 +340,9 @@ This flag causes the linker to load every object file in the library that define
 
 <h4 id="5-enjoy-scanning-and-have-fun">5. Enjoy scanning and have fun :)</h4>
 
-<h2 id="cordova-plugin">Cordova Plugin</h2>
+          <h2 id="cordova-plugin">Cordova Plugin</h2>
 
-<p>The Cordova bundle contains the following parts: </p>
+<p>The Cordova bundle contains the following parts:</p>
 
 <ul>
 <li><strong>anylinesdk-plugin:</strong>      contains the anylinesdk cordova-plugin that can be added to your project</li>
@@ -373,26 +416,31 @@ Basically, there is one simple exec-call to the AnylineSDK with the following pa
 <blockquote>
 <p>Example for <strong>config</strong> from MRZ:</p>
 </blockquote>
-<pre class="highlight json"><code><span class="w">    </span><span class="p">[</span><span class="s2">"YOUR_LICENSE_KEY"</span><span class="p">,</span><span class="w">  
-    </span><span class="p">{</span><span class="w"> </span><span class="nt">"captureResolution"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1080p"</span><span class="p">,</span><span class="w"> 
-        </span><span class="nt">"cutout"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> 
-                </span><span class="nt">"style"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rect"</span><span class="p">,</span><span class="w"> 
-                </span><span class="nt">"maxWidthPercent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"90%"</span><span class="p">,</span><span class="w"> 
-                </span><span class="nt">"maxHeightPercent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"90%"</span><span class="p">,</span><span class="w"> 
-                </span><span class="nt">"alignment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"top_half"</span><span class="p">,</span><span class="w"> 
-                </span><span class="nt">"strokeWidth"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> 
-                </span><span class="nt">"cornerRadius"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> 
-                </span><span class="nt">"strokeColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FFFFFF"</span><span class="p">,</span><span class="w"> 
-                </span><span class="nt">"outerColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000"</span><span class="p">,</span><span class="w"> 
-                </span><span class="nt">"outerAlpha"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.3</span><span class="w"> </span><span class="p">},</span><span class="w"> 
-        </span><span class="nt">"flash"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> 
-                </span><span class="nt">"mode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"manual"</span><span class="p">,</span><span class="w"> 
-                </span><span class="nt">"alignment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bottom_right"</span><span class="w"> </span><span class="p">},</span><span class="w"> 
-        </span><span class="nt">"beepOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> 
-        </span><span class="nt">"vibrateOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> 
-        </span><span class="nt">"blinkAnimationOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> 
-        </span><span class="nt">"cancelOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> 
-    </span><span class="p">}]</span><span class="w">
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+    </span><span class="s2">"YOUR_LICENSE_KEY"</span><span class="p">,</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"captureResolution"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1080p"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"cutout"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"style"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rect"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"maxWidthPercent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"90%"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"maxHeightPercent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"90%"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"alignment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"top_half"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"strokeWidth"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"cornerRadius"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"strokeColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FFFFFF"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"outerColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"outerAlpha"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.3</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"flash"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"mode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"manual"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"alignment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bottom_right"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"beepOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"vibrateOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"blinkAnimationOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"cancelOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
 </span></code></pre>
 
 <h6 id="4-run-your-cordova-project-enjoy-scanning-and-have-fun">4. Run your cordova project: Enjoy scanning and have fun :)</h6>
@@ -1203,26 +1251,43 @@ app:cancel_on_result="true"
 <p>The following example files illustrate a simple use-case of the barcode module.</p>
 
 <h6 id="example-activity">Example  Activity</h6>
+
+<blockquote>
+<p>in onCreate or onActivityCreated lifecycle methods</p>
+</blockquote>
 <pre class="highlight java"><code><span class="n">barcodeScanView</span> <span class="o">=</span> <span class="o">(</span><span class="n">BarcodeScanView</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">barcode_scan_view</span><span class="o">);</span>
 <span class="n">barcodeScanView</span><span class="o">.</span><span class="na">setConfigFromAsset</span><span class="o">(</span><span class="s">"barcode_view_config.json"</span><span class="o">);</span>
 
 <span class="c1">// initialize Anyline with your license key and a Listener that is called if a result is found</span>
-<span class="n">barcodeScanView</span><span class="o">.</span><span class="na">initAnyline</span><span class="o">(</span><span class="n">ANYLINE_LICENSE</span><span class="o">,</span> <span class="k">new</span> <span class="n">BarcodeResultListener</span><span class="o">()</span> <span class="o">{</span>
+<span class="n">barcodeScanView</span><span class="o">.</span><span class="na">initAnyline</span><span class="o">(</span><span class="n">getString</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">string</span><span class="o">.</span><span class="na">anyline_license_key</span><span class="o">),</span> <span class="k">new</span> <span class="n">BarcodeResultListener</span><span class="o">()</span> <span class="o">{</span>
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">onResult</span><span class="o">(</span><span class="n">String</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">onResult</span><span class="o">(</span><span class="n">String</span> <span class="n">result</span><span class="o">,</span> <span class="n">AnylineImage</span> <span class="n">resultImage</span><span class="o">)</span> <span class="o">{</span>
         <span class="c1">// This is called when a result is found.</span>
-
     <span class="o">}</span>
 <span class="o">});</span>
-<span class="n">barcodeScanView</span><span class="o">.</span><span class="na">startScanning</span><span class="o">();</span>
 </code></pre>
 
-<p>There are three simple steps necessary to get started:</p>
+<blockquote>
+<p>in onResume()</p>
+</blockquote>
+<pre class="highlight java"><code><span class="n">barcodeScanView</span><span class="o">.</span><span class="na">startScanning</span><span class="o">();</span>
+</code></pre>
+
+<blockquote>
+<p>in onPause()</p>
+</blockquote>
+<pre class="highlight java"><code><span class="n">barcodeScanView</span><span class="o">.</span><span class="na">cancelScanning</span><span class="o">();</span>
+<span class="c1">//IMPORTANT: always release the camera in onPause</span>
+<span class="n">barcodeScanView</span><span class="o">.</span><span class="na">releaseCameraInBackground</span><span class="o">();</span>
+</code></pre>
+
+<p>There are four simple steps necessary to get started:</p>
 
 <ol>
 <li>If you do not use XML configuration set the <a href="#barcodeConfig">config-file</a> to your BarcodeScanView using the <em>setConfigFromAsset</em> method and make sure that the json config-file is located in the Android assets folder.</li>
 <li>Call initAnyline with your valid license key and a new instance of BarcodeResultListener, which can be used to handle the bar/QR code results.</li>
 <li>Call <em>startScanning()</em></li>
+<li>When done call <em>cancelScanning()</em> and <em>releaseCameraInBackground()</em> or <em>releaseCamera()</em></li>
 </ol>
 
 <h6 id="newline">&NewLine;</h6>
@@ -1251,30 +1316,29 @@ app:cancel_on_result="true"
 
 <h6 id="example-config-for-the-barcode-module">Example config for the Barcode Module</h6>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"captureResolution"</span><span class="p">:</span><span class="s2">"720p"</span><span class="p">,</span><span class="w">
-
-  </span><span class="nt">"cutout"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"style"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rect"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"maxWidthPercent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"80%"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"alignment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"center"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"ratioFromSize"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="w">
+    </span><span class="nt">"captureResolution"</span><span class="p">:</span><span class="w"> </span><span class="s2">"720p"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"cutout"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"style"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rect"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"maxWidthPercent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"80%"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"alignment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"center"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"ratioFromSize"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"strokeWidth"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"cornerRadius"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"strokeColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FFFFFF"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"outerColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"outerAlpha"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.3</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"strokeWidth"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"cornerRadius"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"strokeColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FFFFFF"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"outerColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"outerAlpha"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.3</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"flash"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"mode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"manual"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"alignment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bottom_right"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"beepOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"vibrateOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"blinkAnimationOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"cancelOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="nt">"flash"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"mode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"manual"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"alignment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bottom_right"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"beepOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"vibrateOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"blinkAnimationOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"cancelOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -1338,23 +1402,23 @@ app:cancel_on_result="true"
 <span class="p">}</span>
 </code></pre>
 
-<p>Create a property, initialize the module in the viewDidLoad method and add it to the view of the view controller. Supply the license key and set the delegate, which will receive a call once a result is found. The boolean returned by the setup routine notifies you if the Anyline set up was successful. If an error occurred the error needs to be handled. If the setup was successful, set the barcode types that should be scanned. </p>
+<p>Create a property, initialize the module in the viewDidLoad method and add it to the view of the view controller. Supply the license key and set the delegate, which will receive a call once a result is found. The boolean returned by the setup routine notifies you if the Anyline set up was successful. If an error occurred the error needs to be handled. If the setup was successful, set the barcode types that should be scanned.</p>
 
 <p>Valid types are:</p>
 
 <ul>
 <li>kCodeTypeAztec</li>
-<li>kCodeTypeCodabar </li>
+<li>kCodeTypeCodabar</li>
 <li>kCodeTypeCode39</li>
-<li>kCodeTypeCode93 </li>
+<li>kCodeTypeCode93</li>
 <li>kCodeTypeCode128,</li>
 <li>kCodeTypeDataMatrix</li>
 <li>kCodeTypeEAN8</li>
-<li>kCodeTypeEAN13 </li>
+<li>kCodeTypeEAN13</li>
 <li>kCodeTypeITF</li>
-<li>kCodeTypePDF417 </li>
+<li>kCodeTypePDF417</li>
 <li>kCodeTypeQR,</li>
-<li>kCodeTypeRSS14 </li>
+<li>kCodeTypeRSS14</li>
 <li>kCodeTypeRSSExpanded</li>
 <li>kCodeTypeUPCA</li>
 <li>kCodeTypeUPCE</li>
@@ -1391,33 +1455,37 @@ If there is a problem starting the scanning process an error object will be set,
 <h6 id="example-call-for-the-barcode-module">Example call for the Barcode Module</h6>
 
 <p>Call the exec method with <i><b>scanBarcode</b></i> (all other parameters are as explained in <a href="#cordova-example">Quick Start</a>).</p>
-<pre class="highlight java"><code><span class="n">cordova</span><span class="o">.</span><span class="na">exec</span><span class="o">(</span><span class="n">onResult</span><span class="o">,</span> <span class="n">onError</span><span class="o">,</span> <span class="s">"AnylineSDK"</span><span class="o">,</span> <span class="s">"scanBarcode"</span><span class="o">,</span> 
-    <span class="o">[</span><span class="s">"YOUR_LICENSE_KEY"</span><span class="o">,</span> <span class="c1">// Replace with your license key</span>
-    <span class="o">{</span>   <span class="s">"captureResolution"</span><span class="o">:</span> <span class="s">"720p"</span><span class="o">,</span>
-        <span class="s">"cutout"</span><span class="o">:</span> <span class="o">{</span>
-            <span class="s">"style"</span><span class="o">:</span> <span class="s">"rect"</span><span class="o">,</span>
-            <span class="s">"maxWidthPercent"</span><span class="o">:</span> <span class="s">"80%"</span><span class="o">,</span>
-            <span class="s">"maxHeightPercent"</span><span class="o">:</span> <span class="s">"80%"</span><span class="o">,</span>
-            <span class="s">"alignment"</span><span class="o">:</span> <span class="s">"center"</span><span class="o">,</span>
-            <span class="s">"ratioFromSize"</span><span class="o">:</span> <span class="o">{</span>
-                <span class="s">"width"</span><span class="o">:</span> <span class="mi">100</span><span class="o">,</span>
-                <span class="s">"height"</span><span class="o">:</span> <span class="mi">80</span>
+<pre class="highlight java"><code><span class="n">cordova</span><span class="o">.</span><span class="na">exec</span><span class="o">(</span><span class="n">onResult</span><span class="o">,</span> <span class="n">onError</span><span class="o">,</span> <span class="s">"AnylineSDK"</span><span class="o">,</span> <span class="s">"scanBarcode"</span><span class="o">,</span>
+    <span class="o">[</span>
+        <span class="s">"YOUR_LICENSE_KEY"</span><span class="o">,</span>
+        <span class="o">{</span>
+            <span class="s">"captureResolution"</span><span class="o">:</span> <span class="s">"720p"</span><span class="o">,</span>
+            <span class="s">"cutout"</span><span class="o">:</span> <span class="o">{</span>
+                <span class="s">"style"</span><span class="o">:</span> <span class="s">"rect"</span><span class="o">,</span>
+                <span class="s">"maxWidthPercent"</span><span class="o">:</span> <span class="s">"80%"</span><span class="o">,</span>
+                <span class="s">"maxHeightPercent"</span><span class="o">:</span> <span class="s">"80%"</span><span class="o">,</span>
+                <span class="s">"alignment"</span><span class="o">:</span> <span class="s">"center"</span><span class="o">,</span>
+                <span class="s">"ratioFromSize"</span><span class="o">:</span> <span class="o">{</span>
+                    <span class="s">"width"</span><span class="o">:</span> <span class="mi">100</span><span class="o">,</span>
+                    <span class="s">"height"</span><span class="o">:</span> <span class="mi">80</span>
+                <span class="o">},</span>
+                <span class="s">"strokeWidth"</span><span class="o">:</span> <span class="mi">4</span><span class="o">,</span>
+                <span class="s">"cornerRadius"</span><span class="o">:</span> <span class="mi">10</span><span class="o">,</span>
+                <span class="s">"strokeColor"</span><span class="o">:</span> <span class="s">"FFFFFF"</span><span class="o">,</span>
+                <span class="s">"outerColor"</span><span class="o">:</span> <span class="s">"000000"</span><span class="o">,</span>
+                <span class="s">"outerAlpha"</span><span class="o">:</span> <span class="mf">0.3</span>
             <span class="o">},</span>
-        <span class="s">"strokeWidth"</span><span class="o">:</span> <span class="mi">4</span><span class="o">,</span>
-        <span class="s">"cornerRadius"</span><span class="o">:</span> <span class="mi">10</span><span class="o">,</span>
-        <span class="s">"strokeColor"</span><span class="o">:</span> <span class="s">"FFFFFF"</span><span class="o">,</span>
-        <span class="s">"outerColor"</span><span class="o">:</span> <span class="s">"000000"</span><span class="o">,</span>
-        <span class="s">"outerAlpha"</span><span class="o">:</span> <span class="mf">0.3</span>
-        <span class="o">},</span>
-       <span class="s">"flash"</span><span class="o">:</span> <span class="o">{</span>
-            <span class="s">"mode"</span><span class="o">:</span> <span class="s">"manual"</span><span class="o">,</span>
-            <span class="s">"alignment"</span><span class="o">:</span> <span class="s">"bottom_right"</span>
-      <span class="o">},</span>
-      <span class="s">"beepOnResult"</span><span class="o">:</span> <span class="kc">true</span><span class="o">,</span>
-      <span class="s">"vibrateOnResult"</span><span class="o">:</span> <span class="kc">true</span><span class="o">,</span>
-      <span class="s">"blinkAnimationOnResult"</span><span class="o">:</span> <span class="kc">true</span><span class="o">,</span>
-      <span class="s">"cancelOnResult"</span><span class="o">:</span> <span class="kc">false</span>
-   <span class="o">}]);</span>
+            <span class="s">"flash"</span><span class="o">:</span> <span class="o">{</span>
+                <span class="s">"mode"</span><span class="o">:</span> <span class="s">"manual"</span><span class="o">,</span>
+                <span class="s">"alignment"</span><span class="o">:</span> <span class="s">"bottom_right"</span>
+            <span class="o">},</span>
+            <span class="s">"beepOnResult"</span><span class="o">:</span> <span class="kc">true</span><span class="o">,</span>
+            <span class="s">"vibrateOnResult"</span><span class="o">:</span> <span class="kc">true</span><span class="o">,</span>
+            <span class="s">"blinkAnimationOnResult"</span><span class="o">:</span> <span class="kc">true</span><span class="o">,</span>
+            <span class="s">"cancelOnResult"</span><span class="o">:</span> <span class="kc">false</span>
+        <span class="o">}</span>
+    <span class="o">]</span>
+<span class="o">);</span>
 </code></pre>
 
 <p><a name="energyModule"> </a></p>
@@ -1462,13 +1530,17 @@ It is also possible to scan bar- and QR-codes (useful for identifying meters).</
 <p>The following example files illustrate a simple use-case of the energy module.</p>
 
 <h6 id="example-activity">Example  Activity</h6>
+
+<blockquote>
+<p>in onCreate or onActivityCreated lifecycle methods</p>
+</blockquote>
 <pre class="highlight java"><code><span class="n">energyScanView</span> <span class="o">=</span> <span class="o">(</span><span class="n">EnergyScanView</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">energy_scan_view</span><span class="o">);</span>
 
 <span class="c1">// set the scan mode to start with</span>
 <span class="n">energyScanView</span><span class="o">.</span><span class="na">setScanMode</span><span class="o">(</span><span class="n">EnergyScanView</span><span class="o">.</span><span class="na">ScanMode</span><span class="o">.</span><span class="na">ELECTRIC_METER</span><span class="o">);</span>
 
 <span class="c1">// initialize Anyline with your license key and a Listener that is called if a result is found</span>
-<span class="n">energyScanView</span><span class="o">.</span><span class="na">initAnyline</span><span class="o">(</span><span class="n">ANYLINE_LICENSE</span><span class="o">,</span> <span class="k">new</span> <span class="n">EnergyResultListener</span><span class="o">()</span> <span class="o">{</span>
+<span class="n">energyScanView</span><span class="o">.</span><span class="na">initAnyline</span><span class="o">(</span><span class="n">getString</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">string</span><span class="o">.</span><span class="na">anyline_license_key</span><span class="o">),</span> <span class="k">new</span> <span class="n">EnergyResultListener</span><span class="o">()</span> <span class="o">{</span>
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="n">onResult</span><span class="o">(</span><span class="n">EnergyScanView</span><span class="o">.</span><span class="na">ScanMode</span> <span class="n">scanMode</span><span class="o">,</span> <span class="n">String</span> <span class="n">result</span><span class="o">,</span>
                          <span class="n">AnylineImage</span> <span class="n">resultImage</span><span class="o">,</span> <span class="n">AnylineImage</span> <span class="n">fullImage</span><span class="o">)</span> <span class="o">{</span>
@@ -1481,7 +1553,20 @@ It is also possible to scan bar- and QR-codes (useful for identifying meters).</
 
     <span class="o">}</span>
 <span class="o">});</span>
-<span class="n">energyScanView</span><span class="o">.</span><span class="na">startScanning</span><span class="o">();</span>
+</code></pre>
+
+<blockquote>
+<p>in onResume()</p>
+</blockquote>
+<pre class="highlight java"><code><span class="n">energyScanView</span><span class="o">.</span><span class="na">startScanning</span><span class="o">();</span>
+</code></pre>
+
+<blockquote>
+<p>in onPause()</p>
+</blockquote>
+<pre class="highlight java"><code><span class="n">energyScanView</span><span class="o">.</span><span class="na">cancelScanning</span><span class="o">();</span>
+<span class="c1">//IMPORTANT: always release the camera in onPause</span>
+<span class="n">energyScanView</span><span class="o">.</span><span class="na">releaseCameraInBackground</span><span class="o">();</span>
 </code></pre>
 
 <p>In order to start the scan process, perform the following steps:</p>
@@ -1490,7 +1575,8 @@ It is also possible to scan bar- and QR-codes (useful for identifying meters).</
 <li>If you prefer a json-file for configuration, use the <em>setConfigFromAsset</em> method and place the json-config in the Android assets folder, otherwise configure the view using the xml attributes in the activity layout file.</li>
 <li>Set the scan mode; available are: ELECTRIC_METER, GAS_METER, BAR_CODE</li>
 <li>Call <em>initAnyline</em> with your valid license key and a new instance of EnergyResultListener, which is the callback for handling the results</li>
-<li>Call <em>startScanning()</em> </li>
+<li>Call <em>startScanning()</em></li>
+<li>When done call <em>cancelScanning()</em> and <em>releaseCameraInBackground()</em> or <em>releaseCamera()</em></li>
 </ol>
 
 <h6 id="example-activity-layout">Example Activity Layout</h6>
@@ -1530,6 +1616,14 @@ It is also possible to scan bar- and QR-codes (useful for identifying meters).</
 Capture resolution is currently fixed to 720p on Android, which was optimized for good results on as many devices as possible.
 </aside>
 
+<h6 id="reporting">Reporting</h6>
+
+<p>The reporting of Analog Meter Results in the Community Edition (including an image of a scanned meter)
+helps us to improving our product, and the customer experience.
+It is possible to turn that feature off by calling <em>setReportingEnabled(false)</em> on the EnergyScanView.</p>
+<pre class="highlight java"><code><span class="n">energyScanView</span><span class="o">.</span><span class="na">setReportingEnabled</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+</code></pre>
+
 <h3 id="ios">iOS</h3>
 
 <h4 id="restrictions-for-the-energy-module-config">Restrictions for the Energy-Module Config:</h4>
@@ -1555,16 +1649,16 @@ Capture resolution is currently fixed to 720p on Android, which was optimized fo
 </code></pre>
 
 <p>Create a property, initialize the module and add it to the view of our view controller.
-Afterwards, supply the license key and set the delegate. The delegate will receive a call when a result is found. 
+Afterwards, supply the license key and set the delegate. The delegate will receive a call when a result is found.
 If the Anyline set up returned an error the error object will be set and you can handle the error.
-Furthermore it is necessary to set the scan mode utilizing <em>setScanMode</em>. </p>
+Furthermore it is necessary to set the scan mode utilizing <em>setScanMode</em>.</p>
 
 <p>Possible values:</p>
 
 <ul>
-<li>ALElectricMeter </li>
+<li>ALElectricMeter</li>
 <li>ALGasMeter</li>
-<li>ALBarcode </li>
+<li>ALBarcode</li>
 <li>ALSerialNumber</li>
 </ul>
 
@@ -1592,7 +1686,7 @@ Furthermore it is necessary to set the scan mode utilizing <em>setScanMode</em>.
 <span class="p">}</span>
 </code></pre>
 
-<p>Once Anyline has found a valid result the delegate is called and you get an result object with four result attributes. </p>
+<p>Once Anyline has found a valid result the delegate is called and you get an result object with four result attributes.</p>
 
 <ul>
 <li><strong>scanMode:</strong> the mode the result belongs to</li>
@@ -1611,37 +1705,49 @@ Furthermore it is necessary to set the scan mode utilizing <em>setScanMode</em>.
 </ul></li>
 </ul>
 
+<h6 id="reporting">Reporting</h6>
+
+<p>The reporting of Analog Meter Results in the Community Edition (including an image of a scanned meter)
+helps us to improving our product, and the customer experience.
+It is possible to turn that feature off by calling <em>-(void)enableReporting:(BOOL)enable</em> on the AnylineEnergyModuleView.</p>
+<pre class="highlight objective_c"><code><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">anylineEnergyView</span> <span class="nf">enableReporting</span><span class="p">:</span><span class="nb">NO</span><span class="p">];</span>
+</code></pre>
+
 <h3 id="cordova-plugin">Cordova Plugin</h3>
 
 <h6 id="example-call-for-the-energy-module">Example call for the Energy Module</h6>
 
-<p>There is a distinction between scanning electric and gas meter: 
+<p>There is a distinction between scanning electric and gas meter:
 Call the exec method either with <i><b>scanElectricMeter</b></i> or <i><b>scanGasMeter</b></i> (all other parameters are as explained in <a href="#cordova-example">Quick Start</a>).</p>
-<pre class="highlight java"><code><span class="n">cordova</span><span class="o">.</span><span class="na">exec</span><span class="o">(</span><span class="n">onResult</span><span class="o">,</span> <span class="n">onError</span><span class="o">,</span> <span class="s">"AnylineSDK"</span><span class="o">,</span> <span class="s">"scanElectricMeter"</span><span class="o">,</span> 
-    <span class="o">[</span><span class="s">"YOUR_LICENSE_KEY"</span><span class="o">,</span> <span class="c1">// Replace with your license key</span>
-    <span class="o">{</span>   <span class="s">"captureResolution"</span><span class="o">:</span> <span class="s">"720p"</span><span class="o">,</span>
-          <span class="s">"cutout"</span><span class="o">:</span> <span class="o">{</span>
-            <span class="s">"style"</span><span class="o">:</span> <span class="s">"rect"</span><span class="o">,</span>
-            <span class="s">"alignment"</span><span class="o">:</span> <span class="s">"top"</span><span class="o">,</span>
-            <span class="s">"offset"</span><span class="o">:</span> <span class="o">{</span>
-                <span class="s">"x"</span><span class="o">:</span> <span class="mi">0</span><span class="o">,</span>
-                <span class="s">"y"</span><span class="o">:</span> <span class="mi">120</span>
+<pre class="highlight java"><code><span class="n">cordova</span><span class="o">.</span><span class="na">exec</span><span class="o">(</span><span class="n">onResult</span><span class="o">,</span> <span class="n">onError</span><span class="o">,</span> <span class="s">"AnylineSDK"</span><span class="o">,</span> <span class="s">"scanElectricMeter"</span><span class="o">,</span>
+    <span class="o">[</span>
+        <span class="s">"YOUR_LICENSE_KEY"</span><span class="o">,</span>
+        <span class="o">{</span>
+            <span class="s">"captureResolution"</span><span class="o">:</span> <span class="s">"720p"</span><span class="o">,</span>
+            <span class="s">"cutout"</span><span class="o">:</span> <span class="o">{</span>
+                <span class="s">"style"</span><span class="o">:</span> <span class="s">"rect"</span><span class="o">,</span>
+                <span class="s">"alignment"</span><span class="o">:</span> <span class="s">"top"</span><span class="o">,</span>
+                <span class="s">"offset"</span><span class="o">:</span> <span class="o">{</span>
+                    <span class="s">"x"</span><span class="o">:</span> <span class="mi">0</span><span class="o">,</span>
+                    <span class="s">"y"</span><span class="o">:</span> <span class="mi">120</span>
+                <span class="o">},</span>
+                <span class="s">"strokeWidth"</span><span class="o">:</span> <span class="mi">2</span><span class="o">,</span>
+                <span class="s">"cornerRadius"</span><span class="o">:</span> <span class="mi">4</span><span class="o">,</span>
+                <span class="s">"strokeColor"</span><span class="o">:</span> <span class="s">"FFFFFF"</span><span class="o">,</span>
+                <span class="s">"outerColor"</span><span class="o">:</span> <span class="s">"000000"</span><span class="o">,</span>
+                <span class="s">"outerAlpha"</span><span class="o">:</span> <span class="mf">0.3</span>
             <span class="o">},</span>
-            <span class="s">"strokeWidth"</span><span class="o">:</span> <span class="mi">2</span><span class="o">,</span>
-            <span class="s">"cornerRadius"</span><span class="o">:</span> <span class="mi">4</span><span class="o">,</span>
-            <span class="s">"strokeColor"</span><span class="o">:</span> <span class="s">"FFFFFF"</span><span class="o">,</span>
-            <span class="s">"outerColor"</span><span class="o">:</span> <span class="s">"000000"</span><span class="o">,</span>
-            <span class="s">"outerAlpha"</span><span class="o">:</span> <span class="mf">0.3</span>
-          <span class="o">},</span>
-          <span class="s">"flash"</span><span class="o">:</span> <span class="o">{</span>
-            <span class="s">"mode"</span><span class="o">:</span> <span class="s">"manual"</span><span class="o">,</span>
-            <span class="s">"alignment"</span><span class="o">:</span> <span class="s">"bottom_right"</span>
-          <span class="o">},</span>
-          <span class="s">"beepOnResult"</span><span class="o">:</span> <span class="kc">true</span><span class="o">,</span>
-          <span class="s">"vibrateOnResult"</span><span class="o">:</span> <span class="kc">true</span><span class="o">,</span>
-          <span class="s">"blinkAnimationOnResult"</span><span class="o">:</span> <span class="kc">true</span><span class="o">,</span>
-          <span class="s">"cancelOnResult"</span><span class="o">:</span> <span class="kc">true</span>
-    <span class="o">}]);</span>
+            <span class="s">"flash"</span><span class="o">:</span> <span class="o">{</span>
+                <span class="s">"mode"</span><span class="o">:</span> <span class="s">"manual"</span><span class="o">,</span>
+                <span class="s">"alignment"</span><span class="o">:</span> <span class="s">"bottom_right"</span>
+            <span class="o">},</span>
+            <span class="s">"beepOnResult"</span><span class="o">:</span> <span class="kc">true</span><span class="o">,</span>
+            <span class="s">"vibrateOnResult"</span><span class="o">:</span> <span class="kc">true</span><span class="o">,</span>
+            <span class="s">"blinkAnimationOnResult"</span><span class="o">:</span> <span class="kc">true</span><span class="o">,</span>
+            <span class="s">"cancelOnResult"</span><span class="o">:</span> <span class="kc">true</span>
+        <span class="o">}</span>
+    <span class="o">]</span>
+<span class="o">);</span>
 </code></pre>
 
 <p><a name="mrzModule"> </a></p>
@@ -1729,11 +1835,15 @@ Please be aware that not every property is filled for every document type (e.g. 
 <p>The following example files illustrate a simple use-case of the MRZ module.</p>
 
 <h6 id="example-activity">Example Activity</h6>
+
+<blockquote>
+<p>in onCreate or onActivityCreated lifecycle methods</p>
+</blockquote>
 <pre class="highlight java"><code><span class="n">mrzResultView</span> <span class="o">=</span> <span class="o">(</span><span class="n">MrzScanView</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">mrz_result</span><span class="o">);</span>
 <span class="n">mrzScanView</span><span class="o">.</span><span class="na">setConfigFromAsset</span><span class="o">(</span><span class="s">"mrz_view_config.json"</span><span class="o">);</span>
 
 <span class="c1">// initialize Anyline with your license key and a Listener that is called if a result is found</span>
-<span class="n">mrzScanView</span><span class="o">.</span><span class="na">initAnyline</span><span class="o">(</span><span class="n">ANYLINE_LICENSE</span><span class="o">,</span> <span class="k">new</span> <span class="n">MrzResultListener</span><span class="o">()</span> <span class="o">{</span>
+<span class="n">mrzScanView</span><span class="o">.</span><span class="na">initAnyline</span><span class="o">(</span><span class="n">getString</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">string</span><span class="o">.</span><span class="na">anyline_license_key</span><span class="o">),</span> <span class="k">new</span> <span class="n">MrzResultListener</span><span class="o">()</span> <span class="o">{</span>
 
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="n">onResult</span><span class="o">(</span><span class="n">Identification</span> <span class="n">mrzResult</span><span class="o">,</span> <span class="n">AnylineImage</span> <span class="n">anylineImage</span><span class="o">)</span> <span class="o">{</span>
@@ -1746,12 +1856,27 @@ Please be aware that not every property is filled for every document type (e.g. 
 <span class="n">mrzScanView</span><span class="o">.</span><span class="na">startScanning</span><span class="o">();</span>
 </code></pre>
 
-<p>There are three simple steps necessary to get started:</p>
+<blockquote>
+<p>in onResume()</p>
+</blockquote>
+<pre class="highlight java"><code><span class="n">mrzScanView</span><span class="o">.</span><span class="na">startScanning</span><span class="o">();</span>
+</code></pre>
+
+<blockquote>
+<p>in onPause()</p>
+</blockquote>
+<pre class="highlight java"><code><span class="n">mrzScanView</span><span class="o">.</span><span class="na">cancelScanning</span><span class="o">();</span>
+<span class="c1">//IMPORTANT: always release the camera in onPause</span>
+<span class="n">mrzScanView</span><span class="o">.</span><span class="na">releaseCameraInBackground</span><span class="o">();</span>
+</code></pre>
+
+<p>There are four simple steps necessary to get started:</p>
 
 <ol>
 <li>If you do not use XML configuration set the <a href="#mrzConfig">config-file</a> to your MrzScanView using the <em>setConfigFromAsset</em> method and make sure that the json config-file is located in the Android assets folder</li>
 <li>Call <em>initAnyline</em> with your valid license key and a new instance of MrzResultListener, which will be used as callback for each successful scan.</li>
 <li>Call <em>startScanning()</em></li>
+<li>When done call <em>cancelScanning()</em> and <em>releaseCameraInBackground()</em> or <em>releaseCamera()</em></li>
 </ol>
 
 <h6 id="example-activity-layout">Example Activity Layout</h6>
@@ -1774,7 +1899,7 @@ Please be aware that not every property is filled for every document type (e.g. 
 
 <h6 id="example-config-for-the-mrz-module">Example config for the MRZ Module</h6>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"captureResolution"</span><span class="p">:</span><span class="s2">"1080p"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"captureResolution"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1080p"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"cutout"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"style"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rect"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"maxWidthPercent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"90%"</span><span class="p">,</span><span class="w">
@@ -1856,29 +1981,101 @@ Please be aware that not every property is filled for every document type (e.g. 
 
 <p>Call the exec method with <i><b>scanMRZ</b></i> (all other parameters are as explained in <a href="#cordova-example">Quick Start</a>).</p>
 <pre class="highlight java"><code><span class="n">cordova</span><span class="o">.</span><span class="na">exec</span><span class="o">(</span><span class="n">onResult</span><span class="o">,</span> <span class="n">onError</span><span class="o">,</span> <span class="s">"AnylineSDK"</span><span class="o">,</span> <span class="s">"scanMRZ"</span><span class="o">,</span>    
-  <span class="o">[</span><span class="s">"YOUR_LICENSE_KEY"</span><span class="o">,</span> <span class="c1">// Replace with your license key</span>
-  <span class="o">{</span>   <span class="s">"captureResolution"</span><span class="o">:</span> <span class="s">"1080p"</span><span class="o">,</span>
-      <span class="s">"cutout"</span><span class="o">:</span> <span class="o">{</span>
-        <span class="s">"style"</span><span class="o">:</span> <span class="s">"rect"</span><span class="o">,</span>
-        <span class="s">"maxWidthPercent"</span><span class="o">:</span> <span class="s">"90%"</span><span class="o">,</span>
-        <span class="s">"maxHeightPercent"</span><span class="o">:</span> <span class="s">"90%"</span><span class="o">,</span>
-        <span class="s">"alignment"</span><span class="o">:</span> <span class="s">"top_half"</span><span class="o">,</span>
-        <span class="s">"strokeWidth"</span><span class="o">:</span> <span class="mi">2</span><span class="o">,</span>
-        <span class="s">"cornerRadius"</span><span class="o">:</span> <span class="mi">4</span><span class="o">,</span>
-        <span class="s">"strokeColor"</span><span class="o">:</span> <span class="s">"FFFFFF"</span><span class="o">,</span>
-        <span class="s">"outerColor"</span><span class="o">:</span> <span class="s">"000000"</span><span class="o">,</span>
-        <span class="s">"outerAlpha"</span><span class="o">:</span> <span class="mf">0.3</span>
-     <span class="o">},</span>
-     <span class="s">"flash"</span><span class="o">:</span> <span class="o">{</span>
-     <span class="s">"mode"</span><span class="o">:</span> <span class="s">"manual"</span><span class="o">,</span>
-     <span class="s">"alignment"</span><span class="o">:</span> <span class="s">"bottom_right"</span>
-     <span class="o">},</span>
-     <span class="s">"beepOnResult"</span><span class="o">:</span> <span class="kc">true</span><span class="o">,</span>
-     <span class="s">"vibrateOnResult"</span><span class="o">:</span> <span class="kc">true</span><span class="o">,</span>
-     <span class="s">"blinkAnimationOnResult"</span><span class="o">:</span> <span class="kc">true</span><span class="o">,</span>
-     <span class="s">"cancelOnResult"</span><span class="o">:</span> <span class="kc">true</span>
-  <span class="o">}]);</span>
+    <span class="o">[</span>
+        <span class="s">"YOUR_LICENSE_KEY"</span><span class="o">,</span>
+        <span class="o">{</span>
+            <span class="s">"captureResolution"</span><span class="o">:</span> <span class="s">"1080p"</span><span class="o">,</span>
+            <span class="s">"cutout"</span><span class="o">:</span> <span class="o">{</span>
+                <span class="s">"style"</span><span class="o">:</span> <span class="s">"rect"</span><span class="o">,</span>
+                <span class="s">"maxWidthPercent"</span><span class="o">:</span> <span class="s">"90%"</span><span class="o">,</span>
+                <span class="s">"maxHeightPercent"</span><span class="o">:</span> <span class="s">"90%"</span><span class="o">,</span>
+                <span class="s">"alignment"</span><span class="o">:</span> <span class="s">"top_half"</span><span class="o">,</span>
+                <span class="s">"strokeWidth"</span><span class="o">:</span> <span class="mi">2</span><span class="o">,</span>
+                <span class="s">"cornerRadius"</span><span class="o">:</span> <span class="mi">4</span><span class="o">,</span>
+                <span class="s">"strokeColor"</span><span class="o">:</span> <span class="s">"FFFFFF"</span><span class="o">,</span>
+                <span class="s">"outerColor"</span><span class="o">:</span> <span class="s">"000000"</span><span class="o">,</span>
+                <span class="s">"outerAlpha"</span><span class="o">:</span> <span class="mf">0.3</span>
+            <span class="o">},</span>
+            <span class="s">"flash"</span><span class="o">:</span> <span class="o">{</span>
+                <span class="s">"mode"</span><span class="o">:</span> <span class="s">"manual"</span><span class="o">,</span>
+                <span class="s">"alignment"</span><span class="o">:</span> <span class="s">"bottom_right"</span>
+            <span class="o">},</span>
+            <span class="s">"beepOnResult"</span><span class="o">:</span> <span class="kc">true</span><span class="o">,</span>
+            <span class="s">"vibrateOnResult"</span><span class="o">:</span> <span class="kc">true</span><span class="o">,</span>
+            <span class="s">"blinkAnimationOnResult"</span><span class="o">:</span> <span class="kc">true</span><span class="o">,</span>
+            <span class="s">"cancelOnResult"</span><span class="o">:</span> <span class="kc">true</span>
+        <span class="o">}</span>
+    <span class="o">]</span>
+<span class="o">);</span>
 </code></pre>
+
+          <h1 id="android-advanced-setup">Android Advanced Setup</h1>
+
+<h2 id="how-to-split-apk-into-several-smaller-ones">How to Split APK into several smaller ones</h2>
+
+<p>It is possible to split your app into multiple APKs and upload them all to the playstore.
+The playstore will pick the correct APK to download.
+This is currently not recommended by Google unless the APK is bigger than 50MB. (see: <a href="http://developer.android.com/google/play/publishing/multiple-apks.html">Google developer page on multiple APKs</a>)
+The following can be added in the android section of the build.gradle
+to generate a separate APK for every supported CPU architecture (ABI).</p>
+<pre class="highlight groovy"><code>    <span class="c1">//at the end of the android section
+</span>    <span class="n">productFlavors</span> <span class="o">{</span>
+        <span class="n">x86</span> <span class="o">{</span>
+            <span class="n">flavorDimension</span> <span class="s2">"abi"</span>
+            <span class="n">ndkConfig</span><span class="o">.</span><span class="na">abiFilters</span> <span class="s2">"x86"</span>
+            <span class="c1">// this is the flavor part of the version code.
+</span>            <span class="c1">// It must be higher than the arm one for devices supporting
+</span>            <span class="c1">// both, as x86 is preferred.
+</span>            <span class="n">versionCode</span> <span class="o">=</span> <span class="mi">4</span>
+        <span class="o">}</span>
+        <span class="n">armv7</span> <span class="o">{</span>
+            <span class="n">flavorDimension</span> <span class="s2">"abi"</span>
+            <span class="n">ndkConfig</span><span class="o">.</span><span class="na">abiFilters</span> <span class="s2">"armeabi-v7a"</span>
+            <span class="n">versionCode</span> <span class="o">=</span> <span class="mi">3</span>
+        <span class="o">}</span>
+
+        <span class="n">arm</span> <span class="o">{</span>
+            <span class="n">flavorDimension</span> <span class="s2">"abi"</span>
+            <span class="n">ndkConfig</span><span class="o">.</span><span class="na">abiFilters</span> <span class="s2">"armeabi"</span>
+            <span class="n">versionCode</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="o">}</span>
+
+        <span class="n">mips</span> <span class="o">{</span>
+            <span class="n">flavorDimension</span> <span class="s2">"abi"</span>
+            <span class="n">ndkConfig</span><span class="o">.</span><span class="na">abiFilters</span> <span class="s2">"mips"</span>
+            <span class="n">versionCode</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="o">}</span>
+        <span class="n">fat</span> <span class="o">{</span>
+            <span class="n">flavorDimension</span> <span class="s2">"abi"</span>
+            <span class="c1">// fat binary, lowest version code to be
+</span>            <span class="c1">// the last option
+</span>            <span class="n">versionCode</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="o">}</span>
+
+        <span class="c1">// make per-variant version code
+</span>        <span class="n">applicationVariants</span><span class="o">.</span><span class="na">all</span> <span class="o">{</span> <span class="n">variant</span> <span class="o">-&gt;</span>
+            <span class="c1">// get the version code of each flavor
+</span>            <span class="kt">def</span> <span class="n">abiVersion</span> <span class="o">=</span> <span class="n">variant</span><span class="o">.</span><span class="na">productFlavors</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="na">versionCode</span>
+
+            <span class="c1">// set the composite code
+</span>            <span class="n">variant</span><span class="o">.</span><span class="na">mergedFlavor</span><span class="o">.</span><span class="na">versionCode</span> <span class="o">=</span> <span class="n">defaultConfig</span><span class="o">.</span><span class="na">versionCode</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="n">abiVersion</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+</code></pre>
+
+<p>This example will generate 5 APKs. 4 for every supported ABI and 1 big APK with everything.
+The APKs need to have a different version, for the playstore to be able to deliver the correct one.
+The playstore chooses the highest compatible version so <em>armeabi-v7a</em> must be higher than <em>armeabi</em>
+and <em>x86</em> must be higher than <em>armeabi-v7a</em> (because x86 devices can usually also use <em>armeabi</em> libraries).</p>
+
+<p>The versioning in this example is a bit different than the one suggested on different places like <a href="https://software.intel.com/en-us/android/articles/google-play-supports-cpu-architecture-filtering-for-multiple-APK">this site from Intel</a>.
+Because it is not optimal that an old x86 version has a higher number than any newer other version,
+this could be problematic if you change from multiple APKs to a single APK later on.</p>
+
+<p>The example shows one possibility, you can also use 3 APKs: <em>x86</em>, <em>armeabi-v7a</em>, and one with <em>mips</em> + <em>armeabi</em>.</p>
+
+<p>The splitting has advantages during development, because you can chose the product flavor you want to use
+and that reduces the build and upload time a bit.</p>
 
       </div>
       <div class="dark-box">
