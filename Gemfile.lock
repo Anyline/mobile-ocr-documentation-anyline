@@ -32,6 +32,7 @@ GEM
     erubis (2.7.0)
     execjs (2.5.2)
     ffi (1.9.8)
+    ffi (1.9.8-x64-mingw32)
     haml (4.0.6)
       tilt
     hike (1.2.3)
@@ -128,6 +129,7 @@ GEM
 
 PLATFORMS
   ruby
+  x64-mingw32
 
 DEPENDENCIES
   middleman (~> 3.3.10)
@@ -138,3 +140,6 @@ DEPENDENCIES
   redcarpet (~> 3.3.1)
   rouge (~> 1.9.0)
   therubyracer (~> 0.12.1)
+
+BUNDLED WITH
+   1.10.6
