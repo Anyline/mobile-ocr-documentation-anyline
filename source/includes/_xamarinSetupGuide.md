@@ -639,11 +639,13 @@ public override void ViewDidDisappear(bool animated)
 ```
 ###### &NewLine;
 
-#### 10. Test your app on an iOS device ####
+#### 8. Test your app on an iOS device ####
 
 Build your project and deploy your application on your iOS device. Make sure you choose your storyboard and an adequate deployment target in your Info.plist (>= 7.1, but not higher than your device target).
 
 For module-specific documentation, please check [this section](#modules) for more information. Enjoy scanning and have fun :)
+
+###### &NewLine;
 
 ## Xamarin.WinPhone ##
 
