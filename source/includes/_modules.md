@@ -16,22 +16,41 @@ With the Anyline Barcode-Module 16 different kinds of bar- and QR-codes can be s
 
 #### Available Barcode Formats:  
 
-- AZTEC
-- CODABAR
-- CODE_39
-- CODE_93
-- CODE_128
-- DATA_MATRIX
-- EAN_8
-- EAN_13
-- ITF
-- PDF_417
-- QR_CODE
-- RSS_14
-- RSS_EXPANDED
-- UPC_A
-- UPC_E
-- UPC_EAN_EXTENSION
+###### Fully Supported      
+- UPC A
+- UPC E
+- EAN-8
+- EAN-13
+- EAN-14
+- EAN-18
+- EAN-99
+- EAN-128
+- Identcode
+- Leitcode
+- ISBN-13
+- ISBN-10
+- ISSN
+- ISMN
+- ITF-14
+- Data Matrix
+- Aztec [not vCard - see below]
+- Codabar
+- QR-Code
+- Code 39
+- Code 93
+- Code-128 [no rotation]
+- PDF 417
+
+###### Experimental Support:
+- Code 39 Extended
+- PNZ, PZN8, PZN7
+- Aztec vCard
+
+###### Currently not supported
+- RSS 14
+- RSS Expanded
+- MSI/Plessey
+- Code 93 Extended
 
 ### Android
 
@@ -177,14 +196,13 @@ Valid types are:
 - kCodeTypeCodabar
 - kCodeTypeCode39
 - kCodeTypeCode93
-- kCodeTypeCode128,
+- kCodeTypeCode128
 - kCodeTypeDataMatrix
 - kCodeTypeEAN8
 - kCodeTypeEAN13
 - kCodeTypeITF
 - kCodeTypePDF417
-- kCodeTypeQR,
-- kCodeTypeRSS14
+- kCodeTypeQR
 - kCodeTypeRSSExpanded
 - kCodeTypeUPCA
 - kCodeTypeUPCE
