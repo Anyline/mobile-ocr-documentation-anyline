@@ -229,11 +229,12 @@ If there is a problem starting the scanning process an error object will be set,
 ```objective_c
 - (void)anylineBarcodeModuleView:(AnylineBarcodeModuleView *)anylineBarcodeModuleView
                didFindScanResult:(NSString *)scanResult
-                         atImage:(UIImage *)image {
+                   barcodeFormat:(NSString *)barcodeFormat
+                         atImage:(UIImage *)image;
     NSLog("Scan result: %@", scanResult);
 }
 ```
-When a valid result is found, it will call the delegate. The scan result will be a *string* containing the scanned code.
+When a valid result is found, it will call the delegate. The scan result will be a *string* containing the scanned code. barcodeFormat will contain the format of the barcode.
 
 ### Cordova Plugin
 
