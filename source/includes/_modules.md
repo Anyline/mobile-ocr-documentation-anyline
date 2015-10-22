@@ -541,17 +541,23 @@ For each scan result the module generates an identification object, containing a
 value | description
 ----- | -----------
 expirationDate | expiration date of the document
-dob |	date of birth
-checkDigitDob | check digit for the date of birth
-checkDigitExpiration | check digit for the expiration date
-code |	country code
-surname	| surname
-givenNames| all given first names
-checkDigitDates	| check digit for both dates
-type |	type of the document that was read. (ID/P)
-checkDigitNumber |	check digit for the document number
-checkDigitFinal	| check digit
-sex	 | gender of the person
+dayOfBirth | date of birth
+checkDigitDayOfBirth | check digit for the date of birth
+checkDigitExpirationDate | check digit for the expiration date
+issuingCountryCode | issuing country code
+nationalityCountryCode | nationality country code
+countryCode | country code (Deprecated since 3.2.1. Use issuingCountryCode and nationalityCountryCode instead.)
+surNames    | surnames
+givenNames | all given first names
+personalNumber | personal number
+checkDigitPersonalNumber | check digit for personal number
+checkDigitDates | check digit for both dates
+documentType |  type of the document that was read. (ID/P)
+documentNumber | document number 
+checkDigitNumber |  check digit for the document number
+checkigitFinal  | check digit
+sex  | gender of the person
+
 
 <aside class="notice">
 Please be aware that not every property is filled for every document type (e.g. some ID MRZ do not contain a sex information)
