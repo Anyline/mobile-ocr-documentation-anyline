@@ -525,8 +525,20 @@ cordova.exec(onResult, onError, "AnylineSDK", "scanElectricMeter",
     ]
 );
 ```
+###### Reporting
 
+The reporting of Analog Meter Results in the Community Edition (including an image of a scanned meter)
+helps us to improving our product, and the customer experience.
+It is possible to turn that feature off by adding *"reportingEnabled": false* to the above config.
 
+```js
+//...
+            "blinkAnimationOnResult": true,
+            "cancelOnResult": true,
+            "reportingEnabled": false
+        }
+    ]
+```
 
 <a name="mrzModule"> </a>
 ## MRZ
