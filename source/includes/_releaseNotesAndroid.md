@@ -1,5 +1,27 @@
 # Anyline SDK Android Release Notes #
 
+## Anyline SDK 3.2.1 ##
+Release Date 2015-10-23
+
+### Improved ###
+- Barcode Module
+    - better and faster scanning
+    - Same barcode can now be scanned again (after 2 second timeout)
+- MRZ Module
+
+### Changed ###
+- BarcodeResultListener: added the format of the barcode to the
+```
+// old
+void onResult(String result, AnylineImage anylineImage);
+// new
+void onResult(String result, BarcodeScanView.BarcodeFormat barcodeFormat, AnylineImage anylineImage);
+```
+- MRZ Identification
+    - new fields issuingCountryCode and nationalityCountryCode
+    - deprecated countryCode (Use above new fields instead.)
+
+
 ## Anyline SDK 3.2 RC5 ##
 Release Date 2015-09-23
 
