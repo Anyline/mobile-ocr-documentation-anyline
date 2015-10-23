@@ -14,9 +14,9 @@ With the Anyline Barcode-Module 16 different kinds of bar- and QR-codes can be s
 #### Restrictions for the Barcode-Module Config:
 - Flash mode *auto* is still in alpha stage therefore *manual* mode is preferred
 
-#### Available Barcode Formats:  
+#### Available Barcode Formats:
 
-###### Fully Supported      
+###### Fully Supported
 - UPC A
 - UPC E
 - EAN-8
@@ -68,7 +68,7 @@ barcodeScanView.setConfigFromAsset("barcode_view_config.json");
 // initialize Anyline with your license key and a Listener that is called if a result is found
 barcodeScanView.initAnyline(getString(R.string.anyline_license_key), new BarcodeResultListener() {
     @Override
-    public void onResult(String result, AnylineImage resultImage) {
+    public void onResult(String result, BarcodeScanView.BarcodeFormat format, AnylineImage image) {
         // This is called when a result is found.
     }
 });
@@ -220,7 +220,7 @@ Valid types are:
         // Handle the error here
     }
 }
-```   
+```
 Once Anyline is set up successful, start the scanning process in viewDidAppear.
 If there is a problem starting the scanning process an error object will be set, so the error can be handled.
 
@@ -476,7 +476,7 @@ Once Anyline has found a valid result the delegate is called and you get an resu
 - **fullImage**:
 	 - scanMode = meter: the full image (before cropping)
 	 - scanMode = code: null
-     
+
 ###### Reporting
 
 The reporting of Analog Meter Results in the Community Edition (including an image of a scanned meter)
@@ -553,7 +553,7 @@ personalNumber | personal number
 checkDigitPersonalNumber | check digit for personal number
 checkDigitDates | check digit for both dates
 documentType |  type of the document that was read. (ID/P)
-documentNumber | document number 
+documentNumber | document number
 checkDigitNumber |  check digit for the document number
 checkigitFinal  | check digit
 sex  | gender of the person
@@ -702,7 +702,7 @@ Create a property, initialize the module in the viewDidLoad method and add it to
         // Handle the error here
     }
 }
-```   
+```
 If there is a problem starting the scanning process an error object will be set, so the error can be handled.
 
 ###### 3. Implement the delegate method and receive results
@@ -723,7 +723,7 @@ When a valid result is found, it will call the delegate. ScanResult is an object
 Call the exec method with <i><b>scanMRZ</b></i> (all other parameters are as explained in [Quick Start] (#cordova-example)).
 
 ```java
-cordova.exec(onResult, onError, "AnylineSDK", "scanMRZ", 	
+cordova.exec(onResult, onError, "AnylineSDK", "scanMRZ",
     [
         "YOUR_LICENSE_KEY",
         {
