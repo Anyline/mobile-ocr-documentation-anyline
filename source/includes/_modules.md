@@ -558,17 +558,19 @@ checkDigitDayOfBirth | check digit for the date of birth
 checkDigitExpirationDate | check digit for the expiration date
 issuingCountryCode | issuing country code
 nationalityCountryCode | nationality country code
-countryCode | country code (Deprecated since 3.2.1. Use issuingCountryCode and nationalityCountryCode instead.)
+countryCode | country code (Deprecated since 3.2.1. Use issuingCountryCode and nationalityCountryCode instead)
 surNames    | surnames
 givenNames | all given first names
 personalNumber | personal number
+personalNumber2 | 2nd personal number on TD1 sized MROTDs
 checkDigitPersonalNumber | check digit for personal number
 checkDigitDates | check digit for both dates
 documentType |  type of the document that was read. (ID/P)
 documentNumber | document number
 checkDigitNumber |  check digit for the document number
-checkigitFinal  | check digit
+checkDigitFinal  | check digit
 sex  | gender of the person
+allCheckDigitsValid | flag indicating if all check digits are valid
 
 
 <aside class="notice">
