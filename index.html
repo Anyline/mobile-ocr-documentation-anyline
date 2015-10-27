@@ -1235,23 +1235,49 @@ app:cancel_on_result="true"
 
 <h4 id="available-barcode-formats">Available Barcode Formats:</h4>
 
+<h6 id="fully-supported">Fully Supported</h6>
+
 <ul>
-<li>AZTEC</li>
-<li>CODABAR</li>
-<li>CODE_39</li>
-<li>CODE_93</li>
-<li>CODE_128</li>
-<li>DATA_MATRIX</li>
-<li>EAN_8</li>
-<li>EAN_13</li>
-<li>ITF</li>
-<li>PDF_417</li>
-<li>QR_CODE</li>
-<li>RSS_14</li>
-<li>RSS_EXPANDED</li>
-<li>UPC_A</li>
-<li>UPC_E</li>
-<li>UPC_EAN_EXTENSION</li>
+<li>UPC A</li>
+<li>UPC E</li>
+<li>EAN-8</li>
+<li>EAN-13</li>
+<li>EAN-14</li>
+<li>EAN-18</li>
+<li>EAN-99</li>
+<li>EAN-128</li>
+<li>Identcode</li>
+<li>Leitcode</li>
+<li>ISBN-13</li>
+<li>ISBN-10</li>
+<li>ISSN</li>
+<li>ISMN</li>
+<li>ITF-14</li>
+<li>Data Matrix</li>
+<li>Aztec [not vCard - see below]</li>
+<li>Codabar</li>
+<li>QR-Code</li>
+<li>Code 39</li>
+<li>Code 93</li>
+<li>Code-128 [no rotation]</li>
+<li>PDF 417</li>
+</ul>
+
+<h6 id="experimental-support">Experimental Support:</h6>
+
+<ul>
+<li>Code 39 Extended</li>
+<li>PNZ, PZN8, PZN7</li>
+<li>Aztec vCard</li>
+</ul>
+
+<h6 id="currently-not-supported">Currently not supported</h6>
+
+<ul>
+<li>RSS 14</li>
+<li>RSS Expanded</li>
+<li>MSI/Plessey</li>
+<li>Code 93 Extended</li>
 </ul>
 
 <h3 id="android">Android</h3>
@@ -1271,7 +1297,7 @@ app:cancel_on_result="true"
 <span class="c1">// initialize Anyline with your license key and a Listener that is called if a result is found</span>
 <span class="n">barcodeScanView</span><span class="o">.</span><span class="na">initAnyline</span><span class="o">(</span><span class="n">getString</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">string</span><span class="o">.</span><span class="na">anyline_license_key</span><span class="o">),</span> <span class="k">new</span> <span class="n">BarcodeResultListener</span><span class="o">()</span> <span class="o">{</span>
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">onResult</span><span class="o">(</span><span class="n">String</span> <span class="n">result</span><span class="o">,</span> <span class="n">AnylineImage</span> <span class="n">resultImage</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">onResult</span><span class="o">(</span><span class="n">String</span> <span class="n">result</span><span class="o">,</span> <span class="n">BarcodeScanView</span><span class="o">.</span><span class="na">BarcodeFormat</span> <span class="n">format</span><span class="o">,</span> <span class="n">AnylineImage</span> <span class="n">image</span><span class="o">)</span> <span class="o">{</span>
         <span class="c1">// This is called when a result is found.</span>
     <span class="o">}</span>
 <span class="o">});</span>
@@ -1421,14 +1447,13 @@ app:cancel_on_result="true"
 <li>kCodeTypeCodabar</li>
 <li>kCodeTypeCode39</li>
 <li>kCodeTypeCode93</li>
-<li>kCodeTypeCode128,</li>
+<li>kCodeTypeCode128</li>
 <li>kCodeTypeDataMatrix</li>
 <li>kCodeTypeEAN8</li>
 <li>kCodeTypeEAN13</li>
 <li>kCodeTypeITF</li>
 <li>kCodeTypePDF417</li>
-<li>kCodeTypeQR,</li>
-<li>kCodeTypeRSS14</li>
+<li>kCodeTypeQR</li>
 <li>kCodeTypeRSSExpanded</li>
 <li>kCodeTypeUPCA</li>
 <li>kCodeTypeUPCE</li>
@@ -1453,12 +1478,13 @@ If there is a problem starting the scanning process an error object will be set,
 <h6 id="3-implement-the-delegate-method-and-receive-results">3. Implement the delegate method and receive results</h6>
 <pre class="highlight objective_c"><code><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">anylineBarcodeModuleView</span><span class="p">:(</span><span class="n">AnylineBarcodeModuleView</span> <span class="o">*</span><span class="p">)</span><span class="nv">anylineBarcodeModuleView</span>
                <span class="nf">didFindScanResult</span><span class="p">:(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">scanResult</span>
-                         <span class="nf">atImage</span><span class="p">:(</span><span class="n">UIImage</span> <span class="o">*</span><span class="p">)</span><span class="nv">image</span> <span class="p">{</span>
+                   <span class="nf">barcodeFormat</span><span class="p">:(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">barcodeFormat</span>
+                         <span class="nf">atImage</span><span class="p">:(</span><span class="n">UIImage</span> <span class="o">*</span><span class="p">)</span><span class="nv">image</span><span class="p">;</span>
     <span class="n">NSLog</span><span class="p">(</span><span class="s">"Scan result: %@"</span><span class="p">,</span> <span class="n">scanResult</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre>
 
-<p>When a valid result is found, it will call the delegate. The scan result will be a <em>string</em> containing the scanned code.</p>
+<p>When a valid result is found, it will call the delegate. The scan result will be a <em>string</em> containing the scanned code. barcodeFormat will contain the format of the barcode.</p>
 
 <h3 id="cordova-plugin">Cordova Plugin</h3>
 
@@ -1760,6 +1786,19 @@ Call the exec method either with <i><b>scanElectricMeter</b></i> or <i><b>scanGa
 <span class="o">);</span>
 </code></pre>
 
+<h6 id="reporting">Reporting</h6>
+
+<p>The reporting of Analog Meter Results in the Community Edition (including an image of a scanned meter)
+helps us to improving our product, and the customer experience.
+It is possible to turn that feature off by adding <em>&ldquo;reportingEnabled&rdquo;: false</em> to the above config.</p>
+<pre class="highlight javascript"><code><span class="c1">//...</span>
+            <span class="s2">"blinkAnimationOnResult"</span><span class="err">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="s2">"cancelOnResult"</span><span class="err">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="s2">"reportingEnabled"</span><span class="err">:</span> <span class="kc">false</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+</code></pre>
+
 <p><a name="mrzModule"> </a></p>
 
 <h2 id="mrz">MRZ</h2>
@@ -1782,36 +1821,60 @@ Call the exec method either with <i><b>scanElectricMeter</b></i> or <i><b>scanGa
 <td>expiration date of the document</td>
 </tr>
 <tr>
-<td>dob</td>
+<td>dayOfBirth</td>
 <td>date of birth</td>
 </tr>
 <tr>
-<td>checkDigitDob</td>
+<td>checkDigitDayOfBirth</td>
 <td>check digit for the date of birth</td>
 </tr>
 <tr>
-<td>checkDigitExpiration</td>
+<td>checkDigitExpirationDate</td>
 <td>check digit for the expiration date</td>
 </tr>
 <tr>
-<td>code</td>
-<td>country code</td>
+<td>issuingCountryCode</td>
+<td>issuing country code</td>
 </tr>
 <tr>
-<td>surname</td>
-<td>surname</td>
+<td>nationalityCountryCode</td>
+<td>nationality country code</td>
+</tr>
+<tr>
+<td>countryCode</td>
+<td>country code (Deprecated since 3.2.1. Use issuingCountryCode and nationalityCountryCode instead)</td>
+</tr>
+<tr>
+<td>surNames</td>
+<td>surnames</td>
 </tr>
 <tr>
 <td>givenNames</td>
 <td>all given first names</td>
 </tr>
 <tr>
+<td>personalNumber</td>
+<td>personal number</td>
+</tr>
+<tr>
+<td>personalNumber2</td>
+<td>2nd personal number on TD1 sized MROTDs</td>
+</tr>
+<tr>
+<td>checkDigitPersonalNumber</td>
+<td>check digit for personal number</td>
+</tr>
+<tr>
 <td>checkDigitDates</td>
 <td>check digit for both dates</td>
 </tr>
 <tr>
-<td>type</td>
+<td>documentType</td>
 <td>type of the document that was read. (ID/P)</td>
+</tr>
+<tr>
+<td>documentNumber</td>
+<td>document number</td>
 </tr>
 <tr>
 <td>checkDigitNumber</td>
@@ -1824,6 +1887,10 @@ Call the exec method either with <i><b>scanElectricMeter</b></i> or <i><b>scanGa
 <tr>
 <td>sex</td>
 <td>gender of the person</td>
+</tr>
+<tr>
+<td>allCheckDigitsValid</td>
+<td>flag indicating if all check digits are valid</td>
 </tr>
 </tbody></table>
 
@@ -1990,7 +2057,7 @@ Please be aware that not every property is filled for every document type (e.g. 
 <h6 id="example-call-for-the-mrz-module">Example call for the MRZ Module</h6>
 
 <p>Call the exec method with <i><b>scanMRZ</b></i> (all other parameters are as explained in <a href="#cordova-example">Quick Start</a>).</p>
-<pre class="highlight java"><code><span class="n">cordova</span><span class="o">.</span><span class="na">exec</span><span class="o">(</span><span class="n">onResult</span><span class="o">,</span> <span class="n">onError</span><span class="o">,</span> <span class="s">"AnylineSDK"</span><span class="o">,</span> <span class="s">"scanMRZ"</span><span class="o">,</span>    
+<pre class="highlight java"><code><span class="n">cordova</span><span class="o">.</span><span class="na">exec</span><span class="o">(</span><span class="n">onResult</span><span class="o">,</span> <span class="n">onError</span><span class="o">,</span> <span class="s">"AnylineSDK"</span><span class="o">,</span> <span class="s">"scanMRZ"</span><span class="o">,</span>
     <span class="o">[</span>
         <span class="s">"YOUR_LICENSE_KEY"</span><span class="o">,</span>
         <span class="o">{</span>
