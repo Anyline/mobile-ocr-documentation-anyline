@@ -14,24 +14,43 @@ With the Anyline Barcode-Module 16 different kinds of bar- and QR-codes can be s
 #### Restrictions for the Barcode-Module Config:
 - Flash mode *auto* is still in alpha stage therefore *manual* mode is preferred
 
-#### Available Barcode Formats:  
+#### Available Barcode Formats:
 
-- AZTEC
-- CODABAR
-- CODE_39
-- CODE_93
-- CODE_128
-- DATA_MATRIX
-- EAN_8
-- EAN_13
-- ITF
-- PDF_417
-- QR_CODE
-- RSS_14
-- RSS_EXPANDED
-- UPC_A
-- UPC_E
-- UPC_EAN_EXTENSION
+###### Fully Supported
+- UPC A
+- UPC E
+- EAN-8
+- EAN-13
+- EAN-14
+- EAN-18
+- EAN-99
+- EAN-128
+- Identcode
+- Leitcode
+- ISBN-13
+- ISBN-10
+- ISSN
+- ISMN
+- ITF-14
+- Data Matrix
+- Aztec [not vCard - see below]
+- Codabar
+- QR-Code
+- Code 39
+- Code 93
+- Code-128 [no rotation]
+- PDF 417
+
+###### Experimental Support:
+- Code 39 Extended
+- PNZ, PZN8, PZN7
+- Aztec vCard
+
+###### Currently not supported
+- RSS 14
+- RSS Expanded
+- MSI/Plessey
+- Code 93 Extended
 
 ### Android
 
@@ -49,7 +68,7 @@ barcodeScanView.setConfigFromAsset("barcode_view_config.json");
 // initialize Anyline with your license key and a Listener that is called if a result is found
 barcodeScanView.initAnyline(getString(R.string.anyline_license_key), new BarcodeResultListener() {
     @Override
-    public void onResult(String result, AnylineImage resultImage) {
+    public void onResult(String result, BarcodeScanView.BarcodeFormat format, AnylineImage image) {
         // This is called when a result is found.
     }
 });
@@ -177,14 +196,13 @@ Valid types are:
 - kCodeTypeCodabar
 - kCodeTypeCode39
 - kCodeTypeCode93
-- kCodeTypeCode128,
+- kCodeTypeCode128
 - kCodeTypeDataMatrix
 - kCodeTypeEAN8
 - kCodeTypeEAN13
 - kCodeTypeITF
 - kCodeTypePDF417
-- kCodeTypeQR,
-- kCodeTypeRSS14
+- kCodeTypeQR
 - kCodeTypeRSSExpanded
 - kCodeTypeUPCA
 - kCodeTypeUPCE
@@ -202,7 +220,7 @@ Valid types are:
         // Handle the error here
     }
 }
-```   
+```
 Once Anyline is set up successful, start the scanning process in viewDidAppear.
 If there is a problem starting the scanning process an error object will be set, so the error can be handled.
 
@@ -211,11 +229,12 @@ If there is a problem starting the scanning process an error object will be set,
 ```objective_c
 - (void)anylineBarcodeModuleView:(AnylineBarcodeModuleView *)anylineBarcodeModuleView
                didFindScanResult:(NSString *)scanResult
-                         atImage:(UIImage *)image {
+                   barcodeFormat:(NSString *)barcodeFormat
+                         atImage:(UIImage *)image;
     NSLog("Scan result: %@", scanResult);
 }
 ```
-When a valid result is found, it will call the delegate. The scan result will be a *string* containing the scanned code.
+When a valid result is found, it will call the delegate. The scan result will be a *string* containing the scanned code. barcodeFormat will contain the format of the barcode.
 
 ### Cordova Plugin
 
@@ -457,7 +476,7 @@ Once Anyline has found a valid result the delegate is called and you get an resu
 - **fullImage**:
 	 - scanMode = meter: the full image (before cropping)
 	 - scanMode = code: null
-     
+
 ###### Reporting
 
 The reporting of Analog Meter Results in the Community Edition (including an image of a scanned meter)
@@ -506,8 +525,20 @@ cordova.exec(onResult, onError, "AnylineSDK", "scanElectricMeter",
     ]
 );
 ```
+###### Reporting
 
+The reporting of Analog Meter Results in the Community Edition (including an image of a scanned meter)
+helps us to improving our product, and the customer experience.
+It is possible to turn that feature off by adding *"reportingEnabled": false* to the above config.
 
+```js
+//...
+            "blinkAnimationOnResult": true,
+            "cancelOnResult": true,
+            "reportingEnabled": false
+        }
+    ]
+```
 
 <a name="mrzModule"> </a>
 ## MRZ
@@ -522,17 +553,25 @@ For each scan result the module generates an identification object, containing a
 value | description
 ----- | -----------
 expirationDate | expiration date of the document
-dob |	date of birth
-checkDigitDob | check digit for the date of birth
-checkDigitExpiration | check digit for the expiration date
-code |	country code
-surname	| surname
-givenNames| all given first names
-checkDigitDates	| check digit for both dates
-type |	type of the document that was read. (ID/P)
-checkDigitNumber |	check digit for the document number
-checkDigitFinal	| check digit
-sex	 | gender of the person
+dayOfBirth | date of birth
+checkDigitDayOfBirth | check digit for the date of birth
+checkDigitExpirationDate | check digit for the expiration date
+issuingCountryCode | issuing country code
+nationalityCountryCode | nationality country code
+countryCode | country code (Deprecated since 3.2.1. Use issuingCountryCode and nationalityCountryCode instead)
+surNames    | surnames
+givenNames | all given first names
+personalNumber | personal number
+personalNumber2 | 2nd personal number on TD1 sized MROTDs
+checkDigitPersonalNumber | check digit for personal number
+checkDigitDates | check digit for both dates
+documentType |  type of the document that was read. (ID/P)
+documentNumber | document number
+checkDigitNumber |  check digit for the document number
+checkDigitFinal  | check digit
+sex  | gender of the person
+allCheckDigitsValid | flag indicating if all check digits are valid
+
 
 <aside class="notice">
 Please be aware that not every property is filled for every document type (e.g. some ID MRZ do not contain a sex information)
@@ -677,7 +716,7 @@ Create a property, initialize the module in the viewDidLoad method and add it to
         // Handle the error here
     }
 }
-```   
+```
 If there is a problem starting the scanning process an error object will be set, so the error can be handled.
 
 ###### 3. Implement the delegate method and receive results
@@ -698,7 +737,7 @@ When a valid result is found, it will call the delegate. ScanResult is an object
 Call the exec method with <i><b>scanMRZ</b></i> (all other parameters are as explained in [Quick Start] (#cordova-example)).
 
 ```java
-cordova.exec(onResult, onError, "AnylineSDK", "scanMRZ", 	
+cordova.exec(onResult, onError, "AnylineSDK", "scanMRZ",
     [
         "YOUR_LICENSE_KEY",
         {
