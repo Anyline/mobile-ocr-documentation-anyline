@@ -5,9 +5,15 @@ Release Date 2015-10-23
 
 ### Improved ###
 - Barcode Module
-    - better and faster scanning
+    - Better and faster scanning
     - Same barcode can now be scanned again (after 2 second timeout)
 - MRZ Module
+    - Refined scanning of TD1 size MROTDs
+    - Refined scanning of MRPs and other TD3 size MRTDs
+    - Added support for TD2 size MROTDs
+    - Added support for French ID cards
+        - Known Limitations: check digit validation does not work on French ID cards
+
 
 ### Changed ###
 - BarcodeResultListener: added the format of the barcode to the
@@ -18,8 +24,12 @@ void onResult(String result, AnylineImage anylineImage);
 void onResult(String result, BarcodeScanView.BarcodeFormat barcodeFormat, AnylineImage anylineImage);
 ```
 - MRZ Identification
-    - new fields issuingCountryCode and nationalityCountryCode
-    - deprecated countryCode (Use above new fields instead.)
+    - New fields issuingCountryCode and nationalityCountryCode
+    - New field personalNumber2 (may be used in TD1 size MROTD)
+    - New field allCheckDigitsValid
+        - Indicates if all check digits are valid according to the algorithm defined in ICAO 9303-3 section 4.9
+    - Deprecated countryCode (Use issuingCountryCode and nationalityCountryCode instead)
+    - All fields set to empty strings instead of null if they are not present
 
 
 ## Anyline SDK 3.2 RC5 ##
