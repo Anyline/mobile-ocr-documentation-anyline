@@ -8,9 +8,13 @@ toc_footers:
 search: true
 
 includes:
-- gettingStarted
+- gettingStartedLicense
+- gettingStartedAndroid
+- gettingStartedIOS
+- gettingStartedCordova
 - anylineConfig
 - modules
+- advancedAndroidSetup
 
 ---
 
@@ -18,7 +22,7 @@ includes:
 
 # Introduction
 
-Anyline provides an easy-to-use SDK for applications to enable Optical Character Recognition (OCR) on mobile devices. 
+Anyline provides an easy-to-use SDK for applications to enable Optical Character Recognition (OCR) on mobile devices.
 This API contains a [Quick Start Guide] (#getting-started) for all supported platforms, a detailed description for the [Anyline Config] (#anyline-config) as well as descriptions and examples for the available [Modules] (#modules).<br/>
 
 
@@ -27,14 +31,11 @@ This API contains a [Quick Start Guide] (#getting-started) for all supported pla
 - iOS
 - WP (by Q4 2015)
 
-Anyline is also available as [Cordova Plugin] (#cordova-plugin). 
+Anyline is also available as [Cordova Plugin] (#cordova-plugin).
 (Xamarin Support Q4 2015).
-	
+
 ### Available Modules
 - [**Barcode:**] (#barcodeModule)  Scan 16 international barcodes & QR codes.
 - [**Energy:**] (#energyModule) Scan meter readings of various electric and gas meters.
 - [**MRZ:**] (#mrzModule)  Reliable scanning of data from passports' and IDs' machine readable zones (MRZ)
 - **Custom:** Got any other ideas? We will support you when implementing other use cases for mobile OCR technology.
-
-
-
