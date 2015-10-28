@@ -164,7 +164,7 @@ You now have added a Barcode scan view to your activity. However, depending on w
 - MRZ and passport scanning
 	- at.nineyards.anyline.modules.mrz.MrzScanView
 
-Because we named the element "AnylineScanview" (`android:id="@+id/AnylineScanView"` in the XML code), this element is added automatically to the Resource.Designer.cs class when the project is built. 
+Because we named the element "AnylineScanview" (`android:id="@+id/AnylineScanView"` in the XML code), this element is added automatically to the Resource.Designer.cs class when the project is being built. 
 
 #### 7. Provide a configuration to the scan view ####
 
@@ -376,7 +376,7 @@ To use the Anyline SDK for Xamarin.iOS, you'll need:
 - An iOS device
 	- Minimum iOS 7.0
 	- Minimum iPhone4s
-- A Mac Build Host (For more information, please check out <a href="http://developer.xamarin.com/guides/ios/getting_started/installation/windows/">this guide</a> on how to install Xamarin.iOS on Windows.
+- A Mac Build Host (Windows Only - For more information, please check out <a href="http://developer.xamarin.com/guides/ios/getting_started/installation/windows/">this guide</a> on how to install Xamarin.iOS on Windows.
 - An Apple developer account and your device set up for development: Please check out <a href="http://developer.xamarin.com/guides/ios/getting_started/installation/device_provisioning/">this guide</a> for detailed information.
 
 The iOS bundle contains the following parts:
@@ -596,13 +596,13 @@ public void DidFindScanResult(AnylineBarcodeModuleView anylineBarcodeModuleView,
 ```
 ###### &NewLine;
 
-#### 7. A few more things ####
+#### 7. A few more things / gotchas ####
 
-* Make sure that scanning is stopped before the view appears.
+* Always make sure that scanning is stopped before the view appears.
 
-* If you use a **community edition license** and any visual element is drawn over the Anyline watermark while scanning, an exception is thrown!
+* If you use a **community edition license** you are not allowed to place any visual element over the Anyline watermark while scanning. We will give you a friendly exception if you try to do so. Please contact <sales@anyline.io> if you need to draw over the scanning view.
 
-* Xamarins Garbage Collecter has a few problems, which means that there might be memory leaks if there are any dependencies left in the `ViewController`. Therefore, make sure that all registered events are unregistered and any subview is removed from the ViewController view and disposed.
+* Xamarins Garbage Collector may not be able to collect all garbage, which means that there might be memory leaks if there are any dependencies left in the `ViewController`. Therefore, make sure that all registered events are unregistered and any subview is removed from the ViewController view and disposed.
 
 > ViewWillDisappear
 
@@ -649,4 +649,4 @@ For module-specific documentation, please check [this section](#modules) for mor
 
 ## Xamarin.WinPhone ##
 
-Anyline will be available Windows Phone by Q4 2015.
+Anyline will be available Windows Phone by the end of Q4 2015.
