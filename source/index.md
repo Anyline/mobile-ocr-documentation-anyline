@@ -12,10 +12,11 @@ includes:
 - gettingStartedAndroid
 - gettingStartedIOS
 - gettingStartedCordova
+- xamarinSetupGuide
 - anylineConfig
 - modules
 - advancedAndroidSetup
-- xamarinSetupGuide
+
 
 ---
 
