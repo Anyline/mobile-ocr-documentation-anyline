@@ -1,6 +1,6 @@
 # Getting Started
 
-This section helps you to get started scanning using the Anyline SDK and a brief description of the files included in SDK bundle as well as a requirement description and a Quick Start Guide for all available platforms.
+This section helps you to get started with the Anyline SDK and provides a brief description of the files included in SDK bundle as well as a requirement description and a Quick Start Guide for all available platforms.
 
 ## Obtaining an Anyline SDK License Key
 

@@ -12,9 +12,11 @@ includes:
 - gettingStartedAndroid
 - gettingStartedIOS
 - gettingStartedCordova
+- xamarinSetupGuide
 - anylineConfig
 - modules
 - advancedAndroidSetup
+
 
 ---
 
@@ -32,7 +34,9 @@ This API contains a [Quick Start Guide] (#getting-started) for all supported pla
 - WP (by Q4 2015)
 
 Anyline is also available as [Cordova Plugin] (#cordova-plugin).
-(Xamarin Support Q4 2015).
+Android and iOS modules are also available for [Xamarin] (#xamarin-setup-guide).
+
+(Xamarin WP Support Q4 2015).
 
 ### Available Modules
 - [**Barcode:**] (#barcodeModule)  Scan 16 international barcodes & QR codes.
