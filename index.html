@@ -51,7 +51,9 @@ This API contains a <a href="#getting-started">Quick Start Guide</a> for all sup
 </ul>
 
 <p>Anyline is also available as <a href="#cordova-plugin">Cordova Plugin</a>.
-(Xamarin Support Q4 2015).</p>
+Android and iOS modules are also available for <a href="#xamarin-setup-guide">Xamarin</a>.</p>
+
+<p>(Xamarin WP Support Q4 2015).</p>
 
 <h3 id="available-modules">Available Modules</h3>
 
@@ -64,7 +66,7 @@ This API contains a <a href="#getting-started">Quick Start Guide</a> for all sup
 
           <h1 id="getting-started">Getting Started</h1>
 
-<p>This section helps you to get started scanning using the Anyline SDK and a brief description of the files included in SDK bundle as well as a requirement description and a Quick Start Guide for all available platforms.</p>
+<p>This section helps you to get started with the Anyline SDK and provides a brief description of the files included in SDK bundle as well as a requirement description and a Quick Start Guide for all available platforms.</p>
 
 <h2 id="obtaining-an-anyline-sdk-license-key">Obtaining an Anyline SDK License Key</h2>
 
@@ -454,6 +456,718 @@ Basically, there is one simple exec-call to the AnylineSDK with the following pa
 </span></code></pre>
 
 <h6 id="4-run-your-cordova-project-enjoy-scanning-and-have-fun">4. Run your cordova project: Enjoy scanning and have fun :)</h6>
+
+          <h1 id="xamarin-setup-guide">Xamarin Setup Guide</h1>
+
+<p>The Anyline SDK is available for both Xamarin.Android and Xamarin.iOS. Each mobile platform has their own Anyline Xamarin SDK and and can be used very similar to the regular Anyline bundles for Android and iOS. Please refer to our API Reference for platform-specific documentation.</p>
+
+<h2 id="xamarin-android">Xamarin.Android</h2>
+
+<p>The Anyline Xamarin SDK provides the functionality of our Android SDK in C# to make Android integration in Xamarin as easy as possible. This section helps you to setup your Xamarin.Android project and start scanning right away!</p>
+
+<h3 id="requirements">Requirements</h3>
+
+<p>To use the Anyline SDK for Xamarin.Android, you&rsquo;ll need:</p>
+
+<ul>
+<li>Xamarin account (If you work with Visual Studio, you need at least a Xamarin business account. Check out the <a href="https://xamarin.com/">Xamarin website</a> for detailed information.)</li>
+<li>Android device with SDK &gt;= 15</li>
+<li>Decent camera functionality (recommended: 720p and adequate auto focus)</li>
+<li>Xamarin Studio or Visual Studio</li>
+<li>An Anyline license which you can generate <a href="http://portal.anyline.io/">here</a> after purchasing our SDK in the <a href="https://www.anyline.io/store/">store</a>.</li>
+</ul>
+
+<p>The Android bundle contains the following parts:</p>
+
+<ul>
+<li><strong>AnylineXamarinSDK.Droid.dll:</strong> contains the Anyline SDK Library</li>
+<li><strong>AnylineXamarinApp.Droid</strong> contains a simple app where an example for each module is implemented - it can be installed right away</li>
+<li><strong>LICENSE:</strong> third party license agreements</li>
+<li><strong>README:</strong> contains a quick start - setup and module description</li>
+</ul>
+
+<h3 id="quick-start-setup">Quick Start - Setup</h3>
+
+<p>In this section we will go through the basic process of creating and configurating a simple Anyline scanning application in Xamarin.Android. If you are not yet familiar with Xamarin.Android, follow <a href="https://developer.xamarin.com/guides/android/getting_started/hello,android/hello,android_quickstart/">this</a> guide to develop an understanding of the fundamentals of Android application development with Xamarin.</p>
+
+<h4 id="1-create-a-new-xamarin-android-project">1. Create a new Xamarin.Android Project</h4>
+
+<p>If you are using Visual Studio, click <code class="prettyprint">File</code> &gt; <code class="prettyprint">New Project...</code>, select <code class="prettyprint">Visual C#</code> &gt; <code class="prettyprint">Android</code> and create a new Blank App.</p>
+
+<p><img alt="XamarinAndroidCreateVS" src="images/xamarinAndroidCreateVS.png" /></p>
+
+<p>If you are using Xamarin Studio, click <code class="prettyprint">New Solution...</code> and create an Android App.</p>
+
+<p><img alt="XamarinAndroidCreateXS" src="images/xamarinAndroidCreateXS.png" /></p>
+
+<h4 id="2-generate-license-key">2. Generate license key</h4>
+
+<p>Obtaining a license key is already described <a href="#obtaining-an-anyline-sdk-license-key">here</a>. To generate a license key for your application, refer to the <code class="prettyprint">package name</code> of your Xamarin.Android project. </p>
+
+<ul>
+<li>Visual Studio</li>
+</ul>
+
+<p><img alt="XamarinAndroidPackageVS" src="images/xamarinAndroidPackageVS.png" /></p>
+
+<ul>
+<li>Xamarin Studio</li>
+</ul>
+
+<p><img alt="XamarinAndroidPackageXS" src="images/xamarinAndroidPackageXS.png" /></p>
+
+<h4 id="3-add-anylinexamarinsdk-droid-as-reference">3. Add AnylineXamarinSDK.Droid as reference</h4>
+
+<p>To access the functionality of our SDK, simply add the <code class="prettyprint">AnylineXamarinSDK.Droid.dll</code> file as a reference. </p>
+
+<p>Visual Studio:</p>
+
+<ul>
+<li>right-click the References node in your project tree</li>
+<li>click &ldquo;Add reference&hellip;&rdquo;</li>
+<li>click &ldquo;Browse&hellip;&rdquo; and locate the AnylineXamarinSDK.Droid.dll file</li>
+</ul>
+
+<p>Xamarin Studio:</p>
+
+<ul>
+<li>right-click the References node in your project tree</li>
+<li>click &ldquo;Edit references&hellip;&rdquo;</li>
+<li>navigate to the &ldquo;.Net Assembly&rdquo; tab</li>
+<li>click &ldquo;Browse&hellip;&rdquo; to locate the AnylineXamarinSDK.Droid.dll file</li>
+</ul>
+
+<p>The SDK should now be visible as a reference and your project tree should somewhat look like this:</p>
+
+<p><img alt="XamarinAndroidReference" src="images/xamarinAndroidReference.png" /></p>
+
+<h4 id="4-set-minimum-android-target">4. Set minimum Android target</h4>
+
+<p>In the <code class="prettyprint">Application</code> settings of your project, set the minimum version of your Android target to <code class="prettyprint">API level 17</code>.</p>
+
+<p><img alt="XamarinAndroidTarget" src="images/xamarinAndroidTarget.png" /></p>
+
+<h4 id="5-add-necessary-permissions-and-features">5. Add necessary permissions and features</h4>
+
+<p>The scanning activity needs the following permissions and features</p>
+
+<ul>
+<li>Permissions
+
+<ul>
+<li>CAMERA</li>
+<li>VIBRATE</li>
+<li>WRITE_EXTERNAL_STORAGE</li>
+<li>READ_EXTERNAL_STORAGE</li>
+</ul></li>
+<li>Features
+
+<ul>
+<li>android.hardware.camera</li>
+<li>android.hardware.camera.flash</li>
+<li>android.hardware.camera.autofocus</li>
+</ul></li>
+</ul>
+
+<p>So let&rsquo;s add them in our AndroidManifest.xml in our Properties node.</p>
+
+<blockquote>
+<p>in AndroidManifest.xml</p>
+</blockquote>
+<pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<span class="nt">&lt;manifest</span> <span class="na">xmlns:android=</span><span class="s">"http://schemas.android.com/apk/res/android"</span>
+  <span class="na">package=</span><span class="s">"AT.Nineyards.AnylineXamarinExample"</span>
+  <span class="na">android:versionCode=</span><span class="s">"1"</span> <span class="na">android:versionName=</span><span class="s">"1.0"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;uses-sdk</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;application</span> <span class="na">android:label=</span><span class="s">"AnylineExampleAndroid"</span> <span class="na">android:icon=</span><span class="s">"@drawable/Icon"</span><span class="nt">&gt;&lt;/application&gt;</span>
+  <span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">"android.permission.CAMERA"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">"android.permission.VIBRATE"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">"android.permission.WRITE_EXTERNAL_STORAGE"</span> <span class="na">android:maxSdkVersion=</span><span class="s">"18"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">"android.permission.READ_EXTERNAL_STORAGE"</span> <span class="na">android:maxSdkVersion=</span><span class="s">"18"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;uses-feature</span> <span class="na">android:name=</span><span class="s">"android.hardware.camera"</span> <span class="na">android:required=</span><span class="s">"false"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;uses-feature</span> <span class="na">android:name=</span><span class="s">"android.hardware.camera.flash"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;uses-feature</span> <span class="na">android:name=</span><span class="s">"android.hardware.camera.autofocus"</span> <span class="na">android:required=</span><span class="s">"false"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/manifest&gt;</span>
+</code></pre>
+
+<h6 id="newline">&NewLine;</h6>
+
+<h4 id="6-add-a-scan-view">6. Add a Scan View</h4>
+
+<ul>
+<li>Open the Main.axml file in your Resources/Layout node.</li>
+<li>Switch from the <code class="prettyprint">Design</code> tab to the <code class="prettyprint">Source</code> tab.</li>
+<li>Edit the XML Code as shown in the code example</li>
+</ul>
+
+<blockquote>
+<p>The XML code should look somewhat like this</p>
+</blockquote>
+<pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<span class="nt">&lt;LinearLayout</span> <span class="na">xmlns:android=</span><span class="s">"http://schemas.android.com/apk/res/android"</span>
+    <span class="na">android:orientation=</span><span class="s">"vertical"</span>
+    <span class="na">android:layout_width=</span><span class="s">"fill_parent"</span>
+    <span class="na">android:layout_height=</span><span class="s">"fill_parent"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;Button</span>
+        <span class="na">android:id=</span><span class="s">"@+id/MyButton"</span>
+        <span class="na">android:layout_width=</span><span class="s">"fill_parent"</span>
+        <span class="na">android:layout_height=</span><span class="s">"wrap_content"</span>
+        <span class="na">android:text=</span><span class="s">"@string/Hello"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/LinearLayout&gt;</span>
+</code></pre>
+
+<h6 id="newline">&NewLine;</h6>
+
+<blockquote>
+<p>Remove the Button and add a scan view instead. Edit the XML code as follows</p>
+</blockquote>
+<pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<span class="nt">&lt;LinearLayout</span> <span class="na">xmlns:android=</span><span class="s">"http://schemas.android.com/apk/res/android"</span>
+    <span class="na">android:orientation=</span><span class="s">"vertical"</span>
+    <span class="na">android:layout_width=</span><span class="s">"fill_parent"</span>
+    <span class="na">android:layout_height=</span><span class="s">"fill_parent"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;at.nineyards.anyline.modules.barcode.BarcodeScanView</span>
+        <span class="na">android:id=</span><span class="s">"@+id/AnylineScanView"</span>
+        <span class="na">android:layout_width=</span><span class="s">"match_parent"</span>
+        <span class="na">android:layout_height=</span><span class="s">"match_parent"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/LinearLayout&gt;</span>
+</code></pre>
+
+<h6 id="newline">&NewLine;</h6>
+
+<p>If you switch back from to the <code class="prettyprint">Design</code> tab, the user interface should look like this:</p>
+
+<p><img alt="XamarinAndroidDesign" src="images/xamarinAndroidDesign.png" /></p>
+
+<p>You now have added a Barcode scan view to your activity. However, depending on which scanning type you want to implement, choose one of these module-specific views:</p>
+
+<ul>
+<li>Barcode scanning
+
+<ul>
+<li>at.nineyards.anyline.modules.barcode.BarcodeScanView</li>
+</ul></li>
+<li>Energy meter scanning
+
+<ul>
+<li>at.nineyards.anyline.modules.energy.EnergyScanView</li>
+</ul></li>
+<li>MRZ and passport scanning
+
+<ul>
+<li>at.nineyards.anyline.modules.mrz.MrzScanView</li>
+</ul></li>
+</ul>
+
+<p>Because we named the element &ldquo;AnylineScanview&rdquo; (<code class="prettyprint">android:id=&quot;@+id/AnylineScanView&quot;</code> in the XML code), this element is added automatically to the Resource.Designer.cs class when the project is being built. </p>
+
+<h4 id="7-provide-a-configuration-to-the-scan-view">7. Provide a configuration to the scan view</h4>
+
+<p>You can adapt your scan view easily by either adding a .json file or using XML-attributes in the layout file (e.g. Main.axml).
+In this example, let&rsquo;s create a .json file and fill it with properties:</p>
+
+<p>Visual Studio:</p>
+
+<ul>
+<li>In your Assets treenode, right-click on the folder and select <code class="prettyprint">Add</code> &gt; <code class="prettyprint">New Item..</code></li>
+<li>Choose <code class="prettyprint">Visual C#</code> &gt; <code class="prettyprint">Text File</code> and name it &ldquo;scanConfig.json&rdquo;</li>
+</ul>
+
+<p>Xamarin Studio:</p>
+
+<ul>
+<li>In your Assets treenode, right-click on the folder and select <code class="prettyprint">Add</code> &gt; <code class="prettyprint">New File...</code></li>
+<li>Choose <code class="prettyprint">Misc</code> &gt; <code class="prettyprint">Empty Text File</code> and name it &ldquo;scanConfig.json&rdquo;</li>
+</ul>
+
+<p>Make sure that the build action for this file is <code class="prettyprint">AndroidAsset</code>.</p>
+
+<p>Now open the file and paste the code from the following example</p>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"captureResolution"</span><span class="p">:</span><span class="s2">"720p"</span><span class="p">,</span><span class="w">
+
+  </span><span class="nt">"cutout"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"style"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rect"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"maxWidthPercent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"80%"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"alignment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"top_half"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ratioFromSize"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"strokeWidth"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"cornerRadius"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"strokeColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00AFFE"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"outerColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"outerAlpha"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.3</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"flash"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"mode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"manual"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"alignment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bottom_right"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"beepOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"vibrateOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"blinkAnimationOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"cancelOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h6 id="newline">&NewLine;</h6>
+
+<p>Follow <a href="#anyline-config">this guide</a> for detailed information about the configuration.</p>
+
+<h4 id="8-implement-the-scan-view">8. Implement the scan view</h4>
+
+<p>Now we are ready to implement the scan view in our activity. Add a <code class="prettyprint">using</code> statement for our module-specific scan view in our <code class="prettyprint">MainActivity.cs</code>.</p>
+<pre class="highlight csharp"><code><span class="c1">// for barcode scanning
+</span><span class="k">using</span> <span class="nn">AT.Nineyards.Anyline.Modules.Barcode</span><span class="p">;</span>
+
+<span class="c1">// for energy meter scanning
+</span><span class="k">using</span> <span class="nn">AT.Nineyards.Anyline.Modules.Energy</span><span class="p">;</span>
+
+<span class="c1">// for MRZ scanning
+</span><span class="k">using</span> <span class="nn">AT.Nineyards.Anyline.Modules.MRZ</span><span class="p">;</span>
+</code></pre>
+
+<h6 id="newline">&NewLine;</h6>
+
+<p>Have a look at the code outline of our activity in the following code example:</p>
+
+<blockquote>
+<p>Activity outline</p>
+</blockquote>
+<pre class="highlight csharp"><code><span class="k">namespace</span> <span class="nn">AnylineExampleAndroid</span>
+<span class="p">{</span>
+    <span class="p">[</span><span class="nf">Activity</span><span class="p">(</span><span class="n">Label</span> <span class="p">=</span> <span class="s">"AnylineExampleAndroid"</span><span class="p">,</span> <span class="n">MainLauncher</span> <span class="p">=</span> <span class="k">true</span><span class="p">,</span> <span class="n">Icon</span> <span class="p">=</span> <span class="s">"@drawable/icon"</span><span class="p">)]</span>
+    <span class="k">public</span> <span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">Activity</span>
+    <span class="p">{</span>
+        <span class="c1">// A member variable that is our scan view
+</span>        <span class="n">BarcodeScanView</span> <span class="n">scanView</span><span class="p">;</span>
+
+        <span class="c1">// Setup our scan view here
+</span>        <span class="k">protected</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">OnCreate</span><span class="p">(</span><span class="n">Bundle</span> <span class="n">bundle</span><span class="p">)</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+
+        <span class="c1">// If the application state passes from "Resumed" to "Paused", this method is invoked
+</span>        <span class="c1">// scanView.CancelScanning(); and scanView.ReleaseCameraInBackground(); should be called here
+</span>        <span class="k">protected</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">OnPause</span><span class="p">()</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+
+        <span class="c1">// This method is invoked if the application state changes from "Paused" or "Started" to "Resumed"
+</span>        <span class="c1">// scanView.StartScanning(); should be called here
+</span>        <span class="k">protected</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">OnResume</span><span class="p">()</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+
+        <span class="c1">// If the back-button is pressed, invoke this method
+</span>        <span class="c1">// To close your application, call the Finish(); method here
+</span>        <span class="k">public</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">OnBackPressed</span><span class="p">()</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+<h6 id="newline">&NewLine;</h6>
+
+<p>The following methods have to be implemented in order to use the scan view:</p>
+
+<ul>
+<li>in <code class="prettyprint">OnCreate</code> we&rsquo;ll set up our scan view, load a configuration, initialize it with the license key that we generated earlier.</li>
+</ul>
+
+<blockquote>
+<p>OnCreate</p>
+</blockquote>
+<pre class="highlight csharp"><code><span class="c1">// Setup our scan view here
+</span><span class="k">protected</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">OnCreate</span><span class="p">(</span><span class="n">Bundle</span> <span class="n">bundle</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">base</span><span class="p">.</span><span class="nf">OnCreate</span><span class="p">(</span><span class="n">bundle</span><span class="p">);</span>
+
+    <span class="c1">// Set our view from the "main" layout resource
+</span>    <span class="nf">SetContentView</span><span class="p">(</span><span class="n">Resource</span><span class="p">.</span><span class="n">Layout</span><span class="p">.</span><span class="n">Main</span><span class="p">);</span>
+
+    <span class="c1">// allocate the element we defined earlier in our Main.axml
+</span>    <span class="n">scanView</span> <span class="p">=</span> <span class="n">FindViewById</span><span class="p">&lt;</span><span class="n">BarcodeScanView</span><span class="p">&gt;(</span><span class="n">Resource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">AnylineScanView</span><span class="p">);</span>
+
+    <span class="c1">// Load config from the .json file
+</span>    <span class="c1">// We don't need this, if we define our configuration in the XML code
+</span>    <span class="n">scanView</span><span class="p">.</span><span class="nf">SetConfigFromAsset</span><span class="p">(</span><span class="s">"scanConfig.json"</span><span class="p">);</span>
+
+    <span class="c1">// Initialize with our license key and our result listener
+</span>    <span class="c1">// Important: use the license key for your app package
+</span>    <span class="n">scanView</span><span class="p">.</span><span class="nf">InitAnyline</span><span class="p">(&lt;</span><span class="n">INSERT</span> <span class="n">YOUR</span> <span class="n">LICENSE</span> <span class="n">KEY</span> <span class="n">HERE</span><span class="p">&gt;,</span> <span class="k">this</span><span class="p">);</span>
+
+    <span class="c1">// Don't stop scanning when a result is found
+</span>    <span class="n">scanView</span><span class="p">.</span><span class="nf">SetCancelOnResult</span><span class="p">(</span><span class="k">false</span><span class="p">);</span>
+
+    <span class="c1">// Register event that shows if the camera is initialized
+</span>    <span class="n">scanView</span><span class="p">.</span><span class="n">CameraOpened</span> <span class="p">+=</span> <span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span> 
+        <span class="n">Log</span><span class="p">.</span><span class="nf">Debug</span><span class="p">(</span><span class="s">"Camera"</span><span class="p">,</span> <span class="s">"Camera opened successfully. Frame resolution "</span> <span class="p">+</span> <span class="n">e</span><span class="p">.</span><span class="n">Width</span> <span class="p">+</span> <span class="s">" x "</span> <span class="p">+</span> <span class="n">e</span><span class="p">.</span><span class="n">Height</span><span class="p">);</span>
+    <span class="p">};</span>
+
+    <span class="c1">// Register event that shows if the camera returns an error
+</span>    <span class="n">scanView</span><span class="p">.</span><span class="n">CameraError</span> <span class="p">+=</span> <span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="n">Log</span><span class="p">.</span><span class="nf">Error</span><span class="p">(</span><span class="s">"Camera"</span><span class="p">,</span> <span class="s">"OnCameraError: "</span> <span class="p">+</span> <span class="n">e</span><span class="p">.</span><span class="n">Event</span><span class="p">.</span><span class="n">Message</span><span class="p">);</span>
+    <span class="p">};</span>
+<span class="p">}</span>
+</code></pre>
+
+<h6 id="newline">&NewLine;</h6>
+
+<aside class="notice">
+<b>InitAnyline</b> takes the license key and a module-specific result listener as arguments. A convenient way is to store the license key in a <b>const String</b> and let the activity implement the interface of the result listener, then passing <b>this</b> as second argument.
+</aside>
+
+<h6 id="newline">&NewLine;</h6>
+
+<ul>
+<li>In <code class="prettyprint">OnResume</code>, we finally start scanning.</li>
+</ul>
+
+<blockquote>
+<p>OnResume</p>
+</blockquote>
+<pre class="highlight csharp"><code><span class="c1">// This method is invoked if the application state changes from "Paused" or "Started" to "Resumed"
+</span><span class="k">protected</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">OnResume</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">base</span><span class="p">.</span><span class="nf">OnResume</span><span class="p">();</span>
+    <span class="n">scanView</span><span class="p">.</span><span class="nf">StartScanning</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre>
+
+<h6 id="newline">&NewLine;</h6>
+
+<h4 id="9-handle-results">9. Handle Results</h4>
+
+<p>Each of the anyline modules uses a module-specific scan view that uses the camera of your mobile device and provides real-time scan results via a module-specific listener.</p>
+
+<p>The easiest way to make use of that listener is to implement the interface of the listener in your scan activity like this:</p>
+
+<blockquote>
+<p>Implement a Result Listener depending on the module (IBarcodeResultListener, IEnergyResultListener or IMrzResultListener)</p>
+</blockquote>
+<pre class="highlight csharp"><code><span class="na">[Activity(Label = "AnylineExampleAndroid", MainLauncher = true, Icon = "@drawable/icon")]</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">Activity</span><span class="p">,</span> <span class="n">IBarcodeResultListener</span> <span class="c1">// or any other module-specific listener, depending on your scan module
+</span><span class="p">{</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre>
+
+<h6 id="newline">&NewLine;</h6>
+
+<p>The interface can be implemented by right-clicking on the ResultListener Interface and selecting <code class="prettyprint">Implement Interface</code>. A method will be generated that is called each time our scan view is scanning and reporting a result.</p>
+
+<blockquote>
+<p>OnResult of the Barcode ResultListener</p>
+</blockquote>
+<pre class="highlight csharp"><code><span class="c1">// Each time, a result is found, this method is invoked
+</span><span class="k">public</span> <span class="k">void</span> <span class="nf">OnResult</span><span class="p">(</span><span class="kt">string</span> <span class="n">result</span><span class="p">,</span> <span class="n">AT</span><span class="p">.</span><span class="n">Nineyards</span><span class="p">.</span><span class="n">Anyline</span><span class="p">.</span><span class="n">Models</span><span class="p">.</span><span class="n">AnylineImage</span> <span class="n">resultImage</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// Show a short Toast message if a result is found
+</span>    <span class="n">Toast</span><span class="p">.</span><span class="nf">MakeText</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">ToastLength</span><span class="p">.</span><span class="n">Short</span><span class="p">).</span><span class="nf">Show</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre>
+
+<h6 id="newline">&NewLine;</h6>
+
+<p>&nbsp;</p>
+
+<h4 id="10-test-your-app-on-an-android-device">10. Test your app on an Android device</h4>
+
+<p>Build your project and deploy your application on your Android device. For module-specific documentation, please check <a href="#modules">this section</a> for more information. Enjoy scanning and have fun :)</p>
+
+<h2 id="xamarin-ios">Xamarin.iOS</h2>
+
+<p>The Anyline Xamarin SDK provides the functionality of our iOS SDK in C# to make iOS integration in Xamarin as easy as possible. This section provides a step-by-step guide to set up a Xamarin.iOS project in Visual Studio and start scanning right away!</p>
+
+<h3 id="requirements">Requirements</h3>
+
+<p>To use the Anyline SDK for Xamarin.iOS, you&rsquo;ll need:</p>
+
+<ul>
+<li>Xamarin account (For Visual Studio, you need at least a Xamarin business account. Check out the <a href="https://xamarin.com/">Xamarin website</a> for detailed information.)</li>
+<li>An Anyline license which you can generate <a href="http://portal.anyline.io/">here</a> after purchasing our SDK in the <a href="https://www.anyline.io/store/">store</a>.</li>
+<li>An iOS device
+
+<ul>
+<li>Minimum iOS 7.0</li>
+<li>Minimum iPhone4s</li>
+</ul></li>
+<li>A Mac Build Host (Windows Only - For more information, please check out <a href="http://developer.xamarin.com/guides/ios/getting_started/installation/windows/">this guide</a> on how to install Xamarin.iOS on Windows.</li>
+<li>An Apple developer account and your device set up for development: Please check out <a href="http://developer.xamarin.com/guides/ios/getting_started/installation/device_provisioning/">this guide</a> for detailed information.</li>
+</ul>
+
+<p>The iOS bundle contains the following parts:</p>
+
+<ul>
+<li><strong>AnylineXamarinSDK.iOS.dll:</strong> contains the Anyline SDK Library</li>
+<li><strong>AnylineResources.bundle</strong> contains the necessary resources for your project</li>
+<li><strong>AnylineXamarinApp.iOS:</strong> contains a simple app where each module is implemented - it can be installed right away</li>
+<li><strong>LICENSE:</strong> third party license agreements</li>
+<li><strong>README:</strong> contains a quick start - setup</li>
+</ul>
+
+<h3 id="quick-start-setup">Quick Start - Setup</h3>
+
+<p>In this section we will go through the basic process of creating and configurating a simple Anyline scanning application in Xamarin.iOS. If you are not yet familiar with Xamarin.iOS, follow <a href="https://developer.xamarin.com/guides/ios/getting_started/">this</a> guide to develop an understanding of the fundamentals of iOS application development with Xamarin.</p>
+
+<h4 id="1-create-a-new-xamarin-ios-project">1. Create a new Xamarin.iOS Project</h4>
+
+<p>In Visual Studio, click <code class="prettyprint">File</code> &gt; <code class="prettyprint">New Project...</code>, select <code class="prettyprint">Visual C#</code> &gt; <code class="prettyprint">iOS</code> &gt; <code class="prettyprint">iPhone</code> and create a new Single View App for iPhone.</p>
+
+<p><img alt="XamariniOSCreate" src="images/xamariniOSCreate.png" /></p>
+
+<p>Make sure your build host is up and running and pair Visual Studio with the build host. If you have trouble with this step, please refer to <a href="https://developer.xamarin.com/guides/ios/getting_started/installation/windows/troubleshooting/">this guide</a>.</p>
+
+<h6 id="newline">&NewLine;</h6>
+
+<h4 id="2-generate-license-key">2. Generate license key</h4>
+
+<p>To generate a license key for your application, refer to the <code class="prettyprint">bundle identifier</code> of your Xamarin.iOS project. Further information about getting a license key is described <a href="#obtaining-an-anyline-sdk-license-key">here</a>. </p>
+
+<p><img alt="XamariniOSBundle" src="images/xamariniOSBundle.png" /></p>
+
+<h4 id="3-add-anyline-sdk">3. Add Anyline SDK</h4>
+
+<p>In the project view, right-click on the <code class="prettyprint">References</code> node, select <code class="prettyprint">Add Reference...</code> and locate the AnylineXamarinSDK.iOS.dll.</p>
+
+<p>When added, the SDK is visible in the solution explorer as follows:</p>
+
+<p><img alt="XamariniOSSDK" src="images/xamariniOSSDK.png" /></p>
+
+<h6 id="newline">&NewLine;</h6>
+
+<h4 id="4-add-anylineresources-bundle">4. Add AnylineResources.bundle</h4>
+
+<p>Simply drag and drop the AnylineResources.bundle folder into the <code class="prettyprint">Resources</code> node of your project. The project structure should now look like this:</p>
+
+<p><img alt="XamariniOSResource" src="images/xamariniOSResource.png" /></p>
+
+<h6 id="newline">&NewLine;</h6>
+
+<h6 id="newline">&NewLine;</h6>
+
+<h4 id="5-implement-the-anyline-scan-view">5. Implement the Anyline Scan View</h4>
+
+<p>Because we created a Single View App, Visual Studio automatically created a Storyboard and a View Controller for us. By default, the Storyboard is named <code class="prettyprint">MainStoryboard.storyboard</code> and the View Controller is named <code class="prettyprint">RootViewController</code>.</p>
+
+<p>Let&rsquo;s have a look at the code structure of the <code class="prettyprint">RootViewController</code>.</p>
+
+<ul>
+<li>In <em>ViewDidLoad</em>, we&rsquo;ll set up the Scan View and add it to the View of the ViewController.</li>
+<li>In <em>ViewDidAppear</em>, we&rsquo;ll start scanning for results.</li>
+<li>In <em>ViewWillDissapear</em>, we&rsquo;ll stop scanning.</li>
+<li>In <em>ViewDidDissapear</em>, we&rsquo;ll unregister any event handlers and dispose/remove our Scan View so there are no circular dependencies left.</li>
+</ul>
+
+<blockquote>
+<p>RootViewController.cs</p>
+</blockquote>
+<pre class="highlight csharp"><code><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Drawing</span><span class="p">;</span>
+
+<span class="k">using</span> <span class="nn">Foundation</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">UIKit</span><span class="p">;</span>
+
+<span class="k">namespace</span> <span class="nn">AnylineExampleiOS</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">partial</span> <span class="k">class</span> <span class="nc">RootViewController</span> <span class="p">:</span> <span class="n">UIViewController</span>
+    <span class="p">{</span>
+        <span class="k">public</span> <span class="nf">RootViewController</span><span class="p">(</span><span class="n">IntPtr</span> <span class="n">handle</span><span class="p">)</span> <span class="p">:</span> <span class="k">base</span><span class="p">(</span><span class="n">handle</span><span class="p">)</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+
+        <span class="k">public</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">DidReceiveMemoryWarning</span><span class="p">()</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+
+        <span class="k">public</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">ViewDidLoad</span><span class="p">()</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+
+        <span class="k">public</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">ViewWillAppear</span><span class="p">(</span><span class="kt">bool</span> <span class="n">animated</span><span class="p">)</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+
+        <span class="k">public</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">ViewDidAppear</span><span class="p">(</span><span class="kt">bool</span> <span class="n">animated</span><span class="p">)</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+
+        <span class="k">public</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">ViewWillDisappear</span><span class="p">(</span><span class="kt">bool</span> <span class="n">animated</span><span class="p">)</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+
+        <span class="k">public</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">ViewDidDisappear</span><span class="p">(</span><span class="kt">bool</span> <span class="n">animated</span><span class="p">)</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+<h6 id="newline">&NewLine;</h6>
+
+<p>To access the classes and methods of the Anyline SDK, simply add the following <code class="prettyprint">using</code> statement.</p>
+<pre class="highlight csharp"><code><span class="k">using</span> <span class="nn">AnylineXamarinSDK.iOS</span><span class="p">;</span>
+</code></pre>
+
+<h6 id="newline">&NewLine;</h6>
+
+<h6 id="newline">&NewLine;</h6>
+
+<h5 id="create-and-set-up-a-scan-view">Create and set up a Scan View</h5>
+
+<p>There are three module-specific Scan Views available:</p>
+
+<ul>
+<li><strong>AnylineBarcodeModuleView</strong> for barcode scanning</li>
+<li><strong>AnylineEnergyModuleView</strong> for power meter and gas meter scanning</li>
+<li><strong>AnylineMRZModuleView</strong> for MRZ and passport scanning</li>
+</ul>
+
+<p>In this example, we&rsquo;ll implement a <em>Barcode</em> scan.</p>
+
+<p>Create a member variable <code class="prettyprint">scanView</code> of the type of the module-specific view that you want to implement. 
+In this case: <code class="prettyprint">AnylineBarcodeModuleView scanView;</code></p>
+
+<p>Have a look at the <code class="prettyprint">ViewDidLoad</code> method on how to set up the Scan View.</p>
+
+<p>Basically, a new instance of our module-specific view (in this case: <em>AnylineBarcodeModuleView</em>) is created and a frame in which the view is rendered is delivered.</p>
+
+<p><code class="prettyprint">SetupWithLicenseKey</code> is called with the following parameters:</p>
+
+<ul>
+<li>The license key of <strong>your</strong> personal bundle identifier</li>
+<li>The delegate that will listen to the results (in this case: the <code class="prettyprint">RootViewController</code>, because we&rsquo;ll let it implement the delegate of our module-specific view)</li>
+<li>An error which is filled with an error description if the setup fails (for example, when the license key is wrong).</li>
+</ul>
+
+<p>If anything goes wrong in the setup, the error description is presented to the user in form of an alert view.</p>
+
+<p>Finally, the scan view is added as a subview of our <code class="prettyprint">RootViewController.View</code>.</p>
+<pre class="highlight csharp"><code><span class="k">public</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">ViewDidLoad</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">base</span><span class="p">.</span><span class="nf">ViewDidLoad</span><span class="p">();</span>
+
+    <span class="c1">//initialize the scan view with a frame
+</span>    <span class="n">scanView</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">AnylineBarcodeModuleView</span><span class="p">(</span><span class="n">UIScreen</span><span class="p">.</span><span class="n">MainScreen</span><span class="p">.</span><span class="n">Bounds</span><span class="p">);</span>
+
+    <span class="c1">//setup the scan view with your license key, the delegate (this) that handles the results and store any possible error in a variable
+</span>    <span class="n">NSError</span> <span class="n">error</span><span class="p">;</span>
+    <span class="kt">bool</span> <span class="n">success</span> <span class="p">=</span> <span class="n">scanView</span><span class="p">.</span><span class="nf">SetupWithLicenseKey</span><span class="p">(</span><span class="s">"YOUR LICENSE KEY HERE"</span><span class="p">,</span> <span class="k">this</span><span class="p">,</span> <span class="k">out</span> <span class="n">error</span><span class="p">);</span>
+
+    <span class="c1">//show an alert if something went wrong
+</span>    <span class="k">if</span> <span class="p">(!</span><span class="n">success</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">new</span> <span class="nf">UIAlertView</span><span class="p">(</span><span class="s">"Error"</span><span class="p">,</span> <span class="n">error</span><span class="p">.</span><span class="n">DebugDescription</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="s">"OK"</span><span class="p">,</span> <span class="k">null</span><span class="p">).</span><span class="nf">Show</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="c1">// After the setup is done we add the module to the view of this view controller
+</span>    <span class="n">View</span><span class="p">.</span><span class="nf">AddSubview</span><span class="p">(</span><span class="n">scanView</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+
+<h6 id="newline">&NewLine;</h6>
+
+<p>In the <code class="prettyprint">ViewDidAppear</code> method, we&rsquo;ll tell the SDK to start scanning. The </p>
+<pre class="highlight csharp"><code><span class="k">public</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">ViewDidAppear</span><span class="p">(</span><span class="kt">bool</span> <span class="n">animated</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">base</span><span class="p">.</span><span class="nf">ViewDidAppear</span><span class="p">(</span><span class="n">animated</span><span class="p">);</span>
+    <span class="cm">/*
+     This is the place where we tell Anyline to start receiving and displaying images from the camera.
+     Success/error tells us if everything went fine.
+     */</span>
+    <span class="n">NSError</span> <span class="n">error</span><span class="p">;</span>
+    <span class="kt">bool</span> <span class="n">success</span> <span class="p">=</span> <span class="n">scanView</span><span class="p">.</span><span class="nf">StartScanningAndReturnError</span><span class="p">(</span><span class="k">out</span> <span class="n">error</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(!</span><span class="n">success</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// Something went wrong. The error object contains the error description
+</span>        <span class="k">new</span> <span class="nf">UIAlertView</span><span class="p">(</span><span class="s">@"Start Scanning Error"</span><span class="p">,</span> <span class="n">error</span><span class="p">.</span><span class="n">DebugDescription</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="s">"OK"</span><span class="p">,</span> <span class="k">null</span><span class="p">).</span><span class="nf">Show</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+<h6 id="newline">&NewLine;</h6>
+
+<h4 id="6-handle-scan-results">6. Handle Scan Results</h4>
+
+<p>To handle scan results, our <code class="prettyprint">RootViewController</code> has to implement the interface of a module-specific view delegate. Simply modify the class header signature as shown in the code.</p>
+<pre class="highlight csharp"><code><span class="c1">// for barcode scans, implement IAnylineBarcodeModuleDelegate
+</span><span class="k">public</span> <span class="k">partial</span> <span class="k">class</span> <span class="nc">RootViewController</span> <span class="p">:</span> <span class="n">UIViewController</span><span class="p">,</span> <span class="n">IAnylineBarcodeModuleDelegate</span>
+<span class="p">{</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+
+<span class="c1">// for energy meter scans, implement IAnylineEnergyModuleDelegate
+</span><span class="k">public</span> <span class="k">partial</span> <span class="k">class</span> <span class="nc">RootViewController</span> <span class="p">:</span> <span class="n">UIViewController</span><span class="p">,</span> <span class="n">IAnylineEnergyModuleDelegate</span>
+<span class="p">{</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+
+<span class="c1">// for MRZ and passport scans, implement IAnylineMRZModuleDelegate
+</span><span class="k">public</span> <span class="k">partial</span> <span class="k">class</span> <span class="nc">RootViewController</span> <span class="p">:</span> <span class="n">UIViewController</span><span class="p">,</span> <span class="n">IAnylineMRZModuleDelegate</span>
+<span class="p">{</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre>
+
+<h6 id="newline">&NewLine;</h6>
+
+<p>Right-click on the Interface and choose <code class="prettyprint">Implement Interface</code> &gt; <code class="prettyprint">Implement Interface</code>.</p>
+
+<p><img alt="XamariniOSInterface" src="images/xamariniOSInterface.png" /></p>
+
+<p>Visual Studio automatically generates the <code class="prettyprint">DidFindScanResult</code> method of the module-specific delegate. This method is called every time a result is found.</p>
+
+<p>The following code shows an implementation where the result is presented in an <code class="prettyprint">UIAlertView</code>.</p>
+
+<aside class="notice">
+Because barcode scanning is too fast, the <b>DidFindScanResult</b> event is not fired when the same barcode is scanned again, even if <b>scanView.CancelOnResult</b> is set to false.
+</aside>
+<pre class="highlight csharp"><code><span class="k">public</span> <span class="k">void</span> <span class="nf">DidFindScanResult</span><span class="p">(</span><span class="n">AnylineBarcodeModuleView</span> <span class="n">anylineBarcodeModuleView</span><span class="p">,</span> <span class="kt">string</span> <span class="n">scanResult</span><span class="p">,</span> <span class="n">UIImage</span> <span class="n">image</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">new</span> <span class="nf">UIAlertView</span><span class="p">(</span><span class="s">@"Result"</span><span class="p">,</span> <span class="n">scanResult</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="s">"OK"</span><span class="p">,</span> <span class="k">null</span><span class="p">).</span><span class="nf">Show</span><span class="p">();</span>    
+<span class="p">}</span>
+</code></pre>
+
+<h6 id="newline">&NewLine;</h6>
+
+<h4 id="7-a-few-more-things-gotchas">7. A few more things / gotchas</h4>
+
+<ul>
+<li><p>Always make sure that scanning is stopped before the view appears.</p></li>
+<li><p>If you use a <strong>community edition license</strong> you are not allowed to place any visual element over the Anyline watermark while scanning. We will give you a friendly exception if you try to do so. Please contact <a href="mailto:sales@anyline.io">sales@anyline.io</a> if you need to draw over the scanning view.</p></li>
+<li><p>Xamarins Garbage Collector may not be able to collect all garbage, which means that there might be memory leaks if there are any dependencies left in the <code class="prettyprint">ViewController</code>. Therefore, make sure that all registered events are unregistered and any subview is removed from the ViewController view and disposed.</p></li>
+</ul>
+
+<blockquote>
+<p>ViewWillDisappear</p>
+</blockquote>
+<pre class="highlight csharp"><code><span class="k">public</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">ViewWillDisappear</span><span class="p">(</span><span class="kt">bool</span> <span class="n">animated</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">base</span><span class="p">.</span><span class="nf">ViewWillDisappear</span><span class="p">(</span><span class="n">animated</span><span class="p">);</span>
+
+    <span class="c1">// We have to stop scanning before the view dissapears
+</span>    <span class="n">error</span> <span class="p">=</span> <span class="k">null</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(!</span><span class="n">scanResult</span><span class="p">.</span><span class="nf">CancelScanningAndReturnError</span><span class="p">(</span><span class="k">out</span> <span class="n">error</span><span class="p">))</span>
+    <span class="p">{</span>
+        <span class="p">(</span><span class="n">alert</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">UIAlertView</span><span class="p">(</span><span class="s">"Error"</span><span class="p">,</span> <span class="n">error</span><span class="p">.</span><span class="n">DebugDescription</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="s">"OK"</span><span class="p">,</span> <span class="k">null</span><span class="p">)).</span><span class="nf">Show</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+<blockquote>
+<p>ViewDidDisappear</p>
+</blockquote>
+<pre class="highlight csharp"><code><span class="k">public</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">ViewDidDisappear</span><span class="p">(</span><span class="kt">bool</span> <span class="n">animated</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">base</span><span class="p">.</span><span class="nf">ViewDidDisappear</span><span class="p">(</span><span class="n">animated</span><span class="p">);</span>
+
+    <span class="c1">//un-register any event handlers here, if you have any
+</span>
+    <span class="c1">//we have to erase the scan view so that there are no dependencies for the viewcontroller left.
+</span>    <span class="n">scanResult</span><span class="p">.</span><span class="nf">RemoveFromSuperview</span><span class="p">();</span>
+    <span class="n">scanResult</span><span class="p">.</span><span class="nf">Dispose</span><span class="p">();</span>
+    <span class="n">scanResult</span> <span class="p">=</span> <span class="k">null</span><span class="p">;</span>
+
+    <span class="k">base</span><span class="p">.</span><span class="nf">Dispose</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre>
+
+<h6 id="newline">&NewLine;</h6>
+
+<h4 id="8-test-your-app-on-an-ios-device">8. Test your app on an iOS device</h4>
+
+<p>Build your project and deploy your application on your iOS device. Make sure you choose your storyboard and an adequate deployment target in your Info.plist (&gt;= 7.1, but not higher than your device target).</p>
+
+<p>For module-specific documentation, please check <a href="#modules">this section</a> for more information. Enjoy scanning and have fun :)</p>
+
+<h6 id="newline">&NewLine;</h6>
+
+<h2 id="xamarin-winphone">Xamarin.WinPhone</h2>
+
+<p>Anyline will be available Windows Phone by the end of Q4 2015.</p>
 
           <h1 id="anyline-config">Anyline Config</h1>
 
