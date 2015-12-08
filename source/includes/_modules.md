@@ -280,19 +280,62 @@ cordova.exec(onResult, onError, "AnylineSDK", "scanBarcode",
 <a name="energyModule"> </a>
 ## Energy
 
-The Anyline Energy-Module is capable of scanning analog electric- and gas-meter-readings.
+The Anyline Energy-Module is capable of scanning analog electric-, gas- and water-meter-readings.
 It is also possible to scan bar- and QR-codes (useful for identifying meters).
+Common digital meters and heat meters can also be scanned (but this is ALPHA).
 
-For each successful scan, you will receive four result-attributes:
+#### All the possible scan modes
 
-- **scanMode:** the mode the result belongs to (gas, electric, barcode)
-- **result**: the detected value as a String
-- **resultImage**:
-	 - scanMode = meter: the cropped image that has been used to scan the meter value
-	 - scanMode = code: null
-- **fullImage**:
-	 - scanMode = meter: the full image (before cropping)
-	 - scanMode = code: null
+**Electric Meter**
+Android: *ELECTRIC_METER*, iOS: *ALElectricMeter*, Cordova: *scanElectricMeter*
+Scan analog electric meters with 5 or 6 main digits and one decimal digit.
+The digit count is automatically detected. The decimal place is not included in the result. This only works if the decimal place is highlighted in red somehow.
+
+**Electric Meter 5 main digits 1 decimal (ALPHA)**
+Android: *ELECTRIC_METER_5_1*, iOS: *ALElectricMeter5_1*, Cordova: *scanElectricMeter5_1*
+Scan analog electric meters with 5 main digits and one decimal digit. The decimal is included in the result, if it could be detected, otherwise the decimal place is ommited.
+The decimal is represented by a dot in the result, not a comma.
+This mode is usefull if there is no red marking for the decimal place or the decimal place it self is relevant.
+
+This mode may be removed in the future, if the same can be achieved with the automatic mode.
+
+**Electric Meter 6 main digits 1 decimal (ALPHA)**
+Android: *ELECTRIC_METER_6_1*, iOS: *ALElectricMeter6_1*, Cordova: *scanElectricMeter6_1*
+Same as previouse with 6 main digits.
+
+**Gas Meter**
+Android: *GAS_METER*, iOS: *ALGasMeter*, Cordova: *scanGasMeter*
+Scan analog gas meters with 5 digits before the point. The decimal places are ignored.
+
+**Water Meter (ALPHA)**
+Android: *WATER_METER*, iOS: *ALWaterMeter*, Cordova: *scanWaterMeter*
+TODO
+
+**Digital Meter (ALPHA)**
+Android: *DIGITAL_METER*, iOS: *ALDigitalMeter*, Cordova: *scanDigitalMeter*
+Is general scanner for digital meters with at least 5 digits. It will try to find the biggest number of connected digts and return those without decimal marker.
+
+**Heat Meter with 4 main (up to 3 decimal) digits (ALPHA)**
+Android: *HEAT_METER_4*, iOS: *ALHeatMeter4*, Cordova: *scanHeatMeter4*
+Scan digital heat meters with 4 main and up to 3 decimal digits. The decimal digits are in the result if they could be detected or are omitted otherwise.
+
+This mode may be replaced in the future with a mode that automatically detects the amount of digtis.
+
+**Heat Meter with 5 main (up to 3 decimal) digits (ALPHA)**
+Android: *HEAT_METER_5*, iOS: *ALHeatMeter5*, Cordova: *scanHeatMeter5*
+Same as above with 5 digits befoe the point.
+
+**Heat Meter with 6 main (up to 3 decimal) digits (ALPHA)**
+Android: *HEAT_METER_6*, iOS: *ALHeatMeter6*, Cordova: *scanHeatMeter6*
+Same as above with 6 digits befoe the point.
+
+**Bar- and QR-Codes**
+Android: *BAR_CODE*, iOS: *ALBarcode*, Cordova: *scanBarcode*
+Scan bar and qr codes. This mode can be used to identifiy a meter. See the [barcode module] (#available-barcode-formats)for supported types.
+
+**Serial Numbers (ALPHA)**
+Android: *SERIAL_NUMBER*, iOS: *ALSerialNumber*, Cordova: *scanSerialNumber*
+Scan serial numbers that are engraved or printed onto a meter with arabic digits.
 
 
 ### Android
@@ -347,10 +390,19 @@ energyScanView.releaseCameraInBackground();
 In order to start the scan process, perform the following steps:
 
 1. If you prefer a json-file for configuration, use the *setConfigFromAsset* method and place the json-config in the Android assets folder, otherwise configure the view using the xml attributes in the activity layout file.
-2. Set the scan mode; available are: ELECTRIC_METER, GAS_METER, BAR_CODE
+2. Set the scan mode.
 3. Call *initAnyline* with your valid license key and a new instance of EnergyResultListener, which is the callback for handling the results
 4. Call *startScanning()*
 5. When done call *cancelScanning()* and *releaseCameraInBackground()* or *releaseCamera()*
+
+For each successful scan, you will receive four result-attributes:
+
+- **scanMode:** the mode the result was found in
+- **result**: the detected value as a String
+- **resultImage**:
+	 - the cropped image that has been used to scan the value
+- **fullImage**:
+	 - the full image (before cropping) (null in scan mode BAR_CODE and SERIAL_NUMBER)
 
 
 ###### Example Activity Layout
