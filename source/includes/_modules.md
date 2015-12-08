@@ -293,15 +293,15 @@ The digit count is automatically detected. The decimal place is not included in 
 
 **Electric Meter 5 main digits 1 decimal (ALPHA)**
 Android: *ELECTRIC_METER_5_1*, iOS: *ALElectricMeter5_1*, Cordova: *scanElectricMeter5_1*
-Scan analog electric meters with 5 main digits and one decimal digit. The decimal is included in the result, if it could be detected, otherwise the decimal place is ommited.
+Scan analog electric meters with 5 main digits and one decimal digit. The decimal is included in the result, if it could be detected, otherwise the decimal place is omitted.
 The decimal is represented by a dot in the result, not a comma.
-This mode is usefull if there is no red marking for the decimal place or the decimal place it self is relevant.
+This mode is useful if there is no red marking for the decimal place or the decimal place it self is relevant.
 
 This mode may be removed in the future, if the same can be achieved with the automatic mode.
 
 **Electric Meter 6 main digits 1 decimal (ALPHA)**
 Android: *ELECTRIC_METER_6_1*, iOS: *ALElectricMeter6_1*, Cordova: *scanElectricMeter6_1*
-Same as previouse with 6 main digits.
+Same as previous with 6 main digits.
 
 **Gas Meter**
 Android: *GAS_METER*, iOS: *ALGasMeter*, Cordova: *scanGasMeter*
@@ -313,29 +313,29 @@ TODO
 
 **Digital Meter (ALPHA)**
 Android: *DIGITAL_METER*, iOS: *ALDigitalMeter*, Cordova: *scanDigitalMeter*
-Is general scanner for digital meters with at least 5 digits. It will try to find the biggest number of connected digts and return those without decimal marker.
+Is general scanner for digital meters with at least 5 digits. It will try to find the biggest number of connected digits and return those without decimal marker.
 
 **Heat Meter with 4 main (up to 3 decimal) digits (ALPHA)**
 Android: *HEAT_METER_4*, iOS: *ALHeatMeter4*, Cordova: *scanHeatMeter4*
 Scan digital heat meters with 4 main and up to 3 decimal digits. The decimal digits are in the result if they could be detected or are omitted otherwise.
 
-This mode may be replaced in the future with a mode that automatically detects the amount of digtis.
+This mode may be replaced in the future with a mode that automatically detects the amount of digits.
 
 **Heat Meter with 5 main (up to 3 decimal) digits (ALPHA)**
 Android: *HEAT_METER_5*, iOS: *ALHeatMeter5*, Cordova: *scanHeatMeter5*
-Same as above with 5 digits befoe the point.
+Same as above with 5 digits before the point.
 
 **Heat Meter with 6 main (up to 3 decimal) digits (ALPHA)**
 Android: *HEAT_METER_6*, iOS: *ALHeatMeter6*, Cordova: *scanHeatMeter6*
-Same as above with 6 digits befoe the point.
+Same as above with 6 digits before the point.
 
 **Bar- and QR-Codes**
 Android: *BAR_CODE*, iOS: *ALBarcode*, Cordova: *scanBarcode*
-Scan bar and qr codes. This mode can be used to identifiy a meter. See the [barcode module] (#available-barcode-formats)for supported types.
+Scan bar and qr codes. This mode can be used to identifiy a meter. See the [barcode module] (#available-barcode-formats) for supported types.
 
 **Serial Numbers (ALPHA)**
 Android: *SERIAL_NUMBER*, iOS: *ALSerialNumber*, Cordova: *scanSerialNumber*
-Scan serial numbers that are engraved or printed onto a meter with arabic digits.
+Scan serial numbers that are engraved or printed onto a meter (consisting of numbers 0-9).
 
 
 ### Android
