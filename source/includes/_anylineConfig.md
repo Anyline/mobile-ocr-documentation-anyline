@@ -42,7 +42,11 @@ With the config file the views can be configured in regard of position and looks
           "alignment": "bottom_right",
           "imageOn": "ic_flash_on",
           "imageOff": "ic_flash_off",
-          "imageAuto": "ic_flash_auto"
+          "imageAuto": "ic_flash_auto",
+		  "offset": {
+		        "x": 10,
+		        "y": -10
+		  }
       },
       "beepOnResult": false,
       "vibrateOnResult": true,
@@ -82,6 +86,9 @@ With the config file the views can be configured in regard of position and looks
   * [imageOn] (#flash_imageOn)  *String*
   * [imageOff] (#flash_imageOff)  *String*
   * [imageAuto] (#flash_imageAuto)  *String*
+  * [offset] (#flash_offset)
+     * [x] (#cutout_cropOffset)  *int*
+     * [y] (#cutout_cropOffset) *int*
 * [beepOnResult] (#beepOnResult)  *boolean*
 * [vibrateOnResult] (#vibrateOnResult)  *boolean*
 * [blinkAnimationOnResult] (#blinkAnimationOnResult)  *boolean*
@@ -320,6 +327,15 @@ The name of the custom image resource to show when the flash is in auto mode.
 The image will not be resized and should be provided in an appropriate size.
 
 - **Type:** String
+
+<a name="flash_offset"></a>
+####offset
+Move the flash button in x and y direction by the specified pixel value. 
+
+Positive values in x direction move the button to the right, negative values move the button to the left.
+In y direction positive values move the flash button down, negative values move it up.
+ 
+- **Type:** int (pixel value = densitiy pixels on the display)
 
 ###Special options for Modules
 
