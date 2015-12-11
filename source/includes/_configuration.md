@@ -534,7 +534,7 @@ params.leftMargin = cutoutRect.left;
 // Converting dps to pixels
 float dp = 40f;
 float scale = getContext().getResources().getDisplayMetrics().density;
-int pixels = Math.round(dips * scale);
+int pixels = Math.round(dp * scale);
 params.topMargin = cutoutRect.top-pixels;
 
 // add view to layout
@@ -549,19 +549,21 @@ We add a TextView where the left margin of the view will be the same as the left
 ######Consider the Watermark in Community Edition
 
 ```java
-Rect cutoutRect = scanView.getWatermarkRect();
+Rect watermarkRect = scanView.getWatermarkRect();
+
 // create a view
 TextView textView = new TextView(context, null, 0);
 textView.setText("Result");
+
 // set layout parameters
 LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 
 // Converting dps to pixels
 float dp = 8f;
 float scale = getContext().getResources().getDisplayMetrics().density;
-int marginPx = Math.round(dips * scale);
+int marginPx = Math.round(dp * scale);
 
-params.bottomMargin = cutoutRect.bottom + marginPx;
+params.topMargin = watermarkRect.bottom + marginPx;
 params.gravity = Gravity.CENTER_HORIZONTAL;
 
 // add view to layout
