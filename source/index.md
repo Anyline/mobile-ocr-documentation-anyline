@@ -13,7 +13,7 @@ includes:
 - gettingStartedIOS
 - gettingStartedCordova
 - xamarinSetupGuide
-- anylineConfig
+- configuration
 - modules
 - advancedAndroidSetup
 
@@ -25,7 +25,7 @@ includes:
 # Introduction
 
 Anyline provides an easy-to-use SDK for applications to enable Optical Character Recognition (OCR) on mobile devices.
-This API contains a [Quick Start Guide] (#getting-started) for all supported platforms, a detailed description for the [Anyline Config] (#anyline-config) as well as descriptions and examples for the available [Modules] (#modules).<br/>
+This API contains a [Quick Start Guide] (#getting-started) for all supported platforms, a detailed description on the [Configuration] (#configuration) as well as descriptions and examples for the available [Modules] (#modules).<br/>
 
 
 ### Supported Platforms
