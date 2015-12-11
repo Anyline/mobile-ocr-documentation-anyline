@@ -287,12 +287,12 @@ Common digital meters and heat meters can also be scanned (but this is ALPHA).
 #### All the possible scan modes
 
 **Electric Meter**<br/>
-Android: *ELECTRIC_METER*, iOS: *ALElectricMeter*, Cordova: *scanElectricMeter*<br/>
+Android: *ELECTRIC_METER*, iOS: *ALElectricMeter*<br/>
 Scan analog electric meters with 5 or 6 main digits and one decimal digit.
 The digit count is automatically detected. The decimal place is not included in the result. This only works if the decimal place is highlighted in red somehow.
 
 **Electric Meter 5 main digits 1 decimal (ALPHA)**<br/>
-Android: *ELECTRIC_METER_5_1*, iOS: *ALElectricMeter5_1*, Cordova: *scanElectricMeter5_1*<br/>
+Android: *ELECTRIC_METER_5_1*, iOS: *ALElectricMeter5_1*<br/>
 Scan analog electric meters with 5 main digits and one decimal digit. The decimal is included in the result, if it could be detected, otherwise the decimal place is omitted.
 The decimal is represented by a dot in the result, not a comma.
 This mode is useful if there is no red marking for the decimal place or the decimal place it self is relevant.
@@ -300,41 +300,47 @@ This mode is useful if there is no red marking for the decimal place or the deci
 This mode may be removed in the future, if the same can be achieved with the automatic mode.
 
 **Electric Meter 6 main digits 1 decimal (ALPHA)**<br/>
-Android: *ELECTRIC_METER_6_1*, iOS: *ALElectricMeter6_1*, Cordova: *scanElectricMeter6_1*<br/>
+Android: *ELECTRIC_METER_6_1*, iOS: *ALElectricMeter6_1*<br/>
 Same as previous with 6 main digits.
 
 **Gas Meter**<br/>
-Android: *GAS_METER*, iOS: *ALGasMeter*, Cordova: *scanGasMeter*<br/>
+Android: *GAS_METER*, iOS: *ALGasMeter*<br/>
 Scan analog gas meters with 5 digits before the point. The decimal places are ignored.
 
-**Water Meter (ALPHA)**<br/>
-Android: *WATER_METER*, iOS: *ALWaterMeter*, Cordova: *scanWaterMeter*<br/>
-TODO
+**Water Meter White (ALPHA)**<br/>
+Android: *WATER_METER_WHITE*, iOS: *ALWaterMeterWhite*<br/>
+Scan analog water meters with white background (black digits) with 5 digits before the point.
+The decimal places are ignored.
+
+**Water Meter Black (ALPHA)**<br/>
+Android: *WATER_METER_BLACK*, iOS: *ALWaterMeterBlack*<br/>
+Scan analog water meters with black background (white digits) with 5 digits before the point.
+The decimal places are ignored.
 
 **Digital Meter (ALPHA)**<br/>
-Android: *DIGITAL_METER*, iOS: *ALDigitalMeter*, Cordova: *scanDigitalMeter*<br/>
+Android: *DIGITAL_METER*, iOS: *ALDigitalMeter*<br/>
 Is general scanner for digital meters with at least 5 digits. It will try to find the biggest number of connected digits and return those without decimal marker.
 
 **Heat Meter with 4 main (up to 3 decimal) digits (ALPHA)**<br/>
-Android: *HEAT_METER_4*, iOS: *ALHeatMeter4*, Cordova: *scanHeatMeter4*<br/>
+Android: *HEAT_METER_4*, iOS: *ALHeatMeter4*<br/>
 Scan digital heat meters with 4 main and up to 3 decimal digits. The decimal digits are in the result if they could be detected or are omitted otherwise.
 
 This mode may be replaced in the future with a mode that automatically detects the amount of digits.
 
 **Heat Meter with 5 main (up to 3 decimal) digits (ALPHA)**<br/>
-Android: *HEAT_METER_5*, iOS: *ALHeatMeter5*, Cordova: *scanHeatMeter5*<br/>
+Android: *HEAT_METER_5*, iOS: *ALHeatMeter5*<br/>
 Same as above with 5 digits before the point.
 
 **Heat Meter with 6 main (up to 3 decimal) digits (ALPHA)**<br/>
-Android: *HEAT_METER_6*, iOS: *ALHeatMeter6*, Cordova: *scanHeatMeter6*<br/>
+Android: *HEAT_METER_6*, iOS: *ALHeatMeter6*<br/>
 Same as above with 6 digits before the point.
 
 **Bar- and QR-Codes**<br/>
-Android: *BAR_CODE*, iOS: *ALBarcode*, Cordova: *scanBarcode*<br/>
+Android: *BAR_CODE*, iOS: *ALBarcode*<br/>
 Scan bar and qr codes. This mode can be used to identifiy a meter. See the [barcode module] (#available-barcode-formats) for supported types.
 
 **Serial Numbers (ALPHA)**<br/>
-Android: *SERIAL_NUMBER*, iOS: *ALSerialNumber*, Cordova: *scanSerialNumber*<br/>
+Android: *SERIAL_NUMBER*, iOS: *ALSerialNumber*<br/>
 Scan serial numbers that are engraved or printed onto a meter (consisting of numbers 0-9).
 
 
