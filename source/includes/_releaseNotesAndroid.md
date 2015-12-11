@@ -4,16 +4,13 @@
 Release Date 2015-12-17
 
 ### New ###
-- added gernal digital meters to energy module
-- added heat meters to energy module
-
-### Improved ###
-- Greatly improved water meter scanning
-- Electric Meter scanning with decimal place
+- added scanning of heat meters
+- added scanning of water meters
+- added electric meter scanning with decimal place
+- added scanning of generic digital meters
 
 ### Changed ###
 - libraries for armv6 architecture no longer included (can be provided by request though)
-
 
 ## Anyline SDK 3.2.1 ##
 Release Date 2015-10-23
