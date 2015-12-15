@@ -12,6 +12,10 @@ Release Date 2015-12-17
 ### Improved ###
 - barcode scanning accuracy improved
 - MRZ scanning: less accurate targeting required for IDs
+- SDK interaction:
+    - get the rect of the cutout to position your GUI around it
+    - added a configurable offset the flash button
+    - get information if the scanning is currently running
 
 ### Changed ###
 - libraries for armv6 architecture no longer included (can be provided by request though)
