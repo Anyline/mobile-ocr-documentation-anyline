@@ -9,6 +9,10 @@ Release Date 2015-12-17
 - added electric meter scanning with decimal place
 - added scanning of generic digital meters
 
+### Improved ###
+- barcode scanning accuracy improved
+- MRZ scanning: less accurate targeting required for IDs
+
 ### Changed ###
 - libraries for armv6 architecture no longer included (can be provided by request though)
 
