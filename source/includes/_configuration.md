@@ -509,8 +509,8 @@ The configuration for the anyline-sdk plugin is part of the AnylineSDK call. The
 <a name="add-views"> </a>
 ## Add Views
 
-The SDK provides a function to determine the position and outline of the cutout view. This function should be used when placing views on top of the module ScanView in order to avoid overlap with the cutout. 
-When you include the Community version of the SDK there is a watermark displayed. Depending on the size of the cutout this watermark will either be displayed within the cutout or directly underneath the cutout view. In the second case you also have to consider the watermark view when adding other views, since an overlap of the watermark will result in an exception. 
+The SDK provides a function to determine the position and outline of the cutout view. This function should be used when placing views on top of the module ScanView in order to avoid an overlap with the cutout.
+A watermark is displayed in the Community Edition of the SDK. Depending on the size of the cutout, this watermark will either be displayed within the cutout, or directly underneath the cutout view. In the second case, the watermark view has to be considered when adding other views, since an overlap of the watermark will result in an exception. 
 
 
 ### Android

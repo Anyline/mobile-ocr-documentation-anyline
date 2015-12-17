@@ -9,7 +9,7 @@ The Anyline-Modules are use-case specific abstractions for Anyline. Each module 
 <a name="barcodeModule"> </a>
 ## Barcode
 
-With the Anyline Barcode-Module 16 different kinds of bar- and QR-codes can be scanned. The result will simply be a *string* representation of the code.
+With the Anyline Barcode-Module 23 different types of bar- and QR-codes can be scanned. The result will simply be a *string* representation of the code.
 
 #### Restrictions for the Barcode-Module Config:
 - Flash mode *auto* is still in alpha stage therefore *manual* mode is preferred
@@ -36,14 +36,13 @@ With the Anyline Barcode-Module 16 different kinds of bar- and QR-codes can be s
 - Aztec [not vCard - see below]
 - Codabar
 - QR-Code
-- Code 39
-- Code 93
-- Code-128 [no rotation]
-- PDF 417
+
 
 ###### Experimental Support:
-- Code 39 Extended
-- PNZ, PZN8, PZN7
+- Code 39
+- Code 93
+- Code-128 [without rotation]
+- PDF 417
 - Aztec vCard
 
 ###### Currently not supported
@@ -289,11 +288,11 @@ Common digital meters and heat meters can also be scanned (but this is ALPHA).
 **Electric Meter**<br/>
 Android: *ELECTRIC_METER*, iOS: *ALElectricMeter*<br/>
 Scan analog electric meters with 5 or 6 main digits and one decimal digit.
-The digit count is automatically detected. The decimal place is not included in the result. This only works if the decimal place is highlighted in red somehow.
+The digit count is automatically detected. The decimal place is not included in the result. The auto-detection requires the decimal area to be highlighted in red.
 
 **Electric Meter 5 main digits 1 decimal (ALPHA)**<br/>
 Android: *ELECTRIC_METER_5_1*, iOS: *ALElectricMeter5_1*<br/>
-Scan analog electric meters with 5 main digits and one decimal digit. The decimal is included in the result, if it could be detected, otherwise the decimal place is omitted.
+Scan analog electric meters with 5 main digits and one decimal digit. If detected, the decimal is included in the result, otherwise the decimal place is omitted.
 The decimal is represented by a dot in the result, not a comma.
 This mode is useful if there is no red marking for the decimal place or the decimal place it self is relevant.
 
@@ -301,7 +300,7 @@ This mode may be removed in the future, if the same can be achieved with the aut
 
 **Electric Meter 6 main digits 1 decimal (ALPHA)**<br/>
 Android: *ELECTRIC_METER_6_1*, iOS: *ALElectricMeter6_1*<br/>
-Same as previous with 6 main digits.
+Same as above with 6 main digits.
 
 **Gas Meter**<br/>
 Android: *GAS_METER*, iOS: *ALGasMeter*<br/>
@@ -319,11 +318,11 @@ The decimal places are ignored.
 
 **Digital Meter (ALPHA)**<br/>
 Android: *DIGITAL_METER*, iOS: *ALDigitalMeter*<br/>
-Is general scanner for digital meters with at least 5 digits. It will try to find the biggest number of connected digits and return those without decimal marker.
+Is a general scanner for digital meters with at least 5 digits. It will try to find the highest number of connected digits and return the result without decimal marker.
 
 **Heat Meter with 4 main (up to 3 decimal) digits (ALPHA)**<br/>
 Android: *HEAT_METER_4*, iOS: *ALHeatMeter4*<br/>
-Scan digital heat meters with 4 main and up to 3 decimal digits. The decimal digits are in the result if they could be detected or are omitted otherwise.
+Scan digital heat meters with 4 main and up to 3 decimal digits. If detected, the decimal digits are included in the result, otherwise they are omitted.
 
 This mode may be replaced in the future with a mode that automatically detects the amount of digits.
 

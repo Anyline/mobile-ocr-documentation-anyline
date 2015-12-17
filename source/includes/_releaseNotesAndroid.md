@@ -11,7 +11,7 @@ Release Date 2015-12-17
 
 ### Improved ###
 - barcode scanning accuracy improved
-- MRZ scanning: less accurate targeting required for IDs
+- MRZ scanning: higher tolerance for targeting the IDs
 - SDK interaction:
     - get the rect of the cutout to position your GUI around it
     - added a configurable offset the flash button
