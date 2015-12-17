@@ -36,7 +36,7 @@ This API contains a [Quick Start Guide] (#getting-started) for all supported pla
 Anyline is also available as [Cordova Plugin] (#cordova-plugin).
 Android and iOS modules are also available for [Xamarin] (#xamarin-setup-guide).
 
-(Xamarin WP Support Q4 2015).
+(Xamarin WP Support Q1 2016).
 
 ### Available Modules
 - [**Barcode:**] (#barcodeModule)  Scan 23 types of international barcode & QR code formats.

@@ -202,6 +202,7 @@ Valid types are:
 - kCodeTypeITF
 - kCodeTypePDF417
 - kCodeTypeQR
+- kCodeTypeRSS14
 - kCodeTypeRSSExpanded
 - kCodeTypeUPCA
 - kCodeTypeUPCE
@@ -229,7 +230,7 @@ If there is a problem starting the scanning process an error object will be set,
 - (void)anylineBarcodeModuleView:(AnylineBarcodeModuleView *)anylineBarcodeModuleView
                didFindScanResult:(NSString *)scanResult
                    barcodeFormat:(NSString *)barcodeFormat
-                         atImage:(UIImage *)image;
+                         atImage:(UIImage *)image {
     NSLog("Scan result: %@", scanResult);
 }
 ```
@@ -487,13 +488,6 @@ Create a property, initialize the module and add it to the view of our view cont
 Afterwards, supply the license key and set the delegate. The delegate will receive a call when a result is found.
 If the Anyline set up returned an error the error object will be set and you can handle the error.
 Furthermore it is necessary to set the scan mode utilizing *setScanMode*.
-
-Possible values:
-
-- ALElectricMeter
-- ALGasMeter
-- ALBarcode
-- ALSerialNumber
 
 ###### 2. Start the scanning process in viewDidAppear
 
@@ -781,7 +775,8 @@ If there is a problem starting the scanning process an error object will be set,
 ```objective_c
 - (void)anylineMRZModuleView:(AnylineMRZModuleView *)anylineMRZModuleView
            didFindScanResult:(ALIdentification *)scanResult
-                     atImage:(UIImage *)image; {
+          allCheckDigitsValid:(BOOL)allCheckDigitsValid
+                     atImage:(UIImage *)image {
     NSLog("Scan result: %@", scanResult);
 }
 ```
