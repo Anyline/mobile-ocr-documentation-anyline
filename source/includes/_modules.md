@@ -9,7 +9,7 @@ The Anyline-Modules are use-case specific abstractions for Anyline. Each module 
 <a name="barcodeModule"> </a>
 ## Barcode
 
-With the Anyline Barcode-Module 16 different kinds of bar- and QR-codes can be scanned. The result will simply be a *string* representation of the code.
+With the Anyline Barcode-Module 23 different types of bar- and QR-codes can be scanned. The result will simply be a *string* representation of the code.
 
 #### Restrictions for the Barcode-Module Config:
 - Flash mode *auto* is still in alpha stage therefore *manual* mode is preferred
@@ -36,14 +36,13 @@ With the Anyline Barcode-Module 16 different kinds of bar- and QR-codes can be s
 - Aztec [not vCard - see below]
 - Codabar
 - QR-Code
-- Code 39
-- Code 93
-- Code-128 [no rotation]
-- PDF 417
+
 
 ###### Experimental Support:
-- Code 39 Extended
-- PNZ, PZN8, PZN7
+- Code 39
+- Code 93
+- Code-128 [without rotation]
+- PDF 417
 - Aztec vCard
 
 ###### Currently not supported
@@ -203,6 +202,7 @@ Valid types are:
 - kCodeTypeITF
 - kCodeTypePDF417
 - kCodeTypeQR
+- kCodeTypeRSS14
 - kCodeTypeRSSExpanded
 - kCodeTypeUPCA
 - kCodeTypeUPCE
@@ -230,7 +230,7 @@ If there is a problem starting the scanning process an error object will be set,
 - (void)anylineBarcodeModuleView:(AnylineBarcodeModuleView *)anylineBarcodeModuleView
                didFindScanResult:(NSString *)scanResult
                    barcodeFormat:(NSString *)barcodeFormat
-                         atImage:(UIImage *)image;
+                         atImage:(UIImage *)image {
     NSLog("Scan result: %@", scanResult);
 }
 ```
@@ -280,19 +280,68 @@ cordova.exec(onResult, onError, "AnylineSDK", "scanBarcode",
 <a name="energyModule"> </a>
 ## Energy
 
-The Anyline Energy-Module is capable of scanning analog electric- and gas-meter-readings.
+The Anyline Energy-Module is capable of scanning analog electric-, gas- and water-meter-readings.
 It is also possible to scan bar- and QR-codes (useful for identifying meters).
+Common digital meters and heat meters can also be scanned (but this is ALPHA).
 
-For each successful scan, you will receive four result-attributes:
+#### All the possible scan modes
 
-- **scanMode:** the mode the result belongs to (gas, electric, barcode)
-- **result**: the detected value as a String
-- **resultImage**:
-	 - scanMode = meter: the cropped image that has been used to scan the meter value
-	 - scanMode = code: null
-- **fullImage**:
-	 - scanMode = meter: the full image (before cropping)
-	 - scanMode = code: null
+**Electric Meter**<br/>
+Android: *ELECTRIC_METER*, iOS: *ALElectricMeter*<br/>
+Scan analog electric meters with 5 or 6 main digits and one decimal digit.
+The digit count is automatically detected. The decimal place is not included in the result. The auto-detection requires the decimal area to be highlighted in red.
+
+**Electric Meter 5 main digits 1 decimal (ALPHA)**<br/>
+Android: *ELECTRIC_METER_5_1*, iOS: *ALElectricMeter5_1*<br/>
+Scan analog electric meters with 5 main digits and one decimal digit. If detected, the decimal is included in the result, otherwise the decimal place is omitted.
+The decimal is represented by a dot in the result, not a comma.
+This mode is useful if there is no red marking for the decimal place or the decimal place it self is relevant.
+
+This mode may be removed in the future, if the same can be achieved with the automatic mode.
+
+**Electric Meter 6 main digits 1 decimal (ALPHA)**<br/>
+Android: *ELECTRIC_METER_6_1*, iOS: *ALElectricMeter6_1*<br/>
+Same as above with 6 main digits.
+
+**Gas Meter**<br/>
+Android: *GAS_METER*, iOS: *ALGasMeter*<br/>
+Scan analog gas meters with 5 digits before the point. The decimal places are ignored.
+
+**Water Meter White (ALPHA)**<br/>
+Android: *WATER_METER_WHITE*, iOS: *ALWaterMeterWhite*<br/>
+Scan analog water meters with white background (black digits) with 5 digits before the point.
+The decimal places are ignored.
+
+**Water Meter Black (ALPHA)**<br/>
+Android: *WATER_METER_BLACK*, iOS: *ALWaterMeterBlack*<br/>
+Scan analog water meters with black background (white digits) with 5 digits before the point.
+The decimal places are ignored.
+
+**Digital Meter (ALPHA)**<br/>
+Android: *DIGITAL_METER*, iOS: *ALDigitalMeter*<br/>
+Is a general scanner for digital meters with at least 5 digits. It will try to find the highest number of connected digits and return the result without decimal marker.
+
+**Heat Meter with 4 main (up to 3 decimal) digits (ALPHA)**<br/>
+Android: *HEAT_METER_4*, iOS: *ALHeatMeter4*<br/>
+Scan digital heat meters with 4 main and up to 3 decimal digits. If detected, the decimal digits are included in the result, otherwise they are omitted.
+
+This mode may be replaced in the future with a mode that automatically detects the amount of digits.
+
+**Heat Meter with 5 main (up to 3 decimal) digits (ALPHA)**<br/>
+Android: *HEAT_METER_5*, iOS: *ALHeatMeter5*<br/>
+Same as above with 5 digits before the point.
+
+**Heat Meter with 6 main (up to 3 decimal) digits (ALPHA)**<br/>
+Android: *HEAT_METER_6*, iOS: *ALHeatMeter6*<br/>
+Same as above with 6 digits before the point.
+
+**Bar- and QR-Codes**<br/>
+Android: *BAR_CODE*, iOS: *ALBarcode*<br/>
+Scan bar and qr codes. This mode can be used to identifiy a meter. See the [barcode module] (#available-barcode-formats) for supported types.
+
+**Serial Numbers (ALPHA)**<br/>
+Android: *SERIAL_NUMBER*, iOS: *ALSerialNumber*<br/>
+Scan serial numbers that are engraved or printed onto a meter (consisting of numbers 0-9).
 
 
 ### Android
@@ -347,10 +396,19 @@ energyScanView.releaseCameraInBackground();
 In order to start the scan process, perform the following steps:
 
 1. If you prefer a json-file for configuration, use the *setConfigFromAsset* method and place the json-config in the Android assets folder, otherwise configure the view using the xml attributes in the activity layout file.
-2. Set the scan mode; available are: ELECTRIC_METER, GAS_METER, BAR_CODE
+2. Set the scan mode.
 3. Call *initAnyline* with your valid license key and a new instance of EnergyResultListener, which is the callback for handling the results
 4. Call *startScanning()*
 5. When done call *cancelScanning()* and *releaseCameraInBackground()* or *releaseCamera()*
+
+For each successful scan, you will receive four result-attributes:
+
+- **scanMode:** the mode the result was found in
+- **result**: the detected value as a String
+- **resultImage**:
+	 - the cropped image that has been used to scan the value
+- **fullImage**:
+	 - the full image (before cropping) (null in scan mode BAR_CODE and SERIAL_NUMBER)
 
 
 ###### Example Activity Layout
@@ -430,13 +488,6 @@ Create a property, initialize the module and add it to the view of our view cont
 Afterwards, supply the license key and set the delegate. The delegate will receive a call when a result is found.
 If the Anyline set up returned an error the error object will be set and you can handle the error.
 Furthermore it is necessary to set the scan mode utilizing *setScanMode*.
-
-Possible values:
-
-- ALElectricMeter
-- ALGasMeter
-- ALBarcode
-- ALSerialNumber
 
 ###### 2. Start the scanning process in viewDidAppear
 
@@ -724,7 +775,8 @@ If there is a problem starting the scanning process an error object will be set,
 ```objective_c
 - (void)anylineMRZModuleView:(AnylineMRZModuleView *)anylineMRZModuleView
            didFindScanResult:(ALIdentification *)scanResult
-                     atImage:(UIImage *)image; {
+          allCheckDigitsValid:(BOOL)allCheckDigitsValid
+                     atImage:(UIImage *)image {
     NSLog("Scan result: %@", scanResult);
 }
 ```

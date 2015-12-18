@@ -16,7 +16,13 @@
 
 ### Quick Start - Setup
 
-#### 1. Import the files
+#### 1. With Cocoapods
+
+Simply add *pod 'Anyline', '~> 3.2'* to your Podfile and run *pod install* or *pod update*.
+
+You're all done and can jump to point 4. 
+
+##### Or via local copy of the Anyline.framework & AnylineResources.bundle
 
 Simply drag & drop Anyline.framework & AnylineResources.bundle into your project tree.
 ![Add Frameworks](images/AddFramework.jpg)

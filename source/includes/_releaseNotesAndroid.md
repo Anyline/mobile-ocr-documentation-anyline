@@ -1,5 +1,25 @@
 # Anyline SDK Android Release Notes #
 
+## Anyline SDK 3.3 ##
+Release Date 2015-12-17
+
+### New ###
+- added scanning of heat meters
+- added scanning of water meters
+- added electric meter scanning with decimal place
+- added scanning of generic digital meters
+
+### Improved ###
+- barcode scanning accuracy improved
+- MRZ scanning: higher tolerance for targeting the IDs
+- SDK interaction:
+    - get the rect of the cutout to position your GUI around it
+    - added a configurable offset the flash button
+    - get information if the scanning is currently running
+
+### Changed ###
+- libraries for armv6 architecture no longer included (can be provided by request though)
+
 ## Anyline SDK 3.2.1 ##
 Release Date 2015-10-23
 

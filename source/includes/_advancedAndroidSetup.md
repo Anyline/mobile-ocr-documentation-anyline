@@ -2,6 +2,12 @@
 
 ## How to Split APK into several smaller ones
 
+This is outdated as Anyline only ships with tow ABIS (x86 and armv7) by default now
+and there has been a new method introduced recently:
+http://tools.android.com/tech-docs/new-build-system/user-guide/apk-splits
+
+#### Old Method
+
 It is possible to split your app into multiple APKs and upload them all to the playstore.
 The playstore will pick the correct APK to download.
 This is currently not recommended by Google unless the APK is bigger than 50MB. (see: [Google developer page on multiple APKs](http://developer.android.com/google/play/publishing/multiple-apks.html))
