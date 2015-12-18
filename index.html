@@ -40,26 +40,26 @@
 <h1 id="introduction">Introduction</h1>
 
 <p>Anyline provides an easy-to-use SDK for applications to enable Optical Character Recognition (OCR) on mobile devices.
-This API contains a <a href="#getting-started">Quick Start Guide</a> for all supported platforms, a detailed description for the <a href="#anyline-config">Anyline Config</a> as well as descriptions and examples for the available <a href="#modules">Modules</a>.<br/></p>
+This API contains a <a href="#getting-started">Quick Start Guide</a> for all supported platforms, a detailed description of the <a href="#configuration">Configuration</a>, as well as descriptions and examples for all available <a href="#modules">Modules</a>.<br/></p>
 
 <h3 id="supported-platforms">Supported Platforms</h3>
 
 <ul>
 <li>Android</li>
 <li>iOS</li>
-<li>WP (by Q4 2015)</li>
+<li>WP (expected release: Q1 2016)</li>
 </ul>
 
 <p>Anyline is also available as <a href="#cordova-plugin">Cordova Plugin</a>.
 Android and iOS modules are also available for <a href="#xamarin-setup-guide">Xamarin</a>.</p>
 
-<p>(Xamarin WP Support Q4 2015).</p>
+<p>(Xamarin WP Support Q1 2016).</p>
 
 <h3 id="available-modules">Available Modules</h3>
 
 <ul>
-<li><a href="#barcodeModule"><strong>Barcode:</strong></a>  Scan 16 international barcodes &amp; QR codes.</li>
-<li><a href="#energyModule"><strong>Energy:</strong></a> Scan meter readings of various electric and gas meters.</li>
+<li><a href="#barcodeModule"><strong>Barcode:</strong></a>  Scan 23 types of international barcode &amp; QR code formats.</li>
+<li><a href="#energyModule"><strong>Energy:</strong></a> Scan meter readings of various electric, gas, and water meters.</li>
 <li><a href="#mrzModule"><strong>MRZ:</strong></a>  Reliable scanning of data from passports&rsquo; and IDs&rsquo; machine readable zones (MRZ)</li>
 <li><strong>Custom:</strong> Got any other ideas? We will support you when implementing other use cases for mobile OCR technology.</li>
 </ul>
@@ -306,7 +306,13 @@ A detailed description of all available attributes can be found in <a href="#any
 
 <h3 id="quick-start-setup">Quick Start - Setup</h3>
 
-<h4 id="1-import-the-files">1. Import the files</h4>
+<h4 id="1-with-cocoapods">1. With Cocoapods</h4>
+
+<p>Simply add <em>pod &lsquo;Anyline&rsquo;, &rsquo;~&gt; 3.2&rsquo;</em> to your Podfile and run <em>pod install</em> or <em>pod update</em>.</p>
+
+<p>You&rsquo;re all done and can jump to point 4. </p>
+
+<h5 id="or-via-local-copy-of-the-anyline-framework-amp-anylineresources-bundle">Or via local copy of the Anyline.framework &amp; AnylineResources.bundle</h5>
 
 <p>Simply drag &amp; drop Anyline.framework &amp; AnylineResources.bundle into your project tree.
 <img alt="Add Frameworks" src="images/AddFramework.jpg" /></p>
@@ -1169,13 +1175,21 @@ Because barcode scanning is too fast, the <b>DidFindScanResult</b> event is not 
 
 <p>Anyline will be available Windows Phone by the end of Q4 2015.</p>
 
-          <h1 id="anyline-config">Anyline Config</h1>
+          <p><a name="configuration"> </a></p>
+
+<h1 id="configuration">Configuration</h1>
+
+<p>This section describes how to configure the scan view using <a href="#anyline-config">AnylineConfig</a> files as well as how to <a href="#add-views">add views</a> without overlapping the scan cutout. </p>
+
+<p><a name="anyline-config"> </a></p>
+
+<h2 id="anyline-config">Anyline Config</h2>
 
 <p>With the config file the views can be configured in regard of position and looks of the <em>cutout</em> used for scanning as well as the behavior of flash and feedback mechanisms for scanning. This section contains a detailed description of the configurable items as well as two distinct ways for each platform to set up and configure the view.</p>
 
 <p><a name="itemDescription"> </a></p>
 
-<h2 id="item-description">Item description</h2>
+<h3 id="item-description">Item description</h3>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
       </span><span class="nt">"captureResolution"</span><span class="p">:</span><span class="w"> </span><span class="s2">"720p"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"cutout"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1212,7 +1226,11 @@ Because barcode scanning is too fast, the <b>DidFindScanResult</b> event is not 
           </span><span class="nt">"alignment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bottom_right"</span><span class="p">,</span><span class="w">
           </span><span class="nt">"imageOn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ic_flash_on"</span><span class="p">,</span><span class="w">
           </span><span class="nt">"imageOff"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ic_flash_off"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"imageAuto"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ic_flash_auto"</span><span class="w">
+          </span><span class="nt">"imageAuto"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ic_flash_auto"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"offset"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"x"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"y"</span><span class="p">:</span><span class="w"> </span><span class="mi">-10</span><span class="w">
+          </span><span class="p">}</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="nt">"beepOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
       </span><span class="nt">"vibrateOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
@@ -1270,6 +1288,12 @@ Because barcode scanning is too fast, the <b>DidFindScanResult</b> event is not 
 <li><a href="#flash_imageOn">imageOn</a>  <em>String</em></li>
 <li><a href="#flash_imageOff">imageOff</a>  <em>String</em></li>
 <li><a href="#flash_imageAuto">imageAuto</a>  <em>String</em></li>
+<li><a href="#flash_offset">offset</a>
+
+<ul>
+<li><a href="#cutout_cropOffset">x</a>  <em>int</em></li>
+<li><a href="#cutout_cropOffset">y</a> <em>int</em></li>
+</ul></li>
 </ul></li>
 <li><a href="#beepOnResult">beepOnResult</a>  <em>boolean</em></li>
 <li><a href="#vibrateOnResult">vibrateOnResult</a>  <em>boolean</em></li>
@@ -1277,7 +1301,7 @@ Because barcode scanning is too fast, the <b>DidFindScanResult</b> event is not 
 <li><a href="#cancelOnResult">cancelOnResult</a>  <em>boolean</em></li>
 </ul>
 
-<h3 id="captureresolution">captureResolution</h3>
+<h5 id="captureresolution">captureResolution</h5>
 
 <p>The resolution of the preview frame.</p>
 
@@ -1320,13 +1344,13 @@ If the &ldquo;suggested&rdquo; resolution is available, it will be used, if not 
 
 <p><a name="cutout"></a></p>
 
-<h3 id="cutout">cutout</h3>
+<h5 id="cutout">cutout</h5>
 
 <p>This contains all the settings for the overlay/cutout.</p>
 
 <p><a name="cutout_width"></a></p>
 
-<h4 id="width">width</h4>
+<h5 id="width">width</h5>
 
 <p>Specifies an exact desired pixel width (pixels in the frame, not on the display). If this is bigger than the width of the view, it will be limited to it. </p>
 
@@ -1339,7 +1363,7 @@ If the &ldquo;suggested&rdquo; resolution is available, it will be used, if not 
 
 <p><a name="cutout_maxWidthPercent"></a></p>
 
-<h4 id="maxwidthpercent">maxWidthPercent</h4>
+<h5 id="maxwidthpercent">maxWidthPercent</h5>
 
 <p>Specifies the maximum width of the cutout in percent.</p>
 
@@ -1347,20 +1371,20 @@ If the &ldquo;suggested&rdquo; resolution is available, it will be used, if not 
 
 <ul>
 <li><strong>Type:</strong>         String</li>
-<li><strong>Format:</strong>       ###%</li>
+<li><strong>Format:</strong>       ####%</li>
 <li><strong>Range:</strong>        1% - 100%</li>
 <li><strong>Default:</strong>      100%</li>
 </ul>
 
 <p><a name="cutout_maxHeightPercent"></a></p>
 
-<h4 id="maxheightpercent">maxHeightPercent</h4>
+<h5 id="maxheightpercent">maxHeightPercent</h5>
 
 <p>Specify the maximum height of the cutout in %.</p>
 
 <ul>
 <li><strong>Type:</strong>         String</li>
-<li><strong>Format:</strong>       ###%</li>
+<li><strong>Format:</strong>       ####%</li>
 <li><strong>Range:</strong>        1% - 100%</li>
 <li><strong>Default:</strong>      100%</li>
 </ul>
@@ -1375,7 +1399,7 @@ That limits the usability in landscape mode quite a bit.
 
 <p><a name="cutout_ratioFromSize"></a></p>
 
-<h4 id="ratiofromsize">ratioFromSize</h4>
+<h5 id="ratiofromsize">ratioFromSize</h5>
 
 <p>The ratio of the cutout can be defined by just setting this parameters width and height to the size of the real object that should be
 scanned.</p>
@@ -1389,7 +1413,7 @@ scanned.</p>
 
 <p><a name="cutout_alignment"></a> </p>
 
-<h4 id="alignment">alignment</h4>
+<h5 id="alignment">alignment</h5>
 
 <p>The alignment of the cutout.</p>
 
@@ -1425,7 +1449,7 @@ scanned.</p>
 
 <p><a name="cutout_offset"></a></p>
 
-<h4 id="offset">offset</h4>
+<h5 id="offset">offset</h5>
 
 <p>Move the cutout in x and y direction by the specified pixel value. </p>
 
@@ -1439,7 +1463,7 @@ scanned.</p>
 
 <p><a name="cutout_outerColor"></a></p>
 
-<h4 id="outercolor">outerColor</h4>
+<h5 id="outercolor">outerColor</h5>
 
 <p>The color of the area outside the cutout.</p>
 
@@ -1450,7 +1474,7 @@ scanned.</p>
 
 <p><a name="cutout_outerAlpha"></a></p>
 
-<h4 id="outeralpha">outerAlpha</h4>
+<h5 id="outeralpha">outerAlpha</h5>
 
 <p>The alpha value for the color outside of the cutout.</p>
 
@@ -1466,7 +1490,7 @@ scanned.</p>
 
 <p><a name="cutout_style"></a></p>
 
-<h4 id="style">style</h4>
+<h5 id="style">style</h5>
 
 <p>The type of the cutout.</p>
 
@@ -1491,7 +1515,7 @@ scanned.</p>
 
 <p><a name="cutout_strokeColor"> </a></p>
 
-<h4 id="strokecolor">strokeColor</h4>
+<h5 id="strokecolor">strokeColor</h5>
 
 <p>The color of the stroke (used by rect or vector style).</p>
 
@@ -1502,7 +1526,7 @@ scanned.</p>
 
 <p><a name="cutout_strokeWidth"> </a></p>
 
-<h4 id="strokewidth">strokeWidth</h4>
+<h5 id="strokewidth">strokeWidth</h5>
 
 <p>The thickness of the stroke in a display independent unit </p>
 
@@ -1512,7 +1536,7 @@ scanned.</p>
 
 <p><a name="cutout_cornerRadius"> </a></p>
 
-<h4 id="cornerradius">cornerRadius</h4>
+<h5 id="cornerradius">cornerRadius</h5>
 
 <p>The radius to round the corners of the rect (only used if type is rect).</p>
 
@@ -1522,7 +1546,7 @@ scanned.</p>
 
 <p><a name="cutout_image"> </a></p>
 
-<h4 id="image">image</h4>
+<h5 id="image">image</h5>
 
 <p>The name of the image resource (only used if type is image).</p>
 
@@ -1532,7 +1556,7 @@ scanned.</p>
 
 <p><a name="cutout_cropPadding"> </a></p>
 
-<h4 id="croppadding">cropPadding</h4>
+<h5 id="croppadding">cropPadding</h5>
 
 <p>Adapts the size of the cropped area from the frame. It changes the visible cutout width and height by the x or y padding.</p>
 
@@ -1548,7 +1572,7 @@ scanned.</p>
 
 <p><a name="cutout_cropOffset"> </a></p>
 
-<h4 id="cropoffset">cropOffset</h4>
+<h5 id="cropoffset">cropOffset</h5>
 
 <p>Move the part that is cropped out of the frame away from the visible cutout by the x and y.</p>
 
@@ -1562,13 +1586,13 @@ scanned.</p>
 
 <p><a name="flash"> </a></p>
 
-<h3 id="flash">flash</h3>
+<h4 id="flash">flash</h4>
 
 <p>Settings for a simple view that provides flash functionality.</p>
 
 <p><a name="flash_mode"> </a></p>
 
-<h4 id="mode">mode</h4>
+<h5 id="mode">mode</h5>
 
 <p>Default images for flash on/off/auto are provided.</p>
 
@@ -1596,7 +1620,7 @@ scanned.</p>
 
 <p><a name="flash_alignment"> </a></p>
 
-<h4 id="alignment">alignment</h4>
+<h5 id="alignment">alignment</h5>
 
 <p>The alignment of the flash view.</p>
 
@@ -1634,7 +1658,7 @@ scanned.</p>
 
 <p><a name="flash_imageOn"> </a></p>
 
-<h4 id="imageon">imageOn</h4>
+<h5 id="imageon">imageOn</h5>
 
 <p>The name of the custom image resource to show when the flash is on.</p>
 
@@ -1646,7 +1670,7 @@ scanned.</p>
 
 <p><a name="flash_imageOff"> </a></p>
 
-<h4 id="imageoff">imageOff</h4>
+<h5 id="imageoff">imageOff</h5>
 
 <p>The name of the custom image resource to show when the flash is off.</p>
 
@@ -1658,7 +1682,7 @@ scanned.</p>
 
 <p><a name="flash_imageAuto"> </a></p>
 
-<h4 id="imageauto">imageAuto</h4>
+<h5 id="imageauto">imageAuto</h5>
 
 <p>The name of the custom image resource to show when the flash is in auto mode.</p>
 
@@ -1668,13 +1692,26 @@ scanned.</p>
 <li><strong>Type:</strong> String</li>
 </ul>
 
-<h3 id="special-options-for-modules">Special options for Modules</h3>
+<p><a name="flash_offset"></a></p>
+
+<h5 id="offset">offset</h5>
+
+<p>Move the flash button in x and y direction by the specified pixel value. </p>
+
+<p>Positive values in x direction move the button to the right, negative values move the button to the left.
+In y direction positive values move the flash button down, negative values move it up.</p>
+
+<ul>
+<li><strong>Type:</strong> int (pixel value = densitiy pixels on the display)</li>
+</ul>
+
+<h4 id="special-options-for-modules">Special options for Modules</h4>
 
 <p>Modules can use these additional options to configure some things that should happen when a result was found.</p>
 
 <p><a name="beepOnResult"> </a></p>
 
-<h4 id="beeponresult">beepOnResult</h4>
+<h5 id="beeponresult">beepOnResult</h5>
 
 <p>True, if there should be a beep when a result is found.</p>
 
@@ -1684,7 +1721,7 @@ scanned.</p>
 
 <p><a name="vibrateOnResult"> </a></p>
 
-<h4 id="vibrateonresult">vibrateOnResult</h4>
+<h5 id="vibrateonresult">vibrateOnResult</h5>
 
 <p>True, if there should be a vibration alarm when a result is found.</p>
 
@@ -1694,7 +1731,7 @@ scanned.</p>
 
 <p><a name="blinkAnimationOnResult"> </a></p>
 
-<h4 id="blinkanimationonresult">blinkAnimationOnResult</h4>
+<h5 id="blinkanimationonresult">blinkAnimationOnResult</h5>
 
 <p>True, if the view should display a short flash of white when a result is found.</p>
 
@@ -1704,7 +1741,7 @@ scanned.</p>
 
 <p><a name="cancelOnResult"> </a></p>
 
-<h4 id="cancelonresult">cancelOnResult</h4>
+<h5 id="cancelonresult">cancelOnResult</h5>
 
 <p>True, if the scanning process should be canceled when a result is found (=default setting).</p>
 
@@ -1718,17 +1755,17 @@ If another scan may be required later, leave this value <em>true</em> and just r
 
 <p><a name="androidSpecifics"> </a></p>
 
-<h2 id="android-config">Android Config</h2>
+<h3 id="android-config">Android Config</h3>
 
 <p>There are two ways to configure the look and behavior of the scan view in Android.</p>
 
-<h3 id="1-configuration-via-json">1. Configuration via json</h3>
+<h4 id="1-configuration-via-json">1. Configuration via json</h4>
 
 <p>The view can be configured using a json config file like seen above in the <a href="#itemDescription">item description</a>. This file must be located in the assets folder of your Android project.</p>
 
 <p><a name="configureViaXML"> </a></p>
 
-<h3 id="2-configuration-via-xml">2. Configuration via XML</h3>
+<h4 id="2-configuration-via-xml">2. Configuration via XML</h4>
 
 <blockquote>
 <p>Where app is xmlns:app=&ldquo;http://schemas.android.com/apk/res-auto&rdquo;</p>
@@ -1779,13 +1816,13 @@ app:cancel_on_result="true"
 
 <p><a name="iosConfig"> </a></p>
 
-<h2 id="ios-config">iOS Config</h2>
+<h3 id="ios-config">iOS Config</h3>
 
 <p>There are two methods to add the view for the models available.</p>
 
 <p><a name="iosConfigModuleViewCode"> </a></p>
 
-<h3 id="1-configure-in-code">1. Configure in Code</h3>
+<h4 id="1-configure-in-code">1. Configure in Code</h4>
 
 <p>The view exposes the following properties:</p>
 
@@ -1845,7 +1882,7 @@ app:cancel_on_result="true"
 </tr>
 </tbody></table>
 
-<h5 id="flashbuttonalignment">flashButtonAlignment</h5>
+<h6 id="flashbuttonalignment">flashButtonAlignment</h6>
 
 <p>specifies the alignment of the flash button</p>
 
@@ -1885,7 +1922,7 @@ app:cancel_on_result="true"
 
 <p><a name="iosConfigModuleViewStoryboard"> </a></p>
 
-<h3 id="2-configure-with-storyboards">2. Configure with Storyboards</h3>
+<h4 id="2-configure-with-storyboards">2. Configure with Storyboards</h4>
 
 <ol>
 <li>Select <em>View</em> from the object library</li>
@@ -1895,7 +1932,7 @@ app:cancel_on_result="true"
 
 <p><img alt="AddView" src="images/docAddView.jpg" /></p>
 
-<h5 id="changing-the-appearance">Changing the appearance</h5>
+<h6 id="changing-the-appearance">Changing the appearance</h6>
 
 <p>The appearance of the view can be changed in the attributes inspector.</p>
 
@@ -1921,9 +1958,77 @@ app:cancel_on_result="true"
 
 <p><img alt="Connect" src="images/docConnect.jpg" /></p>
 
-<h2 id="cordova-plugin-config">Cordova Plugin Config</h2>
+<h3 id="cordova-plugin-config">Cordova Plugin Config</h3>
 
 <p>The configuration for the anyline-sdk plugin is part of the AnylineSDK call. The config is just passed as a json-array, see also the <a href="#cordova-example">example in the Quick Start</a>.</p>
+
+<p><a name="add-views"> </a></p>
+
+<h2 id="add-views">Add Views</h2>
+
+<p>The SDK provides a function to determine the position and outline of the cutout view. This function should be used when placing views on top of the module ScanView in order to avoid an overlap with the cutout.
+A watermark is displayed in the Community Edition of the SDK. Depending on the size of the cutout, this watermark will either be displayed within the cutout, or directly underneath the cutout view. In the second case, the watermark view has to be considered when adding other views, since an overlap of the watermark will result in an exception. </p>
+
+<h3 id="android">Android</h3>
+<pre class="highlight java"><code><span class="n">RelativeLayout</span> <span class="n">rl</span> <span class="o">=</span>  <span class="o">(</span><span class="n">RelativeLayout</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">layout</span><span class="o">);</span>
+
+<span class="c1">// get the cutout rect from the scan view</span>
+<span class="n">Rect</span> <span class="n">cutoutRect</span> <span class="o">=</span> <span class="n">scanView</span><span class="o">.</span><span class="na">getCutoutRect</span><span class="o">();</span>
+
+<span class="c1">// create a view</span>
+<span class="n">TextView</span> <span class="n">textView</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TextView</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+<span class="n">textView</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="s">"Result"</span><span class="o">);</span>
+
+<span class="c1">// set layout parameters</span>
+<span class="kt">int</span> <span class="n">height</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="n">TypedValue</span><span class="o">.</span><span class="na">applyDimension</span><span class="o">(</span><span class="n">TypedValue</span><span class="o">.</span><span class="na">COMPLEX_UNIT_SP</span><span class="o">,</span> <span class="mi">28</span><span class="o">,</span> <span class="n">getResources</span><span class="o">().</span><span class="na">getDisplayMetrics</span><span class="o">());</span>
+<span class="n">LayoutParams</span> <span class="n">params</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LayoutParams</span><span class="o">(</span><span class="n">LayoutParams</span><span class="o">.</span><span class="na">WRAP_CONTENT</span><span class="o">,</span> <span class="n">height</span><span class="o">);</span>
+<span class="n">params</span><span class="o">.</span><span class="na">leftMargin</span> <span class="o">=</span> <span class="n">cutoutRect</span><span class="o">.</span><span class="na">left</span><span class="o">;</span>
+
+<span class="c1">// Converting dps to pixels</span>
+<span class="kt">float</span> <span class="n">dp</span> <span class="o">=</span> <span class="mi">40</span><span class="n">f</span><span class="o">;</span>
+<span class="kt">float</span> <span class="n">scale</span> <span class="o">=</span> <span class="n">getContext</span><span class="o">().</span><span class="na">getResources</span><span class="o">().</span><span class="na">getDisplayMetrics</span><span class="o">().</span><span class="na">density</span><span class="o">;</span>
+<span class="kt">int</span> <span class="n">pixels</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">round</span><span class="o">(</span><span class="n">dp</span> <span class="o">*</span> <span class="n">scale</span><span class="o">);</span>
+<span class="n">params</span><span class="o">.</span><span class="na">topMargin</span> <span class="o">=</span> <span class="n">cutoutRect</span><span class="o">.</span><span class="na">top</span><span class="o">-</span><span class="n">pixels</span><span class="o">;</span>
+
+<span class="c1">// add view to layout</span>
+<span class="n">rl</span><span class="o">.</span><span class="na">addView</span><span class="o">(</span><span class="n">textView</span><span class="o">,</span> <span class="n">params</span><span class="o">);</span>
+</code></pre>
+
+<p>This example shows how you can add a view placed above the cutout view. With the function getCutoutRect you get a Rect representing the four corners (left, top, right, bottom) of the cutout. </p>
+
+<p>We add a TextView where the left margin of the view will be the same as the left margin of the cutout. The top border of the TextView will be 40 pixels above the cutout. It is important to consider the height of the TextView and reduce this height value of the top value from the cutout rect. Furthermore it is recommended to work with density independent pixels to avoid large differences when displayed on devices with various display densities. </p>
+
+<h6 id="consider-the-watermark-in-community-edition">Consider the Watermark in Community Edition</h6>
+<pre class="highlight java"><code><span class="n">Rect</span> <span class="n">watermarkRect</span> <span class="o">=</span> <span class="n">scanView</span><span class="o">.</span><span class="na">getWatermarkRect</span><span class="o">();</span>
+
+<span class="c1">// create a view</span>
+<span class="n">TextView</span> <span class="n">textView</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TextView</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+<span class="n">textView</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="s">"Result"</span><span class="o">);</span>
+
+<span class="c1">// set layout parameters</span>
+<span class="n">LayoutParams</span> <span class="n">params</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LayoutParams</span><span class="o">(</span><span class="n">LayoutParams</span><span class="o">.</span><span class="na">WRAP_CONTENT</span><span class="o">,</span> <span class="n">LayoutParams</span><span class="o">.</span><span class="na">WRAP_CONTENT</span><span class="o">);</span>
+
+<span class="c1">// Converting dps to pixels</span>
+<span class="kt">float</span> <span class="n">dp</span> <span class="o">=</span> <span class="mi">8</span><span class="n">f</span><span class="o">;</span>
+<span class="kt">float</span> <span class="n">scale</span> <span class="o">=</span> <span class="n">getContext</span><span class="o">().</span><span class="na">getResources</span><span class="o">().</span><span class="na">getDisplayMetrics</span><span class="o">().</span><span class="na">density</span><span class="o">;</span>
+<span class="kt">int</span> <span class="n">marginPx</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">round</span><span class="o">(</span><span class="n">dp</span> <span class="o">*</span> <span class="n">scale</span><span class="o">);</span>
+
+<span class="n">params</span><span class="o">.</span><span class="na">topMargin</span> <span class="o">=</span> <span class="n">watermarkRect</span><span class="o">.</span><span class="na">bottom</span> <span class="o">+</span> <span class="n">marginPx</span><span class="o">;</span>
+<span class="n">params</span><span class="o">.</span><span class="na">gravity</span> <span class="o">=</span> <span class="n">Gravity</span><span class="o">.</span><span class="na">CENTER_HORIZONTAL</span><span class="o">;</span>
+
+<span class="c1">// add view to layout</span>
+<span class="n">rl</span><span class="o">.</span><span class="na">addView</span><span class="o">(</span><span class="n">textView</span><span class="o">,</span> <span class="n">params</span><span class="o">);</span>
+</code></pre>
+
+<p>When working with the community edition and small cutouts the watermark will be placed underneath the cutout and not included in the cutout view itself. In this case you have to consider the watermark as well when placing a view under the cutout. </p>
+
+<p>The example shows how to use the getWatermarkRect function to add a TextView with a top margin of 8dp under the watermark view</p>
+
+<aside class="notice">
+<b>Use functions postDelayed</b>
+<br/>
+Both functions can only be used after the ScanView is drawn, therefore use postDelayed otherwise the Rect will be null.
+</aside>
 
           <h1 id="modules">Modules</h1>
 
@@ -1939,7 +2044,7 @@ app:cancel_on_result="true"
 
 <h2 id="barcode">Barcode</h2>
 
-<p>With the Anyline Barcode-Module 16 different kinds of bar- and QR-codes can be scanned. The result will simply be a <em>string</em> representation of the code.</p>
+<p>With the Anyline Barcode-Module 23 different types of bar- and QR-codes can be scanned. The result will simply be a <em>string</em> representation of the code.</p>
 
 <h4 id="restrictions-for-the-barcode-module-config">Restrictions for the Barcode-Module Config:</h4>
 
@@ -1971,17 +2076,15 @@ app:cancel_on_result="true"
 <li>Aztec [not vCard - see below]</li>
 <li>Codabar</li>
 <li>QR-Code</li>
-<li>Code 39</li>
-<li>Code 93</li>
-<li>Code-128 [no rotation]</li>
-<li>PDF 417</li>
 </ul>
 
 <h6 id="experimental-support">Experimental Support:</h6>
 
 <ul>
-<li>Code 39 Extended</li>
-<li>PNZ, PZN8, PZN7</li>
+<li>Code 39</li>
+<li>Code 93</li>
+<li>Code-128 [without rotation]</li>
+<li>PDF 417</li>
 <li>Aztec vCard</li>
 </ul>
 
@@ -2168,6 +2271,7 @@ app:cancel_on_result="true"
 <li>kCodeTypeITF</li>
 <li>kCodeTypePDF417</li>
 <li>kCodeTypeQR</li>
+<li>kCodeTypeRSS14</li>
 <li>kCodeTypeRSSExpanded</li>
 <li>kCodeTypeUPCA</li>
 <li>kCodeTypeUPCE</li>
@@ -2193,7 +2297,7 @@ If there is a problem starting the scanning process an error object will be set,
 <pre class="highlight objective_c"><code><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">anylineBarcodeModuleView</span><span class="p">:(</span><span class="n">AnylineBarcodeModuleView</span> <span class="o">*</span><span class="p">)</span><span class="nv">anylineBarcodeModuleView</span>
                <span class="nf">didFindScanResult</span><span class="p">:(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">scanResult</span>
                    <span class="nf">barcodeFormat</span><span class="p">:(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">barcodeFormat</span>
-                         <span class="nf">atImage</span><span class="p">:(</span><span class="n">UIImage</span> <span class="o">*</span><span class="p">)</span><span class="nv">image</span><span class="p">;</span>
+                         <span class="nf">atImage</span><span class="p">:(</span><span class="n">UIImage</span> <span class="o">*</span><span class="p">)</span><span class="nv">image</span> <span class="p">{</span>
     <span class="n">NSLog</span><span class="p">(</span><span class="s">"Scan result: %@"</span><span class="p">,</span> <span class="n">scanResult</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre>
@@ -2242,27 +2346,68 @@ If there is a problem starting the scanning process an error object will be set,
 
 <h2 id="energy">Energy</h2>
 
-<p>The Anyline Energy-Module is capable of scanning analog electric- and gas-meter-readings.
-It is also possible to scan bar- and QR-codes (useful for identifying meters).</p>
+<p>The Anyline Energy-Module is capable of scanning analog electric-, gas- and water-meter-readings.
+It is also possible to scan bar- and QR-codes (useful for identifying meters).
+Common digital meters and heat meters can also be scanned (but this is ALPHA).</p>
 
-<p>For each successful scan, you will receive four result-attributes:</p>
+<h4 id="all-the-possible-scan-modes">All the possible scan modes</h4>
 
-<ul>
-<li><strong>scanMode:</strong> the mode the result belongs to (gas, electric, barcode)</li>
-<li><strong>result</strong>: the detected value as a String</li>
-<li><strong>resultImage</strong>:
+<p><strong>Electric Meter</strong><br/>
+Android: <em>ELECTRIC_METER</em>, iOS: <em>ALElectricMeter</em><br/>
+Scan analog electric meters with 5 or 6 main digits and one decimal digit.
+The digit count is automatically detected. The decimal place is not included in the result. The auto-detection requires the decimal area to be highlighted in red.</p>
 
-<ul>
-<li>scanMode = meter: the cropped image that has been used to scan the meter value</li>
-<li>scanMode = code: null</li>
-</ul></li>
-<li><strong>fullImage</strong>:
+<p><strong>Electric Meter 5 main digits 1 decimal (ALPHA)</strong><br/>
+Android: <em>ELECTRIC_METER_5_1</em>, iOS: <em>ALElectricMeter5_1</em><br/>
+Scan analog electric meters with 5 main digits and one decimal digit. If detected, the decimal is included in the result, otherwise the decimal place is omitted.
+The decimal is represented by a dot in the result, not a comma.
+This mode is useful if there is no red marking for the decimal place or the decimal place it self is relevant.</p>
 
-<ul>
-<li>scanMode = meter: the full image (before cropping)</li>
-<li>scanMode = code: null</li>
-</ul></li>
-</ul>
+<p>This mode may be removed in the future, if the same can be achieved with the automatic mode.</p>
+
+<p><strong>Electric Meter 6 main digits 1 decimal (ALPHA)</strong><br/>
+Android: <em>ELECTRIC_METER_6_1</em>, iOS: <em>ALElectricMeter6_1</em><br/>
+Same as above with 6 main digits.</p>
+
+<p><strong>Gas Meter</strong><br/>
+Android: <em>GAS_METER</em>, iOS: <em>ALGasMeter</em><br/>
+Scan analog gas meters with 5 digits before the point. The decimal places are ignored.</p>
+
+<p><strong>Water Meter White (ALPHA)</strong><br/>
+Android: <em>WATER_METER_WHITE</em>, iOS: <em>ALWaterMeterWhite</em><br/>
+Scan analog water meters with white background (black digits) with 5 digits before the point.
+The decimal places are ignored.</p>
+
+<p><strong>Water Meter Black (ALPHA)</strong><br/>
+Android: <em>WATER_METER_BLACK</em>, iOS: <em>ALWaterMeterBlack</em><br/>
+Scan analog water meters with black background (white digits) with 5 digits before the point.
+The decimal places are ignored.</p>
+
+<p><strong>Digital Meter (ALPHA)</strong><br/>
+Android: <em>DIGITAL_METER</em>, iOS: <em>ALDigitalMeter</em><br/>
+Is a general scanner for digital meters with at least 5 digits. It will try to find the highest number of connected digits and return the result without decimal marker.</p>
+
+<p><strong>Heat Meter with 4 main (up to 3 decimal) digits (ALPHA)</strong><br/>
+Android: <em>HEAT_METER_4</em>, iOS: <em>ALHeatMeter4</em><br/>
+Scan digital heat meters with 4 main and up to 3 decimal digits. If detected, the decimal digits are included in the result, otherwise they are omitted.</p>
+
+<p>This mode may be replaced in the future with a mode that automatically detects the amount of digits.</p>
+
+<p><strong>Heat Meter with 5 main (up to 3 decimal) digits (ALPHA)</strong><br/>
+Android: <em>HEAT_METER_5</em>, iOS: <em>ALHeatMeter5</em><br/>
+Same as above with 5 digits before the point.</p>
+
+<p><strong>Heat Meter with 6 main (up to 3 decimal) digits (ALPHA)</strong><br/>
+Android: <em>HEAT_METER_6</em>, iOS: <em>ALHeatMeter6</em><br/>
+Same as above with 6 digits before the point.</p>
+
+<p><strong>Bar- and QR-Codes</strong><br/>
+Android: <em>BAR_CODE</em>, iOS: <em>ALBarcode</em><br/>
+Scan bar and qr codes. This mode can be used to identifiy a meter. See the <a href="#available-barcode-formats">barcode module</a> for supported types.</p>
+
+<p><strong>Serial Numbers (ALPHA)</strong><br/>
+Android: <em>SERIAL_NUMBER</em>, iOS: <em>ALSerialNumber</em><br/>
+Scan serial numbers that are engraved or printed onto a meter (consisting of numbers 0-9).</p>
 
 <h3 id="android">Android</h3>
 
@@ -2323,11 +2468,28 @@ It is also possible to scan bar- and QR-codes (useful for identifying meters).</
 
 <ol>
 <li>If you prefer a json-file for configuration, use the <em>setConfigFromAsset</em> method and place the json-config in the Android assets folder, otherwise configure the view using the xml attributes in the activity layout file.</li>
-<li>Set the scan mode; available are: ELECTRIC_METER, GAS_METER, BAR_CODE</li>
+<li>Set the scan mode.</li>
 <li>Call <em>initAnyline</em> with your valid license key and a new instance of EnergyResultListener, which is the callback for handling the results</li>
 <li>Call <em>startScanning()</em></li>
 <li>When done call <em>cancelScanning()</em> and <em>releaseCameraInBackground()</em> or <em>releaseCamera()</em></li>
 </ol>
+
+<p>For each successful scan, you will receive four result-attributes:</p>
+
+<ul>
+<li><strong>scanMode:</strong> the mode the result was found in</li>
+<li><strong>result</strong>: the detected value as a String</li>
+<li><strong>resultImage</strong>:
+
+<ul>
+<li>the cropped image that has been used to scan the value</li>
+</ul></li>
+<li><strong>fullImage</strong>:
+
+<ul>
+<li>the full image (before cropping) (null in scan mode BAR_CODE and SERIAL_NUMBER)</li>
+</ul></li>
+</ul>
 
 <h6 id="example-activity-layout">Example Activity Layout</h6>
 <pre class="highlight xml"><code><span class="nt">&lt;RelativeLayout</span>
@@ -2402,15 +2564,6 @@ It is possible to turn that feature off by calling <em>setReportingEnabled(false
 Afterwards, supply the license key and set the delegate. The delegate will receive a call when a result is found.
 If the Anyline set up returned an error the error object will be set and you can handle the error.
 Furthermore it is necessary to set the scan mode utilizing <em>setScanMode</em>.</p>
-
-<p>Possible values:</p>
-
-<ul>
-<li>ALElectricMeter</li>
-<li>ALGasMeter</li>
-<li>ALBarcode</li>
-<li>ALSerialNumber</li>
-</ul>
 
 <h6 id="2-start-the-scanning-process-in-viewdidappear">2. Start the scanning process in viewDidAppear</h6>
 <pre class="highlight objective_c"><code><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewDidAppear</span><span class="p">:(</span><span class="n">BOOL</span><span class="p">)</span><span class="nv">animated</span> <span class="p">{</span>
@@ -2759,7 +2912,8 @@ Please be aware that not every property is filled for every document type (e.g. 
 <h6 id="3-implement-the-delegate-method-and-receive-results">3. Implement the delegate method and receive results</h6>
 <pre class="highlight objective_c"><code><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">anylineMRZModuleView</span><span class="p">:(</span><span class="n">AnylineMRZModuleView</span> <span class="o">*</span><span class="p">)</span><span class="nv">anylineMRZModuleView</span>
            <span class="nf">didFindScanResult</span><span class="p">:(</span><span class="n">ALIdentification</span> <span class="o">*</span><span class="p">)</span><span class="nv">scanResult</span>
-                     <span class="nf">atImage</span><span class="p">:(</span><span class="n">UIImage</span> <span class="o">*</span><span class="p">)</span><span class="nv">image</span><span class="p">;</span> <span class="p">{</span>
+          <span class="nf">allCheckDigitsValid</span><span class="p">:(</span><span class="n">BOOL</span><span class="p">)</span><span class="nv">allCheckDigitsValid</span>
+                     <span class="nf">atImage</span><span class="p">:(</span><span class="n">UIImage</span> <span class="o">*</span><span class="p">)</span><span class="nv">image</span> <span class="p">{</span>
     <span class="n">NSLog</span><span class="p">(</span><span class="s">"Scan result: %@"</span><span class="p">,</span> <span class="n">scanResult</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre>
@@ -2803,6 +2957,12 @@ Please be aware that not every property is filled for every document type (e.g. 
           <h1 id="android-advanced-setup">Android Advanced Setup</h1>
 
 <h2 id="how-to-split-apk-into-several-smaller-ones">How to Split APK into several smaller ones</h2>
+
+<p>This is outdated as Anyline only ships with tow ABIS (x86 and armv7) by default now
+and there has been a new method introduced recently:
+http://tools.android.com/tech-docs/new-build-system/user-guide/apk-splits</p>
+
+<h4 id="old-method">Old Method</h4>
 
 <p>It is possible to split your app into multiple APKs and upload them all to the playstore.
 The playstore will pick the correct APK to download.
