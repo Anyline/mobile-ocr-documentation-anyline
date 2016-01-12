@@ -5,6 +5,7 @@ The Anyline-Modules are use-case specific abstractions for Anyline. Each module 
 - [Barcode] (#barcodeModule)
 - [Energy] (#energyModule)
 - [MRZ (Machine Readable Zone)] (#mrzModule)
+- [Order code] (#ordercodeModule) - on request only
 
 <a name="barcodeModule"> </a>
 ## Barcode
@@ -817,3 +818,137 @@ cordova.exec(onResult, onError, "AnylineSDK", "scanMRZ",
     ]
 );
 ```
+
+<a name="ordercodeModule"> </a>
+## Order Code
+
+<aside class="notice">
+<b>A first version for Epson is available on request. For a valid license please <a href="https://www.anyline.io/support-request/">contact</a> us </b>
+</aside>
+
+With the Anyline Order Code Module it is possible to scan a specific type of Ordercode with the Epson BT2000.
+The code consists of 11 alphanumeric characters in different font sizes. The result will simply be a *string* representation of the code. 
+
+#### Example
+The following example files illustrate a simple use-case of the order code module.
+
+###### Example Activity
+> in onCreate or onActivityCreated lifecycle methods
+
+```java
+ordercodeScanView = (OrdercodeScanView) findViewById(R.id.order_code_scan_view);
+ordercodeScanView.setConfigFromAsset("order_code_view_config.json");
+
+// initialize Anyline with your license key and a Listener that is called if a result is found
+ordercodeScanView.initAnyline(getString(R.string.anyline_license_key), new OrdercodeResultListener() {
+
+    @Override
+    public void onResult(String result, AnylineImage image) {
+
+        // This is called when a result is found.
+    }
+});
+ordercodeScanView.startScanning();
+```
+> in onResume()
+
+```java
+ordercodeScanView.startScanning();
+```
+
+> in onPause()
+
+```java
+ordercodeScanView.cancelScanning();
+//IMPORTANT: always release the camera in onPause
+ordercodeScanView.releaseCameraInBackground();
+```
+
+There are four simple steps necessary to get started:
+
+1. If you do not use XML configuration set the [config-file] (#ordercodeConfig) to your OrdercodeScanView using the *setConfigFromAsset* method and make sure that the json config-file is located in the Android assets folder.
+2. Call initAnyline with your valid license key and a new instance of OrdercodeResultListener, which can be used to handle the results.
+3. Call *startScanning()*
+4. When done call *cancelScanning()* and *releaseCameraInBackground()* or *releaseCamera()*
+
+###### &NewLine;
+
+###### Example Activity Layout
+
+```xml
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+ <at.nineyards.anyline.modules.ordercode.OrdercodeScanView
+    android:id="@+id/ordercode_scan_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"/>
+</RelativeLayout>
+```
+
+The OrdercodeScanView can simply be included in the activity layout file, just like any other view. The view can be either configured here via XML or otherwise a config json file can be used to adapt the scan view.
+
+<a name="ordercodeConfig"> </a>
+###### Example config for the Barcode Module
+
+```json
+{
+  "captureResolution":"1080p",
+  "cutout": {
+    "style": "rect",
+    "maxWidthPercent": "40%",
+    "alignment": "center",
+    "ratioFromSize": {
+      "width": 340,
+      "height": 76
+    },
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "cropPadding": {
+      "x": 0,
+      "y": 0
+    },
+    "cropOffset": {
+      "x": 0,
+      "y": 0
+    },
+    "strokeWidth": 3,
+    "cornerRadius": 10,
+    "strokeColor": "FFFFFF",
+    "outerColor": "000000",
+    "outerAlpha": 0.3
+  },
+  "beepOnResult": false,
+  "blinkAnimationOnResult": true,
+  "cancelOnResult": false
+}
+```
+
+The config file enables a quick and easy adaption of the scan view.
+
+Some of the most important config options may be:
+
+Parameter | Description
+--------- | -----------
+captureResolution | the preferred camera preview size
+cutout | defining which area of the preview will be "cutout" (analyzed to find bar/QR code)
+beepOnResult | enables acoustic feedback on successful scan - only available when headset is connected
+blinkOnResult |visual feedback on successful scan
+cancelOnResult | true, if the scanning process should be stopped after one result; needs manual restart for additional scans
+
+A detailed description of all available config items can be found in [Anyline Config] (#anyline-config)
+
+It is also possible to use xml-attributes instead of the json config file. For more detailed information see [XML Configuration] (#configureViaXML)
+
+
+
+
+
+
+
+
+

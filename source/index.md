@@ -2,7 +2,7 @@
 title: API Reference
 
 toc_footers:
-  - <a href='https://anyline.io/anyline-sdk-modules/'>Get the Anyline&reg SDK</a>
+  - <a href='https://www.anyline.io/download/'>Get the Anyline&reg SDK</a>
 
 
 search: true
