@@ -5,7 +5,7 @@ The Anyline-Modules are use-case specific abstractions for Anyline. Each module 
 - [Barcode] (#barcodeModule)
 - [Energy] (#energyModule)
 - [MRZ (Machine Readable Zone)] (#mrzModule)
-- [Order code] (#ordercodeModule) - on request only
+- [Order Code] (#ordercodeModule) - available for Epson (on request only)
 
 <a name="barcodeModule"> </a>
 ## Barcode
@@ -823,7 +823,7 @@ cordova.exec(onResult, onError, "AnylineSDK", "scanMRZ",
 ## Order Code
 
 <aside class="notice">
-<b>A first version for Epson is available on request. For a valid license please <a href="https://www.anyline.io/support-request/">contact</a> us </b>
+<b>A first version of the Order Code Module for Epson is available on request. For a valid license please <a href="https://www.anyline.io/support-request/">contact</a> us </b>
 </aside>
 
 With the Anyline Order Code Module it is possible to scan a specific type of Ordercode with the Epson BT2000.
