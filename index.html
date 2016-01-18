@@ -29,7 +29,7 @@
       <div id="toc">
       </div>
         <ul class="toc-footer">
-            <li><a href='https://anyline.io/anyline-sdk-modules/'>Get the Anyline&reg SDK</a></li>
+            <li><a href='https://www.anyline.io/download/'>Get the Anyline&reg SDK</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
@@ -55,12 +55,15 @@ Android and iOS modules are also available for <a href="#xamarin-setup-guide">Xa
 
 <p>(Xamarin WP Support Q1 2016).</p>
 
+<p>Furthermore there is a version of the Anyline SDK specific for the <a href='https://tech.moverio.epson.com/en/work/'>Epson BT2000</a>. This verison includes one additional module requiring a special license which can not be acquired via our customer portal. For more information or a trial license please <a href="https://www.anyline.io/support-request/">contact</a> us.</p>
+
 <h3 id="available-modules">Available Modules</h3>
 
 <ul>
 <li><a href="#barcodeModule"><strong>Barcode:</strong></a>  Scan 23 types of international barcode &amp; QR code formats.</li>
 <li><a href="#energyModule"><strong>Energy:</strong></a> Scan meter readings of various electric, gas, and water meters.</li>
 <li><a href="#mrzModule"><strong>MRZ:</strong></a>  Reliable scanning of data from passports&rsquo; and IDs&rsquo; machine readable zones (MRZ)</li>
+<li><a href="#ordercodeModule"><strong>Order Code:</strong></a>  Scan an alphanumeric order code - only available for Epson BT2000</li>
 <li><strong>Custom:</strong> Got any other ideas? We will support you when implementing other use cases for mobile OCR technology.</li>
 </ul>
 
@@ -124,10 +127,19 @@ Android and iOS modules are also available for <a href="#xamarin-setup-guide">Xa
 
 <span class="n">dependencies</span> <span class="o">{</span>
     <span class="c1">//add the anyline sdk as dependency (maybe adapt version name)
-</span>    <span class="n">compile</span> <span class="s1">'io.anyline:anylinesdk:3.2.0@aar'</span>
+</span>    <span class="n">compile</span> <span class="s1">'io.anyline:anylinesdk:3.3.0@aar'</span>
     <span class="c1">//... your other dependencies
 </span><span class="o">}</span>
 </code></pre>
+
+<aside class="notice">
+<b>Epson specific</b>
+<br/>
+To run Anyline for Epson BT2000 you have to integrate a specific Anyline SDK version.
+Therefore change the line in dependecies as follows: 
+<br/><br/>
+compile &lsquo;io.anyline:anylinesdk:3.3.0-epson@aar&rsquo;
+</aside>
 
 <h6 id="newline">&NewLine;</h6>
 
@@ -146,10 +158,18 @@ Android and iOS modules are also available for <a href="#xamarin-setup-guide">Xa
 <span class="o">}</span>
 
 <span class="n">dependencies</span> <span class="o">{</span>
-    <span class="n">compile</span><span class="o">(</span><span class="nl">name:</span><span class="s1">'anylinesdk-3.2.0'</span><span class="o">,</span> <span class="nl">ext:</span><span class="s1">'aar'</span><span class="o">)</span>
+    <span class="n">compile</span><span class="o">(</span><span class="nl">name:</span><span class="s1">'anylinesdk-3.3.0'</span><span class="o">,</span> <span class="nl">ext:</span><span class="s1">'aar'</span><span class="o">)</span>
     <span class="c1">//... your other dependencies
 </span><span class="o">}</span>
 </code></pre>
+
+<aside class="notice">
+<b>Epson specific</b>
+<br/>
+To integrate the Epson specific Anyline SDK adapt the line in dependecies as follows:
+<br/><br/>
+compile(name:'anylinesdk-3.3.0-epson&rsquo;, ext:'aar&rsquo;)
+</aside>
 
 <h6 id="newline">&NewLine;</h6>
 
@@ -187,6 +207,12 @@ Android and iOS modules are also available for <a href="#xamarin-setup-guide">Xa
 
 <p>The config file enables a quick and easy adaption of the &ldquo;Scan-View&rdquo;. You can either provide a json-file or use the XML-attributes in the layout file itself.
 A detailed description of all available attributes can be found in <a href="#anyline-config">Anyline Config</a></p>
+
+<aside class="notice">
+<b>Epson specific</b>
+<br/>
+The Epson BT2000 has no flash or vibration alarm integrated. Hence, all settings regarding flash and 'vibrateOnResult&rsquo; will be ignored. Furthermore has the Epson no built-in speakers, therfore the 'beepOnResult&rsquo; will only be played when the headset is connected
+</aside>
 
 <h6 id="json">JSON</h6>
 
@@ -1590,6 +1616,12 @@ scanned.</p>
 
 <p>Settings for a simple view that provides flash functionality.</p>
 
+<aside class="notice">
+<b>Epson specific</b>
+<br/>
+The Epson BT2000 has no flash integrated. Hence, all flash config settings will be ignored
+</aside>
+
 <p><a name="flash_mode"> </a></p>
 
 <h5 id="mode">mode</h5>
@@ -1715,6 +1747,12 @@ In y direction positive values move the flash button down, negative values move 
 
 <p>True, if there should be a beep when a result is found.</p>
 
+<aside class="notice">
+<b>Epson specific</b>
+<br/>
+The Epson BT2000 has no built-in speakers, therefore the beep will only be played when the headset is connected.
+</aside>
+
 <ul>
 <li><strong>Type:</strong> boolean</li>
 </ul>
@@ -1724,6 +1762,12 @@ In y direction positive values move the flash button down, negative values move 
 <h5 id="vibrateonresult">vibrateOnResult</h5>
 
 <p>True, if there should be a vibration alarm when a result is found.</p>
+
+<aside class="notice">
+<b>Epson specific</b>
+<br/>
+The Epson BT2000 has no vibration alarm integrated, therefore the 'vibrateOnResult&rsquo; setting will be ignored
+</aside>
 
 <ul>
 <li><strong>Type:</strong> boolean</li>
@@ -2038,6 +2082,7 @@ Both functions can only be used after the ScanView is drawn, therefore use postD
 <li><a href="#barcodeModule">Barcode</a></li>
 <li><a href="#energyModule">Energy</a></li>
 <li><a href="#mrzModule">MRZ (Machine Readable Zone)</a></li>
+<li><a href="#ordercodeModule">Order Code</a> - available for Epson (on request only)</li>
 </ul>
 
 <p><a name="barcodeModule"> </a></p>
@@ -2953,6 +2998,154 @@ Please be aware that not every property is filled for every document type (e.g. 
     <span class="o">]</span>
 <span class="o">);</span>
 </code></pre>
+
+<p><a name="ordercodeModule"> </a></p>
+
+<h2 id="order-code">Order Code</h2>
+
+<aside class="notice">
+<b>A first version of the Order Code Module for Epson is available on request. For a valid license please <a href="https://www.anyline.io/support-request/">contact</a> us </b>
+</aside>
+
+<p>With the Anyline Order Code Module it is possible to scan a specific type of Ordercode with the Epson BT2000.
+The code consists of 11 alphanumeric characters in different font sizes. The result will simply be a <em>string</em> representation of the code. </p>
+
+<h4 id="example">Example</h4>
+
+<p>The following example files illustrate a simple use-case of the order code module.</p>
+
+<h6 id="example-activity">Example Activity</h6>
+
+<blockquote>
+<p>in onCreate or onActivityCreated lifecycle methods</p>
+</blockquote>
+<pre class="highlight java"><code><span class="n">ordercodeScanView</span> <span class="o">=</span> <span class="o">(</span><span class="n">OrdercodeScanView</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">order_code_scan_view</span><span class="o">);</span>
+<span class="n">ordercodeScanView</span><span class="o">.</span><span class="na">setConfigFromAsset</span><span class="o">(</span><span class="s">"order_code_view_config.json"</span><span class="o">);</span>
+
+<span class="c1">// initialize Anyline with your license key and a Listener that is called if a result is found</span>
+<span class="n">ordercodeScanView</span><span class="o">.</span><span class="na">initAnyline</span><span class="o">(</span><span class="n">getString</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">string</span><span class="o">.</span><span class="na">anyline_license_key</span><span class="o">),</span> <span class="k">new</span> <span class="n">OrdercodeResultListener</span><span class="o">()</span> <span class="o">{</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">onResult</span><span class="o">(</span><span class="n">String</span> <span class="n">result</span><span class="o">,</span> <span class="n">AnylineImage</span> <span class="n">image</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="c1">// This is called when a result is found.</span>
+    <span class="o">}</span>
+<span class="o">});</span>
+<span class="n">ordercodeScanView</span><span class="o">.</span><span class="na">startScanning</span><span class="o">();</span>
+</code></pre>
+
+<blockquote>
+<p>in onResume()</p>
+</blockquote>
+<pre class="highlight java"><code><span class="n">ordercodeScanView</span><span class="o">.</span><span class="na">startScanning</span><span class="o">();</span>
+</code></pre>
+
+<blockquote>
+<p>in onPause()</p>
+</blockquote>
+<pre class="highlight java"><code><span class="n">ordercodeScanView</span><span class="o">.</span><span class="na">cancelScanning</span><span class="o">();</span>
+<span class="c1">//IMPORTANT: always release the camera in onPause</span>
+<span class="n">ordercodeScanView</span><span class="o">.</span><span class="na">releaseCameraInBackground</span><span class="o">();</span>
+</code></pre>
+
+<p>There are four simple steps necessary to get started:</p>
+
+<ol>
+<li>If you do not use XML configuration set the <a href="#ordercodeConfig">config-file</a> to your OrdercodeScanView using the <em>setConfigFromAsset</em> method and make sure that the json config-file is located in the Android assets folder.</li>
+<li>Call initAnyline with your valid license key and a new instance of OrdercodeResultListener, which can be used to handle the results.</li>
+<li>Call <em>startScanning()</em></li>
+<li>When done call <em>cancelScanning()</em> and <em>releaseCameraInBackground()</em> or <em>releaseCamera()</em></li>
+</ol>
+
+<h6 id="newline">&NewLine;</h6>
+
+<h6 id="example-activity-layout">Example Activity Layout</h6>
+<pre class="highlight xml"><code><span class="nt">&lt;RelativeLayout</span>
+    <span class="na">xmlns:android=</span><span class="s">"http://schemas.android.com/apk/res/android"</span>
+    <span class="na">android:layout_width=</span><span class="s">"match_parent"</span>
+    <span class="na">android:layout_height=</span><span class="s">"match_parent"</span><span class="nt">&gt;</span>
+
+ <span class="nt">&lt;at.nineyards.anyline.modules.ordercode.OrdercodeScanView</span>
+    <span class="na">android:id=</span><span class="s">"@+id/ordercode_scan_view"</span>
+    <span class="na">android:layout_width=</span><span class="s">"match_parent"</span>
+    <span class="na">android:layout_height=</span><span class="s">"match_parent"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/RelativeLayout&gt;</span>
+</code></pre>
+
+<p>The OrdercodeScanView can simply be included in the activity layout file, just like any other view. The view can be either configured here via XML or otherwise a config json file can be used to adapt the scan view.</p>
+
+<p><a name="ordercodeConfig"> </a></p>
+
+<h6 id="example-config-for-the-barcode-module">Example config for the Barcode Module</h6>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"captureResolution"</span><span class="p">:</span><span class="s2">"1080p"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"cutout"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"style"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rect"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"maxWidthPercent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"40%"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"alignment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"center"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ratioFromSize"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">340</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"offset"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"x"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"y"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"cropPadding"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"x"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"y"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"cropOffset"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"x"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"y"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"strokeWidth"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"cornerRadius"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"strokeColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FFFFFF"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"outerColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"outerAlpha"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.3</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"beepOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"blinkAnimationOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"cancelOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>The config file enables a quick and easy adaption of the scan view.</p>
+
+<p>Some of the most important config options may be:</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>captureResolution</td>
+<td>the preferred camera preview size</td>
+</tr>
+<tr>
+<td>cutout</td>
+<td>defining which area of the preview will be &ldquo;cutout&rdquo; (analyzed to find bar/QR code)</td>
+</tr>
+<tr>
+<td>beepOnResult</td>
+<td>enables acoustic feedback on successful scan - only available when headset is connected</td>
+</tr>
+<tr>
+<td>blinkOnResult</td>
+<td>visual feedback on successful scan</td>
+</tr>
+<tr>
+<td>cancelOnResult</td>
+<td>true, if the scanning process should be stopped after one result; needs manual restart for additional scans</td>
+</tr>
+</tbody></table>
+
+<p>A detailed description of all available config items can be found in <a href="#anyline-config">Anyline Config</a></p>
+
+<p>It is also possible to use xml-attributes instead of the json config file. For more detailed information see <a href="#configureViaXML">XML Configuration</a></p>
 
           <h1 id="android-advanced-setup">Android Advanced Setup</h1>
 
