@@ -283,6 +283,12 @@ This should only be used in combination with a fixed width (which also fits on a
 ####flash
 Settings for a simple view that provides flash functionality.
 
+<aside class="notice">
+<b>Epson specific</b>
+<br/>
+The Epson BT2000 has no flash integrated. Hence, all flash config settings will be ignored
+</aside>
+
 <a name="flash_mode"> </a>
 #####mode
 
@@ -351,11 +357,24 @@ Modules can use these additional options to configure some things that should ha
 #####beepOnResult
 True, if there should be a beep when a result is found.
 
+<aside class="notice">
+<b>Epson specific</b>
+<br/>
+The Epson BT2000 has no built-in speakers, therefore the beep will only be played when the headset is connected.
+</aside>
+
+
 - **Type:** boolean
 
 <a name="vibrateOnResult"> </a>
 #####vibrateOnResult
 True, if there should be a vibration alarm when a result is found.
+
+<aside class="notice">
+<b>Epson specific</b>
+<br/>
+The Epson BT2000 has no vibration alarm integrated, therefore the 'vibrateOnResult' setting will be ignored
+</aside>
 
 - **Type:** boolean
 

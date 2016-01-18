@@ -1,6 +1,16 @@
 # Anyline SDK Android Release Notes #
 
-## Anyline SDK 3.3 ##
+## Anyline SDK 3.3 - Epson ##
+Release Date 2016-01-21
+
+### New ###
+- add order code scanning: scans alphanumeric codes (11 characters) with varying font sizes
+- Adapt CameraView and AnylineConfig to work with EPSON BT2000 available hardware and provided Developer SDK from Epson
+
+### Improved ###
+- fixed scaling issue on low resolution preview 
+
+## Anyline SDK 3.3  ##
 Release Date 2015-12-17
 
 ### New ###
