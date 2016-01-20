@@ -1,5 +1,11 @@
 # Anyline SDK Android Release Notes #
 
+## Anyline SDK 3.3.1-sp_alpha1 ##
+Release Date 2016-01-20
+### New ###
+- added document scanning alpha version
+
+
 ## Anyline SDK 3.3 ##
 Release Date 2015-12-17
 
