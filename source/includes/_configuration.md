@@ -139,9 +139,9 @@ The resolution of the full picture taken from the camera (optional).
 
 value | description
 ----- | -----------
-1080p |	use 1920x1080 as preferred picture resolution
-720p  | use 1280x720 as preferred picture resolution
-480p  |	use 480x854 as preferred picture resolution
+1080 |	use 1080 as the minumum picture resolution
+1280 | use 1280 as the minimum picture resolution
+...  | and so on
 
  - The p is optional (and only accepted for convenience). 
  - The defined picture resolution is just the preferred minimal picture resolution. If this resolution is not available the smallest resolution bigger than the provided resolution will be used. If no resolution is provided, the highest available resolution is chosen. This also takes the provided pictureAspectRatios into account. See [pictureAspectRatios] (#pictureAspectRatios) for further details on combining those values
