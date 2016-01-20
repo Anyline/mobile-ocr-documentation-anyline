@@ -17,7 +17,7 @@ The Android bundle contains the following parts:
 
 ### Quick Start Guide
 
-#### 1. Add AnylineSDK as dependcency
+#### 1. Add AnylineSDK as dependency
 
 ##### Via Maven
 > Add AnylineSDK to the dependencies in build.gradle

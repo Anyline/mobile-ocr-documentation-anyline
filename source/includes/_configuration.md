@@ -13,7 +13,7 @@ With the config file the views can be configured in regard of position and looks
 
 ```json
 {
-      "captureResolution": "720p",
+      "captureResolution": "720",
       "pictureResolution": "1080",
       "pictureAspectRatios":["16:9"],
       "cutout": {
@@ -105,6 +105,7 @@ With the config file the views can be configured in regard of position and looks
 * [cancelOnResult] (#cancelOnResult)  *boolean*
 
 
+<a name="captureResolution"> </a>
 ##### captureResolution
 
 The resolution of the preview frame.
@@ -121,8 +122,6 @@ value | description
  - The p is optional. 
  - The defined capture resolution is just the preferred resolution. If this resolution is not available the resolution that best fits inside the desired resolution should be used.
  
-<a name="captureResolution2"> </a>
-
 <aside class="notice">
 <b>Android specific</b>
 <br/>
@@ -131,18 +130,22 @@ If the "suggested" resolution is available, it will be used, if not a resolution
 </aside>
 
 
+<a name="pictureResolution"> </a>
 ##### pictureResolution
 
 The resolution of the full picture taken from the camera (optional).
 
 **Possible values:**
-720, 1080, 1280, ... 
+
+value | description
+----- | -----------
+1080p |	use 1920x1080 as preferred picture resolution
+720p  | use 1280x720 as preferred picture resolution
+480p  |	use 480x854 as preferred picture resolution
 
  - The p is optional (and only accepted for convenience). 
- - The defined picture resolution is just the preferred minimal picture resolution. If this resolution is not available the smallest resolution bigger than the provided resolution will be used. If no resolution is provided, the highest available resolution is chosen. This also takes the provided pictureAspectRatios into account. See #pictureAspectRatios for further details on combining those values
+ - The defined picture resolution is just the preferred minimal picture resolution. If this resolution is not available the smallest resolution bigger than the provided resolution will be used. If no resolution is provided, the highest available resolution is chosen. This also takes the provided pictureAspectRatios into account. See [pictureAspectRatios] (#pictureAspectRatios) for further details on combining those values
  
-<a name="pictureResolution2"> </a>
-
 <aside class="notice">
 <b>Android specific</b>
 <br/>
@@ -150,20 +153,28 @@ The capture resolution is more like a suggestion, because the available preview 
 If the "suggested" resolution is available, it will be used, if not, the smallest available resolution bigger than the suggested resolution will be used.
 </aside>
  
-
- ##### pictureAspectRatios
+<a name="pictureAspectRatios"> </a>
+##### pictureAspectRatios
 
 An array of preferred aspect ratios for the full picture taken from the camera.
 
 **Possible values:**
-"16:9", "5:3", "16:10", "4:3", "ANY"
 
- - This, together with the any provided #pictureResolution defines the chosen resolution of the available resolutions from the camera. 
+value | 
+----- |
+16:9  |	
+5:3   | 
+16:10 |
+4:3   |	
+ANY   |
+ 
+
+
+ - This, together with the provided [pictureResolution] (#pictureResolution) defines the chosen resolution of the available resolutions from the camera. 
  - If there is no fitting pictureResolution available with any of the provided aspect ratios, the highest resolution matching any aspect ratio is picked. If there is also none available, the highest resolution regardless of the aspect ratio is picked.
  - **Type:**  [String]
  - **Default: ["16:9", "5:3", "16:10"]
  
-<a name="pictureAspectRatios2"> </a>
 
 <aside class="notice">
 <b>Android specific</b>
