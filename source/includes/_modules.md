@@ -5,6 +5,7 @@ The Anyline-Modules are use-case specific abstractions for Anyline. Each module 
 - [Barcode] (#barcodeModule)
 - [Energy] (#energyModule)
 - [MRZ (Machine Readable Zone)] (#mrzModule)
+- [Document] (#documentModule)
 
 <a name="barcodeModule"> </a>
 ## Barcode
@@ -817,3 +818,158 @@ cordova.exec(onResult, onError, "AnylineSDK", "scanMRZ",
     ]
 );
 ```
+<a name="documentModule"> </a>
+## Document
+
+The Anyline Document-Module detects document outlines, validates the interior angles to ensure the document is not skewed, detects the sharpness of the text and rectifies the document.
+
+In the first step the preview frames are analysed. Once a valid and sharp document is detected, a high resolution image is taken from the camera, analysed, and, if valid and sharp, rectified and cropped.
+
+The module does not perform the OCR step, but provides a high resolution, rectified, cropped document image, which is ensured to hold sharp text.
+
+<aside class="notice">
+The sharpness detection is robust in the face of text contrast, which means that sharpness detection works on grey text as well as on black text on a white background.
+</aside>
+
+ <a name="addtionalConfiguration"> </a>
+**Additional Configuration:**
+The resoution and aspect ratio of the final high resolution image can be set in the [Configuration] (#anyline-config).
+The additional configuration fields are:
+
+field | description
+----- | -----------
+[pictureResolution](#pictureResolution) | Resolution of the high resolution document image
+[pictureAspectRatios](#pictureAspectRatios) | Valid aspect ratios for the high resolution document image
+
+### Restrictions/hints for the Document-Module Config
+- The bigger the cutout, the better
+- It is adviced to hide the cutout via setting the [strokeColor](#cutout_strokeColor) to #00000000
+- It is that the [cutoutWidth](#cutout_width) matches the [captureResolution](#captureResolution)
+- At this stage, the document scanner is limited to upright rectangular documents (like DIN-A4). Because of that, the [ratioFromSize](#cutout_ratioFromSize) should be set at around 10:15
+
+
+### Android
+
+
+#### Example
+The following example files illustrate a simple use-case of the document module.
+
+###### Example Activity
+> in onCreate or onActivityCreated lifecycle methods
+
+```java
+documentScanView = (DocumentScanView) findViewById(R.id.document_scan_view);
+
+// initialize Anyline with your license key and a Listener that is called if a result is found
+documentScanView.initAnyline(getString(R.string.anyline_license_key), new DocumentResultListener() {
+    @Override
+    public void onResult(AnylineImage transformedImage, AnylineImage fullFrame) {
+
+        // This is called once a result (a valid document containing sharp text) is found.
+        // The transformedImage contains the rectified and cropped document image,
+        // the fullFrame contains the full picture that was taken
+
+        /**
+         * IMPORTANT: cache provided frames here, and release them at the end of this callback. Because
+         * keeping them in memory (e.g. setting the full frame to an ImageView)
+         * could result in a OutOfMemoryError (depending on the chosen pictureResoultion)). This error is reported in {@link #onTakePictureError
+         * (Throwable)}
+         *
+         * Use a DiskCache http://developer.android.com/training/displaying-bitmaps/cache-bitmap.html#disk-cache
+         * for example
+         *
+         */
+
+    }
+
+    @Override
+    public void onPictureProcessingFailure(DocumentScanView.DocumentError documentError) {
+        // handle an error while processing the full picture here
+        // the preview will be restarted automatically
+    }
+
+    @Override
+    public void onPreviewProcessingSuccess(AnylineImage anylineImage) {
+        // this is called after the preview of the document is completed, and a full picture will be
+        // processed automatically
+    }
+
+    @Override
+    public void onPreviewProcessingFailure(DocumentScanView.DocumentError documentError) {
+        // this is called on any error while processing the document image
+        // Note: this is called every time an error occurs in a run, so that might be quite often
+        // An error message should only be presented to the user after some time
+    }
+
+    @Override
+    public boolean onDocumentOutlineDetected(List<PointF> list, boolean anglesValid) {
+        // is called when the outline of the document is detected. return true if the outline is consumed by
+        // the implementation here, false if the outline should be drawn by the DocumentScanView
+    }
+
+    @Override
+    public void onTakePictureSuccess() {
+        // this is called after the image has been captured from the camera and is about to be processed
+    }
+
+    @Override
+    public void onTakePictureError(Throwable throwable) {
+        // This is called if the image could not be captured from the camera (most probably because of an
+        // OutOfMemoryError)
+    }
+});
+
+// optionally stop the scan once a valid result was returned
+// documentScanView.cancelOnResult(true);       
+```
+> in onResume()
+
+```java
+documentScanView.startScanning();
+```
+
+> in onPause()
+
+```java
+documentScanView.cancelScanning();
+//IMPORTANT: always release the camera in onPause
+documentScanView.releaseCameraInBackground();
+```
+
+In order to start the scan process, perform the following steps:
+
+1. If you prefer a json-file for configuration, use the *setConfigFromAsset* method and place the json-config in the Android assets folder, otherwise configure the view using the xml attributes in the activity layout file.
+2. Call *initAnyline* with your valid license key and a new instance of DocumentResultListener, which is the callback for handling the results
+3. Call *startScanning()*
+4. When done call *cancelScanning()* and *releaseCameraInBackground()* or *releaseCamera()*
+
+For each successful scan, you will receive two result-attributes:
+
+- **transformedImage:** the rectified document image
+- **fullFrame**: the full frame the document was anylised from
+
+###### Example Activity Layout
+
+```xml
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<at.nineyards.anyline.modules.document.DocumentScanView
+    android:id="@+id/document_scan_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    />
+
+</RelativeLayout>
+```
+
+The DocumentScanView can simply be included in the activity layout.
+
+For custom configuration (e.g. cutout, flash, feedback on successful scan, etc.) you can either use a json-file or XML-attributes like in the example. If you need more detailed information about all available config items see [Anyline Config] (#anyline-config).
+
+
+### iOS
+//FIXME(DD)
