@@ -6,6 +6,7 @@ The Anyline-Modules are use-case specific abstractions for Anyline. Each module 
 - [Energy] (#energyModule)
 - [MRZ (Machine Readable Zone)] (#mrzModule)
 - [Document] (#documentModule)
+- [Debitcard] (#debitcardModule)
 - [Order Code] (#ordercodeModule) - available for Epson (on request only)
 
 <a name="barcodeModule"> </a>
@@ -968,6 +969,113 @@ For each successful scan, you will receive two result-attributes:
 ```
 
 The DocumentScanView can simply be included in the activity layout.
+
+For custom configuration (e.g. cutout, flash, feedback on successful scan, etc.) you can either use a json-file or XML-attributes like in the example. If you need more detailed information about all available config items see [Anyline Config] (#anyline-config).
+
+
+### iOS
+//FIXME(DD)
+
+
+<a name="debitcardModule"> </a>
+## Debitcard
+
+The Anyline Debitcard provides functionality to scan the IBAN, BIC and cardholder name of a debitcard.
+
+<aside class="notice">
+Note: This is an alpha version, and therefore does not work on every debit card. I.e. the name, IBAN and BIC have to be of the same character height.
+</aside>
+
+
+### Restrictions for the Debitcard-Module Config
+- The cutout ratio is set to a fixed value, to ensure the best results
+
+**Information scanned:**
+
+value | description
+----- | -----------
+cardHolderName | the full name of the card holder
+iban | the IBAN
+bic | the BIC
+
+
+### Android
+
+#### Example
+The following example files illustrate a simple use-case of the debitcard module.
+
+###### Example Activity
+> in onCreate or onActivityCreated lifecycle methods
+
+```java
+debitcardScanView = (DebitCardScanView) findViewById(R.id.debitcard_scan_view);
+
+// initialize Anyline with your license key and a Listener that is called if a result is found
+debitcardScanView.initAnyline(getString(R.string.anyline_license_key), new DebitCardResultListener() {
+    @Override
+    public void onResult(DebitCardResult result, AnylineImage resultImage) {
+        // This is called when a result was found, with the result and an image where the result can be seen
+    }
+});
+     
+```
+> in onResume()
+
+```java
+debitcardScanView.startScanning();
+```
+
+> in onPause()
+
+```java
+debitcardScanView.cancelScanning();
+//IMPORTANT: always release the camera in onPause
+debitcardScanView.releaseCameraInBackground();
+```
+
+In order to start the scan process, perform the following steps:
+
+1. If you prefer a json-file for configuration, use the *setConfigFromAsset* method and place the json-config in the Android assets folder, otherwise configure the view using the xml attributes in the activity layout file.
+2. Call *initAnyline* with your valid license key and a new instance of DebitCardResultListener, which is the callback for handling the results
+3. Call *startScanning()*
+4. When done call *cancelScanning()* and *releaseCameraInBackground()* or *releaseCamera()*
+
+For each successful scan, you will receive two result-attributes:
+
+- **result:** the result object holding the fields mentioned above
+- **resultImage**: the cropped image that has been used to scan the value
+
+###### Example Activity Layout
+
+```xml
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<at.nineyards.anyline.modules.debitcard.DebitCardScanView
+    android:id="@+id/debitcard_scan_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:cutout_alignment="top_half"
+    app:cutout_style="rect"
+    app:cutout_outside_color="#000000"
+    app:cutout_rect_corner_radius_in_dp="4"
+    app:cutout_stroke_width_in_dp="2"
+    app:cutout_stroke_color="#FFFFFF"
+    app:flash_mode="manual"
+    app:flash_alignment="bottom_right"
+    app:beep_on_result="true"
+    app:vibrate_on_result="true"
+    app:blink_animation_on_result="true"
+    app:cancel_on_result="true"
+    />
+
+</RelativeLayout>
+```
+
+The DebitCardScanView can simply be included in the activity layout.
 
 For custom configuration (e.g. cutout, flash, feedback on successful scan, etc.) you can either use a json-file or XML-attributes like in the example. If you need more detailed information about all available config items see [Anyline Config] (#anyline-config).
 
