@@ -20,6 +20,7 @@ The Android bundle contains the following parts:
 #### 1. Add AnylineSDK as dependency
 
 ##### Via Maven
+
 > Add AnylineSDK to the dependencies in build.gradle
 
 ```groovy
@@ -31,10 +32,21 @@ repositories {
 
 dependencies {
     //add the anyline sdk as dependency (maybe adapt version name)
-    compile 'io.anyline:anylinesdk:3.2.0@aar'
+    compile 'io.anyline:anylinesdk:3.3.0@aar'
     //... your other dependencies
 }
 ```  
+
+<aside class="notice">
+<b>Epson specific</b>
+<br/>
+To run Anyline for Epson BT2000 you have to integrate a specific Anyline SDK version.
+Therefore change the line in dependecies as follows: 
+<br/><br/>
+compile 'io.anyline:anylinesdk:3.3.0-epson@aar'
+</aside>
+
+
 ###### &NewLine;
 
 ##### Or via local copy of the aar
@@ -52,10 +64,20 @@ repositories {
 }
 
 dependencies {
-    compile(name:'anylinesdk-3.2.0', ext:'aar')
+    compile(name:'anylinesdk-3.3.0', ext:'aar')
     //... your other dependencies
 }
 ```
+
+<aside class="notice">
+<b>Epson specific</b>
+<br/>
+To integrate the Epson specific Anyline SDK adapt the line in dependecies as follows:
+<br/><br/>
+compile(name:'anylinesdk-3.3.0-epson', ext:'aar')
+</aside>
+
+
 ###### &NewLine;  
 
 ##### 2. Provide a config file (json or xml)
@@ -92,6 +114,12 @@ dependencies {
 
 The config file enables a quick and easy adaption of the "Scan-View". You can either provide a json-file or use the XML-attributes in the layout file itself.
 A detailed description of all available attributes can be found in [Anyline Config] (#anyline-config)
+
+<aside class="notice">
+<b>Epson specific</b>
+<br/>
+The Epson BT2000 has no flash or vibration alarm integrated. Hence, all settings regarding flash and 'vibrateOnResult' will be ignored. Furthermore has the Epson no built-in speakers, therfore the 'beepOnResult' will only be played when the headset is connected
+</aside>
 
 ###### JSON
 
