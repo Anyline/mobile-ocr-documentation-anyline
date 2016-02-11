@@ -15,7 +15,6 @@ With the config file the views can be configured in regard of position and looks
 {
       "captureResolution": "720",
       "pictureResolution": "1080",
-      "pictureAspectRatios":["16:9"],
       "cutout": {
           "style": "rect",
           "width": 540,
@@ -65,7 +64,6 @@ With the config file the views can be configured in regard of position and looks
 
 * [captureResolution] (#captureResolution)  *String*
 * [pictureResolution] (#pictureResolution)  *String*
-* [pictureAspectRatios] (#pictureAspectRatios)  *Array of Strings*
 * [cutout] (#cutout) 
   * [width] (#cutout_width) *int*
   * [maxWidthPercent] (#cutout_maxWidthPercent)  *String*
@@ -144,50 +142,15 @@ value | description
 ...  | and so on
 
  - The p is optional (and only accepted for convenience). 
- - The defined picture resolution is just the preferred minimal picture resolution. If this resolution is not available the smallest resolution bigger than the provided resolution will be used. If no resolution is provided, the highest available resolution is chosen. This also takes the provided pictureAspectRatios into account. See [pictureAspectRatios] (#pictureAspectRatios) for further details on combining those values
- 
+ - The defined picture resolution is just the preferred minimal picture resolution. If this resolution is not available the smallest resolution bigger than the provided resolution will be used. If no resolution is provided, the highest available resolution is chosen. 
+
 <aside class="notice">
 <b>Android specific</b>
 <br/>
-The capture resolution is more like a suggestion, because the available preview sizes vary from device to device. 
+The picture resolution is more like a suggestion, because the available preview sizes vary from device to device. 
 If the "suggested" resolution is available, it will be used, if not, the smallest available resolution bigger than the suggested resolution will be used.
 </aside>
- 
-<a name="pictureAspectRatios"> </a>
-##### pictureAspectRatios
 
-An array of preferred aspect ratios for the full picture taken from the camera.
-
-**Possible values:**
-
-value | 
------ |
-16:9  |	
-5:3   | 
-16:10 |
-4:3   |	
-ANY   |
- 
-
-
- - This, together with the provided [pictureResolution] (#pictureResolution) defines the chosen resolution of the available resolutions from the camera. 
- - If there is no fitting pictureResolution available with any of the provided aspect ratios, the highest resolution matching any aspect ratio is picked. If there is also none available, the highest resolution regardless of the aspect ratio is picked.
- - **Type:**  [String]
- - **Default: ["16:9", "5:3", "16:10"]
- 
-
-<aside class="notice">
-<b>Android specific</b>
-<br/>
-The selection process is always as follows
-  <ul>
-    <li>Find the smallest resolution bigger than the provided pictureResolution matching the provided aspect ratio</li>
-    <li>If not found, find the biggest resolution in available matching the provided aspect ratio</li>
-    <li>If not found, chose the biggest resolution avalable for the device</li>
-  </ul>
-<br/>
-If no pictureResolution is provided, step 1 is skipped.
-</aside>
 
 <a name="cutout"></a>
 ##### cutout
