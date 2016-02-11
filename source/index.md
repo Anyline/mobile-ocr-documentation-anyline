@@ -44,5 +44,7 @@ Furthermore there is a version of the Anyline SDK specific for the <a href='http
 - [**Barcode:**] (#barcodeModule)  Scan 23 types of international barcode & QR code formats.
 - [**Energy:**] (#energyModule) Scan meter readings of various electric, gas, and water meters.
 - [**MRZ:**] (#mrzModule)  Reliable scanning of data from passports' and IDs' machine readable zones (MRZ)
+- [**Document**] (#documentModule)
+- [**Debitcard**] (#debitcardModule)
 - [**Order Code:**] (#ordercodeModule)  Scan an alphanumeric order code - only available for Epson BT2000
 - **Custom:** Got any other ideas? We will support you when implementing other use cases for mobile OCR technology.

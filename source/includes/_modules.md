@@ -940,7 +940,7 @@ documentScanView.releaseCameraInBackground();
 
 In order to start the scan process, perform the following steps:
 
-1. If you prefer a json-file for configuration, use the *setConfigFromAsset* method and place the json-config in the Android assets folder, otherwise configure the view using the xml attributes in the activity layout file.
+1. If you prefer a json-file for configuration, use the *setConfigFromAsset* method and place the json-config in the Android assets folder, otherwise configure the view using the xml attributes in the activity layout file
 2. Call *initAnyline* with your valid license key and a new instance of DocumentResultListener, which is the callback for handling the results
 3. Call *startScanning()*
 4. When done call *cancelScanning()* and *releaseCameraInBackground()* or *releaseCamera()*
@@ -1035,7 +1035,7 @@ debitcardScanView.releaseCameraInBackground();
 
 In order to start the scan process, perform the following steps:
 
-1. If you prefer a json-file for configuration, use the *setConfigFromAsset* method and place the json-config in the Android assets folder, otherwise configure the view using the xml attributes in the activity layout file.
+1. If you prefer a json-file for configuration, use the *setConfigFromAsset* method and place the json-config in the Android assets folder, otherwise configure the view using the xml attributes in the activity layout file
 2. Call *initAnyline* with your valid license key and a new instance of DebitCardResultListener, which is the callback for handling the results
 3. Call *startScanning()*
 4. When done call *cancelScanning()* and *releaseCameraInBackground()* or *releaseCamera()*
