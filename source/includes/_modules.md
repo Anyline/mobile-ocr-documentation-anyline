@@ -7,6 +7,7 @@ The Anyline-Modules are use-case specific abstractions for Anyline. Each module 
 - [MRZ (Machine Readable Zone)] (#mrzModule)
 - [Document] (#documentModule)
 - [Debitcard] (#debitcardModule)
+- [AnylineOCR] (#anylineOcrModule)
 - [Order Code] (#ordercodeModule) - available for Epson (on request only)
 
 <a name="barcodeModule"> </a>
@@ -1017,7 +1018,7 @@ debitcardScanView.initAnyline(getString(R.string.anyline_license_key), new Debit
         // This is called when a result was found, with the result and an image where the result can be seen
     }
 });
-     
+
 ```
 > in onResume()
 
@@ -1083,6 +1084,202 @@ For custom configuration (e.g. cutout, flash, feedback on successful scan, etc.)
 ### iOS
 //FIXME(DD)
 
+
+<a name="anylineOcrModule"> </a>
+## Anyline OCR
+
+With the Anyline OCR Module it is possible to set up scanning for special/custom use cases.
+There are two different modes for this module: LINE and GRID.
+The LINE mode is optimal for scanning one or more lines of variable length or font (like IBANs or addresses).
+The GRID mode is optimal for characters with equal size laid out in a grid with a constant font (like voucher codes).
+
+If the provided settings are not enough to achieve a great result, you can
+<a href="https://www.anyline.io/support-request/">contact us</a> and we can create a command file that is optimized
+for that use case. This script can then be set as a parameter to this module (so minimal change required in your app).
+
+#### Settings Common
+
+property | description
+----- | -----------
+scanMode | the mode: "LINE" or "GRID"
+customCmdFile | an optional custom command file
+minCharHeight | the minimum height of a character to scan in pixels (relative to the configured capture resolution)
+maxCharHeight | the maximum height of a character to scan in pixels (relative to the configured capture resolution)
+tesseractLanguages | the languages to use for the OCR (e.g. for custom.traineddata set to "custom")
+charWhitelist | Set all the characters that may occurred on the data that should be recognized. (e.g. "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890" for only capital letters and numbers)
+validationRegex | a regex string to validate the result (invalid results will not be returned). (regex is in <a href="http://www.cplusplus.com/reference/regex/ECMAScript/">ECMAScript regular expressions pattern syntax</a>)
+minConfidence | The minimum confidence required to return a result, a value between 0 and 100. (higher confidence means less likely to get a wrong result, but may be slower to get a result)
+
+#### Settings LINE mode only
+property | description
+----- | -----------
+removeSmallContours | true if small contours should be removed (good for Latin capital letters and numbers only, bad if small stuff is relevant, like the point on the i)
+
+#### Settings GRID mode only
+property | description
+----- | -----------
+charCountX | the number of character in X direction
+charCountY | the number of character in Y direction
+charPaddingXFactor | the average distance between characters in X direction, measured in percentage of the character width
+charPaddingYFactor | the average distance between characters in Y direction, measured in percentage of the character height
+isBrightTextOnDark | true to set to bright text on dark background, false to set to dark text on bright background
+
+### Android
+
+#### Example
+The following example illustrates an IBAN scanner use-case realized with the Anyline OCR module.
+
+###### Example Activity for the IBAN use case
+> in onCreate or onActivityCreated lifecycle methods
+
+There are five simple steps necessary to get started:
+
+1. Set the view config with *setConfig* (or in the layout xml)
+2. Set OCR parameters with *setOcrConfig*
+3. Initialize with a license and a listener that is called with the result (and other informations) using *initAnyline*
+4. Call *startScanning()*
+5. When done call *cancelScanning()* and *releaseCameraInBackground()* or *releaseCamera()*
+
+```java
+// Get the view from the layout
+scanView = (AnylineOcrScanView) findViewById(R.id.scan_view);
+// Configure the view (cutout, the camera resolution, etc.) via json (can also be done in xml in the layout)
+scanView.setConfig(new AnylineViewConfig(this, "iban_view_config.json"));
+
+// Copies given traineddata-file to a place where the core can access it.
+// This MUST be called for every traineddata file that is used (before startScanning() is called).
+// The file must be located directly in the assets directory (or in tessdata/ but no other folders are allowed)
+scanView.copyTrainedData("tessdata/eng.traineddata", "f4b86e0b7eb03c682f0e5e6519e02d32");
+scanView.copyTrainedData("tessdata/deu.traineddata", "2d5190b9b62e28fa6d17b728ca195776");
+
+//Configure the OCR for IBANs
+AnylineOcrConfig anylineOcrConfig = new AnylineOcrConfig();
+// use the line mode (line length and font may vary)
+anylineOcrConfig.setScanMode(AnylineOcrConfig.ScanMode.LINE);
+// set the languages used for OCR
+anylineOcrConfig.setTesseractLanguages("eng", "deu");
+// allow only capital letters and numbers
+anylineOcrConfig.setCharWhitelist("ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890");
+// set the height range the text can have
+anylineOcrConfig.setMinCharHeight(30);
+anylineOcrConfig.setMaxCharHeight(60);
+// The minimum confidence required to return a result, a value between 0 and 100.
+// (higher confidence means less likely to get a wrong result, but may be slower to get a result)
+anylineOcrConfig.setMinConfidence(65);
+// a simple regex for a basic validation of the IBAN, results that don't match this, will not be returned
+// (full validation is more complex, as different countries have different formats)
+anylineOcrConfig.setValidationRegex("^[A-Z]{2}([0-9A-Z]\\s*){13,32}$");
+// removes small contours (helpful in this case as no letters with small artifacts are allowed, like iöäü)
+anylineOcrConfig.setRemoveSmallContours(true);
+// set the ocr config
+scanView.setAnylineOcrConfig(anylineOcrConfig);
+
+// initialize with the license and a listener
+scanView.initAnyline(license, new AnylineOcrListener() {
+    @Override
+    public void onReport(String identifier, Object value) {
+        // Called with interesting values, that arise during processing.
+        // Some possibly reported values:
+        //
+        // $brightness - the brightness of the center region of the cutout as a float value
+        // $confidence - the confidence, an Integer value between 0 and 100
+        // $thresholdedImage - the current image transformed into black and white
+    }
+
+    @Override
+    public boolean onTextOutlineDetected(List<PointF> list) {
+        // Called when the outline of a possible text is detected.
+        // If false is returned, the outline is drawn automatically.
+        return false;
+    }
+
+    @Override
+    public void onResult(AnylineOcrResult result) {
+        // Called when a result is found (minimum confidence is exceeded and validation with regex was ok)
+        ibanResultView.setResult(result.getText());
+        ibanResultView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onAbortRun(AnylineOcrError code, String message) {
+        // Is called when no result was found for the current image.
+        // E.g. if no text was found or the result is not valid.
+    }
+});
+```
+> in onResume()
+
+```java
+scanView.startScanning();
+```
+
+> in onPause()
+
+```java
+scanView.cancelScanning();
+//IMPORTANT: always release the camera in onPause
+scanView.releaseCameraInBackground();
+```
+
+###### Example Activity Layout
+
+```xml
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <at.nineyards.anyline.modules.ocr.AnylineOcrScanView
+        android:id="@+id/scan_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</RelativeLayout>
+```
+
+The AnylineOcrScanView can simply be included in the activity layout file, just like any other view. The view can be either configured via XML or with a config json.
+
+<a name="ibanViewConfig"> </a>
+###### Example view config for the IBAN use case
+
+```json
+{
+  "captureResolution":"1080",
+  "cutout": {
+    "style": "rect",
+    "maxWidthPercent": "80%",
+    "maxHeightPercent": "80%",
+    "alignment": "top_half",
+    "width": 870,
+    "ratioFromSize": {
+      "width": 5,
+      "height": 1
+    },
+    "strokeWidth": 2,
+    "cornerRadius": 10,
+    "strokeColor": "FFFFFF",
+    "outerColor": "000000",
+    "outerAlpha": 0.3
+  },
+  "flash": {
+    "mode": "manual",
+    "alignment": "bottom_right"
+  },
+  "beepOnResult": true,
+  "vibrateOnResult": true,
+  "blinkAnimationOnResult": true,
+  "cancelOnResult": true
+}
+```
+
+A detailed description of all available config items can be found in [Anyline Config] (#anyline-config)
+
+It is also possible to use xml-attributes instead of the json config file. For more detailed information see [XML Configuration] (#configureViaXML)
+
+##### Other Examples
+
+For more example use cases of the Anyline OCR Module, check out the Examples app in the download package (can be found here: <a href="https://www.anyline.io/download/">https://www.anyline.io/download/</a>)
+
 <a name="ordercodeModule"> </a>
 ## Order Code
 
@@ -1091,7 +1288,7 @@ For custom configuration (e.g. cutout, flash, feedback on successful scan, etc.)
 </aside>
 
 With the Anyline Order Code Module it is possible to scan a specific type of Ordercode with the Epson BT2000.
-The code consists of 11 alphanumeric characters in different font sizes. The result will simply be a *string* representation of the code. 
+The code consists of 11 alphanumeric characters in different font sizes. The result will simply be a *string* representation of the code.
 
 #### Example
 The following example files illustrate a simple use-case of the order code module.
@@ -1207,12 +1404,3 @@ cancelOnResult | true, if the scanning process should be stopped after one resul
 A detailed description of all available config items can be found in [Anyline Config] (#anyline-config)
 
 It is also possible to use xml-attributes instead of the json config file. For more detailed information see [XML Configuration] (#configureViaXML)
-
-
-
-
-
-
-
-
-

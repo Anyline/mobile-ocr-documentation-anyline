@@ -3,8 +3,13 @@
 ## Anyline SDK 3.4 ##
 Release Date 2016-02-18
 ### New ###
+- added Anyline OCR module (generic module for custom use cases)
 - added scanning of documents
+- added scanning for debit cars
 
+### Improved ###
+- Camera and Focus settings
+- MRZ speed
 
 ## Anyline SDK 3.3 - Epson ##
 Release Date 2016-01-21
