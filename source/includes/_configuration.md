@@ -304,6 +304,12 @@ This should only be used in combination with a fixed width (which also fits on a
 
 - **Type:** int (pixel value)
 
+<aside class="notice">
+<b>Cutout and Focus</b>
+<br/>
+Please keep in mind that there is a relationship between the size of the cutout, and how close/far the user will hold the phone from the object. Choosing a cutout that is too large for a small object, will intuitively force the user to move closer with the phone to the object. This may result in an incorrectly set focus on some devices, as the minimal distance between the object and the camera needs to be up to ~12cm in auto-focus mode in some cases, and ~7.5cm in macro- or continuous focus mode.
+</aside>
+
 <a name="flash"> </a>
 ####flash
 Settings for a simple view that provides flash functionality.
