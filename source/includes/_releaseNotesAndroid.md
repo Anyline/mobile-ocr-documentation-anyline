@@ -5,7 +5,6 @@ Release Date 2016-02-18
 ### New ###
 - added Anyline OCR module (generic module for custom use cases)
 - added scanning of documents
-- added scanning for debit cars
 
 ### Improved ###
 - Camera and Focus settings
