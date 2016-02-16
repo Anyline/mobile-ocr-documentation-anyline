@@ -341,7 +341,7 @@ Same as above with 6 digits before the point.
 
 **Bar- and QR-Codes**<br/>
 Android: *BAR_CODE*, iOS: *ALBarcode*<br/>
-Scan bar and qr codes. This mode can be used to identifiy a meter. See the [barcode module] (#available-barcode-formats) for supported types.
+Scan bar and qr codes. This mode can be used to identify a meter. See the [barcode module] (#available-barcode-formats) for supported types.
 
 **Serial Numbers (ALPHA)**<br/>
 Android: *SERIAL_NUMBER*, iOS: *ALSerialNumber*<br/>
@@ -826,27 +826,26 @@ cordova.exec(onResult, onError, "AnylineSDK", "scanMRZ",
 
 The Anyline Document-Module detects document outlines, validates the interior angles to ensure the document is not skewed, detects the sharpness of the text and rectifies the document.
 
-In the first step the preview frames are analysed. Once a valid and sharp document is detected, a high resolution image is taken from the camera, analysed, and, if valid and sharp, rectified and cropped.
+In the first step the preview frames are analyzed. Once a valid and sharp document is detected, a high resolution image is taken from the camera, analyzed, and, if valid and sharp, rectified and cropped.
 
 The module does not perform the OCR step, but provides a high resolution, rectified, cropped document image, which is ensured to hold sharp text.
 
 <aside class="notice">
-The sharpness detection is robust in the face of text contrast, which means that sharpness detection works on grey text as well as on black text on a white background.
+The sharpness detection is robust in the face of text contrast, which means that sharpness detection works on gray text as well as on black text on a white background.
 </aside>
 
  <a name="addtionalConfiguration"> </a>
 **Additional Configuration:**
-The resoution and aspect ratio of the final high resolution image can be set in the [Configuration] (#anyline-config).
+The resolution of the final high resolution image can be set in the [Configuration] (#anyline-config).
 The additional configuration fields are:
 
 field | description
 ----- | -----------
 [pictureResolution](#pictureResolution) | Resolution of the high resolution document image
-[pictureAspectRatios](#pictureAspectRatios) | Valid aspect ratios for the high resolution document image
 
 ### Restrictions/hints for the Document-Module Config
 - The bigger the cutout, the better
-- It is adviced to hide the cutout via setting the [strokeColor](#cutout_strokeColor) to #00000000
+- It is advised to hide the cutout via setting the [strokeColor](#cutout_strokeColor) to #00000000
 - It is that the [cutoutWidth](#cutout_width) matches the [captureResolution](#captureResolution)
 - At this stage, the document scanner is limited to upright rectangular documents (like DIN-A4). Because of that, the [ratioFromSize](#cutout_ratioFromSize) should be set at around 10:15
 
@@ -1091,7 +1090,7 @@ For custom configuration (e.g. cutout, flash, feedback on successful scan, etc.)
 With the Anyline OCR Module it is possible to set up scanning for special/custom use cases.
 There are two different modes for this module: LINE and GRID.
 The LINE mode is optimal for scanning one or more lines of variable length or font (like IBANs or addresses).
-The GRID mode is optimal for characters with equal size laid out in a grid with a constant font (like voucher codes).
+The GRID mode is optimal for characters with equal size laid out in a grid with a constant font, background and character count (like loyalty codes inside bottle caps).
 
 If the provided settings are not enough to achieve a great result, you can
 <a href="https://www.anyline.io/support-request/">contact us</a> and we can create a command file that is optimized
