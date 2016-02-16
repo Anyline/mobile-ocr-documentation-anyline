@@ -974,7 +974,69 @@ For custom configuration (e.g. cutout, flash, feedback on successful scan, etc.)
 
 
 ### iOS
-//FIXME(DD)
+
+#### Example
+The following example illustrate a simple use-case of the document module.
+
+In order to start the scan process, perform the following steps:
+
+1. Create a `ALUIConfiguration` object and use its properties to configure the user interface (or load a layout file)
+3. Initialize the module with a license key, delegate. The delegate will be called with the result (and other information) according to the `AnylineDocumentModuleDelegate` protocol
+4. In `viewDidAppear:` call `startScanningAndReturnError:`
+5. After you received a result call `cancelScanningAndReturnError:` (This also has to be called in viewWillDisappear: to clean up the module)
+
+
+> in viewDidLoad
+
+```objective_c
+    CGRect frame = [[UIScreen mainScreen] applicationFrame];
+    frame = CGRectMake(frame.origin.x, frame.origin.y + self.navigationController.navigationBar.frame.size.height, frame.size.width, frame.size.height - self.navigationController.navigationBar.frame.size.height);
+    self.documentModuleView = [[AnylineDocumentModuleView alloc] initWithFrame:frame];
+    
+    NSError *error = nil;
+    // We tell the module to bootstrap itself with the license key and delegate. The delegate will later get called
+    // by the module once we start receiving results.
+    BOOL success = [self.documentModuleView setupWithLicenseKey:kDocumentScanLicenseKey delegate:self error:&error];
+    // setupWithLicenseKey:delegate:error returns true if everything went fine. In the case something wrong
+    // we have to check the error object for the error message.
+    if( !success ) {
+        // Something went wrong. The error object contains the error description
+        NSAssert(success, @"Setup Error: %@", error.debugDescription);
+    }
+    
+    // After setup is complete we add the module to the view of this view controller
+    [self.view addSubview:self.documentModuleView];
+
+```
+> in viewDidAppear()
+
+```objective_c
+[self.documentModuleView startScanningAndReturnError:&error];
+```
+
+> in viewWillDisappear()
+
+```objective_c
+[self.documentModuleView cancelScanningAndReturnError:&error];
+```
+
+To receive results implement the following delegate method:
+
+```objective_c
+- (void)anylineDocumentModuleView:(AnylineDocumentModuleView *)anylineEnergyModuleView hasResult:(UIImage *)transformedImage fullImage:(UIImage *)fullFrame {
+   NSLog(@"Anyline has a result");
+}
+```
+
+For each successful scan, you will receive two objects:
+
+- **transformedImage:** the cropped and transformed image of the document
+- **fullFrame**: the full image taken by the camera
+
+The AnylineDocumentModuleView can simply be added as a subview.
+
+For custom configuration (e.g. cutout, flash, feedback on successful scan, etc.) you can either use a json-file or configure it by accessing the properties of the module. If you need more detailed information about all available config items see [Anyline Config] (#anyline-config).
+
 
 
 <a name="debitcardModule"> </a>
@@ -1081,7 +1143,67 @@ For custom configuration (e.g. cutout, flash, feedback on successful scan, etc.)
 
 
 ### iOS
-//FIXME(DD)
+
+#### Example
+The following example illustrate a simple use-case of the debitcard module.
+
+In order to start the scan process, perform the following steps:
+
+1. Create a `ALUIConfiguration` object and use its properties to configure the user interface (or load a layout file)
+3. Initialize the module with a license key, delegate. The delegate will be called with the result (and other information) according to the `AnylineDebitCardModuleDelegate` protocol
+4. In `viewDidAppear:` call `startScanningAndReturnError:`
+5. After you received a result call `cancelScanningAndReturnError:` (This also has to be called in viewWillDisappear: to clean up the module)
+
+> in viewDidLoad
+
+```objective_c
+    CGRect frame = [[UIScreen mainScreen] applicationFrame];
+    frame = CGRectMake(frame.origin.x, frame.origin.y + self.navigationController.navigationBar.frame.size.height, frame.size.width, frame.size.height - self.navigationController.navigationBar.frame.size.height);
+    self.debitcardModuleView = [[AnylineDebitcardModuleView alloc] initWithFrame:frame];
+    
+    NSError *error = nil;
+    // We tell the module to bootstrap itself with the license key and delegate. The delegate will later get called
+    // by the module once we start receiving results.
+    BOOL success = [self.debitcardModuleView setupWithLicenseKey:kDebitcardLicenseKey delegate:self error:&error];
+    // setupWithLicenseKey:delegate:error returns true if everything went fine. In the case something wrong
+    // we have to check the error object for the error message.
+    if( !success ) {
+        // Something went wrong. The error object contains the error description
+        NSAssert(success, @"Setup Error: %@", error.debugDescription);
+    }
+    
+    // After setup is complete we add the module to the view of this view controller
+    [self.view addSubview:self.debitcardModuleView];
+
+```
+> in viewDidAppear()
+
+```objective_c
+[self.debitcardModuleView startScanningAndReturnError:&error];
+```
+
+> in viewWillDisappear()
+
+```objective_c
+[self.debitcardModuleView cancelScanningAndReturnError:&error];
+```
+
+To receive results implement the following delegate method:
+
+```objective_c
+- (void)anylineDebitcardModuleView:(AnylineDebitcardModuleView *)anylineDebitcardModuleView didFindScanResult:(ALDebitcardResult *)scanResult atImage:(UIImage *)image {
+   NSLog(@"Anyline has a result");
+}
+```
+For each successful scan, you will receive two objects:
+
+- **scanResult:** the result object holding the fields mentioned above
+- **image**: the cropped image that has been used to scan the value
+
+The AnylineDebitcardModuleView can simply be added as a subview.
+
+For custom configuration (e.g. cutout, flash, feedback on successful scan, etc.) you can either use a json-file or configure it by accessing the properties of the module. If you need more detailed information about all available config items see [Anyline Config] (#anyline-config).
+
 
 
 <a name="anylineOcrModule"> </a>
@@ -1381,10 +1503,19 @@ There are five simple steps necessary to get started:
 [self.ocrModuleView cancelScanningAndReturnError:&error];
 ```
 
-The ocr module can simply be added as a subview, just like any other view. The view can be either configured via `ALUIConfiguration` or with a config json file.
+To receive results implement the following delegate method:
+
+```objective_c
+- (void)anylineOCRModuleView:(AnylineOCRModuleView *)anylineOCRModuleView didFindResult:(ALOCRResult *)result {
+   NSLog(@"Anyline has a result");
+}
+```
+
 
 <a name="ibanViewConfig"> </a>
 ###### Example view config for the IBAN use case
+
+The ocr module can simply be added as a subview, just like any other view. The view can be either configured via `ALUIConfiguration` or with a config json file.
 
 ```json
 {
