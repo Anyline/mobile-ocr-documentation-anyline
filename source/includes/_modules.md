@@ -1094,34 +1094,34 @@ The GRID mode is optimal for characters with equal size laid out in a grid with 
 
 If the provided settings are not enough to achieve a great result, you can
 <a href="https://www.anyline.io/support-request/">contact us</a> and we can create a command file that is optimized
-for that use case. This script can then be set as a parameter to this module (so minimal change required in your app).
+for that your case. This script can then be set as a parameter to this module (so minimal changes are required to your app).
 
 #### Settings Common
 
 property | description
 ----- | -----------
-scanMode | the mode: "LINE" or "GRID"
-customCmdFile | an optional custom command file
-minCharHeight | the minimum height of a character to scan in pixels (relative to the configured capture resolution)
-maxCharHeight | the maximum height of a character to scan in pixels (relative to the configured capture resolution)
-tesseractLanguages | the languages to use for the OCR (e.g. for custom.traineddata set to "custom")
-charWhitelist | Set all the characters that may occurred on the data that should be recognized. (e.g. "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890" for only capital letters and numbers)
-validationRegex | a regex string to validate the result (invalid results will not be returned). (regex is in <a href="http://www.cplusplus.com/reference/regex/ECMAScript/">ECMAScript regular expressions pattern syntax</a>)
-minConfidence | The minimum confidence required to return a result, a value between 0 and 100. (higher confidence means less likely to get a wrong result, but may be slower to get a result)
+scanMode | Available modes: `LINE` or `GRID`
+customCmdFile | An optional custom command file
+minCharHeight | The minimum height of a character to scan in pixels (relative to the configured capture resolution)
+maxCharHeight | The maximum height of a character to scan in pixels (relative to the configured capture resolution)
+tesseractLanguages | The languages to use for the OCR (e.g. to use custom.traineddata set this value "custom")
+charWhitelist | Filter the recognized characters to only allow the ones included in this list (e.g. `"ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"` for capital letters and numbers only)
+validationRegex | A regex string to validate the result (invalid results will not be returned). (regex is in <a href="http://www.cplusplus.com/reference/regex/ECMAScript/">ECMAScript regular expressions pattern syntax</a>)
+minConfidence | The minimum confidence required to return a result, a value between 0 and 100. (higher confidence means it may take longer to get a result but it is more likely to be accurate)
 
 #### Settings LINE mode only
 property | description
 ----- | -----------
-removeSmallContours | true if small contours should be removed (good for Latin capital letters and numbers only, bad if small stuff is relevant, like the point on the i)
+removeSmallContours | If this is `true` small contours will be ignored (This is useful for latin capital letters and numbers. This is detrimental if details are relevant, like the dot above the letter `i`)
 
 #### Settings GRID mode only
 property | description
 ----- | -----------
-charCountX | the number of character in X direction
-charCountY | the number of character in Y direction
-charPaddingXFactor | the average distance between characters in X direction, measured in percentage of the character width
-charPaddingYFactor | the average distance between characters in Y direction, measured in percentage of the character height
-isBrightTextOnDark | true to set to bright text on dark background, false to set to dark text on bright background
+charCountX | The number of horizontal characters
+charCountY | The number of vertical characters
+charPaddingXFactor | The average horizontal distance between two characters, measured in percentage of the characters width
+charPaddingYFactor | The average vertical distance between two characters, measured in percentage of the character height
+isBrightTextOnDark | If `true` this scans bright text on dark background. <br> If `false` this scans dark text on bright background
 
 ### Android
 
@@ -1129,15 +1129,15 @@ isBrightTextOnDark | true to set to bright text on dark background, false to set
 The following example illustrates an IBAN scanner use-case realized with the Anyline OCR module.
 
 ###### Example Activity for the IBAN use case
-> in onCreate or onActivityCreated lifecycle methods
+> in `onCreate` or `onActivityCreated` lifecycle methods
 
 There are five simple steps necessary to get started:
 
-1. Set the view config with *setConfig* (or in the layout xml)
-2. Set OCR parameters with *setOcrConfig*
-3. Initialize with a license and a listener that is called with the result (and other informations) using *initAnyline*
-4. Call *startScanning()*
-5. When done call *cancelScanning()* and *releaseCameraInBackground()* or *releaseCamera()*
+1. Set the view config with `setConfig` (or in the layout xml)
+2. Set OCR parameters with `setOcrConfig`
+3. Initialize the module with a license and a listener. The listener is called with the result (and other information) using `initAnyline`
+4. Call `startScanning()`
+5. When you are done call `cancelScanning()` and `releaseCameraInBackground()` or `releaseCamera()`
 
 ```java
 // Get the view from the layout
@@ -1271,13 +1271,156 @@ The AnylineOcrScanView can simply be included in the activity layout file, just 
 }
 ```
 
-A detailed description of all available config items can be found in [Anyline Config] (#anyline-config)
+A detailed description of all available config items can be found in the chapter [Anyline Config] (#anyline-config)
 
 It is also possible to use xml-attributes instead of the json config file. For more detailed information see [XML Configuration] (#configureViaXML)
 
 ##### Other Examples
 
-For more example use cases of the Anyline OCR Module, check out the Examples app in the download package (can be found here: <a href="https://www.anyline.io/download/">https://www.anyline.io/download/</a>)
+For more example use cases of the Anyline OCR Module, check out the Examples app in the download package (available here: <a href="https://www.anyline.io/download/">https://www.anyline.io/download/</a>)
+
+### iOS
+
+#### Example
+The following example illustrates an IBAN scanner use-case realized with the Anyline OCR module.
+
+###### Example Activity for the IBAN use case
+> in `viewDidLoad` lifecycle method
+
+There are five simple steps necessary to get started:
+
+1. Create a `ALUIConfiguration` object and use its properties to configure the user interface (or load a layout file)
+2. Create a `ALOCRConfig` object and use its properties to configure the module
+3. Initialize the module with a license key, delegate and the `ALOCRConfig` object. The delegate will be called with the result (and other information) according to the `AnylineOCRModuleDelegate` protocol
+4. In `viewDidAppear:` call `startScanningAndReturnError:`
+5. After you received a result call `cancelScanningAndReturnError:` (This also has to be called in viewWillDisappear: to clean up the module)
+
+```objective_c
+// The controller has to conform to <AnylineOCRModuleDelegate> to be able to receive results
+@interface ALISBNScanViewController ()<AnylineOCRModuleDelegate>
+// The Anyline module used for OCR
+@property (nonatomic, strong) AnylineOCRModuleView *ocrModuleView;
+
+@end
+
+@implementation ALISBNScanViewController
+/*
+ We will do our main setup in viewDidLoad. Its called once the view controller is getting ready to be displayed.
+ */
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    // Initializing the module. Its a UIView subclass. We set the frame to fill the whole screen
+    CGRect frame = [[UIScreen mainScreen] applicationFrame];
+    frame = CGRectMake(frame.origin.x, frame.origin.y + self.navigationController.navigationBar.frame.size.height, frame.size.width, frame.size.height - self.navigationController.navigationBar.frame.size.height);
+    self.ocrModuleView = [[AnylineOCRModuleView alloc] initWithFrame:frame];
+    
+    ALOCRConfig *config = [[ALOCRConfig alloc] init];
+    config.charHeight = ALRangeMake(20, 70);
+    config.tesseractLanguages = @[@"eng", @"deu"];
+    config.charWhiteList = @"ISBN0123456789<>-X";
+    config.minConfidence = 65;
+    config.validationRegex = @"^ISBN\\s*((978|979){1}-?\\s*)*[0-9]{1,5}-?\\s*[0-9]{2,7}-?\\s*[0-9]{2,7}-?\\s*[0-9X]$";
+    config.removeSmallContours = YES;
+    config.scanMode = ALLine;
+    
+    NSError *error = nil;
+    // We tell the module to bootstrap itself with the license key and delegate. The delegate will later get called
+    // by the module once we start receiving results.
+    BOOL success = [self.ocrModuleView setupWithLicenseKey:kISBNLicenseKey
+                                                  delegate:self
+                                                 ocrConfig:config
+                                                     error:&error];
+    // setupWithLicenseKey:delegate:error returns true if everything went fine. In the case something wrong
+    // we have to check the error object for the error message.
+    if (!success) {
+        // Something went wrong. The error object contains the error description
+        NSAssert(success, @"Setup Error: %@", error.debugDescription);
+    }
+
+    // Load the UI Configuration from a json file
+    NSString *confPath = [[NSBundle mainBundle] pathForResource:@"isbn_config" ofType:@"json"];
+    ALUIConfiguration *ibanConf = [ALUIConfiguration cutoutConfigurationFromJsonFile:confPath];
+    self.ocrModuleView.currentConfiguration = ibanConf;
+    
+    // After setup is complete we add the module to the view of this view controller
+    [self.view addSubview:self.ocrModuleView];
+}
+
+/*
+ This is the main delegate method Anyline uses to report its results
+ */
+- (void)anylineOCRModuleView:(AnylineOCRModuleView *)anylineOCRModuleView
+               didFindResult:(ALOCRResult *)result {
+    NSLog(@"Anyline reports result:", result.text);
+}
+
+- (void)anylineOCRModuleView:(AnylineOCRModuleView *)anylineOCRModuleView
+             reportsVariable:(NSString *)variableName
+                       value:(id)value {
+    NSLog(@"Anyline reports varaible: %@ with value: %@", variableName, value);
+}
+
+- (void)anylineOCRModuleView:(AnylineOCRModuleView *)anylineOCRModuleView
+           reportsRunFailure:(ALOCRError)error {
+    NSLog(@"Anyline reports varaible an error: %@", error);
+}
+
+@end
+```
+
+> in viewDidAppear()
+
+```objective_c
+[self.ocrModuleView startScanningAndReturnError:&error];
+```
+
+> in viewWillDisappear()
+
+```objective_c
+[self.ocrModuleView cancelScanningAndReturnError:&error];
+```
+
+The ocr module can simply be added as a subview, just like any other view. The view can be either configured via `ALUIConfiguration` or with a config json file.
+
+<a name="ibanViewConfig"> </a>
+###### Example view config for the IBAN use case
+
+```json
+{
+  "captureResolution":"1080",
+  "cutout": {
+    "style": "rect",
+    "maxWidthPercent": "80%",
+    "maxHeightPercent": "80%",
+    "alignment": "top_half",
+    "width": 870,
+    "ratioFromSize": {
+      "width": 5,
+      "height": 1
+    },
+    "strokeWidth": 2,
+    "cornerRadius": 10,
+    "strokeColor": "FFFFFF",
+    "outerColor": "000000",
+    "outerAlpha": 0.3
+  },
+  "flash": {
+    "mode": "manual",
+    "alignment": "bottom_right"
+  },
+  "beepOnResult": true,
+  "vibrateOnResult": true,
+  "blinkAnimationOnResult": true,
+  "cancelOnResult": true
+}
+```
+
+A detailed description of all available config items can be found in the chapter [Anyline Config] (#anyline-config)
+
+##### Other Examples
+
+For more example use cases of the Anyline OCR Module, check out the Examples app in the download package (available here: <a href="https://www.anyline.io/download/">https://www.anyline.io/download/</a>)
 
 <a name="ordercodeModule"> </a>
 ## Order Code
