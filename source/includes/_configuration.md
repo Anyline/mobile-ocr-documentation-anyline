@@ -131,7 +131,7 @@ If the "suggested" resolution is available, it will be used, if not a resolution
 <a name="pictureResolution"> </a>
 ##### pictureResolution
 
-The resolution of the full picture taken from the camera (optional).
+The resolution of the full picture taken from the camera (optional). This parameter is only of interest when using the module [Document] (#document).
 
 **Possible values:**
 

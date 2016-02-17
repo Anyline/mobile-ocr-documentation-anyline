@@ -50,4 +50,4 @@ First prototypes for both glasses are available on request. The versions include
 - [**MRZ:**] (#mrzModule)  Reliable scanning of data from passports' and IDs' machine readable zones (MRZ)
 - [**Document:**] (#documentModule) Detects document outlines and delivers a high-resolution image
 - [**Order Code:**] (#ordercodeModule)  Scan an alphanumeric order code - only available for smart glasses
-- **Custom:** Got any other ideas? We will support you when implementing other use cases for mobile OCR technology.
+- [**Anyline OCR:**] (#anylineOcrModule) Create a custom use case with LINE or GRID recognition
