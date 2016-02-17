@@ -633,5 +633,44 @@ Both functions can only be used after the ScanView is drawn, therefore use postD
 </aside>
 
 
+### iOS
 
+```objective_c
+// get the cutout rect from the scan view
+CGRect cutOutRect = [self.moduleView cutoutRect];
+CGFloat lowerBorder = CGRectGetMaxY(cutOutRect);
+        
+// create a view
+UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(cutOutRect.origin.x,
+                                                            lowerBorder,
+                                                            cutOutRect.size.width,
+                                                            cutOutRect.size.height)];
+label.backgroundColor = [UIColor grayColor];
+                                                            
+// add view to layout
+[self.moduleView addSubview:label];
+```
 
+This example shows how to add a view below the cutout view. With the function `cutoutRect` you get a CGRect representing the cutout. `CGRectGetMaxY` adds its y origin and its height to get the lower border of the cutout.
+
+######Consider the Watermark in Community Edition
+
+```objective_c
+// get the cutout rect from the scan view
+CGRect cutOutRect = [self.ocrModuleView cutoutRect];
+CGRect watermarkRect = [self.ocrModuleView watermarkRect];    
+
+CGFloat lowerBorder = MAX(CGRectGetMaxY(cutOutRect), CGRectGetMaxY(watermarkRect));
+
+// create a view
+UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(cutOutRect.origin.x,
+                                                            lowerBorder,
+                                                            cutOutRect.size.width,
+                                                            cutOutRect.size.height)];
+label.backgroundColor = [UIColor grayColor];
+
+// add view to layout
+[self.ocrModuleView addSubview:label];
+```
+
+In this example we add a subview below the watermark. Because the watermark can sometimes be inside the cutout we make sure to check which one has the highes y coordinate. With the function cutoutRect you get a CGRect representing the cutout. The function `watermarkRect` gets the bounding rect of teh watermark. `CGRectGetMaxY` adds its y origin and its height to get the lower border of the cutouts. `MAX` determines the bigger value. This code makes sure your label is placed below the cutout and the watermark.
