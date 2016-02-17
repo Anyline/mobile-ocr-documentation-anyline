@@ -657,4 +657,4 @@ For module-specific documentation, please check [this section](#modules) for mor
 
 ## Xamarin.WinPhone ##
 
-Anyline will be available Windows Phone by the end of Q4 2015.
+Anyline will be available Windows Phone by the end of Q1 2016.
