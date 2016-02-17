@@ -355,6 +355,7 @@ Scan serial numbers that are engraved or printed onto a meter (consisting of num
 - The cutout should be placed fairly high (use alignment top and a small y offset), because this reduces reflections considerably when used with flash.
 - Flash mode *auto* is still in alpha stage therefore *manual* mode is preferred
 
+
 #### Example
 The following example files illustrate a simple use-case of the energy module.
 
@@ -414,6 +415,40 @@ For each successful scan, you will receive four result-attributes:
 	 - the full image (before cropping) (null in scan mode BAR_CODE and SERIAL_NUMBER)
 
 
+###### Example Switching the scan mode
+It is possible to switch the scan mode any time, but one need to call startScanning() again!
+The example shows how switching could be implemented with a radio group selection.
+
+```java
+ // switch the scan mode depending on user selection
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (R.id.radio_electric == checkedId) {
+                    energyScanView.setScanMode(EnergyScanView.ScanMode.ELECTRIC_METER);
+                    energyScanView.startScanning();
+                } else if (R.id.radio_electric_6 == checkedId) {
+                    energyScanView.setScanMode(EnergyScanView.ScanMode.ELECTRIC_METER_5_1);
+                    energyScanView.startScanning();
+                } else if (R.id.radio_electric_7 == checkedId) {
+                    energyScanView.setScanMode(EnergyScanView.ScanMode.ELECTRIC_METER_6_1);
+                    energyScanView.startScanning();
+                } else if (R.id.radio_gas == checkedId) {
+                    energyScanView.setScanMode(EnergyScanView.ScanMode.GAS_METER);
+                    energyScanView.startScanning();
+                } else if (R.id.radio_water_white == checkedId){
+                    energyScanView.setScanMode(EnergyScanView.ScanMode.WATER_METER_WHITE);
+                    energyScanView.startScanning();
+                } else{
+                    energyScanView.setScanMode(EnergyScanView.ScanMode.WATER_METER_BLACK);
+                    energyScanView.startScanning();
+                }
+            }
+
+```
+
+
+
 ###### Example Activity Layout
 
 ```xml
@@ -450,7 +485,7 @@ The EnergyScanView can simply be included in the activity layout.
 For custom configuration (e.g. cutout, flash, feedback on successful scan, etc.) you can either use a json-file or XML-attributes like in the example. If you need more detailed information about all available config items see [Anyline Config] (#anyline-config). 
 
 
-In the example *cancelOnResult* is set *true*, which means scanning will be stopped once a result is returned. However, if you switch between scan modes the scanning process will be restarted even if you already got a result. 
+In the example *cancelOnResult* is set *true*, which means scanning will be stopped once a result is returned.
 
 <aside class="notice">
 Capture resolution is currently fixed to 720p on Android, which was optimized for good results on as many devices as possible.
