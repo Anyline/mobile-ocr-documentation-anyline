@@ -38,12 +38,12 @@ Android and iOS modules are also available for [Xamarin] (#xamarin-setup-guide).
 
 (Xamarin WP Support Q1 2016).
 
-Furthermore there is a version of the Anyline SDK specific for the <a href='https://tech.moverio.epson.com/en/work/'>Epson BT2000</a>. This verison includes one additional module requiring a special license which can not be acquired via our customer portal. For more information or a trial license please <a href="https://www.anyline.io/support-request/">contact</a> us.
+Furthermore there is a version of the Anyline SDK specific for the <a href='https://tech.moverio.epson.com/en/work/'>Epson BT2000</a>. This verison includes one additional module requiring a special license which cannot be acquired via our customer portal. For more information or a trial license please <a href="https://www.anyline.io/support-request/">contact</a> us.
 
 ### Available Modules
 - [**Barcode:**] (#barcodeModule)  Scan 23 types of international barcode & QR code formats.
 - [**Energy:**] (#energyModule) Scan meter readings of various electric, gas, and water meters.
 - [**MRZ:**] (#mrzModule)  Reliable scanning of data from passports' and IDs' machine readable zones (MRZ)
-- [**Document**] (#documentModule)
+- [**Document:**] (#documentModule) Detects document outlines and delivers a high-resolution image
 - [**Order Code:**] (#ordercodeModule)  Scan an alphanumeric order code - only available for Epson BT2000
 - **Custom:** Got any other ideas? We will support you when implementing other use cases for mobile OCR technology.
