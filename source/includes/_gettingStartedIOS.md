@@ -1,11 +1,12 @@
 ##iOS Getting Started##
 
-- **Framework:**        contains the Anyline.framework & AnylineResources.bundle
-- **Documentation:**    contains a html & docset version of an appledoc style interface documentation
+- **Framework:**        contains the Anyline.framework and AnylineResources.bundle
+- **Documentation:**    contains a html and docset version of an appledoc style interface documentation
 - **AnylineExamples:**  contains a simple app where each module is implemented - it can be installed right away
+- **TestPages:** 		a folder containing sample images
 - **LICENSE:** 			third party license agreements
 - **README:**			containing a quick start - setup and module description
-- **RELEASE_NOTES**
+- **RELEASE_NOTES**		information about any changes
 
 
 ### Requirements
