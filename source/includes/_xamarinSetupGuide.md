@@ -1,6 +1,6 @@
 # Xamarin Setup Guide #
 
-The Anyline SDK is available for both Xamarin.Android and Xamarin.iOS. Each mobile platform has their own Anyline Xamarin SDK and and can be used very similar to the regular Anyline bundles for Android and iOS. Please refer to our API Reference for platform-specific documentation.
+The Anyline SDK is available for both Xamarin.Android and Xamarin.iOS. Each mobile platform has their own Anyline Xamarin SDK and can be used very similar to the regular Anyline bundles for Android and iOS. Please refer to our API Reference for platform-specific documentation.
 
 ## Xamarin.Android ##
 
@@ -8,10 +8,10 @@ The Anyline Xamarin SDK provides the functionality of our Android SDK in C# to m
 
 ### Requirements ###
 
-To use the Anyline SDK for Xamarin.Android, you'll need:
+To use the Anyline SDK for Xamarin.Android you need:
 
-- Xamarin account (If you work with Visual Studio, you need at least a Xamarin business account. Check out the <a href="https://xamarin.com/">Xamarin website</a> for detailed information.)
-- Android device with SDK >= 15
+- A Xamarin account (If you work with Visual Studio, you need at least a Xamarin business account. Check out the <a href="https://xamarin.com/">Xamarin website</a> for detailed information.)
+- An Android device with SDK >= 17
 - Decent camera functionality (recommended: 720p and adequate auto focus)
 - Xamarin Studio or Visual Studio
 - An Anyline license which you can generate <a href="http://portal.anyline.io/">here</a> after purchasing our SDK in the <a href="https://www.anyline.io/store/">store</a>.
@@ -19,13 +19,13 @@ To use the Anyline SDK for Xamarin.Android, you'll need:
 The Android bundle contains the following parts:
 
 - **AnylineXamarinSDK.Droid.dll:** contains the Anyline SDK Library
-- **AnylineXamarinApp.Droid** contains a simple app where an example for each module is implemented - it can be installed right away
+- **AnylineXamarinApp.Droid:** contains a simple app where an example for each module is implemented - it can be installed right away
 - **LICENSE:** third party license agreements
 - **README:** contains a quick start - setup and module description
 
 ### Quick Start - Setup ###
 
-In this section we will go through the basic process of creating and configurating a simple Anyline scanning application in Xamarin.Android. If you are not yet familiar with Xamarin.Android, follow <a href="https://developer.xamarin.com/guides/android/getting_started/hello,android/hello,android_quickstart/">this</a> guide to develop an understanding of the fundamentals of Android application development with Xamarin.
+In this section we will go through the basic process of creating and configuring a simple Anyline scanning application in Xamarin.Android. If you are not yet familiar with Xamarin.Android, follow <a href="https://developer.xamarin.com/guides/android/getting_started/hello,android/hello,android_quickstart/">this</a> guide to develop an understanding of the fundamentals of Android application development with Xamarin.
 
 #### 1. Create a new Xamarin.Android Project ####
 
@@ -41,11 +41,11 @@ If you are using Xamarin Studio, click `New Solution...` and create an Android A
 
 Obtaining a license key is already described [here](#obtaining-an-anyline-sdk-license-key). To generate a license key for your application, refer to the `package name` of your Xamarin.Android project. 
 
-- Visual Studio
+- **Visual Studio**
 
 ![XamarinAndroidPackageVS](images/xamarinAndroidPackageVS.png)
 
-- Xamarin Studio
+- **Xamarin Studio**
 
 ![XamarinAndroidPackageXS](images/xamarinAndroidPackageXS.png)
 
@@ -53,18 +53,18 @@ Obtaining a license key is already described [here](#obtaining-an-anyline-sdk-li
 
 To access the functionality of our SDK, simply add the `AnylineXamarinSDK.Droid.dll` file as a reference. 
 
-Visual Studio:
+**Visual Studio:**
 
-- right-click the References node in your project tree
-- click "Add reference..."
-- click "Browse..." and locate the AnylineXamarinSDK.Droid.dll file
+- right-click the *References* node in your project tree
+- click *Add reference...*
+- click *Browse...* and locate the *AnylineXamarinSDK.Droid.dll* file
 
-Xamarin Studio:
+**Xamarin Studio:**
 
-- right-click the References node in your project tree
-- click "Edit references..."
-- navigate to the ".Net Assembly" tab
-- click "Browse..." to locate the AnylineXamarinSDK.Droid.dll file
+- right-click the *References* node in your project tree
+- click *Edit references...*
+- navigate to the *.Net Assembly* tab
+- click *Browse...* to locate the *AnylineXamarinSDK.Droid.dll* file
 
 The SDK should now be visible as a reference and your project tree should somewhat look like this:
 
@@ -78,7 +78,7 @@ In the `Application` settings of your project, set the minimum version of your A
 
 #### 5. Add necessary permissions and features ####
 
-The scanning activity needs the following permissions and features
+The scanning activity needs the following permissions and features:
 
 - Permissions
 	- CAMERA
@@ -135,7 +135,7 @@ So let's add them in our AndroidManifest.xml in our Properties node.
 ```
 ###### &NewLine;
 
-> Remove the Button and add a scan view instead. Edit the XML code as follows
+> Remove the button and add a scan view instead. Edit the XML code as follows:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -157,11 +157,11 @@ If you switch back from to the `Design` tab, the user interface should look like
 
 You now have added a Barcode scan view to your activity. However, depending on which scanning type you want to implement, choose one of these module-specific views:
 
-- Barcode scanning
-	- at.nineyards.anyline.modules.barcode.BarcodeScanView
-- Energy meter scanning
+- Barcode scanning: 
+    - at.nineyards.anyline.modules.barcode.BarcodeScanView
+- Energy meter scanning:
 	- at.nineyards.anyline.modules.energy.EnergyScanView
-- MRZ and passport scanning
+- MRZ and passport scanning:
 	- at.nineyards.anyline.modules.mrz.MrzScanView
 
 Because we named the element "AnylineScanview" (`android:id="@+id/AnylineScanView"` in the XML code), this element is added automatically to the Resource.Designer.cs class when the project is being built. 
@@ -267,7 +267,7 @@ namespace AnylineExampleAndroid
 
 The following methods have to be implemented in order to use the scan view:
 
-- in `OnCreate` we'll set up our scan view, load a configuration, initialize it with the license key that we generated earlier.
+- in `OnCreate` we'll set up our scan view, load a configuration and initialize it with the license key that we generated earlier.
 
 > OnCreate
 
@@ -328,7 +328,7 @@ protected override void OnResume()
 
 #### 9. Handle Results ####
 
-Each of the anyline modules uses a module-specific scan view that uses the camera of your mobile device and provides real-time scan results via a module-specific listener.
+Each of the Anyline modules uses a module-specific scan view that uses the camera of your mobile device and provides real-time scan results via a module-specific listener.
 
 The easiest way to make use of that listener is to implement the interface of the listener in your scan activity like this:
 
@@ -361,7 +361,9 @@ public void OnResult(string result, AT.Nineyards.Anyline.Models.AnylineImage res
 
 #### 10. Test your app on an Android device ####
 
-Build your project and deploy your application on your Android device. For module-specific documentation, please check [this section](#modules) for more information. Enjoy scanning and have fun :)
+Build your project and deploy your application on your Android device. For module-specific documentation, please check [this section](#modules) for more information. 
+
+#### 11. Enjoy scanning and have fun :) ####
 
 ## Xamarin.iOS ##
 
@@ -369,9 +371,9 @@ The Anyline Xamarin SDK provides the functionality of our iOS SDK in C# to make 
 
 ### Requirements ###
 
-To use the Anyline SDK for Xamarin.iOS, you'll need:
+To use the Anyline SDK for Xamarin.iOS you need:
 
-- Xamarin account (For Visual Studio, you need at least a Xamarin business account. Check out the <a href="https://xamarin.com/">Xamarin website</a> for detailed information.)
+- A Xamarin account (For Visual Studio, you need at least a Xamarin business account. Check out the <a href="https://xamarin.com/">Xamarin website</a> for detailed information.)
 - An Anyline license which you can generate <a href="http://portal.anyline.io/">here</a> after purchasing our SDK in the <a href="https://www.anyline.io/store/">store</a>.
 - An iOS device
 	- Minimum iOS 7.0
@@ -382,14 +384,14 @@ To use the Anyline SDK for Xamarin.iOS, you'll need:
 The iOS bundle contains the following parts:
 
 - **AnylineXamarinSDK.iOS.dll:** contains the Anyline SDK Library
-- **AnylineResources.bundle** contains the necessary resources for your project
+- **AnylineResources.bundle:** contains the necessary resources for your project
 - **AnylineXamarinApp.iOS:** contains a simple app where each module is implemented - it can be installed right away
 - **LICENSE:** third party license agreements
 - **README:** contains a quick start - setup
 
 ### Quick Start - Setup ###
 
-In this section we will go through the basic process of creating and configurating a simple Anyline scanning application in Xamarin.iOS. If you are not yet familiar with Xamarin.iOS, follow <a href="https://developer.xamarin.com/guides/ios/getting_started/">this</a> guide to develop an understanding of the fundamentals of iOS application development with Xamarin.
+In this section we will go through the basic process of creating and configuring a simple Anyline scanning application in Xamarin.iOS. If you are not yet familiar with Xamarin.iOS, follow <a href="https://developer.xamarin.com/guides/ios/getting_started/">this</a> guide to develop an understanding of the fundamentals of iOS application development with Xamarin.
 
 
 #### 1. Create a new Xamarin.iOS Project ####
@@ -398,21 +400,21 @@ In Visual Studio, click `File` > `New Project...`, select `Visual C#` > `iOS` > 
 
 ![XamariniOSCreate](images/xamariniOSCreate.png)
 
-Make sure your build host is up and running and pair Visual Studio with the build host. If you have trouble with this step, please refer to <a href="https://developer.xamarin.com/guides/ios/getting_started/installation/windows/troubleshooting/">this guide</a>.
+Make sure your build host is up and running and pair Visual Studio with the build host. If you have any troubles with this step, please refer to <a href="https://developer.xamarin.com/guides/ios/getting_started/installation/windows/troubleshooting/">this guide</a>.
 
 ###### &NewLine;
 
 #### 2. Generate license key ####
 
-To generate a license key for your application, refer to the `bundle identifier` of your Xamarin.iOS project. Further information about getting a license key is described [here](#obtaining-an-anyline-sdk-license-key). 
+To generate a license key for your application, refer to the `bundle identifier` of your Xamarin.iOS project and follow this [guide] (#obtaining-an-anyline-sdk-license-key) to get a valid license key.
 
 ![XamariniOSBundle](images/xamariniOSBundle.png)
 
 #### 3. Add Anyline SDK ####
 
-In the project view, right-click on the `References` node, select `Add Reference...` and locate the AnylineXamarinSDK.iOS.dll.
+In the project view, right-click on the `References` node, select `Add Reference...` and locate the `AnylineXamarinSDK.iOS.dll`.
 
-When added, the SDK is visible in the solution explorer as follows:
+When added, the SDK should be visible in the solution explorer and look like this:
 
 ![XamariniOSSDK](images/xamariniOSSDK.png)
 
@@ -429,14 +431,14 @@ Simply drag and drop the AnylineResources.bundle folder into the `Resources` nod
 
 #### 5. Implement the Anyline Scan View ####
 
-Because we created a Single View App, Visual Studio automatically created a Storyboard and a View Controller for us. By default, the Storyboard is named `MainStoryboard.storyboard` and the View Controller is named `RootViewController`.
+Since we created a Single View App, Visual Studio automatically created a Storyboard and a View Controller for us. By default, the Storyboard is named `MainStoryboard.storyboard` and the View Controller is named `RootViewController`.
 
 Let's have a look at the code structure of the `RootViewController`.
 
-- In *ViewDidLoad*, we'll set up the Scan View and add it to the View of the ViewController.
-- In *ViewDidAppear*, we'll start scanning for results.
-- In *ViewWillDissapear*, we'll stop scanning.
-- In *ViewDidDissapear*, we'll unregister any event handlers and dispose/remove our Scan View so there are no circular dependencies left.
+- In *ViewDidLoad*, we set up the Scan View and add it to the View of the ViewController.
+- In *ViewDidAppear*, we start scanning for results.
+- In *ViewWillDissapear*, we stop scanning.
+- In *ViewDidDissapear*, we unregister any event handlers and dispose/remove our Scan View so there are no circular dependencies left.
 
 > RootViewController.cs
 
@@ -486,24 +488,26 @@ There are three module-specific Scan Views available:
 - **AnylineEnergyModuleView** for power meter and gas meter scanning
 - **AnylineMRZModuleView** for MRZ and passport scanning
 
-In this example, we'll implement a *Barcode* scan.
+In this example, we implement *Barcode* scanning.
 
-Create a member variable `scanView` of the type of the module-specific view that you want to implement. 
-In this case: `AnylineBarcodeModuleView scanView;`
+- Create a member variable `scanView` of the type of the module-specific view that you want to implement. 
+	
+	In this case: `AnylineBarcodeModuleView scanView;`
 
-Have a look at the `ViewDidLoad` method on how to set up the Scan View.
+- Have a look at the `ViewDidLoad` method on how to setup the Scan View.
 
-Basically, a new instance of our module-specific view (in this case: *AnylineBarcodeModuleView*) is created and a frame in which the view is rendered is delivered.
+	Basically, a new instance of our module-specific view (in this case: *AnylineBarcodeModuleView*) is created and a frame in which the view is rendered is delivered.
 
-`SetupWithLicenseKey` is called with the following parameters:
+- `SetupWithLicenseKey` is called with the following parameters:
 
-- The license key of **your** personal bundle identifier
-- The delegate that will listen to the results (in this case: the `RootViewController`, because we'll let it implement the delegate of our module-specific view)
-- An error which is filled with an error description if the setup fails (for example, when the license key is wrong).
+	- The license key of **your** personal bundle identifier
+	- The delegate that will listen to the results (in this case: the `RootViewController`, because we'll let it implement the delegate of our module-specific view)
+	- An error which is filled with an error description if the setup fails (for example, when the license key is wrong).
 
-If anything goes wrong in the setup, the error description is presented to the user in form of an alert view.
+	
+	If anything goes wrong in the setup, the error description is presented to the user in form of an alert view.
 
-Finally, the scan view is added as a subview of our `RootViewController.View`.
+- Finally, the scan view is added as a subview of our `RootViewController.View`
 
 ```csharp
 public override void ViewDidLoad()
@@ -529,7 +533,7 @@ public override void ViewDidLoad()
 ```
 ###### &NewLine;
 
-In the `ViewDidAppear` method, we'll tell the SDK to start scanning. The 
+In the `ViewDidAppear` method, we'll tell the SDK to start scanning
 
 ```csharp
 public override void ViewDidAppear(bool animated)
@@ -576,7 +580,7 @@ public partial class RootViewController : UIViewController, IAnylineMRZModuleDel
 ```
 ###### &NewLine;
 
-Right-click on the Interface and choose `Implement Interface` > `Implement Interface`.
+Right-click on the interface and choose `Implement Interface` > `Implement Interface`.
 
 ![XamariniOSInterface](images/xamariniOSInterface.png)
 
@@ -584,9 +588,6 @@ Visual Studio automatically generates the `DidFindScanResult` method of the modu
 
 The following code shows an implementation where the result is presented in an `UIAlertView`.
 
-<aside class="notice">
-Because barcode scanning is too fast, the <b>DidFindScanResult</b> event is not fired when the same barcode is scanned again, even if <b>scanView.CancelOnResult</b> is set to false.
-</aside>
 
 ```csharp
 public void DidFindScanResult(AnylineBarcodeModuleView anylineBarcodeModuleView, string scanResult, UIImage image)
@@ -594,15 +595,20 @@ public void DidFindScanResult(AnylineBarcodeModuleView anylineBarcodeModuleView,
 	new UIAlertView(@"Result", scanResult, null, "OK", null).Show();	
 }
 ```
+
+<aside class="notice">
+Because barcode scanning is too fast, the <b>DidFindScanResult</b> event is not fired when the same barcode is scanned again, even if <b>scanView.CancelOnResult</b> is set to false.
+</aside>
+
 ###### &NewLine;
 
 #### 7. A few more things / gotchas ####
 
 * Always make sure that scanning is stopped before the view appears.
 
-* If you use a **community edition license** you are not allowed to place any visual element over the Anyline watermark while scanning. We will give you a friendly exception if you try to do so. Please contact <sales@anyline.io> if you need to draw over the scanning view.
+* If you use a **community edition license** you are not allowed to place any visual element over the Anyline watermark while scanning. We will give you a friendly exception if you try to do so. Please <a href="https://www.anyline.io/support-request/">contact</a> us, if you need to draw over the scanning view.
 
-* Xamarins Garbage Collector may not be able to collect all garbage, which means that there might be memory leaks if there are any dependencies left in the `ViewController`. Therefore, make sure that all registered events are unregistered and any subview is removed from the ViewController view and disposed.
+* Xamarins Garbage Collector may not be able to collect all garbage, which means that there might be memory leaks if there are any dependencies left in the `ViewController`. Therefore, make sure that all registered events are unregistered and all subviews are removed from the ViewController view and disposed.
 
 > ViewWillDisappear
 
@@ -641,9 +647,11 @@ public override void ViewDidDisappear(bool animated)
 
 #### 8. Test your app on an iOS device ####
 
-Build your project and deploy your application on your iOS device. Make sure you choose your storyboard and an adequate deployment target in your Info.plist (>= 7.1, but not higher than your device target).
+Build your project and deploy your application on your iOS device. Make sure you choose your storyboard and an adequate deployment target in your Info.plist (>= 7.1 - but not higher than your device target).
 
-For module-specific documentation, please check [this section](#modules) for more information. Enjoy scanning and have fun :)
+For module-specific documentation, please check [this section](#modules) for more information. 
+
+#### 9. Enjoy scanning and have fun :) ####
 
 ###### &NewLine;
 
