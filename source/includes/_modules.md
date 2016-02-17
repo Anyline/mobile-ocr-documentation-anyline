@@ -351,7 +351,7 @@ Scan serial numbers that are engraved or printed onto a meter (consisting of num
 
 #### Restrictions for the Energy-Module Config
 - Capture resolution is currently fixed to 720p on Android (optimized for good results on as many devices as possible).
-- The size and ratio of the cutout is predefined and cannot be changed (sizes are optimized for best results)
+- <b>The size and ratio of the cutout is predefined and cannot be changed </b>(sizes are optimized for best results)
 - The cutout should be placed fairly high (use alignment top and a small y offset), because this reduces reflections considerably when used with flash.
 - Flash mode *auto* is still in alpha stage therefore *manual* mode is preferred
 
