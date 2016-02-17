@@ -3,10 +3,12 @@
 The Android bundle contains the following parts:
 
 - **AnylineSDK:**      contains the anyline-android-release.aar library
-- **Documentation:**    contains the java doc for the anyline-sdk
 - **AnylineSDKExamples:**      contains a simple app where an example for each module is implemented - it can be installed right away
+- **Documentation:**    contains the java doc for the anyline-sdk, and this web documentation
+- **TestPages:**		a folder containing sample images
 - **LICENSE:** 			third party license agreements
 - **README:**			contains a quick start - setup and module description
+- **RELEASE_NOTES:**	information about any changes
 
 
 ### Requirements
@@ -80,7 +82,7 @@ compile(name:'anylinesdk-3.3.0-epson', ext:'aar')
 
 ###### &NewLine;  
 
-##### 2. Provide a config file (json or xml)
+#### 2. Provide a config file (json or xml)
 
 > Example barcode_view_config.json:
 
@@ -118,7 +120,7 @@ A detailed description of all available attributes can be found in [Anyline Conf
 <aside class="notice">
 <b>Epson specific</b>
 <br/>
-The Epson BT2000 has no flash or vibration alarm integrated. Hence, all settings regarding flash and 'vibrateOnResult' will be ignored. Furthermore has the Epson no built-in speakers, therfore the 'beepOnResult' will only be played when the headset is connected
+The Epson BT2000 has no flash or vibration alarm integrated. Hence, all settings regarding flash and 'vibrateOnResult' will be ignored. Furthermore the Epson has no built-in speakers, therfore the 'beepOnResult' will only be played when the headset is connected
 </aside>
 
 ###### JSON
