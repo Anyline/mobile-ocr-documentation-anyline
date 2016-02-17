@@ -161,7 +161,7 @@ This contains all the settings for the overlay/cutout.
 <a name="cutout_width"></a>
 ##### width 
 
-Specifies an exact desired pixel width (pixels in the frame, not on the display). If this is bigger than the width of the view, it will be limited to it. 
+Specifies an exact desired pixel width (pixels in the frame, not on the display). If this is bigger than the width of the view, it will be limited to the view's width. 
 
 E.g. Android devices may have a 720p preview but only a 540p wide display. If a width of 600 is specified, the cutout will still only be 540. 
 
@@ -478,6 +478,7 @@ A list of of all available xml options can be found in the example.
 ##### Differences to json
 - tree is "flattened" and snake_case
 - captureResolution is defined by preferred_preview_width and preferred_preview_height
+- pictureResolution is defined by preferred_picture_width and preferred_picture_height
 - colors contain alpha value, so there is no extra option for alpha
 
 <a name="iosConfig"> </a>
