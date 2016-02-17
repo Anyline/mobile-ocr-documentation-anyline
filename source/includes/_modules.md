@@ -7,7 +7,7 @@ The Anyline-Modules are use-case specific abstractions for Anyline. Each module 
 - [MRZ (Machine Readable Zone)] (#mrzModule)
 - [Document] (#documentModule)
 - [AnylineOCR] (#anylineOcrModule)
-- [Order Code] (#ordercodeModule) - available for Epson (on request only)
+- [Order Code] (#ordercodeModule) - only available for smart glasses (on request)
 
 <a name="barcodeModule"> </a>
 ## Barcode
@@ -447,7 +447,10 @@ For each successful scan, you will receive four result-attributes:
 
 The EnergyScanView can simply be included in the activity layout.
 
-For custom configuration (e.g. cutout, flash, feedback on successful scan, etc.) you can either use a json-file or XML-attributes like in the example. If you need more detailed information about all available config items see [Anyline Config] (#anyline-config).
+For custom configuration (e.g. cutout, flash, feedback on successful scan, etc.) you can either use a json-file or XML-attributes like in the example. If you need more detailed information about all available config items see [Anyline Config] (#anyline-config). 
+
+
+In the example *cancelOnResult* is set *true*, which means scanning will be stopped once a result is returned. However, if you switch between scan modes the scanning process will be restarted even if you already got a result. 
 
 <aside class="notice">
 Capture resolution is currently fixed to 720p on Android, which was optimized for good results on as many devices as possible.
@@ -1388,10 +1391,10 @@ For more example use cases of the Anyline OCR Module, check out the Examples app
 ## Order Code
 
 <aside class="notice">
-<b>A first version of the Order Code Module for Epson is available on request. For a valid license please <a href="https://www.anyline.io/support-request/">contact</a> us </b>
+<b>A first version of the Order Code Module for smart glasses is available on request. For a valid license please <a href="https://www.anyline.io/support-request/">contact</a> us </b>
 </aside>
 
-With the Anyline Order Code Module it is possible to scan a specific type of Ordercode with the Epson BT2000.
+With the Anyline Order Code Module it is possible to scan a specific type of Ordercode.
 The code consists of 11 alphanumeric characters in different font sizes. The result will simply be a *string* representation of the code.
 
 #### Example
@@ -1502,7 +1505,7 @@ Parameter | Description
 captureResolution | the preferred camera preview size
 cutout | defining which area of the preview will be "cutout" (analyzed to find bar/QR code)
 beepOnResult | enables acoustic feedback on successful scan - only available when headset is connected
-blinkOnResult |visual feedback on successful scan
+blinkOnResult | visual feedback on successful scan
 cancelOnResult | true, if the scanning process should be stopped after one result; needs manual restart for additional scans
 
 A detailed description of all available config items can be found in [Anyline Config] (#anyline-config)
