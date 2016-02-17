@@ -447,7 +447,10 @@ For each successful scan, you will receive four result-attributes:
 
 The EnergyScanView can simply be included in the activity layout.
 
-For custom configuration (e.g. cutout, flash, feedback on successful scan, etc.) you can either use a json-file or XML-attributes like in the example. If you need more detailed information about all available config items see [Anyline Config] (#anyline-config).
+For custom configuration (e.g. cutout, flash, feedback on successful scan, etc.) you can either use a json-file or XML-attributes like in the example. If you need more detailed information about all available config items see [Anyline Config] (#anyline-config). 
+
+
+In the example *cancelOnResult* is set *true*, which means scanning will be stopped once a result is returned. However, if you switch between scan modes the scanning process will be restarted even if you already got a result. 
 
 <aside class="notice">
 Capture resolution is currently fixed to 720p on Android, which was optimized for good results on as many devices as possible.
