@@ -415,7 +415,7 @@ For each successful scan, you will receive four result-attributes:
 	 - the full image (before cropping) (null in scan mode BAR_CODE and SERIAL_NUMBER)
 
 
-###### Example Switching the scan mode
+###### Example: switching the scan mode
 It is possible to switch the scan mode any time, but one need to call startScanning() again!
 The example shows how switching could be implemented with a radio group selection.
 
@@ -657,7 +657,7 @@ personalNumber | personal number
 personalNumber2 | 2nd personal number on TD1 sized MROTDs
 checkDigitPersonalNumber | check digit for personal number
 checkDigitDates | check digit for both dates
-documentType |  type of the document that was read. (ID/P)
+documentType |  type of the document that was read. (ID/P/IT)
 documentNumber | document number
 checkDigitNumber |  check digit for the document number
 checkDigitFinal  | check digit
@@ -666,7 +666,9 @@ allCheckDigitsValid | flag indicating if all check digits are valid
 
 
 <aside class="notice">
-Please be aware that not every property is filled for every document type (e.g. some ID MRZ do not contain a sex information)
+Please be aware that not every property is filled for every document type (e.g. some ID MRZ do not contain a sex information).
+<p></p>
+Be also aware, that the names may not be printed completely as the machine readable zone has a limited amount of characters.
 </aside>
 
 ### Android
@@ -809,7 +811,7 @@ Create a property, initialize the module in the viewDidLoad method and add it to
     }
 }
 ```
-If there is a problem starting the scanning process an error object will be set, so the error can be handled.
+If there is a problem while starting the scanning process, an error object will be set so the error can be handled.
 
 ###### 3. Implement the delegate method and receive results
 
