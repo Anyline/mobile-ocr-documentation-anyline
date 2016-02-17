@@ -10,6 +10,10 @@ Release Date 2016-02-18
 - Camera and Focus settings
 - MRZ speed
 
+### Fixed ###
+- issue with preview layout (on devices that support 1080 preview on 720 screen, not the full preview was shown)
+
+
 ## Anyline SDK 3.3 - Epson ##
 Release Date 2016-01-21
 
@@ -19,6 +23,7 @@ Release Date 2016-01-21
 
 ### Improved ###
 - fixed scaling issue on low resolution preview 
+
 
 ## Anyline SDK 3.3  ##
 Release Date 2015-12-17
@@ -40,6 +45,7 @@ Release Date 2015-12-17
 ### Changed ###
 - libraries for armv6 architecture no longer included (can be provided by request though)
 
+
 ## Anyline SDK 3.2.1 ##
 Release Date 2015-10-23
 
@@ -53,7 +59,6 @@ Release Date 2015-10-23
     - Added support for TD2 size MROTDs
     - Added support for French ID cards
         - Known Limitations: check digit validation does not work on French ID cards
-
 
 ### Changed ###
 - BarcodeResultListener: added the format of the barcode to the
