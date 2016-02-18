@@ -1272,6 +1272,16 @@ It is also possible to use xml-attributes instead of the json config file. For m
 
 For more example use cases of the Anyline OCR Module, check out the Examples app in the download package (available here: <a href="https://www.anyline.io/download/">https://www.anyline.io/download/</a>)
 
+###### Reporting
+
+The reporting of results in the Community Edition (including an image)
+helps us to improving our product, and the customer experience.
+It is possible to turn that feature off by calling ​*setReportingEnabled(false)*​ on the AnylineOcrScanView.
+
+```java
+scanView.setReportingEnabled(false);
+```
+
 ### iOS
 
 #### Example
