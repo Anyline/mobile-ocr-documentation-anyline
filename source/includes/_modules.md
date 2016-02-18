@@ -1,6 +1,6 @@
 # Modules
 
-The Anyline-Modules are use-case specific abstractions for Anyline. Each module is designed to serve a specific purpose. Currently, the following modules are available:
+The Anyline modules are use-case specific abstractions for Anyline. Each module is designed to serve a specific purpose. Currently, the following modules are available:
 
 - [Barcode] (#barcodeModule)
 - [Energy] (#energyModule)
@@ -58,7 +58,7 @@ With the Anyline Barcode-Module 23 different types of bar- and QR-codes can be s
 
 #### Example
 
-The following example files illustrate a simple use-case of the barcode module.
+The following example files illustrate a simple use-case of the Barcode module.
 
 ###### Example  Activity
 > in onCreate or onActivityCreated lifecycle methods
@@ -120,7 +120,7 @@ In an optional step, you can limit the barcode scanning to one or multiple barco
 </RelativeLayout>
 ```
 
-The BarcodeScanView can simply be included in the activity layout file, just like any other view. The view can be either configured here via XML or otherwise a config json file can be used to adapt the scan view.
+The BarcodeScanView can simply be included in the activity layout file, just like any other view. The view can be either configured via XML or otherwise a config json file can be used to adapt the scan view.
 
 <a name="barcodeConfig"> </a>
 ###### Example config for the Barcode Module
@@ -190,7 +190,9 @@ There are three steps necessary to get a scan result:
 }
 ```
 
-Create a property, initialize the module in the viewDidLoad method and add it to the view of the view controller. Supply the license key and set the delegate, which will receive a call once a result is found. The boolean returned by the setup routine notifies you if the Anyline set up was successful. If an error occurred the error needs to be handled. If the setup was successful, set the barcode types that should be scanned.
+ - Create a property, initialize the module in the viewDidLoad method and add it to the view of the ViewController. 
+ - Supply the license key and set the delegate, which will receive a call once a result is found. The boolean returned by the setup routine notifies you if the Anyline setup was successful. If an error occurred the error needs to be handled.
+ - After the succesful setup, set the barcode types that should be scanned.
 
 Valid types are:
 
@@ -237,12 +239,17 @@ If there is a problem starting the scanning process an error object will be set,
     NSLog("Scan result: %@", scanResult);
 }
 ```
-When a valid result is found, it will call the delegate. The scan result will be a *string* containing the scanned code. barcodeFormat will contain the format of the barcode.
+
+When a valid result is found, the delegate will be called and you get the following values:  
+
+- **scanResult:** a *string* containing the scanned code
+- **barcodeFormat:** a *string* representing the format of the scanned barcode
+- **image**: the cropped image which was used to scan the value
 
 ### Cordova Plugin
 
 ###### Example call for the Barcode Module
-Call the exec method with <i><b>scanBarcode</b></i> (all other parameters are as explained in [Quick Start] (#cordova-example)).
+Call the exec method with *scanBarcode*. For a more detailed description of the config parameters used, see the [example] (#cordova-example) in Quick Start.
 
 ```java
 cordova.exec(onResult, onError, "AnylineSDK", "scanBarcode",
@@ -283,8 +290,8 @@ cordova.exec(onResult, onError, "AnylineSDK", "scanBarcode",
 <a name="energyModule"> </a>
 ## Energy
 
-The Anyline Energy-Module is capable of scanning analog electric-, gas- and water-meter-readings.
-It is also possible to scan bar- and QR-codes (useful for identifying meters).
+The Anyline Energy module is capable of scanning analog electric-, gas- and water-meter readings.
+It is also possible to scan bar- and QR-codes, which is useful for identifying meters.
 Common digital meters and heat meters can also be scanned (but this is ALPHA).
 
 #### All the possible scan modes
@@ -292,7 +299,7 @@ Common digital meters and heat meters can also be scanned (but this is ALPHA).
 **Electric Meter**<br/>
 Android: *ELECTRIC_METER*, iOS: *ALElectricMeter*<br/>
 Scan analog electric meters with 5 or 6 main digits and one decimal digit.
-The digit count is automatically detected. The decimal place is not included in the result. The auto-detection requires the decimal area to be highlighted in red.
+The digit count is detected automatically. The decimal place is not included in the result. The auto-detection requires the decimal area to be highlighted in red.
 
 **Electric Meter 5 main digits 1 decimal (ALPHA)**<br/>
 Android: *ELECTRIC_METER_5_1*, iOS: *ALElectricMeter5_1*<br/>
@@ -340,7 +347,7 @@ Same as above with 6 digits before the point.
 
 **Bar- and QR-Codes**<br/>
 Android: *BAR_CODE*, iOS: *ALBarcode*<br/>
-Scan bar and qr codes. This mode can be used to identify a meter. See the [barcode module] (#available-barcode-formats) for supported types.
+Scan bar and QR codes. This mode can be used to identify a meter. See the [barcode module] (#available-barcode-formats) for supported types.
 
 **Serial Numbers (ALPHA)**<br/>
 Android: *SERIAL_NUMBER*, iOS: *ALSerialNumber*<br/>
@@ -349,6 +356,7 @@ Scan serial numbers that are engraved or printed onto a meter (consisting of num
 
 ### Android
 
+<a name="energyModuleRestrictions"> </a>
 #### Restrictions for the Energy-Module Config
 - Capture resolution is currently fixed to 720p on Android (optimized for good results on as many devices as possible).
 - <b>The size and ratio of the cutout is predefined and cannot be changed </b>(sizes are optimized for best results)
@@ -416,7 +424,7 @@ For each successful scan, you will receive four result-attributes:
 
 
 ###### Example: switching the scan mode
-It is possible to switch the scan mode any time, but one need to call startScanning() again!
+It is possible to switch the scan mode at any time, but you have to call *startScanning()* again when you switch the mode!
 The example shows how switching could be implemented with a radio group selection.
 
 ```java
@@ -482,20 +490,13 @@ The example shows how switching could be implemented with a radio group selectio
 
 The EnergyScanView can simply be included in the activity layout.
 
-For custom configuration (e.g. cutout, flash, feedback on successful scan, etc.) you can either use a json-file or XML-attributes like in the example. If you need more detailed information about all available config items see [Anyline Config] (#anyline-config). 
+For custom configuration (e.g. cutout, flash, feedback on successful scan, etc.) you can either use a json-file or XML-attributes like in the example. If you need more detailed information about all available config items see [Anyline Config] (#anyline-config). Please consider the [config restrictions] (#energyModuleRestrictions) mentioned above when configuring the EnergyScanView.  
 
-
-In the example *cancelOnResult* is set *true*, which means scanning will be stopped once a result is returned.
-
-<aside class="notice">
-Capture resolution is currently fixed to 720p on Android, which was optimized for good results on as many devices as possible.
-</aside>
 
 ###### Reporting
 
-The reporting of Analog Meter Results in the Community Edition (including an image of a scanned meter)
-helps us to improving our product, and the customer experience.
-It is possible to turn that feature off by calling *setReportingEnabled(false)* on the EnergyScanView.
+The reporting of analog meter results in the Community Edition (including an image of the scanned meter) helps us to improve our product, and the customer experience.
+It is possible to turn off this feature by calling *setReportingEnabled(false)* on the EnergyScanView.
 
 ```java
 energyScanView.setReportingEnabled(false);
@@ -525,10 +526,9 @@ In order to get scan results, it is necessary to perform the following three ste
 }
 ```
 
-Create a property, initialize the module and add it to the view of our view controller.
-Afterwards, supply the license key and set the delegate. The delegate will receive a call when a result is found.
-If the Anyline set up returned an error the error object will be set and you can handle the error.
-Furthermore it is necessary to set the scan mode utilizing *setScanMode*.
+- Create a property, initialize the module in the viewDidLoad method and add it to the view of the ViewController. 
+- Supply the license key and set the delegate, which will receive a call once a result is found. The boolean returned by the setup routine notifies you if the Anyline setup was successful. If an error occurred the error needs to be handled
+- After the successful setup, set the scan mode utilizing *setScanMode* 
 
 ###### 2. Start the scanning process in viewDidAppear
 
@@ -571,9 +571,9 @@ Once Anyline has found a valid result the delegate is called and you get an resu
 
 ###### Reporting
 
-The reporting of Analog Meter Results in the Community Edition (including an image of a scanned meter)
-helps us to improving our product, and the customer experience.
-It is possible to turn that feature off by calling *-(void)enableReporting:(BOOL)enable* on the AnylineEnergyModuleView.
+The reporting of analog meter results in the Community Edition (including an image of the scanned meter) helps us to improve our product, and the customer experience.
+It is possible to turn off this feature by calling 
+ *-(void)enableReporting:(BOOL)enable* on the AnylineEnergyModuleView.
 
 ```objective_c
 [self.anylineEnergyView enableReporting:NO];
@@ -582,10 +582,6 @@ It is possible to turn that feature off by calling *-(void)enableReporting:(BOOL
 ### Cordova Plugin
 
 ###### Example call for the Energy Module
-
-There is a distinction between scanning electric and gas meter:
-Call the exec method either with <i><b>scanElectricMeter</b></i> or <i><b>scanGasMeter</b></i> (all other parameters are as explained in [Quick Start] (#cordova-example)).
-
 ```java
 cordova.exec(onResult, onError, "AnylineSDK", "scanElectricMeter",
     [
@@ -617,13 +613,17 @@ cordova.exec(onResult, onError, "AnylineSDK", "scanElectricMeter",
     ]
 );
 ```
+
+It is possible to scan two different types of meters, electric and gas.
+Call the exec method either with <i><b>scanElectricMeter</b></i> or <i><b>scanGasMeter</b></i>. For more information about the config parameters set here, see the [example] (#cordova-example) in section Quick Start.
+
+
 ###### Reporting
 
-The reporting of Analog Meter Results in the Community Edition (including an image of a scanned meter)
-helps us to improving our product, and the customer experience.
-It is possible to turn that feature off by adding *"reportingEnabled": false* to the above config.
+The reporting of analog meter results in the Community Edition (including an image of the scanned meter) helps us to improve our product, and the customer experience.
+It is possible to turn off this feature by adding *"reportingEnabled": false* to the above config.
 
-```js
+```java
 //...
             "blinkAnimationOnResult": true,
             "cancelOnResult": true,
@@ -635,7 +635,7 @@ It is possible to turn that feature off by adding *"reportingEnabled": false* to
 <a name="mrzModule"> </a>
 ## MRZ
 
-The Anyline MRZ-Module provides the functionality to scan passports and other IDs using the MRZ (Machine Readable Zone).
+The Anyline MRZ module provides the functionality to scan passports and other IDs using the MRZ (Machine Readable Zone).
 
 For each scan result the module generates an identification object, containing all relevant information as well as the image of the scanned document.
 
@@ -666,16 +666,16 @@ allCheckDigitsValid | flag indicating if all check digits are valid
 
 
 <aside class="notice">
-Please be aware that not every property is filled for every document type (e.g. some ID MRZ do not contain a sex information).
+Please be aware that not every property is filled for every document type (e.g. some ID MRZs do not contain a sex information).
 <p></p>
-Be also aware, that the names may not be printed completely as the machine readable zone has a limited amount of characters.
+Furthermore its important to know, that the names may not be printed completely as the machine readable zone has a limited amount of characters.
 </aside>
 
 ### Android
 
-##### Restrictions for the MRZ-Module Config:
-- The ratio of the cutout cannot be changed and is predefined to fit passports and IDs well.
-- Flash mode *auto* is still in alpha stage therefore *manual* mode is preferred
+##### Restrictions for the MRZ module config:
+- The ratio of the cutout can not be changed and is predefined to fit well for passports and IDs.
+- Flash mode *auto* is still in alpha stage therefore *manual* mode is preferred.
 
 #### Example
 The following example files illustrate a simple use-case of the MRZ module.
@@ -719,7 +719,7 @@ There are four simple steps necessary to get started:
 1. If you do not use XML configuration set the [config-file] (#mrzConfig) to your MrzScanView using the *setConfigFromAsset* method and make sure that the json config-file is located in the Android assets folder
 2. Call *initAnyline* with your valid license key and a new instance of MrzResultListener, which will be used as callback for each successful scan.
 3. Call *startScanning()*
-4. When done call *cancelScanning()* and *releaseCameraInBackground()* or *releaseCamera()*
+4. When done, call *cancelScanning()* and *releaseCameraInBackground()* or *releaseCamera()*
 
 ###### Example Activity Layout
 
@@ -767,7 +767,7 @@ The MrzScanView can simply be included in the activity layout file, just like an
 }
 ```
 
-A detailed description of all available config items can be found in [Anyline Config] (#anyline-config)
+A detailed description of all available config items can be found in [Anyline Config] (#anyline-config).
 
 It is also possible to use xml-attributes instead of the json config file. For more detailed information see [XML Configuration] (#configureViaXML)
 
@@ -795,7 +795,8 @@ There are three steps necessary to get a scan result:
 }
 ```
 
-Create a property, initialize the module in the viewDidLoad method and add it to the view of the view controller. Supply the license key and set the delegate, which will receive a call once a result is found. The boolean returned by the setup routine notifies you if the Anyline set up was successful. If an error occurred the error needs to be handled.
+
+Create a property, initialize the module in the viewDidLoad method and add it to the view of the ViewController. Supply the license key and set the delegate, which will receive a call once a result is found. The boolean returned by the setup routine notifies you if the Anyline setup was successful. If an error occurred the error needs to be handled.
 
 
 ###### 2. Start scanning process in viewDidAppear
@@ -823,13 +824,13 @@ If there is a problem while starting the scanning process, an error object will 
     NSLog("Scan result: %@", scanResult);
 }
 ```
-When a valid result is found, it will call the delegate. ScanResult is an object of type ALIdentification containing the [information scanned.] (#scannedInfo)
+When a valid result is found, it will call the delegate. ScanResult is an object of type ALIdentification containing the [scanned information.] (#scannedInfo)
 
 ### Cordova Plugin
 
 ###### Example call for the MRZ Module
 
-Call the exec method with <i><b>scanMRZ</b></i> (all other parameters are as explained in [Quick Start] (#cordova-example)).
+Call the exec method with <i><b>scanMRZ</b></i>. For more detailed information about the config parameters, see the [example] (#cordova-example) in section Quick Start.
 
 ```java
 cordova.exec(onResult, onError, "AnylineSDK", "scanMRZ",
@@ -863,7 +864,7 @@ cordova.exec(onResult, onError, "AnylineSDK", "scanMRZ",
 <a name="documentModule"> </a>
 ## Document
 
-The Anyline Document-Module detects document outlines, validates the interior angles to ensure the document is not skewed, detects the sharpness of the text and rectifies the document.
+The Anyline Document module detects document outlines, validates the interior angles to ensure the document is not skewed, detects the sharpness of the text and rectifies the document.
 
 In the first step the preview frames are analyzed. Once a valid and sharp document is detected, a high resolution image is taken from the camera, analyzed, and, if valid and sharp, rectified and cropped.
 
@@ -875,13 +876,15 @@ The sharpness detection is robust in the face of text contrast, which means that
 
  <a name="addtionalConfiguration"> </a>
 **Additional Configuration:**
+
 The resolution of the final high resolution image can be set in the [Configuration] (#anyline-config).
-The additional configuration fields are:
+The additional configuration fields is:
 
 field | description
 ----- | -----------
 [pictureResolution](#pictureResolution) | Resolution of the high resolution document image
 
+<a name="documentModuleRestrictions"> </a>
 ### Restrictions/hints for the Document-Module Config
 - The bigger the cutout, the better
 - It is advised to hide the cutout via setting the [strokeColor](#cutout_strokeColor) to #00000000
@@ -979,15 +982,16 @@ documentScanView.releaseCameraInBackground();
 
 In order to start the scan process, perform the following steps:
 
-1. If you prefer a json-file for configuration, use the *setConfigFromAsset* method and place the json-config in the Android assets folder, otherwise configure the view using the xml attributes in the activity layout file
+1. If you prefer a json-file for configuration, use the *setConfigFromAsset* method and place the json-config in the Android assets folder, otherwise configure the view using the XML attributes in the activity layout file
 2. Call *initAnyline* with your valid license key and a new instance of DocumentResultListener, which is the callback for handling the results
 3. Call *startScanning()*
 4. When done call *cancelScanning()* and *releaseCameraInBackground()* or *releaseCamera()*
 
-For each successful scan, you will receive two result-attributes:
+
+For each successful scan, you will receive two result attributes:
 
 - **transformedImage:** the rectified document image
-- **fullFrame**: the full frame the document was anylised from
+- **fullFrame**: the full frame the document was analysed from
 
 ###### Example Activity Layout
 
@@ -1009,21 +1013,17 @@ For each successful scan, you will receive two result-attributes:
 
 The DocumentScanView can simply be included in the activity layout.
 
-For custom configuration (e.g. cutout, flash, feedback on successful scan, etc.) you can either use a json-file or XML-attributes like in the example. If you need more detailed information about all available config items see [Anyline Config] (#anyline-config).
+For custom configuration (e.g. cutout, flash, feedback on successful scan, etc.) you can either use a json-file or XML-attributes like in the example. If you need more detailed information about all available config items see [Anyline Config] (#anyline-config). Please consider the [config restrictions] (#documentModuleRestrictions) when configuring the DocumentScanView.
 
 
 ### iOS
 
 #### Example
-The following example illustrate a simple use-case of the document module.
+The following example illustrates a simple use-case of the document module.
 
 In order to start the scan process, perform the following steps:
 
-1. Create a `ALUIConfiguration` object and use its properties to configure the user interface (or load a layout file)
-3. Initialize the module with a license key, delegate. The delegate will be called with the result (and other information) according to the `AnylineDocumentModuleDelegate` protocol
-4. In `viewDidAppear:` call `startScanningAndReturnError:`
-5. After you received a result call `cancelScanningAndReturnError:` (This also has to be called in viewWillDisappear: to clean up the module)
-
+######1. Initialize the module in viewDidLoad ######
 
 > in viewDidLoad
 
@@ -1047,11 +1047,23 @@ In order to start the scan process, perform the following steps:
     [self.view addSubview:self.documentModuleView];
 
 ```
+
+ - Create a `ALUIConfiguration` object and use its properties to configure the user interface, or load a layout file. 
+ - Initialize the module with a license key and delegate, which will receive a call once a result is found. The boolean returned by the setup routine notifies you if the Anyline setup was successful. If an error occurred the error needs to be handled.
+
+
+######2. Start scanning process in viewDidAppear######
+
 > in viewDidAppear()
 
 ```objective_c
 [self.documentModuleView startScanningAndReturnError:&error];
 ```
+
+Call `startScanningAndReturnError` in `viewDidAppear`. If there is a problem while starting the scanning process, an error object will be set so the error can be handled.
+
+
+######3. Implement the delegate method and receive results######
 
 > in viewWillDisappear()
 
@@ -1059,14 +1071,20 @@ In order to start the scan process, perform the following steps:
 [self.documentModuleView cancelScanningAndReturnError:&error];
 ```
 
-To receive results implement the following delegate method:
 
+After you received a result, call `cancelScanningAndReturnError`. This also has to be called in `viewWillDisappear` to clean up the module.
+
+
+###### &NewLine;
 ```objective_c
 - (void)anylineDocumentModuleView:(AnylineDocumentModuleView *)anylineEnergyModuleView hasResult:(UIImage *)transformedImage fullImage:(UIImage *)fullFrame {
    NSLog(@"Anyline has a result");
 }
 ```
 
+To receive results implement the delegate method as can be seen in the example.
+
+###### &NewLine;
 For each successful scan, you will receive two objects:
 
 - **transformedImage:** the cropped and transformed image of the document
@@ -1080,32 +1098,33 @@ For custom configuration (e.g. cutout, flash, feedback on successful scan, etc.)
 <a name="anylineOcrModule"> </a>
 ## Anyline OCR
 
-With the Anyline OCR Module it is possible to set up scanning for special/custom use cases.
-There are two different modes for this module: LINE and GRID.
-The LINE mode is optimal for scanning one or more lines of variable length or font (like IBANs or addresses).
-The GRID mode is optimal for characters with equal size laid out in a grid with a constant font, background and character count (like loyalty codes inside bottle caps).
+With the Anyline OCR Module it is possible to set up scanning for custom use-cases.
 
-If the provided settings are not enough to achieve a great result, you can
-<a href="https://www.anyline.io/support-request/">contact us</a> and we can create a command file that is optimized
-for that your case. This script can then be set as a parameter to this module (so minimal changes are required to your app).
+There are two different modes for this module: **LINE** and **GRID**.
+The LINE mode is optimal for scanning one or more lines of variable length and/or font (like IBANs or addresses).
+The GRID mode is optimal for characters with equal size laid out in a grid, with a constant font, background and character count (like loyalty codes inside bottle caps).
+
+If the provided settings are not enough to achieve great results, feel free to
+<a href="https://www.anyline.io/support-request/">contact us</a> and we will create a command file that is optimized
+for your use-case. This script can then be set as a parameter to this module, so minimal changes are required to your app.
 
 #### Settings Common
 
 property | description
 ----- | -----------
-scanMode | Available modes: `LINE` or `GRID`
+scanMode | `LINE` or `GRID`
 customCmdFile | An optional custom command file
 minCharHeight | The minimum height of a character to scan in pixels (relative to the configured capture resolution)
 maxCharHeight | The maximum height of a character to scan in pixels (relative to the configured capture resolution)
 tesseractLanguages | The languages to use for the OCR (e.g. to use custom.traineddata set this value "custom")
 charWhitelist | Filter the recognized characters to only allow the ones included in this list (e.g. `"ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"` for capital letters and numbers only)
-validationRegex | A regex string to validate the result (invalid results will not be returned). (regex is in <a href="http://www.cplusplus.com/reference/regex/ECMAScript/">ECMAScript regular expressions pattern syntax</a>)
+validationRegex | A regex string to validate the result. Invalid results will not be returned. (regex is in <a href="http://www.cplusplus.com/reference/regex/ECMAScript/">ECMAScript regular expressions pattern syntax</a>)
 minConfidence | The minimum confidence required to return a result, a value between 0 and 100. (higher confidence means it may take longer to get a result but it is more likely to be accurate)
 
 #### Settings LINE mode only
 property | description
 ----- | -----------
-removeSmallContours | If this is `true` small contours will be ignored (This is useful for latin capital letters and numbers. This is detrimental if details are relevant, like the dot above the letter `i`)
+removeSmallContours | If this is `true`, small contours will be ignored (This is useful for latin capital letters and numbers. This is detrimental if details are relevant, like the dot above the letter `i`)
 
 #### Settings GRID mode only
 property | description
@@ -1114,7 +1133,7 @@ charCountX | The number of horizontal characters
 charCountY | The number of vertical characters
 charPaddingXFactor | The average horizontal distance between two characters, measured in percentage of the characters width
 charPaddingYFactor | The average vertical distance between two characters, measured in percentage of the character height
-isBrightTextOnDark | If `true` this scans bright text on dark background. <br> If `false` this scans dark text on bright background
+isBrightTextOnDark | If `true`, this scans bright text on dark background. <br> If `false`, this scans dark text on bright background
 
 ### Android
 
@@ -1126,11 +1145,11 @@ The following example illustrates an IBAN scanner use-case realized with the Any
 
 There are five simple steps necessary to get started:
 
-1. Set the view config with `setConfig` (or in the layout xml)
+1. Set the view config with `setConfig` (or in the layout XML)
 2. Set OCR parameters with `setOcrConfig`
 3. Initialize the module with a license and a listener. The listener is called with the result (and other information) using `initAnyline`
 4. Call `startScanning()`
-5. When you are done call `cancelScanning()` and `releaseCameraInBackground()` or `releaseCamera()`
+5. When you are done, call `cancelScanning()` and `releaseCameraInBackground()` or `releaseCamera()`
 
 ```java
 // Get the view from the layout
@@ -1229,7 +1248,7 @@ scanView.releaseCameraInBackground();
 </RelativeLayout>
 ```
 
-The AnylineOcrScanView can simply be included in the activity layout file, just like any other view. The view can be either configured via XML or with a config json.
+The AnylineOcrScanView can simply be included in the activity layout file, just like any other view. The view can be either configured via [XML] (#configureViaXML) or with a config json.
 
 <a name="ibanViewConfig"> </a>
 ###### Example view config for the IBAN use case
@@ -1264,39 +1283,36 @@ The AnylineOcrScanView can simply be included in the activity layout file, just 
 }
 ```
 
-A detailed description of all available config items can be found in the chapter [Anyline Config] (#anyline-config)
+A detailed description of all available config items can be found in the section [Anyline Config] (#anyline-config).
 
-It is also possible to use xml-attributes instead of the json config file. For more detailed information see [XML Configuration] (#configureViaXML)
+###### &NewLine;
 
 ##### Other Examples
 
-For more example use cases of the Anyline OCR Module, check out the Examples app in the download package (available here: <a href="https://www.anyline.io/download/">https://www.anyline.io/download/</a>)
+For more example use cases of the Anyline OCR module, check out the Examples app in the download package, available here: <a href="https://www.anyline.io/download/">https://www.anyline.io/download/</a>
 
 ###### Reporting
-
-The reporting of results in the Community Edition (including an image)
-helps us to improving our product, and the customer experience.
-It is possible to turn that feature off by calling ​*setReportingEnabled(false)*​ on the AnylineOcrScanView.
 
 ```java
 scanView.setReportingEnabled(false);
 ```
 
+The reporting of results in the Community Edition (including an image)
+helps us to improve our product, and the customer experience.
+It is possible to turn off that feature by calling ​*setReportingEnabled(false)*​ on the AnylineOcrScanView.
+
+
+
 ### iOS
 
 #### Example
-The following example illustrates an IBAN scanner use-case realized with the Anyline OCR module.
+The following example illustrates an ISBN scanner use-case, realized with the Anyline OCR module.
 
-###### Example Activity for the IBAN use case
+There are three simple steps necessary to get started:
+
+######1. Initialize the module in viewDidLoad######
+
 > in `viewDidLoad` lifecycle method
-
-There are five simple steps necessary to get started:
-
-1. Create a `ALUIConfiguration` object and use its properties to configure the user interface (or load a layout file)
-2. Create a `ALOCRConfig` object and use its properties to configure the module
-3. Initialize the module with a license key, delegate and the `ALOCRConfig` object. The delegate will be called with the result (and other information) according to the `AnylineOCRModuleDelegate` protocol
-4. In `viewDidAppear:` call `startScanningAndReturnError:`
-5. After you received a result call `cancelScanningAndReturnError:` (This also has to be called in viewWillDisappear: to clean up the module)
 
 ```objective_c
 // The controller has to conform to <AnylineOCRModuleDelegate> to be able to receive results
@@ -1372,11 +1388,21 @@ There are five simple steps necessary to get started:
 @end
 ```
 
+ - Create a `ALUIConfiguration` object and use its properties to configure the user interface, or load a layout file. 
+ - Create a `ALOCRConfig` object and use its properties to configure the module. 
+ - Initialize the module with a license key, a delegate and the `ALOCRConfig` object. The delegate will be called once there is a result. 
+
+######2. Start scanning process in viewDidAppear######
+
 > in viewDidAppear()
 
 ```objective_c
 [self.ocrModuleView startScanningAndReturnError:&error];
 ```
+
+Call `startScanningAndReturnError` in `viewDidAppear`. If there is a problem while starting the scanning process, an error object will be set so the error can be handled.
+
+######3. Implement the delegate method and receive results######
 
 > in viewWillDisappear()
 
@@ -1384,55 +1410,60 @@ There are five simple steps necessary to get started:
 [self.ocrModuleView cancelScanningAndReturnError:&error];
 ```
 
-To receive results implement the following delegate method:
-
 ```objective_c
 - (void)anylineOCRModuleView:(AnylineOCRModuleView *)anylineOCRModuleView didFindResult:(ALOCRResult *)result {
    NSLog(@"Anyline has a result");
 }
 ```
 
+To receive results implement the delegate method as can be seen in the example.
+After you received a result, call `cancelScanningAndReturnError`. This also has to be called in `viewWillDisappear` to clean up the module. 
 
-<a name="ibanViewConfig"> </a>
+
+<a name="isbnViewConfig"> </a>
 ###### Example view config for the IBAN use case
-
-The ocr module can simply be added as a subview, just like any other view. The view can be either configured via `ALUIConfiguration` or with a config json file.
 
 ```json
 {
-  "captureResolution":"1080",
-  "cutout": {
-    "style": "rect",
-    "maxWidthPercent": "80%",
-    "maxHeightPercent": "80%",
-    "alignment": "top_half",
-    "width": 870,
-    "ratioFromSize": {
-      "width": 5,
-      "height": 1
+    "captureResolution":"1080",
+    "cutout": {
+        "style": "rect",
+        "maxWidthPercent": "80%",
+        "maxHeightPercent": "80%",
+        "alignment": "top_half",
+        "width": 540,
+        "ratioFromSize": {
+            "width": 5,
+            "height": 1
+        },
+        "strokeWidth": 2,
+        "cornerRadius": 10,
+        "strokeColor": "FFFFFF",
+        "outerColor": "000000",
+        "outerAlpha": 0.3
     },
-    "strokeWidth": 2,
-    "cornerRadius": 10,
-    "strokeColor": "FFFFFF",
-    "outerColor": "000000",
-    "outerAlpha": 0.3
-  },
-  "flash": {
-    "mode": "manual",
-    "alignment": "bottom_right"
-  },
-  "beepOnResult": true,
-  "vibrateOnResult": true,
-  "blinkAnimationOnResult": true,
-  "cancelOnResult": true
+    "flash": {
+        "mode": "manual",
+        "alignment": "bottom_right"
+    },
+    "beepOnResult": true,
+    "vibrateOnResult": true,
+    "blinkAnimationOnResult": true,
+    "cancelOnResult": true
 }
 ```
 
-A detailed description of all available config items can be found in the chapter [Anyline Config] (#anyline-config)
+The OCR module can simply be added as a subview, just like any other view. The view can be either configured via `ALUIConfiguration` or with a config json file.
+
+
+
+A detailed description of all available config items can be found in the section [Anyline Config] (#anyline-config)
+
+######&NewLine;
 
 ##### Other Examples
 
-For more example use cases of the Anyline OCR Module, check out the Examples app in the download package (available here: <a href="https://www.anyline.io/download/">https://www.anyline.io/download/</a>)
+For more example use cases of the Anyline OCR Module, check out the Examples app in the download package, available here: <a href="https://www.anyline.io/download/">https://www.anyline.io/download/</a>
 
 <a name="ordercodeModule"> </a>
 ## Order Code
