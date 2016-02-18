@@ -6,7 +6,7 @@ This section describes how to configure the scan view using [AnylineConfig] (#an
 <a name="anyline-config"> </a>
 ## Anyline Config 
 
-With the config file the views can be configured in regard of position and looks of the *cutout* used for scanning as well as the behavior of flash and feedback mechanisms for scanning. This section contains a detailed description of the configurable items as well as two distinct ways for each platform to set up and configure the view.
+With the config file the views can be configured in regard of position and looks of the *cutout* used for scanning, as well as the behavior of flash and feedback mechanisms for scanning. This section contains a detailed description of the configurable items, as well as two distinct ways for each platform to set up and configure the view.
 
 <a name="itemDescription"> </a>
 ### Item description
@@ -16,23 +16,25 @@ With the config file the views can be configured in regard of position and looks
       "captureResolution": "720",
       "pictureResolution": "1080",
       "cutout": {
-          "style": "rect",
           "width": 540,
           "maxWidthPercent": "80%",
           "maxHeightPercent": "80%",
-          "alignment": "center",
-          "image":"Overlay",
           "ratioFromSize": {
               "width": 125,
               "height": 85
           },
-          "strokeWidth": 2,
-          "strokeColor": "FFFFFF",
-          "cornerRadius": 4,
+          "alignment": "center",  
           "offset": {
               "x": 0,
               "y": 0
           },
+          "outerColor": "000000",
+          "outerAlpha": 0.3,
+		  "style": "rect",
+          "strokeColor": "FFFFFF",
+		  "strokeWidth": 2,
+          "cornerRadius": 4,
+		  "image":"Overlay",
           "cropPadding": {
               "x": 0,
               "y": 0
@@ -40,9 +42,7 @@ With the config file the views can be configured in regard of position and looks
           "cropOffset": {
               "x": 0,
               "y": 0
-          },
-          "outerColor": "000000",
-          "outerAlpha": 0.3
+          }
       },
       "flash": {
           "mode": "manual",
@@ -131,18 +131,18 @@ If the "suggested" resolution is available, it will be used, if not a resolution
 <a name="pictureResolution"> </a>
 ##### pictureResolution
 
-The resolution of the full picture taken from the camera (optional). This parameter is only of interest when using the module [Document] (#document).
+The resolution of the full picture taken from the camera (optional). This parameter is only of interest when using the [Document] (#document) module.
 
 **Possible values:**
 
 value | description
 ----- | -----------
-1080 |	use 1080 as the minumum picture resolution
 1280 | use 1280 as the minimum picture resolution
+1080 |	use 1080 as the minumum picture resolution
 ...  | and so on
 
  - The p is optional (and only accepted for convenience). 
- - The defined picture resolution is just the preferred minimal picture resolution. If this resolution is not available the smallest resolution bigger than the provided resolution will be used. If no resolution is provided, the highest available resolution is chosen. 
+ - The defined picture resolution is just the preferred minimal picture resolution.  
 
 <aside class="notice">
 <b>Android specific</b>
@@ -151,11 +151,17 @@ The picture resolution is more like a suggestion, because the available preview 
 If the "suggested" resolution is available, it will be used, if not, the smallest available resolution bigger than the suggested resolution will be used.
 </aside>
 
+<aside class="notice">
+<b>iOS specific</b>
+<br/>
+The highest possible resolution for iOS is 1080. However if you specify a higher value for picture resolution we will return a high resolution photo of the found document as result. Therefore it is also possible to specify "photo" as value if you want to get a high resolution result.
+</aside>
+
 
 <a name="cutout"></a>
 ##### cutout
 
-This contains all the settings for the overlay/cutout.
+This section contains all the settings for the overlay/cutout.
 
 
 <a name="cutout_width"></a>
@@ -173,10 +179,10 @@ E.g. Android devices may have a 720p preview but only a 540p wide display. If a 
 
 Specifies the maximum width of the cutout in percent.
 
-This is the desired width if 'width' parameter is not used.
+This is the desired width if the 'width' parameter is not used.
 
 - **Type:**			String
-- **Format:**		####%
+- **Format:**		###%
 - **Range:**		1% - 100%
 - **Default:**		100%
 
@@ -186,12 +192,12 @@ This is the desired width if 'width' parameter is not used.
 Specify the maximum height of the cutout in %.
 
 - **Type:**			String
-- **Format:**		####%
+- **Format:**		###%
 - **Range:**		1% - 100%
 - **Default:**		100%
 
 <aside class="notice">
-<b>Why width and maxWidth and maxHeight but no height?</b>
+<b>Why width, maxWidth and maxHeight but no height?</b>
 <br/>
 The form of the cutout can be defined by the ratio, so there is no direct need for width AND height parameter.
 But if there is only one width parameter where % or pixel value is allowed, it is not possible to limit the height to a certain percentage.
@@ -312,7 +318,7 @@ Please keep in mind that there is a relationship between the size of the cutout,
 
 <a name="flash"> </a>
 ####flash
-Settings for a simple view that provides flash functionality.
+Settings for a simple view that provides flash functionality. Default images for flash on/off/auto are provided, however you can use custom images as well. 
 
 <aside class="notice">
 <b>Epson specific</b>
@@ -323,7 +329,7 @@ The Epson BT2000 has no flash integrated. Hence, all flash config settings will 
 <a name="flash_mode"> </a>
 #####mode
 
-Default images for flash on/off/auto are provided.
+The following three possible flash modes are available:
 
 **Possible values:** 
 
@@ -382,7 +388,7 @@ In y direction positive values move the flash button down, negative values move 
 
 ####Special options for Modules
 
-Modules can use these additional options to configure some things that should happen when a result was found.
+Modules can use these additional settings to configure some feedback options which should happen when a result was found.
 
 <a name="beepOnResult"> </a>
 #####beepOnResult
@@ -555,13 +561,13 @@ Drag the connector of you property to the newly created view.
 ![Connect] (images/docConnect.jpg)
 
 ### Cordova Plugin Config 
-The configuration for the anyline-sdk plugin is part of the AnylineSDK call. The config is just passed as a json-array, see also the [example in the Quick Start] (#cordova-example).
+The configuration for the anyline-sdk plugin is part of the AnylineSDK call. The config is just passed as a json-array, see also the [example] (#cordova-example) in the Quick Start.
 
 <a name="add-views"> </a>
 ## Add Views
 
 The SDK provides a function to determine the position and outline of the cutout view. This function should be used when placing views on top of the module ScanView in order to avoid an overlap with the cutout.
-A watermark is displayed in the Community Edition of the SDK. Depending on the size of the cutout, this watermark will either be displayed within the cutout, or directly underneath the cutout view. In the second case, the watermark view has to be considered when adding other views, since an overlap of the watermark will result in an exception. 
+In the Community Edition of the SDK a watermark is displayed. Depending on the cutout size, this watermark will either be displayed within the cutout, or with respect to the cutout position, directly underneath or above the cutout. In the second case, the watermark view has to be considered when adding other views, since an overlap of the watermark will result in an exception. 
 
 
 ### Android
@@ -592,9 +598,9 @@ params.topMargin = cutoutRect.top-pixels;
 rl.addView(textView, params);
 ```
 
-This example shows how you can add a view placed above the cutout view. With the function getCutoutRect you get a Rect representing the four corners (left, top, right, bottom) of the cutout. 
+This example shows how to add a view above the cutout. With the function getCutoutRect you get a Rect representing the four corners (left, top, right, bottom) of the cutout. 
 
-We add a TextView where the left margin of the view will be the same as the left margin of the cutout. The top border of the TextView will be 40 pixels above the cutout. It is important to consider the height of the TextView and reduce this height value of the top value from the cutout rect. Furthermore it is recommended to work with density independent pixels to avoid large differences when displayed on devices with various display densities. 
+We add a TextView where the left margin of the view will be the same as the left margin of the cutout. The top border of the TextView will be 40 pixels above the cutout. It is important to consider the height of the TextView and reduce this height value from the top value of the cutout rect. Furthermore it is recommended to work with density independent pixels to avoid large differences when displayed on devices with various display densities. 
 
 
 ######Consider the Watermark in Community Edition
@@ -621,7 +627,7 @@ params.gravity = Gravity.CENTER_HORIZONTAL;
 rl.addView(textView, params);
 ```
 
-When working with the community edition and small cutouts the watermark will be placed underneath the cutout and not included in the cutout view itself. In this case you have to consider the watermark as well when placing a view under the cutout. 
+When working with the community edition and small cutouts the watermark will usually be placed underneath the cutout and not included in the cutout view itself. In this case you have to consider the watermark as well when placing a view under the cutout. In case the cutout is placed on the bottom of the view, the watermark will be displayed above the the cutout and you have to be careful when placing views above the cutout. 
 
 
 The example shows how to use the getWatermarkRect function to add a TextView with a top margin of 8dp under the watermark view
@@ -673,4 +679,5 @@ label.backgroundColor = [UIColor grayColor];
 [self.ocrModuleView addSubview:label];
 ```
 
-In this example we add a subview below the watermark. Because the watermark can sometimes be inside the cutout we make sure to check which one has the highes y coordinate. With the function cutoutRect you get a CGRect representing the cutout. The function `watermarkRect` gets the bounding rect of teh watermark. `CGRectGetMaxY` adds its y origin and its height to get the lower border of the cutouts. `MAX` determines the bigger value. This code makes sure your label is placed below the cutout and the watermark.
+Notice that you will get an exception when you overlay the watermark. Since the watermark will be displayed outside the cutout when the cutout size is to small, you have to consider both views when placing custom views around the cutout. 
+In this example we add a view below the watermark. Therefore, we have to check which view has the largest y coordinate to avoid an overlap. With the function `cutoutRect` you get a CGRect representing the cutout. The function `watermarkRect` returns the bounding rect of the watermark. `CGRectGetMaxY` determines the y origin plus height to get the lower border of the view. With `MAX` you then get the maximum y coordinate of both rects and can use this value to place your view below both views. In case a small cutout is placed at the bottom edge of the display the watermark will be placed above the cutout. Please also consider this edge case when placing your views around the cutout.
