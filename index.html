@@ -50,12 +50,21 @@ This API contains a <a href="#getting-started">Quick Start Guide</a> for all sup
 <li>WP (expected release: Q1 2016)</li>
 </ul>
 
-<p>Anyline is also available as <a href="#cordova-plugin">Cordova Plugin</a>.
-Android and iOS modules are also available for <a href="#xamarin-setup-guide">Xamarin</a>.</p>
+<h3 id="extensions">Extensions</h3>
 
-<p>(Xamarin WP Support Q1 2016).</p>
+<ul>
+<li><a href="#cordova-plugin">Cordova Plugin</a></li>
+<li><a href="#xamarin-setup-guide">Xamarin</a> - Availabe for Android and iOS. Expected WP Support Q1 2016.</li>
+</ul>
 
-<p>Furthermore there is a version of the Anyline SDK specific for the <a href='https://tech.moverio.epson.com/en/work/'>Epson BT2000</a>. This verison includes one additional module requiring a special license which can not be acquired via our customer portal. For more information or a trial license please <a href="https://www.anyline.io/support-request/">contact</a> us.</p>
+<h3 id="smart-glasses">Smart Glasses</h3>
+
+<ul>
+<li><a href=https://developers.google.com/glass/>Google Glass</a></li>
+<li><a href='https://tech.moverio.epson.com/en/work/'>Epson BT2000</a> </li>
+</ul>
+
+<p>First prototypes for both glasses are available on request. The versions include one additional module requiring a special license which cannot be acquired via our customer portal. For more information and a trial license please <a href="https://www.anyline.io/support-request/">contact</a> us.</p>
 
 <h3 id="available-modules">Available Modules</h3>
 
@@ -63,8 +72,9 @@ Android and iOS modules are also available for <a href="#xamarin-setup-guide">Xa
 <li><a href="#barcodeModule"><strong>Barcode:</strong></a>  Scan 23 types of international barcode &amp; QR code formats.</li>
 <li><a href="#energyModule"><strong>Energy:</strong></a> Scan meter readings of various electric, gas, and water meters.</li>
 <li><a href="#mrzModule"><strong>MRZ:</strong></a>  Reliable scanning of data from passports&rsquo; and IDs&rsquo; machine readable zones (MRZ)</li>
-<li><a href="#ordercodeModule"><strong>Order Code:</strong></a>  Scan an alphanumeric order code - only available for Epson BT2000</li>
-<li><strong>Custom:</strong> Got any other ideas? We will support you when implementing other use cases for mobile OCR technology.</li>
+<li><a href="#documentModule"><strong>Document:</strong></a> Detects document outlines and delivers a high-resolution image</li>
+<li><a href="#ordercodeModule"><strong>Order Code:</strong></a>  Scan an alphanumeric order code - only available for smart glasses</li>
+<li><a href="#anylineOcrModule"><strong>Anyline OCR:</strong></a> Create a custom use case with LINE or GRID recognition</li>
 </ul>
 
           <h1 id="getting-started">Getting Started</h1>
@@ -73,7 +83,7 @@ Android and iOS modules are also available for <a href="#xamarin-setup-guide">Xa
 
 <h2 id="obtaining-an-anyline-sdk-license-key">Obtaining an Anyline SDK License Key</h2>
 
-<p>The best way to use Anyline is to purchase your personal license in our <a href="https://www.anyline.io/store/">Anyline Store</a>. Each key is bound to a specific application by the Bundle Identifier (iOS) or the ApplicationId (Android).</p>
+<p>The best way to use Anyline is to purchase your personal license in our <a href="https://www.anyline.io/store/">Anyline Store</a>. Each key is bound to a specific application by the Bundle Identifier (iOS) or the applicationId (Android).</p>
 
 <h3 id="ios-bundle-identifier">iOS Bundle Identifier</h3>
 
@@ -83,11 +93,11 @@ Android and iOS modules are also available for <a href="#xamarin-setup-guide">Xa
 
 <h3 id="android-applicationid">Android ApplicationId</h3>
 
-<p>The Android ApplicationId is found in the build.gradle file as android / defaultConfig / applicationId.</p>
+<p>The Android applicationId is found in the build.gradle file as android / defaultConfig / applicationId.</p>
 
 <p><img alt="BundleIDAndroid" src="images/bundleIDAndroid.png" /></p>
 
-<p>If you do not use the ApplicationId in your build.gradle file you may use the package name shown in the AndroidManifest.xml.</p>
+<p>If you do not use the applicationId in your build.gradle file you may use the package name shown in the AndroidManifest.xml.</p>
 
 <p><img alt="BundleIdAndroid2" src="images/bundleIDAndroid2.png" /></p>
 
@@ -97,11 +107,16 @@ Android and iOS modules are also available for <a href="#xamarin-setup-guide">Xa
 
 <ul>
 <li><strong>AnylineSDK:</strong>      contains the anyline-android-release.aar library</li>
-<li><strong>Documentation:</strong>    contains the java doc for the anyline-sdk</li>
 <li><strong>AnylineSDKExamples:</strong>      contains a simple app where an example for each module is implemented - it can be installed right away</li>
+<li><strong>Documentation:</strong>    contains the java doc for the anyline-sdk, and this web documentation</li>
 <li><strong>LICENSE:</strong>          third party license agreements</li>
 <li><strong>README:</strong>           contains a quick start - setup and module description</li>
+<li><strong>RELEASE_NOTES:</strong>    information about any changes</li>
 </ul>
+
+<h3 id="sample-data">Sample Data</h3>
+
+<p>In order to try out our examples app yourself, you can download  <a href="https://anylinewebsiteresource.blob.core.windows.net/wordpressmedia/2016/02/Anyline-3.4-Use-Case-Samples.pdf">this file</a> with test images or scan things in the real world ;) </p>
 
 <h3 id="requirements">Requirements</h3>
 
@@ -112,7 +127,7 @@ Android and iOS modules are also available for <a href="#xamarin-setup-guide">Xa
 
 <h3 id="quick-start-guide">Quick Start Guide</h3>
 
-<h4 id="1-add-anylinesdk-as-dependcency">1. Add AnylineSDK as dependcency</h4>
+<h4 id="1-add-anylinesdk-as-dependency">1. Add AnylineSDK as dependency</h4>
 
 <h5 id="via-maven">Via Maven</h5>
 
@@ -127,7 +142,7 @@ Android and iOS modules are also available for <a href="#xamarin-setup-guide">Xa
 
 <span class="n">dependencies</span> <span class="o">{</span>
     <span class="c1">//add the anyline sdk as dependency (maybe adapt version name)
-</span>    <span class="n">compile</span> <span class="s1">'io.anyline:anylinesdk:3.3.0@aar'</span>
+</span>    <span class="n">compile</span> <span class="s1">'io.anyline:anylinesdk:3.4.0@aar'</span>
     <span class="c1">//... your other dependencies
 </span><span class="o">}</span>
 </code></pre>
@@ -158,7 +173,7 @@ compile &lsquo;io.anyline:anylinesdk:3.3.0-epson@aar&rsquo;
 <span class="o">}</span>
 
 <span class="n">dependencies</span> <span class="o">{</span>
-    <span class="n">compile</span><span class="o">(</span><span class="nl">name:</span><span class="s1">'anylinesdk-3.3.0'</span><span class="o">,</span> <span class="nl">ext:</span><span class="s1">'aar'</span><span class="o">)</span>
+    <span class="n">compile</span><span class="o">(</span><span class="nl">name:</span><span class="s1">'anylinesdk-3.4.0'</span><span class="o">,</span> <span class="nl">ext:</span><span class="s1">'aar'</span><span class="o">)</span>
     <span class="c1">//... your other dependencies
 </span><span class="o">}</span>
 </code></pre>
@@ -173,7 +188,7 @@ compile(name:'anylinesdk-3.3.0-epson&rsquo;, ext:'aar&rsquo;)
 
 <h6 id="newline">&NewLine;</h6>
 
-<h5 id="2-provide-a-config-file-json-or-xml">2. Provide a config file (json or xml)</h5>
+<h4 id="2-provide-a-config-file-json-or-xml">2. Provide a config file (json or xml)</h4>
 
 <blockquote>
 <p>Example barcode_view_config.json:</p>
@@ -211,7 +226,7 @@ A detailed description of all available attributes can be found in <a href="#any
 <aside class="notice">
 <b>Epson specific</b>
 <br/>
-The Epson BT2000 has no flash or vibration alarm integrated. Hence, all settings regarding flash and 'vibrateOnResult&rsquo; will be ignored. Furthermore has the Epson no built-in speakers, therfore the 'beepOnResult&rsquo; will only be played when the headset is connected
+The Epson BT2000 has no flash or vibration alarm integrated. Hence, all settings regarding flash and 'vibrateOnResult&rsquo; will be ignored. Furthermore the Epson has no built-in speakers, therfore the 'beepOnResult&rsquo; will only be played when the headset is connected
 </aside>
 
 <h6 id="json">JSON</h6>
@@ -315,13 +330,16 @@ The Epson BT2000 has no flash or vibration alarm integrated. Hence, all settings
           <h2 id="ios-getting-started">iOS Getting Started</h2>
 
 <ul>
-<li><strong>Framework:</strong>        contains the Anyline.framework &amp; AnylineResources.bundle</li>
-<li><strong>Documentation:</strong>    contains a html &amp; docset version of an appledoc style interface documentation</li>
+<li><strong>Framework:</strong>        contains the Anyline.framework and AnylineResources.bundle</li>
+<li><strong>Documentation:</strong>    contains a html and docset version of an appledoc style interface documentation</li>
 <li><strong>AnylineExamples:</strong>  contains a simple app where each module is implemented - it can be installed right away</li>
 <li><strong>LICENSE:</strong>          third party license agreements</li>
-<li><strong>README:</strong>           containing a quick start - setup and module description</li>
-<li><strong>RELEASE_NOTES</strong></li>
+<li><strong>RELEASE_NOTES</strong>     information about any changes</li>
 </ul>
+
+<h3 id="sample-data">Sample Data</h3>
+
+<p>In order to try out our examples app yourself, you can download  <a href="https://anylinewebsiteresource.blob.core.windows.net/wordpressmedia/2016/02/Anyline-3.4-Use-Case-Samples.pdf">this file</a> with test images or scan things in the real world ;)  </p>
 
 <h3 id="requirements">Requirements</h3>
 
@@ -363,7 +381,7 @@ The Epson BT2000 has no flash or vibration alarm integrated. Hence, all settings
 <h4 id="3-linker-flags">3. Linker Flags</h4>
 
 <p>In your project inspector switch to the <em>Build Settings</em> tab  and search for <em>Other Linker Flags</em>. Select
-<em>Other - Other Linker Flags</em> and add <em>-&nbsp;ObjC</em>.
+<em>Other - Other Linker Flags</em> and add <em>-ObjC</em>.
 This flag causes the linker to load every object file in the library that defines an Objective-C class or category.</p>
 
 <p><img alt="Linker Flags" src="images/LinkerFlags.jpg" /></p>
@@ -491,7 +509,7 @@ Basically, there is one simple exec-call to the AnylineSDK with the following pa
 
           <h1 id="xamarin-setup-guide">Xamarin Setup Guide</h1>
 
-<p>The Anyline SDK is available for both Xamarin.Android and Xamarin.iOS. Each mobile platform has their own Anyline Xamarin SDK and and can be used very similar to the regular Anyline bundles for Android and iOS. Please refer to our API Reference for platform-specific documentation.</p>
+<p>The Anyline SDK is available for both Xamarin.Android and Xamarin.iOS. Each mobile platform has their own Anyline Xamarin SDK and can be used very similar to the regular Anyline bundles for Android and iOS. Please refer to our API Reference for platform-specific documentation.</p>
 
 <h2 id="xamarin-android">Xamarin.Android</h2>
 
@@ -499,11 +517,11 @@ Basically, there is one simple exec-call to the AnylineSDK with the following pa
 
 <h3 id="requirements">Requirements</h3>
 
-<p>To use the Anyline SDK for Xamarin.Android, you&rsquo;ll need:</p>
+<p>To use the Anyline SDK for Xamarin.Android you need:</p>
 
 <ul>
-<li>Xamarin account (If you work with Visual Studio, you need at least a Xamarin business account. Check out the <a href="https://xamarin.com/">Xamarin website</a> for detailed information.)</li>
-<li>Android device with SDK &gt;= 15</li>
+<li>A Xamarin account (If you work with Visual Studio, you need at least a Xamarin business account. Check out the <a href="https://xamarin.com/">Xamarin website</a> for detailed information.)</li>
+<li>An Android device with SDK &gt;= 17</li>
 <li>Decent camera functionality (recommended: 720p and adequate auto focus)</li>
 <li>Xamarin Studio or Visual Studio</li>
 <li>An Anyline license which you can generate <a href="http://portal.anyline.io/">here</a> after purchasing our SDK in the <a href="https://www.anyline.io/store/">store</a>.</li>
@@ -513,14 +531,14 @@ Basically, there is one simple exec-call to the AnylineSDK with the following pa
 
 <ul>
 <li><strong>AnylineXamarinSDK.Droid.dll:</strong> contains the Anyline SDK Library</li>
-<li><strong>AnylineXamarinApp.Droid</strong> contains a simple app where an example for each module is implemented - it can be installed right away</li>
+<li><strong>AnylineXamarinApp.Droid:</strong> contains a simple app where an example for each module is implemented - it can be installed right away</li>
 <li><strong>LICENSE:</strong> third party license agreements</li>
 <li><strong>README:</strong> contains a quick start - setup and module description</li>
 </ul>
 
 <h3 id="quick-start-setup">Quick Start - Setup</h3>
 
-<p>In this section we will go through the basic process of creating and configurating a simple Anyline scanning application in Xamarin.Android. If you are not yet familiar with Xamarin.Android, follow <a href="https://developer.xamarin.com/guides/android/getting_started/hello,android/hello,android_quickstart/">this</a> guide to develop an understanding of the fundamentals of Android application development with Xamarin.</p>
+<p>In this section we will go through the basic process of creating and configuring a simple Anyline scanning application in Xamarin.Android. If you are not yet familiar with Xamarin.Android, follow <a href="https://developer.xamarin.com/guides/android/getting_started/hello,android/hello,android_quickstart/">this</a> guide to develop an understanding of the fundamentals of Android application development with Xamarin.</p>
 
 <h4 id="1-create-a-new-xamarin-android-project">1. Create a new Xamarin.Android Project</h4>
 
@@ -537,13 +555,13 @@ Basically, there is one simple exec-call to the AnylineSDK with the following pa
 <p>Obtaining a license key is already described <a href="#obtaining-an-anyline-sdk-license-key">here</a>. To generate a license key for your application, refer to the <code class="prettyprint">package name</code> of your Xamarin.Android project. </p>
 
 <ul>
-<li>Visual Studio</li>
+<li><strong>Visual Studio</strong></li>
 </ul>
 
 <p><img alt="XamarinAndroidPackageVS" src="images/xamarinAndroidPackageVS.png" /></p>
 
 <ul>
-<li>Xamarin Studio</li>
+<li><strong>Xamarin Studio</strong></li>
 </ul>
 
 <p><img alt="XamarinAndroidPackageXS" src="images/xamarinAndroidPackageXS.png" /></p>
@@ -552,21 +570,21 @@ Basically, there is one simple exec-call to the AnylineSDK with the following pa
 
 <p>To access the functionality of our SDK, simply add the <code class="prettyprint">AnylineXamarinSDK.Droid.dll</code> file as a reference. </p>
 
-<p>Visual Studio:</p>
+<p><strong>Visual Studio:</strong></p>
 
 <ul>
-<li>right-click the References node in your project tree</li>
-<li>click &ldquo;Add reference&hellip;&rdquo;</li>
-<li>click &ldquo;Browse&hellip;&rdquo; and locate the AnylineXamarinSDK.Droid.dll file</li>
+<li>right-click the <em>References</em> node in your project tree</li>
+<li>click <em>Add reference&hellip;</em></li>
+<li>click <em>Browse&hellip;</em> and locate the <em>AnylineXamarinSDK.Droid.dll</em> file</li>
 </ul>
 
-<p>Xamarin Studio:</p>
+<p><strong>Xamarin Studio:</strong></p>
 
 <ul>
-<li>right-click the References node in your project tree</li>
-<li>click &ldquo;Edit references&hellip;&rdquo;</li>
-<li>navigate to the &ldquo;.Net Assembly&rdquo; tab</li>
-<li>click &ldquo;Browse&hellip;&rdquo; to locate the AnylineXamarinSDK.Droid.dll file</li>
+<li>right-click the <em>References</em> node in your project tree</li>
+<li>click <em>Edit references&hellip;</em></li>
+<li>navigate to the <em>.Net Assembly</em> tab</li>
+<li>click <em>Browse&hellip;</em> to locate the <em>AnylineXamarinSDK.Droid.dll</em> file</li>
 </ul>
 
 <p>The SDK should now be visible as a reference and your project tree should somewhat look like this:</p>
@@ -581,7 +599,7 @@ Basically, there is one simple exec-call to the AnylineSDK with the following pa
 
 <h4 id="5-add-necessary-permissions-and-features">5. Add necessary permissions and features</h4>
 
-<p>The scanning activity needs the following permissions and features</p>
+<p>The scanning activity needs the following permissions and features:</p>
 
 <ul>
 <li>Permissions
@@ -651,7 +669,7 @@ Basically, there is one simple exec-call to the AnylineSDK with the following pa
 <h6 id="newline">&NewLine;</h6>
 
 <blockquote>
-<p>Remove the Button and add a scan view instead. Edit the XML code as follows</p>
+<p>Remove the button and add a scan view instead. Edit the XML code as follows:</p>
 </blockquote>
 <pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
 <span class="nt">&lt;LinearLayout</span> <span class="na">xmlns:android=</span><span class="s">"http://schemas.android.com/apk/res/android"</span>
@@ -674,17 +692,17 @@ Basically, there is one simple exec-call to the AnylineSDK with the following pa
 <p>You now have added a Barcode scan view to your activity. However, depending on which scanning type you want to implement, choose one of these module-specific views:</p>
 
 <ul>
-<li>Barcode scanning
+<li>Barcode scanning: 
 
 <ul>
 <li>at.nineyards.anyline.modules.barcode.BarcodeScanView</li>
 </ul></li>
-<li>Energy meter scanning
+<li>Energy meter scanning:
 
 <ul>
 <li>at.nineyards.anyline.modules.energy.EnergyScanView</li>
 </ul></li>
-<li>MRZ and passport scanning
+<li>MRZ and passport scanning:
 
 <ul>
 <li>at.nineyards.anyline.modules.mrz.MrzScanView</li>
@@ -798,7 +816,7 @@ In this example, let&rsquo;s create a .json file and fill it with properties:</p
 <p>The following methods have to be implemented in order to use the scan view:</p>
 
 <ul>
-<li>in <code class="prettyprint">OnCreate</code> we&rsquo;ll set up our scan view, load a configuration, initialize it with the license key that we generated earlier.</li>
+<li>in <code class="prettyprint">OnCreate</code> we&rsquo;ll set up our scan view, load a configuration and initialize it with the license key that we generated earlier.</li>
 </ul>
 
 <blockquote>
@@ -865,7 +883,7 @@ In this example, let&rsquo;s create a .json file and fill it with properties:</p
 
 <h4 id="9-handle-results">9. Handle Results</h4>
 
-<p>Each of the anyline modules uses a module-specific scan view that uses the camera of your mobile device and provides real-time scan results via a module-specific listener.</p>
+<p>Each of the Anyline modules uses a module-specific scan view that uses the camera of your mobile device and provides real-time scan results via a module-specific listener.</p>
 
 <p>The easiest way to make use of that listener is to implement the interface of the listener in your scan activity like this:</p>
 
@@ -900,7 +918,9 @@ In this example, let&rsquo;s create a .json file and fill it with properties:</p
 
 <h4 id="10-test-your-app-on-an-android-device">10. Test your app on an Android device</h4>
 
-<p>Build your project and deploy your application on your Android device. For module-specific documentation, please check <a href="#modules">this section</a> for more information. Enjoy scanning and have fun :)</p>
+<p>Build your project and deploy your application on your Android device. For module-specific documentation, please check <a href="#modules">this section</a> for more information. </p>
+
+<h4 id="11-enjoy-scanning-and-have-fun">11. Enjoy scanning and have fun :)</h4>
 
 <h2 id="xamarin-ios">Xamarin.iOS</h2>
 
@@ -908,10 +928,10 @@ In this example, let&rsquo;s create a .json file and fill it with properties:</p
 
 <h3 id="requirements">Requirements</h3>
 
-<p>To use the Anyline SDK for Xamarin.iOS, you&rsquo;ll need:</p>
+<p>To use the Anyline SDK for Xamarin.iOS you need:</p>
 
 <ul>
-<li>Xamarin account (For Visual Studio, you need at least a Xamarin business account. Check out the <a href="https://xamarin.com/">Xamarin website</a> for detailed information.)</li>
+<li>A Xamarin account (For Visual Studio, you need at least a Xamarin business account. Check out the <a href="https://xamarin.com/">Xamarin website</a> for detailed information.)</li>
 <li>An Anyline license which you can generate <a href="http://portal.anyline.io/">here</a> after purchasing our SDK in the <a href="https://www.anyline.io/store/">store</a>.</li>
 <li>An iOS device
 
@@ -927,7 +947,7 @@ In this example, let&rsquo;s create a .json file and fill it with properties:</p
 
 <ul>
 <li><strong>AnylineXamarinSDK.iOS.dll:</strong> contains the Anyline SDK Library</li>
-<li><strong>AnylineResources.bundle</strong> contains the necessary resources for your project</li>
+<li><strong>AnylineResources.bundle:</strong> contains the necessary resources for your project</li>
 <li><strong>AnylineXamarinApp.iOS:</strong> contains a simple app where each module is implemented - it can be installed right away</li>
 <li><strong>LICENSE:</strong> third party license agreements</li>
 <li><strong>README:</strong> contains a quick start - setup</li>
@@ -935,7 +955,7 @@ In this example, let&rsquo;s create a .json file and fill it with properties:</p
 
 <h3 id="quick-start-setup">Quick Start - Setup</h3>
 
-<p>In this section we will go through the basic process of creating and configurating a simple Anyline scanning application in Xamarin.iOS. If you are not yet familiar with Xamarin.iOS, follow <a href="https://developer.xamarin.com/guides/ios/getting_started/">this</a> guide to develop an understanding of the fundamentals of iOS application development with Xamarin.</p>
+<p>In this section we will go through the basic process of creating and configuring a simple Anyline scanning application in Xamarin.iOS. If you are not yet familiar with Xamarin.iOS, follow <a href="https://developer.xamarin.com/guides/ios/getting_started/">this</a> guide to develop an understanding of the fundamentals of iOS application development with Xamarin.</p>
 
 <h4 id="1-create-a-new-xamarin-ios-project">1. Create a new Xamarin.iOS Project</h4>
 
@@ -943,21 +963,21 @@ In this example, let&rsquo;s create a .json file and fill it with properties:</p
 
 <p><img alt="XamariniOSCreate" src="images/xamariniOSCreate.png" /></p>
 
-<p>Make sure your build host is up and running and pair Visual Studio with the build host. If you have trouble with this step, please refer to <a href="https://developer.xamarin.com/guides/ios/getting_started/installation/windows/troubleshooting/">this guide</a>.</p>
+<p>Make sure your build host is up and running and pair Visual Studio with the build host. If you have any troubles with this step, please refer to <a href="https://developer.xamarin.com/guides/ios/getting_started/installation/windows/troubleshooting/">this guide</a>.</p>
 
 <h6 id="newline">&NewLine;</h6>
 
 <h4 id="2-generate-license-key">2. Generate license key</h4>
 
-<p>To generate a license key for your application, refer to the <code class="prettyprint">bundle identifier</code> of your Xamarin.iOS project. Further information about getting a license key is described <a href="#obtaining-an-anyline-sdk-license-key">here</a>. </p>
+<p>To generate a license key for your application, refer to the <code class="prettyprint">bundle identifier</code> of your Xamarin.iOS project and follow this <a href="#obtaining-an-anyline-sdk-license-key">guide</a> to get a valid license key.</p>
 
 <p><img alt="XamariniOSBundle" src="images/xamariniOSBundle.png" /></p>
 
 <h4 id="3-add-anyline-sdk">3. Add Anyline SDK</h4>
 
-<p>In the project view, right-click on the <code class="prettyprint">References</code> node, select <code class="prettyprint">Add Reference...</code> and locate the AnylineXamarinSDK.iOS.dll.</p>
+<p>In the project view, right-click on the <code class="prettyprint">References</code> node, select <code class="prettyprint">Add Reference...</code> and locate the <code class="prettyprint">AnylineXamarinSDK.iOS.dll</code>.</p>
 
-<p>When added, the SDK is visible in the solution explorer as follows:</p>
+<p>When added, the SDK should be visible in the solution explorer and look like this:</p>
 
 <p><img alt="XamariniOSSDK" src="images/xamariniOSSDK.png" /></p>
 
@@ -975,15 +995,15 @@ In this example, let&rsquo;s create a .json file and fill it with properties:</p
 
 <h4 id="5-implement-the-anyline-scan-view">5. Implement the Anyline Scan View</h4>
 
-<p>Because we created a Single View App, Visual Studio automatically created a Storyboard and a View Controller for us. By default, the Storyboard is named <code class="prettyprint">MainStoryboard.storyboard</code> and the View Controller is named <code class="prettyprint">RootViewController</code>.</p>
+<p>Since we created a Single View App, Visual Studio automatically created a Storyboard and a View Controller for us. By default, the Storyboard is named <code class="prettyprint">MainStoryboard.storyboard</code> and the View Controller is named <code class="prettyprint">RootViewController</code>.</p>
 
 <p>Let&rsquo;s have a look at the code structure of the <code class="prettyprint">RootViewController</code>.</p>
 
 <ul>
-<li>In <em>ViewDidLoad</em>, we&rsquo;ll set up the Scan View and add it to the View of the ViewController.</li>
-<li>In <em>ViewDidAppear</em>, we&rsquo;ll start scanning for results.</li>
-<li>In <em>ViewWillDissapear</em>, we&rsquo;ll stop scanning.</li>
-<li>In <em>ViewDidDissapear</em>, we&rsquo;ll unregister any event handlers and dispose/remove our Scan View so there are no circular dependencies left.</li>
+<li>In <em>ViewDidLoad</em>, we set up the Scan View and add it to the View of the ViewController.</li>
+<li>In <em>ViewDidAppear</em>, we start scanning for results.</li>
+<li>In <em>ViewWillDissapear</em>, we stop scanning.</li>
+<li>In <em>ViewDidDissapear</em>, we unregister any event handlers and dispose/remove our Scan View so there are no circular dependencies left.</li>
 </ul>
 
 <blockquote>
@@ -1037,16 +1057,16 @@ In this example, let&rsquo;s create a .json file and fill it with properties:</p
 <li><strong>AnylineMRZModuleView</strong> for MRZ and passport scanning</li>
 </ul>
 
-<p>In this example, we&rsquo;ll implement a <em>Barcode</em> scan.</p>
+<p>In this example, we implement <em>Barcode</em> scanning.</p>
 
-<p>Create a member variable <code class="prettyprint">scanView</code> of the type of the module-specific view that you want to implement. 
-In this case: <code class="prettyprint">AnylineBarcodeModuleView scanView;</code></p>
+<ul>
+<li><p>Create a member variable <code class="prettyprint">scanView</code> of the type of the module-specific view that you want to implement. </p>
 
-<p>Have a look at the <code class="prettyprint">ViewDidLoad</code> method on how to set up the Scan View.</p>
+<p>In this case: <code class="prettyprint">AnylineBarcodeModuleView scanView;</code></p></li>
+<li><p>Have a look at the <code class="prettyprint">ViewDidLoad</code> method on how to setup the Scan View.</p>
 
-<p>Basically, a new instance of our module-specific view (in this case: <em>AnylineBarcodeModuleView</em>) is created and a frame in which the view is rendered is delivered.</p>
-
-<p><code class="prettyprint">SetupWithLicenseKey</code> is called with the following parameters:</p>
+<p>Basically, a new instance of our module-specific view (in this case: <em>AnylineBarcodeModuleView</em>) is created and a frame in which the view is rendered is delivered.</p></li>
+<li><p><code class="prettyprint">SetupWithLicenseKey</code> is called with the following parameters:</p>
 
 <ul>
 <li>The license key of <strong>your</strong> personal bundle identifier</li>
@@ -1054,9 +1074,9 @@ In this case: <code class="prettyprint">AnylineBarcodeModuleView scanView;</code
 <li>An error which is filled with an error description if the setup fails (for example, when the license key is wrong).</li>
 </ul>
 
-<p>If anything goes wrong in the setup, the error description is presented to the user in form of an alert view.</p>
-
-<p>Finally, the scan view is added as a subview of our <code class="prettyprint">RootViewController.View</code>.</p>
+<p>If anything goes wrong in the setup, the error description is presented to the user in form of an alert view.</p></li>
+<li><p>Finally, the scan view is added as a subview of our <code class="prettyprint">RootViewController.View</code></p></li>
+</ul>
 <pre class="highlight csharp"><code><span class="k">public</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">ViewDidLoad</span><span class="p">()</span>
 <span class="p">{</span>
     <span class="k">base</span><span class="p">.</span><span class="nf">ViewDidLoad</span><span class="p">();</span>
@@ -1081,7 +1101,7 @@ In this case: <code class="prettyprint">AnylineBarcodeModuleView scanView;</code
 
 <h6 id="newline">&NewLine;</h6>
 
-<p>In the <code class="prettyprint">ViewDidAppear</code> method, we&rsquo;ll tell the SDK to start scanning. The </p>
+<p>In the <code class="prettyprint">ViewDidAppear</code> method, we&rsquo;ll tell the SDK to start scanning</p>
 <pre class="highlight csharp"><code><span class="k">public</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">ViewDidAppear</span><span class="p">(</span><span class="kt">bool</span> <span class="n">animated</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="k">base</span><span class="p">.</span><span class="nf">ViewDidAppear</span><span class="p">(</span><span class="n">animated</span><span class="p">);</span>
@@ -1126,22 +1146,22 @@ In this case: <code class="prettyprint">AnylineBarcodeModuleView scanView;</code
 
 <h6 id="newline">&NewLine;</h6>
 
-<p>Right-click on the Interface and choose <code class="prettyprint">Implement Interface</code> &gt; <code class="prettyprint">Implement Interface</code>.</p>
+<p>Right-click on the interface and choose <code class="prettyprint">Implement Interface</code> &gt; <code class="prettyprint">Implement Interface</code>.</p>
 
 <p><img alt="XamariniOSInterface" src="images/xamariniOSInterface.png" /></p>
 
 <p>Visual Studio automatically generates the <code class="prettyprint">DidFindScanResult</code> method of the module-specific delegate. This method is called every time a result is found.</p>
 
 <p>The following code shows an implementation where the result is presented in an <code class="prettyprint">UIAlertView</code>.</p>
-
-<aside class="notice">
-Because barcode scanning is too fast, the <b>DidFindScanResult</b> event is not fired when the same barcode is scanned again, even if <b>scanView.CancelOnResult</b> is set to false.
-</aside>
 <pre class="highlight csharp"><code><span class="k">public</span> <span class="k">void</span> <span class="nf">DidFindScanResult</span><span class="p">(</span><span class="n">AnylineBarcodeModuleView</span> <span class="n">anylineBarcodeModuleView</span><span class="p">,</span> <span class="kt">string</span> <span class="n">scanResult</span><span class="p">,</span> <span class="n">UIImage</span> <span class="n">image</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="k">new</span> <span class="nf">UIAlertView</span><span class="p">(</span><span class="s">@"Result"</span><span class="p">,</span> <span class="n">scanResult</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="s">"OK"</span><span class="p">,</span> <span class="k">null</span><span class="p">).</span><span class="nf">Show</span><span class="p">();</span>    
 <span class="p">}</span>
 </code></pre>
+
+<aside class="notice">
+Because barcode scanning is too fast, the <b>DidFindScanResult</b> event is not fired when the same barcode is scanned again, even if <b>scanView.CancelOnResult</b> is set to false.
+</aside>
 
 <h6 id="newline">&NewLine;</h6>
 
@@ -1149,8 +1169,8 @@ Because barcode scanning is too fast, the <b>DidFindScanResult</b> event is not 
 
 <ul>
 <li><p>Always make sure that scanning is stopped before the view appears.</p></li>
-<li><p>If you use a <strong>community edition license</strong> you are not allowed to place any visual element over the Anyline watermark while scanning. We will give you a friendly exception if you try to do so. Please contact <a href="mailto:sales@anyline.io">sales@anyline.io</a> if you need to draw over the scanning view.</p></li>
-<li><p>Xamarins Garbage Collector may not be able to collect all garbage, which means that there might be memory leaks if there are any dependencies left in the <code class="prettyprint">ViewController</code>. Therefore, make sure that all registered events are unregistered and any subview is removed from the ViewController view and disposed.</p></li>
+<li><p>If you use a <strong>community edition license</strong> you are not allowed to place any visual element over the Anyline watermark while scanning. We will give you a friendly exception if you try to do so. Please <a href="https://www.anyline.io/support-request/">contact</a> us, if you need to draw over the scanning view.</p></li>
+<li><p>Xamarins Garbage Collector may not be able to collect all garbage, which means that there might be memory leaks if there are any dependencies left in the <code class="prettyprint">ViewController</code>. Therefore, make sure that all registered events are unregistered and all subviews are removed from the ViewController view and disposed.</p></li>
 </ul>
 
 <blockquote>
@@ -1191,15 +1211,17 @@ Because barcode scanning is too fast, the <b>DidFindScanResult</b> event is not 
 
 <h4 id="8-test-your-app-on-an-ios-device">8. Test your app on an iOS device</h4>
 
-<p>Build your project and deploy your application on your iOS device. Make sure you choose your storyboard and an adequate deployment target in your Info.plist (&gt;= 7.1, but not higher than your device target).</p>
+<p>Build your project and deploy your application on your iOS device. Make sure you choose your storyboard and an adequate deployment target in your Info.plist (&gt;= 7.1 - but not higher than your device target).</p>
 
-<p>For module-specific documentation, please check <a href="#modules">this section</a> for more information. Enjoy scanning and have fun :)</p>
+<p>For module-specific documentation, please check <a href="#modules">this section</a> for more information. </p>
+
+<h4 id="9-enjoy-scanning-and-have-fun">9. Enjoy scanning and have fun :)</h4>
 
 <h6 id="newline">&NewLine;</h6>
 
 <h2 id="xamarin-winphone">Xamarin.WinPhone</h2>
 
-<p>Anyline will be available Windows Phone by the end of Q4 2015.</p>
+<p>Anyline will be available Windows Phone by the end of Q1 2016.</p>
 
           <p><a name="configuration"> </a></p>
 
@@ -1211,31 +1233,34 @@ Because barcode scanning is too fast, the <b>DidFindScanResult</b> event is not 
 
 <h2 id="anyline-config">Anyline Config</h2>
 
-<p>With the config file the views can be configured in regard of position and looks of the <em>cutout</em> used for scanning as well as the behavior of flash and feedback mechanisms for scanning. This section contains a detailed description of the configurable items as well as two distinct ways for each platform to set up and configure the view.</p>
+<p>With the config file the views can be configured in regard of position and looks of the <em>cutout</em> used for scanning, as well as the behavior of flash and feedback mechanisms for scanning. This section contains a detailed description of the configurable items, as well as two distinct ways for each platform to set up and configure the view.</p>
 
 <p><a name="itemDescription"> </a></p>
 
 <h3 id="item-description">Item description</h3>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-      </span><span class="nt">"captureResolution"</span><span class="p">:</span><span class="w"> </span><span class="s2">"720p"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"captureResolution"</span><span class="p">:</span><span class="w"> </span><span class="s2">"720"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"pictureResolution"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1080"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"cutout"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"style"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rect"</span><span class="p">,</span><span class="w">
           </span><span class="nt">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">540</span><span class="p">,</span><span class="w">
           </span><span class="nt">"maxWidthPercent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"80%"</span><span class="p">,</span><span class="w">
           </span><span class="nt">"maxHeightPercent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"80%"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"alignment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"center"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"image"</span><span class="p">:</span><span class="s2">"Overlay"</span><span class="p">,</span><span class="w">
           </span><span class="nt">"ratioFromSize"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
               </span><span class="nt">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">125</span><span class="p">,</span><span class="w">
               </span><span class="nt">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">85</span><span class="w">
           </span><span class="p">},</span><span class="w">
-          </span><span class="nt">"strokeWidth"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"strokeColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FFFFFF"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"cornerRadius"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"alignment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"center"</span><span class="p">,</span><span class="w">  
           </span><span class="nt">"offset"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
               </span><span class="nt">"x"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
               </span><span class="nt">"y"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
           </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"outerColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"outerAlpha"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.3</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"style"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rect"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"strokeColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FFFFFF"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"strokeWidth"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"cornerRadius"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="s2">"Overlay"</span><span class="p">,</span><span class="w">
           </span><span class="nt">"cropPadding"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
               </span><span class="nt">"x"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
               </span><span class="nt">"y"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
@@ -1243,9 +1268,7 @@ Because barcode scanning is too fast, the <b>DidFindScanResult</b> event is not 
           </span><span class="nt">"cropOffset"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
               </span><span class="nt">"x"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
               </span><span class="nt">"y"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
-          </span><span class="p">},</span><span class="w">
-          </span><span class="nt">"outerColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"outerAlpha"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.3</span><span class="w">
+          </span><span class="p">}</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="nt">"flash"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"mode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"manual"</span><span class="p">,</span><span class="w">
@@ -1267,6 +1290,7 @@ Because barcode scanning is too fast, the <b>DidFindScanResult</b> event is not 
 
 <ul>
 <li><a href="#captureResolution">captureResolution</a>  <em>String</em></li>
+<li><a href="#pictureResolution">pictureResolution</a>  <em>String</em></li>
 <li><a href="#cutout">cutout</a> 
 
 <ul>
@@ -1327,6 +1351,8 @@ Because barcode scanning is too fast, the <b>DidFindScanResult</b> event is not 
 <li><a href="#cancelOnResult">cancelOnResult</a>  <em>boolean</em></li>
 </ul>
 
+<p><a name="captureResolution"> </a></p>
+
 <h5 id="captureresolution">captureResolution</h5>
 
 <p>The resolution of the preview frame.</p>
@@ -1358,27 +1384,70 @@ Because barcode scanning is too fast, the <b>DidFindScanResult</b> event is not 
 <li>The defined capture resolution is just the preferred resolution. If this resolution is not available the resolution that best fits inside the desired resolution should be used.</li>
 </ul>
 
-<p><a name="captureResolution2"> </a></p>
-
 <aside class="notice">
 <b>Android specific</b>
 <br/>
 The capture resolution is more like a suggestion, because the available preview sizes vary from device to device. 
 If the &ldquo;suggested&rdquo; resolution is available, it will be used, if not a resolution that fits best within the views size will be used.
 </aside>
- 
+
+<p><a name="pictureResolution"> </a></p>
+
+<h5 id="pictureresolution">pictureResolution</h5>
+
+<p>The resolution of the full picture taken from the camera (optional). This parameter is only of interest when using the <a href="#document">Document</a> module.</p>
+
+<p><strong>Possible values:</strong></p>
+
+<table><thead>
+<tr>
+<th>value</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1280</td>
+<td>use 1280 as the minimum picture resolution</td>
+</tr>
+<tr>
+<td>1080</td>
+<td>use 1080 as the minumum picture resolution</td>
+</tr>
+<tr>
+<td>&hellip;</td>
+<td>and so on</td>
+</tr>
+</tbody></table>
+
+<ul>
+<li>The p is optional (and only accepted for convenience). </li>
+<li>The defined picture resolution is just the preferred minimal picture resolution.<br></li>
+</ul>
+
+<aside class="notice">
+<b>Android specific</b>
+<br/>
+The picture resolution is more like a suggestion, because the available preview sizes vary from device to device. 
+If the &ldquo;suggested&rdquo; resolution is available, it will be used, if not, the smallest available resolution bigger than the suggested resolution will be used.
+</aside>
+
+<aside class="notice">
+<b>iOS specific</b>
+<br/>
+The highest possible resolution for iOS is 1080. However if you specify a higher value for picture resolution we will return a high resolution photo of the found document as result. Therefore it is also possible to specify &ldquo;photo&rdquo; as value if you want to get a high resolution result.
+</aside>
 
 <p><a name="cutout"></a></p>
 
 <h5 id="cutout">cutout</h5>
 
-<p>This contains all the settings for the overlay/cutout.</p>
+<p>This section contains all the settings for the overlay/cutout.</p>
 
 <p><a name="cutout_width"></a></p>
 
 <h5 id="width">width</h5>
 
-<p>Specifies an exact desired pixel width (pixels in the frame, not on the display). If this is bigger than the width of the view, it will be limited to it. </p>
+<p>Specifies an exact desired pixel width (pixels in the frame, not on the display). If this is bigger than the width of the view, it will be limited to the view&rsquo;s width. </p>
 
 <p>E.g. Android devices may have a 720p preview but only a 540p wide display. If a width of 600 is specified, the cutout will still only be 540. </p>
 
@@ -1393,11 +1462,11 @@ If the &ldquo;suggested&rdquo; resolution is available, it will be used, if not 
 
 <p>Specifies the maximum width of the cutout in percent.</p>
 
-<p>This is the desired width if &lsquo;width&rsquo; parameter is not used.</p>
+<p>This is the desired width if the &lsquo;width&rsquo; parameter is not used.</p>
 
 <ul>
 <li><strong>Type:</strong>         String</li>
-<li><strong>Format:</strong>       ####%</li>
+<li><strong>Format:</strong>       ###%</li>
 <li><strong>Range:</strong>        1% - 100%</li>
 <li><strong>Default:</strong>      100%</li>
 </ul>
@@ -1410,13 +1479,13 @@ If the &ldquo;suggested&rdquo; resolution is available, it will be used, if not 
 
 <ul>
 <li><strong>Type:</strong>         String</li>
-<li><strong>Format:</strong>       ####%</li>
+<li><strong>Format:</strong>       ###%</li>
 <li><strong>Range:</strong>        1% - 100%</li>
 <li><strong>Default:</strong>      100%</li>
 </ul>
 
 <aside class="notice">
-<b>Why width and maxWidth and maxHeight but no height?</b>
+<b>Why width, maxWidth and maxHeight but no height?</b>
 <br/>
 The form of the cutout can be defined by the ratio, so there is no direct need for width AND height parameter.
 But if there is only one width parameter where % or pixel value is allowed, it is not possible to limit the height to a certain percentage.
@@ -1610,11 +1679,17 @@ scanned.</p>
 <li><strong>Type:</strong> int (pixel value)</li>
 </ul>
 
+<aside class="notice">
+<b>Cutout and Focus</b>
+<br/>
+Please keep in mind that there is a relationship between the size of the cutout, and how close/far the user will hold the phone from the object. Choosing a cutout that is too large for a small object, will intuitively force the user to move closer with the phone to the object. This may result in an incorrectly set focus on some devices, as the minimal distance between the object and the camera needs to be up to ~12cm in auto-focus mode in some cases, and ~7.5cm in macro- or continuous focus mode.
+</aside>
+
 <p><a name="flash"> </a></p>
 
 <h4 id="flash">flash</h4>
 
-<p>Settings for a simple view that provides flash functionality.</p>
+<p>Settings for a simple view that provides flash functionality. Default images for flash on/off/auto are provided, however you can use custom images as well. </p>
 
 <aside class="notice">
 <b>Epson specific</b>
@@ -1626,7 +1701,7 @@ The Epson BT2000 has no flash integrated. Hence, all flash config settings will 
 
 <h5 id="mode">mode</h5>
 
-<p>Default images for flash on/off/auto are provided.</p>
+<p>The following three possible flash modes are available:</p>
 
 <p><strong>Possible values:</strong> </p>
 
@@ -1739,7 +1814,7 @@ In y direction positive values move the flash button down, negative values move 
 
 <h4 id="special-options-for-modules">Special options for Modules</h4>
 
-<p>Modules can use these additional options to configure some things that should happen when a result was found.</p>
+<p>Modules can use these additional settings to configure some feedback options which should happen when a result was found.</p>
 
 <p><a name="beepOnResult"> </a></p>
 
@@ -1855,6 +1930,7 @@ app:cancel_on_result="true"
 <ul>
 <li>tree is &ldquo;flattened&rdquo; and snake_case</li>
 <li>captureResolution is defined by preferred_preview_width and preferred_preview_height</li>
+<li>pictureResolution is defined by preferred_picture_width and preferred_picture_height</li>
 <li>colors contain alpha value, so there is no extra option for alpha</li>
 </ul>
 
@@ -2004,14 +2080,14 @@ app:cancel_on_result="true"
 
 <h3 id="cordova-plugin-config">Cordova Plugin Config</h3>
 
-<p>The configuration for the anyline-sdk plugin is part of the AnylineSDK call. The config is just passed as a json-array, see also the <a href="#cordova-example">example in the Quick Start</a>.</p>
+<p>The configuration for the anyline-sdk plugin is part of the AnylineSDK call. The config is just passed as a json-array, see also the <a href="#cordova-example">example</a> in the Quick Start.</p>
 
 <p><a name="add-views"> </a></p>
 
 <h2 id="add-views">Add Views</h2>
 
 <p>The SDK provides a function to determine the position and outline of the cutout view. This function should be used when placing views on top of the module ScanView in order to avoid an overlap with the cutout.
-A watermark is displayed in the Community Edition of the SDK. Depending on the size of the cutout, this watermark will either be displayed within the cutout, or directly underneath the cutout view. In the second case, the watermark view has to be considered when adding other views, since an overlap of the watermark will result in an exception. </p>
+In the Community Edition of the SDK a watermark is displayed. Depending on the cutout size, this watermark will either be displayed within the cutout, or with respect to the cutout position, directly underneath or above the cutout. In the second case, the watermark view has to be considered when adding other views, since an overlap of the watermark will result in an exception. </p>
 
 <h3 id="android">Android</h3>
 <pre class="highlight java"><code><span class="n">RelativeLayout</span> <span class="n">rl</span> <span class="o">=</span>  <span class="o">(</span><span class="n">RelativeLayout</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">layout</span><span class="o">);</span>
@@ -2038,9 +2114,9 @@ A watermark is displayed in the Community Edition of the SDK. Depending on the s
 <span class="n">rl</span><span class="o">.</span><span class="na">addView</span><span class="o">(</span><span class="n">textView</span><span class="o">,</span> <span class="n">params</span><span class="o">);</span>
 </code></pre>
 
-<p>This example shows how you can add a view placed above the cutout view. With the function getCutoutRect you get a Rect representing the four corners (left, top, right, bottom) of the cutout. </p>
+<p>This example shows how to add a view above the cutout. With the function getCutoutRect you get a Rect representing the four corners (left, top, right, bottom) of the cutout. </p>
 
-<p>We add a TextView where the left margin of the view will be the same as the left margin of the cutout. The top border of the TextView will be 40 pixels above the cutout. It is important to consider the height of the TextView and reduce this height value of the top value from the cutout rect. Furthermore it is recommended to work with density independent pixels to avoid large differences when displayed on devices with various display densities. </p>
+<p>We add a TextView where the left margin of the view will be the same as the left margin of the cutout. The top border of the TextView will be 40 pixels above the cutout. It is important to consider the height of the TextView and reduce this height value from the top value of the cutout rect. Furthermore it is recommended to work with density independent pixels to avoid large differences when displayed on devices with various display densities. </p>
 
 <h6 id="consider-the-watermark-in-community-edition">Consider the Watermark in Community Edition</h6>
 <pre class="highlight java"><code><span class="n">Rect</span> <span class="n">watermarkRect</span> <span class="o">=</span> <span class="n">scanView</span><span class="o">.</span><span class="na">getWatermarkRect</span><span class="o">();</span>
@@ -2064,7 +2140,7 @@ A watermark is displayed in the Community Edition of the SDK. Depending on the s
 <span class="n">rl</span><span class="o">.</span><span class="na">addView</span><span class="o">(</span><span class="n">textView</span><span class="o">,</span> <span class="n">params</span><span class="o">);</span>
 </code></pre>
 
-<p>When working with the community edition and small cutouts the watermark will be placed underneath the cutout and not included in the cutout view itself. In this case you have to consider the watermark as well when placing a view under the cutout. </p>
+<p>When working with the community edition and small cutouts the watermark will usually be placed underneath the cutout and not included in the cutout view itself. In this case you have to consider the watermark as well when placing a view under the cutout. In case the cutout is placed on the bottom of the view, the watermark will be displayed above the the cutout and you have to be careful when placing views above the cutout. </p>
 
 <p>The example shows how to use the getWatermarkRect function to add a TextView with a top margin of 8dp under the watermark view</p>
 
@@ -2074,15 +2150,56 @@ A watermark is displayed in the Community Edition of the SDK. Depending on the s
 Both functions can only be used after the ScanView is drawn, therefore use postDelayed otherwise the Rect will be null.
 </aside>
 
+<h3 id="ios">iOS</h3>
+<pre class="highlight objective_c"><code><span class="c1">// get the cutout rect from the scan view
+</span><span class="n">CGRect</span> <span class="n">cutOutRect</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">moduleView</span> <span class="nf">cutoutRect</span><span class="p">];</span>
+<span class="n">CGFloat</span> <span class="n">lowerBorder</span> <span class="o">=</span> <span class="n">CGRectGetMaxY</span><span class="p">(</span><span class="n">cutOutRect</span><span class="p">);</span>
+
+<span class="c1">// create a view
+</span><span class="n">UILabel</span> <span class="o">*</span> <span class="n">label</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UILabel</span> <span class="nf">alloc</span><span class="p">]</span> <span class="nf">initWithFrame</span><span class="p">:</span><span class="n">CGRectMake</span><span class="p">(</span><span class="n">cutOutRect</span><span class="p">.</span><span class="n">origin</span><span class="p">.</span><span class="n">x</span><span class="p">,</span>
+                                                            <span class="n">lowerBorder</span><span class="p">,</span>
+                                                            <span class="n">cutOutRect</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">width</span><span class="p">,</span>
+                                                            <span class="n">cutOutRect</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">height</span><span class="p">)];</span>
+<span class="n">label</span><span class="p">.</span><span class="n">backgroundColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="nf">grayColor</span><span class="p">];</span>
+
+<span class="c1">// add view to layout
+</span><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">moduleView</span> <span class="nf">addSubview</span><span class="p">:</span><span class="n">label</span><span class="p">];</span>
+</code></pre>
+
+<p>This example shows how to add a view below the cutout view. With the function <code class="prettyprint">cutoutRect</code> you get a CGRect representing the cutout. <code class="prettyprint">CGRectGetMaxY</code> adds its y origin and its height to get the lower border of the cutout.</p>
+
+<h6 id="consider-the-watermark-in-community-edition">Consider the Watermark in Community Edition</h6>
+<pre class="highlight objective_c"><code><span class="c1">// get the cutout rect from the scan view
+</span><span class="n">CGRect</span> <span class="n">cutOutRect</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">ocrModuleView</span> <span class="nf">cutoutRect</span><span class="p">];</span>
+<span class="n">CGRect</span> <span class="n">watermarkRect</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">ocrModuleView</span> <span class="nf">watermarkRect</span><span class="p">];</span>    
+
+<span class="n">CGFloat</span> <span class="n">lowerBorder</span> <span class="o">=</span> <span class="n">MAX</span><span class="p">(</span><span class="n">CGRectGetMaxY</span><span class="p">(</span><span class="n">cutOutRect</span><span class="p">),</span> <span class="n">CGRectGetMaxY</span><span class="p">(</span><span class="n">watermarkRect</span><span class="p">));</span>
+
+<span class="c1">// create a view
+</span><span class="n">UILabel</span> <span class="o">*</span> <span class="n">label</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UILabel</span> <span class="nf">alloc</span><span class="p">]</span> <span class="nf">initWithFrame</span><span class="p">:</span><span class="n">CGRectMake</span><span class="p">(</span><span class="n">cutOutRect</span><span class="p">.</span><span class="n">origin</span><span class="p">.</span><span class="n">x</span><span class="p">,</span>
+                                                            <span class="n">lowerBorder</span><span class="p">,</span>
+                                                            <span class="n">cutOutRect</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">width</span><span class="p">,</span>
+                                                            <span class="n">cutOutRect</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">height</span><span class="p">)];</span>
+<span class="n">label</span><span class="p">.</span><span class="n">backgroundColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="nf">grayColor</span><span class="p">];</span>
+
+<span class="c1">// add view to layout
+</span><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">ocrModuleView</span> <span class="nf">addSubview</span><span class="p">:</span><span class="n">label</span><span class="p">];</span>
+</code></pre>
+
+<p>Notice that you will get an exception when you overlay the watermark. Since the watermark will be displayed outside the cutout when the cutout size is to small, you have to consider both views when placing custom views around the cutout. 
+In this example we add a view below the watermark. Therefore, we have to check which view has the largest y coordinate to avoid an overlap. With the function <code class="prettyprint">cutoutRect</code> you get a CGRect representing the cutout. The function <code class="prettyprint">watermarkRect</code> returns the bounding rect of the watermark. <code class="prettyprint">CGRectGetMaxY</code> determines the y origin plus height to get the lower border of the view. With <code class="prettyprint">MAX</code> you then get the maximum y coordinate of both rects and can use this value to place your view below both views. In case a small cutout is placed at the bottom edge of the display the watermark will be placed above the cutout. Please also consider this edge case when placing your views around the cutout.</p>
+
           <h1 id="modules">Modules</h1>
 
-<p>The Anyline-Modules are use-case specific abstractions for Anyline. Each module is designed to serve a specific purpose. Currently, the following modules are available:</p>
+<p>The Anyline modules are use-case specific abstractions for Anyline. Each module is designed to serve a specific purpose. Currently, the following modules are available:</p>
 
 <ul>
 <li><a href="#barcodeModule">Barcode</a></li>
 <li><a href="#energyModule">Energy</a></li>
 <li><a href="#mrzModule">MRZ (Machine Readable Zone)</a></li>
-<li><a href="#ordercodeModule">Order Code</a> - available for Epson (on request only)</li>
+<li><a href="#documentModule">Document</a></li>
+<li><a href="#anylineOcrModule">AnylineOCR</a></li>
+<li><a href="#ordercodeModule">Order Code</a> - only available for smart glasses (on request)</li>
 </ul>
 
 <p><a name="barcodeModule"> </a></p>
@@ -2146,7 +2263,7 @@ Both functions can only be used after the ScanView is drawn, therefore use postD
 
 <h4 id="example">Example</h4>
 
-<p>The following example files illustrate a simple use-case of the barcode module.</p>
+<p>The following example files illustrate a simple use-case of the Barcode module.</p>
 
 <h6 id="example-activity">Example  Activity</h6>
 
@@ -2208,7 +2325,7 @@ Both functions can only be used after the ScanView is drawn, therefore use postD
 <span class="nt">&lt;/RelativeLayout&gt;</span>
 </code></pre>
 
-<p>The BarcodeScanView can simply be included in the activity layout file, just like any other view. The view can be either configured here via XML or otherwise a config json file can be used to adapt the scan view.</p>
+<p>The BarcodeScanView can simply be included in the activity layout file, just like any other view. The view can be either configured via XML or otherwise a config json file can be used to adapt the scan view.</p>
 
 <p><a name="barcodeConfig"> </a></p>
 
@@ -2300,7 +2417,11 @@ Both functions can only be used after the ScanView is drawn, therefore use postD
 <span class="p">}</span>
 </code></pre>
 
-<p>Create a property, initialize the module in the viewDidLoad method and add it to the view of the view controller. Supply the license key and set the delegate, which will receive a call once a result is found. The boolean returned by the setup routine notifies you if the Anyline set up was successful. If an error occurred the error needs to be handled. If the setup was successful, set the barcode types that should be scanned.</p>
+<ul>
+<li>Create a property, initialize the module in the viewDidLoad method and add it to the view of the ViewController. </li>
+<li>Supply the license key and set the delegate, which will receive a call once a result is found. The boolean returned by the setup routine notifies you if the Anyline setup was successful. If an error occurred the error needs to be handled.</li>
+<li>After the succesful setup, set the barcode types that should be scanned.</li>
+</ul>
 
 <p>Valid types are:</p>
 
@@ -2347,13 +2468,19 @@ If there is a problem starting the scanning process an error object will be set,
 <span class="p">}</span>
 </code></pre>
 
-<p>When a valid result is found, it will call the delegate. The scan result will be a <em>string</em> containing the scanned code. barcodeFormat will contain the format of the barcode.</p>
+<p>When a valid result is found, the delegate will be called and you get the following values:  </p>
+
+<ul>
+<li><strong>scanResult:</strong> a <em>string</em> containing the scanned code</li>
+<li><strong>barcodeFormat:</strong> a <em>string</em> representing the format of the scanned barcode</li>
+<li><strong>image</strong>: the cropped image which was used to scan the value</li>
+</ul>
 
 <h3 id="cordova-plugin">Cordova Plugin</h3>
 
 <h6 id="example-call-for-the-barcode-module">Example call for the Barcode Module</h6>
 
-<p>Call the exec method with <i><b>scanBarcode</b></i> (all other parameters are as explained in <a href="#cordova-example">Quick Start</a>).</p>
+<p>Call the exec method with <em>scanBarcode</em>. For a more detailed description of the config parameters used, see the <a href="#cordova-example">example</a> in Quick Start.</p>
 <pre class="highlight java"><code><span class="n">cordova</span><span class="o">.</span><span class="na">exec</span><span class="o">(</span><span class="n">onResult</span><span class="o">,</span> <span class="n">onError</span><span class="o">,</span> <span class="s">"AnylineSDK"</span><span class="o">,</span> <span class="s">"scanBarcode"</span><span class="o">,</span>
     <span class="o">[</span>
         <span class="s">"YOUR_LICENSE_KEY"</span><span class="o">,</span>
@@ -2391,8 +2518,8 @@ If there is a problem starting the scanning process an error object will be set,
 
 <h2 id="energy">Energy</h2>
 
-<p>The Anyline Energy-Module is capable of scanning analog electric-, gas- and water-meter-readings.
-It is also possible to scan bar- and QR-codes (useful for identifying meters).
+<p>The Anyline Energy module is capable of scanning analog electric-, gas- and water-meter readings.
+It is also possible to scan bar- and QR-codes, which is useful for identifying meters.
 Common digital meters and heat meters can also be scanned (but this is ALPHA).</p>
 
 <h4 id="all-the-possible-scan-modes">All the possible scan modes</h4>
@@ -2400,7 +2527,7 @@ Common digital meters and heat meters can also be scanned (but this is ALPHA).</
 <p><strong>Electric Meter</strong><br/>
 Android: <em>ELECTRIC_METER</em>, iOS: <em>ALElectricMeter</em><br/>
 Scan analog electric meters with 5 or 6 main digits and one decimal digit.
-The digit count is automatically detected. The decimal place is not included in the result. The auto-detection requires the decimal area to be highlighted in red.</p>
+The digit count is detected automatically. The decimal place is not included in the result. The auto-detection requires the decimal area to be highlighted in red.</p>
 
 <p><strong>Electric Meter 5 main digits 1 decimal (ALPHA)</strong><br/>
 Android: <em>ELECTRIC_METER_5_1</em>, iOS: <em>ALElectricMeter5_1</em><br/>
@@ -2448,7 +2575,7 @@ Same as above with 6 digits before the point.</p>
 
 <p><strong>Bar- and QR-Codes</strong><br/>
 Android: <em>BAR_CODE</em>, iOS: <em>ALBarcode</em><br/>
-Scan bar and qr codes. This mode can be used to identifiy a meter. See the <a href="#available-barcode-formats">barcode module</a> for supported types.</p>
+Scan bar and QR codes. This mode can be used to identify a meter. See the <a href="#available-barcode-formats">barcode module</a> for supported types.</p>
 
 <p><strong>Serial Numbers (ALPHA)</strong><br/>
 Android: <em>SERIAL_NUMBER</em>, iOS: <em>ALSerialNumber</em><br/>
@@ -2456,11 +2583,13 @@ Scan serial numbers that are engraved or printed onto a meter (consisting of num
 
 <h3 id="android">Android</h3>
 
+<p><a name="energyModuleRestrictions"> </a></p>
+
 <h4 id="restrictions-for-the-energy-module-config">Restrictions for the Energy-Module Config</h4>
 
 <ul>
 <li>Capture resolution is currently fixed to 720p on Android (optimized for good results on as many devices as possible).</li>
-<li>The size and ratio of the cutout is predefined and cannot be changed (sizes are optimized for best results)</li>
+<li><b>The size and ratio of the cutout is predefined and cannot be changed </b>(sizes are optimized for best results)</li>
 <li>The cutout should be placed fairly high (use alignment top and a small y offset), because this reduces reflections considerably when used with flash.</li>
 <li>Flash mode <em>auto</em> is still in alpha stage therefore <em>manual</em> mode is preferred</li>
 </ul>
@@ -2536,6 +2665,37 @@ Scan serial numbers that are engraved or printed onto a meter (consisting of num
 </ul></li>
 </ul>
 
+<h6 id="example-switching-the-scan-mode">Example: switching the scan mode</h6>
+
+<p>It is possible to switch the scan mode at any time, but you have to call <em>startScanning()</em> again when you switch the mode!
+The example shows how switching could be implemented with a radio group selection.</p>
+<pre class="highlight java"><code> <span class="c1">// switch the scan mode depending on user selection</span>
+        <span class="n">radioGroup</span><span class="o">.</span><span class="na">setOnCheckedChangeListener</span><span class="o">(</span><span class="k">new</span> <span class="n">RadioGroup</span><span class="o">.</span><span class="na">OnCheckedChangeListener</span><span class="o">()</span> <span class="o">{</span>
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="n">onCheckedChanged</span><span class="o">(</span><span class="n">RadioGroup</span> <span class="n">group</span><span class="o">,</span> <span class="kt">int</span> <span class="n">checkedId</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">radio_electric</span> <span class="o">==</span> <span class="n">checkedId</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">energyScanView</span><span class="o">.</span><span class="na">setScanMode</span><span class="o">(</span><span class="n">EnergyScanView</span><span class="o">.</span><span class="na">ScanMode</span><span class="o">.</span><span class="na">ELECTRIC_METER</span><span class="o">);</span>
+                    <span class="n">energyScanView</span><span class="o">.</span><span class="na">startScanning</span><span class="o">();</span>
+                <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">radio_electric_6</span> <span class="o">==</span> <span class="n">checkedId</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">energyScanView</span><span class="o">.</span><span class="na">setScanMode</span><span class="o">(</span><span class="n">EnergyScanView</span><span class="o">.</span><span class="na">ScanMode</span><span class="o">.</span><span class="na">ELECTRIC_METER_5_1</span><span class="o">);</span>
+                    <span class="n">energyScanView</span><span class="o">.</span><span class="na">startScanning</span><span class="o">();</span>
+                <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">radio_electric_7</span> <span class="o">==</span> <span class="n">checkedId</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">energyScanView</span><span class="o">.</span><span class="na">setScanMode</span><span class="o">(</span><span class="n">EnergyScanView</span><span class="o">.</span><span class="na">ScanMode</span><span class="o">.</span><span class="na">ELECTRIC_METER_6_1</span><span class="o">);</span>
+                    <span class="n">energyScanView</span><span class="o">.</span><span class="na">startScanning</span><span class="o">();</span>
+                <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">radio_gas</span> <span class="o">==</span> <span class="n">checkedId</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">energyScanView</span><span class="o">.</span><span class="na">setScanMode</span><span class="o">(</span><span class="n">EnergyScanView</span><span class="o">.</span><span class="na">ScanMode</span><span class="o">.</span><span class="na">GAS_METER</span><span class="o">);</span>
+                    <span class="n">energyScanView</span><span class="o">.</span><span class="na">startScanning</span><span class="o">();</span>
+                <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">radio_water_white</span> <span class="o">==</span> <span class="n">checkedId</span><span class="o">){</span>
+                    <span class="n">energyScanView</span><span class="o">.</span><span class="na">setScanMode</span><span class="o">(</span><span class="n">EnergyScanView</span><span class="o">.</span><span class="na">ScanMode</span><span class="o">.</span><span class="na">WATER_METER_WHITE</span><span class="o">);</span>
+                    <span class="n">energyScanView</span><span class="o">.</span><span class="na">startScanning</span><span class="o">();</span>
+                <span class="o">}</span> <span class="k">else</span><span class="o">{</span>
+                    <span class="n">energyScanView</span><span class="o">.</span><span class="na">setScanMode</span><span class="o">(</span><span class="n">EnergyScanView</span><span class="o">.</span><span class="na">ScanMode</span><span class="o">.</span><span class="na">WATER_METER_BLACK</span><span class="o">);</span>
+                    <span class="n">energyScanView</span><span class="o">.</span><span class="na">startScanning</span><span class="o">();</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+
+</code></pre>
+
 <h6 id="example-activity-layout">Example Activity Layout</h6>
 <pre class="highlight xml"><code><span class="nt">&lt;RelativeLayout</span>
     <span class="na">xmlns:android=</span><span class="s">"http://schemas.android.com/apk/res/android"</span>
@@ -2567,19 +2727,14 @@ Scan serial numbers that are engraved or printed onto a meter (consisting of num
 
 <p>The EnergyScanView can simply be included in the activity layout.</p>
 
-<p>For custom configuration (e.g. cutout, flash, feedback on successful scan, etc.) you can either use a json-file or XML-attributes like in the example. If you need more detailed information about all available config items see <a href="#anyline-config">Anyline Config</a>.</p>
-
-<aside class="notice">
-Capture resolution is currently fixed to 720p on Android, which was optimized for good results on as many devices as possible.
-</aside>
+<p>For custom configuration (e.g. cutout, flash, feedback on successful scan, etc.) you can either use a json-file or XML-attributes like in the example. If you need more detailed information about all available config items see <a href="#anyline-config">Anyline Config</a>. Please consider the <a href="#energyModuleRestrictions">config restrictions</a> mentioned above when configuring the EnergyScanView.  </p>
 
 <h6 id="reporting">Reporting</h6>
-
-<p>The reporting of Analog Meter Results in the Community Edition (including an image of a scanned meter)
-helps us to improving our product, and the customer experience.
-It is possible to turn that feature off by calling <em>setReportingEnabled(false)</em> on the EnergyScanView.</p>
 <pre class="highlight java"><code><span class="n">energyScanView</span><span class="o">.</span><span class="na">setReportingEnabled</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
 </code></pre>
+
+<p>The reporting of analog meter results in the Community Edition (including an image of the scanned meter) helps us to improve our product, and the customer experience.
+It is possible to turn off this feature by calling <em>setReportingEnabled(false)</em> on the EnergyScanView.</p>
 
 <h3 id="ios">iOS</h3>
 
@@ -2605,10 +2760,11 @@ It is possible to turn that feature off by calling <em>setReportingEnabled(false
 <span class="p">}</span>
 </code></pre>
 
-<p>Create a property, initialize the module and add it to the view of our view controller.
-Afterwards, supply the license key and set the delegate. The delegate will receive a call when a result is found.
-If the Anyline set up returned an error the error object will be set and you can handle the error.
-Furthermore it is necessary to set the scan mode utilizing <em>setScanMode</em>.</p>
+<ul>
+<li>Create a property, initialize the module in the viewDidLoad method and add it to the view of the ViewController. </li>
+<li>Supply the license key and set the delegate, which will receive a call once a result is found. The boolean returned by the setup routine notifies you if the Anyline setup was successful. If an error occurred the error needs to be handled</li>
+<li>After the successful setup, set the scan mode utilizing <em>setScanMode</em> </li>
+</ul>
 
 <h6 id="2-start-the-scanning-process-in-viewdidappear">2. Start the scanning process in viewDidAppear</h6>
 <pre class="highlight objective_c"><code><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewDidAppear</span><span class="p">:(</span><span class="n">BOOL</span><span class="p">)</span><span class="nv">animated</span> <span class="p">{</span>
@@ -2654,19 +2810,16 @@ Furthermore it is necessary to set the scan mode utilizing <em>setScanMode</em>.
 </ul>
 
 <h6 id="reporting">Reporting</h6>
-
-<p>The reporting of Analog Meter Results in the Community Edition (including an image of a scanned meter)
-helps us to improving our product, and the customer experience.
-It is possible to turn that feature off by calling <em>-(void)enableReporting:(BOOL)enable</em> on the AnylineEnergyModuleView.</p>
 <pre class="highlight objective_c"><code><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">anylineEnergyView</span> <span class="nf">enableReporting</span><span class="p">:</span><span class="nb">NO</span><span class="p">];</span>
 </code></pre>
+
+<p>The reporting of analog meter results in the Community Edition (including an image of the scanned meter) helps us to improve our product, and the customer experience.
+It is possible to turn off this feature by calling 
+ <em>-(void)enableReporting:(BOOL)enable</em> on the AnylineEnergyModuleView.</p>
 
 <h3 id="cordova-plugin">Cordova Plugin</h3>
 
 <h6 id="example-call-for-the-energy-module">Example call for the Energy Module</h6>
-
-<p>There is a distinction between scanning electric and gas meter:
-Call the exec method either with <i><b>scanElectricMeter</b></i> or <i><b>scanGasMeter</b></i> (all other parameters are as explained in <a href="#cordova-example">Quick Start</a>).</p>
 <pre class="highlight java"><code><span class="n">cordova</span><span class="o">.</span><span class="na">exec</span><span class="o">(</span><span class="n">onResult</span><span class="o">,</span> <span class="n">onError</span><span class="o">,</span> <span class="s">"AnylineSDK"</span><span class="o">,</span> <span class="s">"scanElectricMeter"</span><span class="o">,</span>
     <span class="o">[</span>
         <span class="s">"YOUR_LICENSE_KEY"</span><span class="o">,</span>
@@ -2698,24 +2851,26 @@ Call the exec method either with <i><b>scanElectricMeter</b></i> or <i><b>scanGa
 <span class="o">);</span>
 </code></pre>
 
-<h6 id="reporting">Reporting</h6>
+<p>It is possible to scan two different types of meters, electric and gas.
+Call the exec method either with <i><b>scanElectricMeter</b></i> or <i><b>scanGasMeter</b></i>. For more information about the config parameters set here, see the <a href="#cordova-example">example</a> in section Quick Start.</p>
 
-<p>The reporting of Analog Meter Results in the Community Edition (including an image of a scanned meter)
-helps us to improving our product, and the customer experience.
-It is possible to turn that feature off by adding <em>&ldquo;reportingEnabled&rdquo;: false</em> to the above config.</p>
-<pre class="highlight javascript"><code><span class="c1">//...</span>
-            <span class="s2">"blinkAnimationOnResult"</span><span class="err">:</span> <span class="kc">true</span><span class="p">,</span>
-            <span class="s2">"cancelOnResult"</span><span class="err">:</span> <span class="kc">true</span><span class="p">,</span>
-            <span class="s2">"reportingEnabled"</span><span class="err">:</span> <span class="kc">false</span>
-        <span class="p">}</span>
-    <span class="p">]</span>
+<h6 id="reporting">Reporting</h6>
+<pre class="highlight java"><code><span class="c1">//...</span>
+            <span class="s">"blinkAnimationOnResult"</span><span class="o">:</span> <span class="kc">true</span><span class="o">,</span>
+            <span class="s">"cancelOnResult"</span><span class="o">:</span> <span class="kc">true</span><span class="o">,</span>
+            <span class="s">"reportingEnabled"</span><span class="o">:</span> <span class="kc">false</span>
+        <span class="o">}</span>
+    <span class="o">]</span>
 </code></pre>
+
+<p>The reporting of analog meter results in the Community Edition (including an image of the scanned meter) helps us to improve our product, and the customer experience.
+It is possible to turn off this feature by adding <em>&ldquo;reportingEnabled&rdquo;: false</em> to the above config.</p>
 
 <p><a name="mrzModule"> </a></p>
 
 <h2 id="mrz">MRZ</h2>
 
-<p>The Anyline MRZ-Module provides the functionality to scan passports and other IDs using the MRZ (Machine Readable Zone).</p>
+<p>The Anyline MRZ module provides the functionality to scan passports and other IDs using the MRZ (Machine Readable Zone).</p>
 
 <p>For each scan result the module generates an identification object, containing all relevant information as well as the image of the scanned document.</p>
 
@@ -2782,7 +2937,7 @@ It is possible to turn that feature off by adding <em>&ldquo;reportingEnabled&rd
 </tr>
 <tr>
 <td>documentType</td>
-<td>type of the document that was read. (ID/P)</td>
+<td>type of the document that was read. (ID/P/IT)</td>
 </tr>
 <tr>
 <td>documentNumber</td>
@@ -2807,16 +2962,18 @@ It is possible to turn that feature off by adding <em>&ldquo;reportingEnabled&rd
 </tbody></table>
 
 <aside class="notice">
-Please be aware that not every property is filled for every document type (e.g. some ID MRZ do not contain a sex information)
+Please be aware that not every property is filled for every document type (e.g. some ID MRZs do not contain a sex information).
+<p></p>
+Furthermore its important to know, that the names may not be printed completely as the machine readable zone has a limited amount of characters.
 </aside>
 
 <h3 id="android">Android</h3>
 
-<h5 id="restrictions-for-the-mrz-module-config">Restrictions for the MRZ-Module Config:</h5>
+<h5 id="restrictions-for-the-mrz-module-config">Restrictions for the MRZ module config:</h5>
 
 <ul>
-<li>The ratio of the cutout cannot be changed and is predefined to fit passports and IDs well.</li>
-<li>Flash mode <em>auto</em> is still in alpha stage therefore <em>manual</em> mode is preferred</li>
+<li>The ratio of the cutout can not be changed and is predefined to fit well for passports and IDs.</li>
+<li>Flash mode <em>auto</em> is still in alpha stage therefore <em>manual</em> mode is preferred.</li>
 </ul>
 
 <h4 id="example">Example</h4>
@@ -2865,7 +3022,7 @@ Please be aware that not every property is filled for every document type (e.g. 
 <li>If you do not use XML configuration set the <a href="#mrzConfig">config-file</a> to your MrzScanView using the <em>setConfigFromAsset</em> method and make sure that the json config-file is located in the Android assets folder</li>
 <li>Call <em>initAnyline</em> with your valid license key and a new instance of MrzResultListener, which will be used as callback for each successful scan.</li>
 <li>Call <em>startScanning()</em></li>
-<li>When done call <em>cancelScanning()</em> and <em>releaseCameraInBackground()</em> or <em>releaseCamera()</em></li>
+<li>When done, call <em>cancelScanning()</em> and <em>releaseCameraInBackground()</em> or <em>releaseCamera()</em></li>
 </ol>
 
 <h6 id="example-activity-layout">Example Activity Layout</h6>
@@ -2911,7 +3068,7 @@ Please be aware that not every property is filled for every document type (e.g. 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>A detailed description of all available config items can be found in <a href="#anyline-config">Anyline Config</a></p>
+<p>A detailed description of all available config items can be found in <a href="#anyline-config">Anyline Config</a>.</p>
 
 <p>It is also possible to use xml-attributes instead of the json config file. For more detailed information see <a href="#configureViaXML">XML Configuration</a></p>
 
@@ -2938,7 +3095,7 @@ Please be aware that not every property is filled for every document type (e.g. 
 <span class="p">}</span>
 </code></pre>
 
-<p>Create a property, initialize the module in the viewDidLoad method and add it to the view of the view controller. Supply the license key and set the delegate, which will receive a call once a result is found. The boolean returned by the setup routine notifies you if the Anyline set up was successful. If an error occurred the error needs to be handled.</p>
+<p>Create a property, initialize the module in the viewDidLoad method and add it to the view of the ViewController. Supply the license key and set the delegate, which will receive a call once a result is found. The boolean returned by the setup routine notifies you if the Anyline setup was successful. If an error occurred the error needs to be handled.</p>
 
 <h6 id="2-start-scanning-process-in-viewdidappear">2. Start scanning process in viewDidAppear</h6>
 <pre class="highlight objective_c"><code><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewDidAppear</span><span class="p">:(</span><span class="n">BOOL</span><span class="p">)</span><span class="nv">animated</span> <span class="p">{</span>
@@ -2952,7 +3109,7 @@ Please be aware that not every property is filled for every document type (e.g. 
 <span class="p">}</span>
 </code></pre>
 
-<p>If there is a problem starting the scanning process an error object will be set, so the error can be handled.</p>
+<p>If there is a problem while starting the scanning process, an error object will be set so the error can be handled.</p>
 
 <h6 id="3-implement-the-delegate-method-and-receive-results">3. Implement the delegate method and receive results</h6>
 <pre class="highlight objective_c"><code><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">anylineMRZModuleView</span><span class="p">:(</span><span class="n">AnylineMRZModuleView</span> <span class="o">*</span><span class="p">)</span><span class="nv">anylineMRZModuleView</span>
@@ -2963,13 +3120,11 @@ Please be aware that not every property is filled for every document type (e.g. 
 <span class="p">}</span>
 </code></pre>
 
-<p>When a valid result is found, it will call the delegate. ScanResult is an object of type ALIdentification containing the <a href="#scannedInfo">information scanned.</a></p>
+<p>When a valid result is found, it will call the delegate. ScanResult is an object of type ALIdentification containing the <a href="#scannedInfo">scanned information.</a></p>
 
 <h3 id="cordova-plugin">Cordova Plugin</h3>
 
 <h6 id="example-call-for-the-mrz-module">Example call for the MRZ Module</h6>
-
-<p>Call the exec method with <i><b>scanMRZ</b></i> (all other parameters are as explained in <a href="#cordova-example">Quick Start</a>).</p>
 <pre class="highlight java"><code><span class="n">cordova</span><span class="o">.</span><span class="na">exec</span><span class="o">(</span><span class="n">onResult</span><span class="o">,</span> <span class="n">onError</span><span class="o">,</span> <span class="s">"AnylineSDK"</span><span class="o">,</span> <span class="s">"scanMRZ"</span><span class="o">,</span>
     <span class="o">[</span>
         <span class="s">"YOUR_LICENSE_KEY"</span><span class="o">,</span>
@@ -2999,16 +3154,694 @@ Please be aware that not every property is filled for every document type (e.g. 
 <span class="o">);</span>
 </code></pre>
 
+<p>Call the exec method with <i><b>scanMRZ</b></i>. For more detailed information about the config parameters, see the <a href="#cordova-example">example</a> in section Quick Start.</p>
+
+<p><a name="documentModule"> </a></p>
+
+<h2 id="document">Document</h2>
+
+<p>The Anyline Document module detects document outlines, validates the interior angles to ensure the document is not skewed, detects the sharpness of the text and rectifies the document.</p>
+
+<p>In the first step the preview frames are analyzed. Once a valid and sharp document is detected, a high resolution image is taken from the camera, analyzed, and, if valid and sharp, rectified and cropped.</p>
+
+<p>The module does not perform the OCR step, but provides a high resolution, rectified, cropped document image, which is ensured to hold sharp text.</p>
+
+<aside class="notice">
+The sharpness detection is robust in the face of text contrast, which means that sharpness detection works on gray text as well as on black text on a white background.
+</aside>
+
+<p><a name="addtionalConfiguration"> </a>
+<strong>Additional Configuration:</strong></p>
+
+<p>The resolution of the final high resolution image can be set in the <a href="#anyline-config">Configuration</a>.
+The additional configuration fields is:</p>
+
+<table><thead>
+<tr>
+<th>field</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><a href="#pictureResolution">pictureResolution</a></td>
+<td>Resolution of the high resolution document image</td>
+</tr>
+</tbody></table>
+
+<p><a name="documentModuleRestrictions"> </a></p>
+
+<h3 id="restrictions-hints-for-the-document-module-config">Restrictions/hints for the Document-Module Config</h3>
+
+<ul>
+<li>The bigger the cutout, the better</li>
+<li>It is advised to hide the cutout via setting the <a href="#cutout_strokeColor">strokeColor</a> to #00000000</li>
+<li>It is that the <a href="#cutout_width">cutoutWidth</a> matches the <a href="#captureResolution">captureResolution</a></li>
+<li>At this stage, the document scanner is limited to upright rectangular documents (like DIN-A4). Because of that, the <a href="#cutout_ratioFromSize">ratioFromSize</a> should be set at around 10:15</li>
+</ul>
+
+<h3 id="android">Android</h3>
+
+<h4 id="example">Example</h4>
+
+<p>The following example files illustrate a simple use-case of the document module.</p>
+
+<h6 id="example-activity">Example Activity</h6>
+
+<blockquote>
+<p>in onCreate or onActivityCreated lifecycle methods</p>
+</blockquote>
+<pre class="highlight java"><code><span class="n">documentScanView</span> <span class="o">=</span> <span class="o">(</span><span class="n">DocumentScanView</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">document_scan_view</span><span class="o">);</span>
+
+<span class="c1">// initialize Anyline with your license key and a Listener that is called if a result is found</span>
+<span class="n">documentScanView</span><span class="o">.</span><span class="na">initAnyline</span><span class="o">(</span><span class="n">getString</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">string</span><span class="o">.</span><span class="na">anyline_license_key</span><span class="o">),</span> <span class="k">new</span> <span class="n">DocumentResultListener</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">onResult</span><span class="o">(</span><span class="n">AnylineImage</span> <span class="n">transformedImage</span><span class="o">,</span> <span class="n">AnylineImage</span> <span class="n">fullFrame</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="c1">// This is called once a result (a valid document containing sharp text) is found.</span>
+        <span class="c1">// The transformedImage contains the rectified and cropped document image,</span>
+        <span class="c1">// the fullFrame contains the full picture that was taken</span>
+
+        <span class="cm">/**
+         * IMPORTANT: cache provided frames here, and release them at the end of this callback. Because
+         * keeping them in memory (e.g. setting the full frame to an ImageView)
+         * could result in a OutOfMemoryError (depending on the chosen pictureResoultion)). This error is reported in {@link #onTakePictureError
+         * (Throwable)}
+         *
+         * Use a DiskCache http://developer.android.com/training/displaying-bitmaps/cache-bitmap.html#disk-cache
+         * for example
+         *
+         */</span>
+
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">onPictureProcessingFailure</span><span class="o">(</span><span class="n">DocumentScanView</span><span class="o">.</span><span class="na">DocumentError</span> <span class="n">documentError</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// handle an error while processing the full picture here</span>
+        <span class="c1">// the preview will be restarted automatically</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">onPreviewProcessingSuccess</span><span class="o">(</span><span class="n">AnylineImage</span> <span class="n">anylineImage</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// this is called after the preview of the document is completed, and a full picture will be</span>
+        <span class="c1">// processed automatically</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">onPreviewProcessingFailure</span><span class="o">(</span><span class="n">DocumentScanView</span><span class="o">.</span><span class="na">DocumentError</span> <span class="n">documentError</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// this is called on any error while processing the document image</span>
+        <span class="c1">// Note: this is called every time an error occurs in a run, so that might be quite often</span>
+        <span class="c1">// An error message should only be presented to the user after some time</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="n">onDocumentOutlineDetected</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">PointF</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">anglesValid</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// is called when the outline of the document is detected. return true if the outline is consumed by</span>
+        <span class="c1">// the implementation here, false if the outline should be drawn by the DocumentScanView</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">onTakePictureSuccess</span><span class="o">()</span> <span class="o">{</span>
+        <span class="c1">// this is called after the image has been captured from the camera and is about to be processed</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">onTakePictureError</span><span class="o">(</span><span class="n">Throwable</span> <span class="n">throwable</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// This is called if the image could not be captured from the camera (most probably because of an</span>
+        <span class="c1">// OutOfMemoryError)</span>
+    <span class="o">}</span>
+<span class="o">});</span>
+
+<span class="c1">// optionally stop the scan once a valid result was returned</span>
+<span class="c1">// documentScanView.cancelOnResult(true);       </span>
+</code></pre>
+
+<blockquote>
+<p>in onResume()</p>
+</blockquote>
+<pre class="highlight java"><code><span class="n">documentScanView</span><span class="o">.</span><span class="na">startScanning</span><span class="o">();</span>
+</code></pre>
+
+<blockquote>
+<p>in onPause()</p>
+</blockquote>
+<pre class="highlight java"><code><span class="n">documentScanView</span><span class="o">.</span><span class="na">cancelScanning</span><span class="o">();</span>
+<span class="c1">//IMPORTANT: always release the camera in onPause</span>
+<span class="n">documentScanView</span><span class="o">.</span><span class="na">releaseCameraInBackground</span><span class="o">();</span>
+</code></pre>
+
+<p>In order to start the scan process, perform the following steps:</p>
+
+<ol>
+<li>If you prefer a json-file for configuration, use the <em>setConfigFromAsset</em> method and place the json-config in the Android assets folder, otherwise configure the view using the XML attributes in the activity layout file</li>
+<li>Call <em>initAnyline</em> with your valid license key and a new instance of DocumentResultListener, which is the callback for handling the results</li>
+<li>Call <em>startScanning()</em></li>
+<li>When done call <em>cancelScanning()</em> and <em>releaseCameraInBackground()</em> or <em>releaseCamera()</em></li>
+</ol>
+
+<p>For each successful scan, you will receive two result attributes:</p>
+
+<ul>
+<li><strong>transformedImage:</strong> the rectified document image</li>
+<li><strong>fullFrame</strong>: the full frame the document was analysed from</li>
+</ul>
+
+<h6 id="example-activity-layout">Example Activity Layout</h6>
+<pre class="highlight xml"><code><span class="nt">&lt;RelativeLayout</span>
+    <span class="na">xmlns:android=</span><span class="s">"http://schemas.android.com/apk/res/android"</span>
+    <span class="na">xmlns:app=</span><span class="s">"http://schemas.android.com/apk/res-auto"</span>
+    <span class="na">android:layout_width=</span><span class="s">"match_parent"</span>
+    <span class="na">android:layout_height=</span><span class="s">"match_parent"</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;at.nineyards.anyline.modules.document.DocumentScanView</span>
+    <span class="na">android:id=</span><span class="s">"@+id/document_scan_view"</span>
+    <span class="na">android:layout_width=</span><span class="s">"match_parent"</span>
+    <span class="na">android:layout_height=</span><span class="s">"match_parent"</span>
+    <span class="nt">/&gt;</span>
+
+<span class="nt">&lt;/RelativeLayout&gt;</span>
+</code></pre>
+
+<p>The DocumentScanView can simply be included in the activity layout.</p>
+
+<p>For custom configuration (e.g. cutout, flash, feedback on successful scan, etc.) you can either use a json-file or XML-attributes like in the example. If you need more detailed information about all available config items see <a href="#anyline-config">Anyline Config</a>. Please consider the <a href="#documentModuleRestrictions">config restrictions</a> when configuring the DocumentScanView.</p>
+
+<h3 id="ios">iOS</h3>
+
+<h4 id="example">Example</h4>
+
+<p>The following example illustrates a simple use-case of the document module.</p>
+
+<p>In order to start the scan process, perform the following steps:</p>
+
+<h6 id="1-initialize-the-module-in-viewdidload">1. Initialize the module in viewDidLoad</h6>
+
+<blockquote>
+<p>in viewDidLoad</p>
+</blockquote>
+<pre class="highlight objective_c"><code>    <span class="n">CGRect</span> <span class="n">frame</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIScreen</span> <span class="nf">mainScreen</span><span class="p">]</span> <span class="nf">applicationFrame</span><span class="p">];</span>
+    <span class="n">frame</span> <span class="o">=</span> <span class="n">CGRectMake</span><span class="p">(</span><span class="n">frame</span><span class="p">.</span><span class="n">origin</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">frame</span><span class="p">.</span><span class="n">origin</span><span class="p">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">self</span><span class="p">.</span><span class="n">navigationController</span><span class="p">.</span><span class="n">navigationBar</span><span class="p">.</span><span class="n">frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">height</span><span class="p">,</span> <span class="n">frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">width</span><span class="p">,</span> <span class="n">frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">height</span> <span class="o">-</span> <span class="n">self</span><span class="p">.</span><span class="n">navigationController</span><span class="p">.</span><span class="n">navigationBar</span><span class="p">.</span><span class="n">frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">height</span><span class="p">);</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">documentModuleView</span> <span class="o">=</span> <span class="p">[[</span><span class="n">AnylineDocumentModuleView</span> <span class="nf">alloc</span><span class="p">]</span> <span class="nf">initWithFrame</span><span class="p">:</span><span class="n">frame</span><span class="p">];</span>
+
+    <span class="n">NSError</span> <span class="o">*</span><span class="n">error</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
+    <span class="c1">// We tell the module to bootstrap itself with the license key and delegate. The delegate will later get called
+</span>    <span class="c1">// by the module once we start receiving results.
+</span>    <span class="n">BOOL</span> <span class="n">success</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">documentModuleView</span> <span class="nf">setupWithLicenseKey</span><span class="p">:</span><span class="n">kDocumentScanLicenseKey</span> <span class="nf">delegate</span><span class="p">:</span><span class="n">self</span> <span class="nf">error</span><span class="p">:</span><span class="o">&amp;</span><span class="n">error</span><span class="p">];</span>
+    <span class="c1">// setupWithLicenseKey:delegate:error returns true if everything went fine. In the case something wrong
+</span>    <span class="c1">// we have to check the error object for the error message.
+</span>    <span class="k">if</span><span class="p">(</span> <span class="o">!</span><span class="n">success</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Something went wrong. The error object contains the error description
+</span>        <span class="n">NSAssert</span><span class="p">(</span><span class="n">success</span><span class="p">,</span> <span class="s">@"Setup Error: %@"</span><span class="p">,</span> <span class="n">error</span><span class="p">.</span><span class="n">debugDescription</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// After setup is complete we add the module to the view of this view controller
+</span>    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">view</span> <span class="nf">addSubview</span><span class="p">:</span><span class="n">self</span><span class="p">.</span><span class="n">documentModuleView</span><span class="p">];</span>
+
+</code></pre>
+
+<ul>
+<li>Create a <code class="prettyprint">ALUIConfiguration</code> object and use its properties to configure the user interface, or load a layout file. </li>
+<li>Initialize the module with a license key and delegate, which will receive a call once a result is found. The boolean returned by the setup routine notifies you if the Anyline setup was successful. If an error occurred the error needs to be handled.</li>
+</ul>
+
+<h6 id="2-start-scanning-process-in-viewdidappear">2. Start scanning process in viewDidAppear</h6>
+
+<blockquote>
+<p>in viewDidAppear()</p>
+</blockquote>
+<pre class="highlight objective_c"><code><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">documentModuleView</span> <span class="nf">startScanningAndReturnError</span><span class="p">:</span><span class="o">&amp;</span><span class="n">error</span><span class="p">];</span>
+</code></pre>
+
+<p>Call <code class="prettyprint">startScanningAndReturnError</code> in <code class="prettyprint">viewDidAppear</code>. If there is a problem while starting the scanning process, an error object will be set so the error can be handled.</p>
+
+<h6 id="3-implement-the-delegate-method-and-receive-results">3. Implement the delegate method and receive results</h6>
+<pre class="highlight objective_c"><code><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">anylineDocumentModuleView</span><span class="p">:(</span><span class="n">AnylineDocumentModuleView</span> <span class="o">*</span><span class="p">)</span><span class="nv">anylineEnergyModuleView</span> <span class="nf">hasResult</span><span class="p">:(</span><span class="n">UIImage</span> <span class="o">*</span><span class="p">)</span><span class="nv">transformedImage</span> <span class="nf">fullImage</span><span class="p">:(</span><span class="n">UIImage</span> <span class="o">*</span><span class="p">)</span><span class="nv">fullFrame</span> <span class="p">{</span>
+   <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Anyline has a result"</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>To receive results implement the delegate method as can be seen in the example.</p>
+
+<h6 id="newline">&NewLine;</h6>
+
+<blockquote>
+<p>in viewWillDisappear()</p>
+</blockquote>
+<pre class="highlight objective_c"><code><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">documentModuleView</span> <span class="nf">cancelScanningAndReturnError</span><span class="p">:</span><span class="o">&amp;</span><span class="n">error</span><span class="p">];</span>
+</code></pre>
+
+<p>After you received a result, call <code class="prettyprint">cancelScanningAndReturnError</code>. This also has to be called in <code class="prettyprint">viewWillDisappear</code> to clean up the module.</p>
+
+<h6 id="newline">&NewLine;</h6>
+
+<p>For each successful scan, you will receive two objects:</p>
+
+<ul>
+<li><strong>transformedImage:</strong> the cropped and transformed image of the document</li>
+<li><strong>fullFrame</strong>: the full image taken by the camera</li>
+</ul>
+
+<p>The AnylineDocumentModuleView can simply be added as a subview.</p>
+
+<p>For custom configuration (e.g. cutout, flash, feedback on successful scan, etc.) you can either use a json-file or configure it by accessing the properties of the module. If you need more detailed information about all available config items see <a href="#anyline-config">Anyline Config</a>.</p>
+
+<p><a name="anylineOcrModule"> </a></p>
+
+<h2 id="anyline-ocr">Anyline OCR</h2>
+
+<p>With the Anyline OCR Module it is possible to set up scanning for custom use-cases.</p>
+
+<p>There are two different modes for this module: <strong>LINE</strong> and <strong>GRID</strong>.
+The LINE mode is optimal for scanning one or more lines of variable length and/or font (like IBANs or addresses).
+The GRID mode is optimal for characters with equal size laid out in a grid, with a constant font, background and character count (like loyalty codes inside bottle caps).</p>
+
+<p>If the provided settings are not enough to achieve great results, feel free to
+<a href="https://www.anyline.io/support-request/">contact us</a> and we will create a command file that is optimized
+for your use-case. This script can then be set as a parameter to this module, so minimal changes are required to your app.</p>
+
+<h4 id="settings-common">Settings Common</h4>
+
+<table><thead>
+<tr>
+<th>property</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>scanMode</td>
+<td><code class="prettyprint">LINE</code> or <code class="prettyprint">GRID</code></td>
+</tr>
+<tr>
+<td>customCmdFile</td>
+<td>An optional custom command file</td>
+</tr>
+<tr>
+<td>minCharHeight</td>
+<td>The minimum height of a character to scan in pixels (relative to the configured capture resolution)</td>
+</tr>
+<tr>
+<td>maxCharHeight</td>
+<td>The maximum height of a character to scan in pixels (relative to the configured capture resolution)</td>
+</tr>
+<tr>
+<td>tesseractLanguages</td>
+<td>The languages to use for the OCR (e.g. to use custom.traineddata set this value &ldquo;custom&rdquo;)</td>
+</tr>
+<tr>
+<td>charWhitelist</td>
+<td>Filter the recognized characters to only allow the ones included in this list (e.g. <code class="prettyprint">&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890&quot;</code> for capital letters and numbers only)</td>
+</tr>
+<tr>
+<td>validationRegex</td>
+<td>A regex string to validate the result. Invalid results will not be returned. (regex is in <a href="http://www.cplusplus.com/reference/regex/ECMAScript/">ECMAScript regular expressions pattern syntax</a>)</td>
+</tr>
+<tr>
+<td>minConfidence</td>
+<td>The minimum confidence required to return a result, a value between 0 and 100. (higher confidence means it may take longer to get a result but it is more likely to be accurate)</td>
+</tr>
+</tbody></table>
+
+<h4 id="settings-line-mode-only">Settings LINE mode only</h4>
+
+<table><thead>
+<tr>
+<th>property</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>removeSmallContours</td>
+<td>If this is <code class="prettyprint">true</code>, small contours will be ignored (This is useful for latin capital letters and numbers. This is detrimental if details are relevant, like the dot above the letter <code class="prettyprint">i</code>)</td>
+</tr>
+</tbody></table>
+
+<h4 id="settings-grid-mode-only">Settings GRID mode only</h4>
+
+<table><thead>
+<tr>
+<th>property</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>charCountX</td>
+<td>The number of horizontal characters</td>
+</tr>
+<tr>
+<td>charCountY</td>
+<td>The number of vertical characters</td>
+</tr>
+<tr>
+<td>charPaddingXFactor</td>
+<td>The average horizontal distance between two characters, measured in percentage of the characters width</td>
+</tr>
+<tr>
+<td>charPaddingYFactor</td>
+<td>The average vertical distance between two characters, measured in percentage of the character height</td>
+</tr>
+<tr>
+<td>isBrightTextOnDark</td>
+<td>If <code class="prettyprint">true</code>, this scans bright text on dark background. <br> If <code class="prettyprint">false</code>, this scans dark text on bright background</td>
+</tr>
+</tbody></table>
+
+<h3 id="android">Android</h3>
+
+<h4 id="example">Example</h4>
+
+<p>The following example illustrates an IBAN scanner use-case realized with the Anyline OCR module.</p>
+
+<h6 id="example-activity-for-the-iban-use-case">Example Activity for the IBAN use case</h6>
+
+<blockquote>
+<p>in <code class="prettyprint">onCreate</code> or <code class="prettyprint">onActivityCreated</code> lifecycle methods</p>
+</blockquote>
+
+<p>There are five simple steps necessary to get started:</p>
+
+<ol>
+<li>Set the view config with <code class="prettyprint">setConfig</code> (or in the layout XML)</li>
+<li>Set OCR parameters with <code class="prettyprint">setOcrConfig</code></li>
+<li>Initialize the module with a license and a listener. The listener is called with the result (and other information) using <code class="prettyprint">initAnyline</code></li>
+<li>Call <code class="prettyprint">startScanning()</code></li>
+<li>When you are done, call <code class="prettyprint">cancelScanning()</code> and <code class="prettyprint">releaseCameraInBackground()</code> or <code class="prettyprint">releaseCamera()</code></li>
+</ol>
+<pre class="highlight java"><code><span class="c1">// Get the view from the layout</span>
+<span class="n">scanView</span> <span class="o">=</span> <span class="o">(</span><span class="n">AnylineOcrScanView</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">scan_view</span><span class="o">);</span>
+<span class="c1">// Configure the view (cutout, the camera resolution, etc.) via json (can also be done in xml in the layout)</span>
+<span class="n">scanView</span><span class="o">.</span><span class="na">setConfig</span><span class="o">(</span><span class="k">new</span> <span class="n">AnylineViewConfig</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="s">"iban_view_config.json"</span><span class="o">));</span>
+
+<span class="c1">// Copies given traineddata-file to a place where the core can access it.</span>
+<span class="c1">// This MUST be called for every traineddata file that is used (before startScanning() is called).</span>
+<span class="c1">// The file must be located directly in the assets directory (or in tessdata/ but no other folders are allowed)</span>
+<span class="n">scanView</span><span class="o">.</span><span class="na">copyTrainedData</span><span class="o">(</span><span class="s">"tessdata/eng.traineddata"</span><span class="o">,</span> <span class="s">"f4b86e0b7eb03c682f0e5e6519e02d32"</span><span class="o">);</span>
+<span class="n">scanView</span><span class="o">.</span><span class="na">copyTrainedData</span><span class="o">(</span><span class="s">"tessdata/deu.traineddata"</span><span class="o">,</span> <span class="s">"2d5190b9b62e28fa6d17b728ca195776"</span><span class="o">);</span>
+
+<span class="c1">//Configure the OCR for IBANs</span>
+<span class="n">AnylineOcrConfig</span> <span class="n">anylineOcrConfig</span> <span class="o">=</span> <span class="k">new</span> <span class="n">AnylineOcrConfig</span><span class="o">();</span>
+<span class="c1">// use the line mode (line length and font may vary)</span>
+<span class="n">anylineOcrConfig</span><span class="o">.</span><span class="na">setScanMode</span><span class="o">(</span><span class="n">AnylineOcrConfig</span><span class="o">.</span><span class="na">ScanMode</span><span class="o">.</span><span class="na">LINE</span><span class="o">);</span>
+<span class="c1">// set the languages used for OCR</span>
+<span class="n">anylineOcrConfig</span><span class="o">.</span><span class="na">setTesseractLanguages</span><span class="o">(</span><span class="s">"eng"</span><span class="o">,</span> <span class="s">"deu"</span><span class="o">);</span>
+<span class="c1">// allow only capital letters and numbers</span>
+<span class="n">anylineOcrConfig</span><span class="o">.</span><span class="na">setCharWhitelist</span><span class="o">(</span><span class="s">"ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"</span><span class="o">);</span>
+<span class="c1">// set the height range the text can have</span>
+<span class="n">anylineOcrConfig</span><span class="o">.</span><span class="na">setMinCharHeight</span><span class="o">(</span><span class="mi">30</span><span class="o">);</span>
+<span class="n">anylineOcrConfig</span><span class="o">.</span><span class="na">setMaxCharHeight</span><span class="o">(</span><span class="mi">60</span><span class="o">);</span>
+<span class="c1">// The minimum confidence required to return a result, a value between 0 and 100.</span>
+<span class="c1">// (higher confidence means less likely to get a wrong result, but may be slower to get a result)</span>
+<span class="n">anylineOcrConfig</span><span class="o">.</span><span class="na">setMinConfidence</span><span class="o">(</span><span class="mi">65</span><span class="o">);</span>
+<span class="c1">// a simple regex for a basic validation of the IBAN, results that don't match this, will not be returned</span>
+<span class="c1">// (full validation is more complex, as different countries have different formats)</span>
+<span class="n">anylineOcrConfig</span><span class="o">.</span><span class="na">setValidationRegex</span><span class="o">(</span><span class="s">"^[A-Z]{2}([0-9A-Z]\\s*){13,32}$"</span><span class="o">);</span>
+<span class="c1">// removes small contours (helpful in this case as no letters with small artifacts are allowed, like iöäü)</span>
+<span class="n">anylineOcrConfig</span><span class="o">.</span><span class="na">setRemoveSmallContours</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+<span class="c1">// set the ocr config</span>
+<span class="n">scanView</span><span class="o">.</span><span class="na">setAnylineOcrConfig</span><span class="o">(</span><span class="n">anylineOcrConfig</span><span class="o">);</span>
+
+<span class="c1">// initialize with the license and a listener</span>
+<span class="n">scanView</span><span class="o">.</span><span class="na">initAnyline</span><span class="o">(</span><span class="n">license</span><span class="o">,</span> <span class="k">new</span> <span class="n">AnylineOcrListener</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">onReport</span><span class="o">(</span><span class="n">String</span> <span class="n">identifier</span><span class="o">,</span> <span class="n">Object</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// Called with interesting values, that arise during processing.</span>
+        <span class="c1">// Some possibly reported values:</span>
+        <span class="c1">//</span>
+        <span class="c1">// $brightness - the brightness of the center region of the cutout as a float value</span>
+        <span class="c1">// $confidence - the confidence, an Integer value between 0 and 100</span>
+        <span class="c1">// $thresholdedImage - the current image transformed into black and white</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="n">onTextOutlineDetected</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">PointF</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// Called when the outline of a possible text is detected.</span>
+        <span class="c1">// If false is returned, the outline is drawn automatically.</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">onResult</span><span class="o">(</span><span class="n">AnylineOcrResult</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// Called when a result is found (minimum confidence is exceeded and validation with regex was ok)</span>
+        <span class="n">ibanResultView</span><span class="o">.</span><span class="na">setResult</span><span class="o">(</span><span class="n">result</span><span class="o">.</span><span class="na">getText</span><span class="o">());</span>
+        <span class="n">ibanResultView</span><span class="o">.</span><span class="na">setVisibility</span><span class="o">(</span><span class="n">View</span><span class="o">.</span><span class="na">VISIBLE</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">onAbortRun</span><span class="o">(</span><span class="n">AnylineOcrError</span> <span class="n">code</span><span class="o">,</span> <span class="n">String</span> <span class="n">message</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// Is called when no result was found for the current image.</span>
+        <span class="c1">// E.g. if no text was found or the result is not valid.</span>
+    <span class="o">}</span>
+<span class="o">});</span>
+</code></pre>
+
+<blockquote>
+<p>in onResume()</p>
+</blockquote>
+<pre class="highlight java"><code><span class="n">scanView</span><span class="o">.</span><span class="na">startScanning</span><span class="o">();</span>
+</code></pre>
+
+<blockquote>
+<p>in onPause()</p>
+</blockquote>
+<pre class="highlight java"><code><span class="n">scanView</span><span class="o">.</span><span class="na">cancelScanning</span><span class="o">();</span>
+<span class="c1">//IMPORTANT: always release the camera in onPause</span>
+<span class="n">scanView</span><span class="o">.</span><span class="na">releaseCameraInBackground</span><span class="o">();</span>
+</code></pre>
+
+<h6 id="example-activity-layout">Example Activity Layout</h6>
+<pre class="highlight xml"><code><span class="nt">&lt;RelativeLayout</span>
+    <span class="na">xmlns:android=</span><span class="s">"http://schemas.android.com/apk/res/android"</span>
+    <span class="na">xmlns:tools=</span><span class="s">"http://schemas.android.com/tools"</span>
+    <span class="na">android:layout_width=</span><span class="s">"match_parent"</span>
+    <span class="na">android:layout_height=</span><span class="s">"match_parent"</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;at.nineyards.anyline.modules.ocr.AnylineOcrScanView</span>
+        <span class="na">android:id=</span><span class="s">"@+id/scan_view"</span>
+        <span class="na">android:layout_width=</span><span class="s">"match_parent"</span>
+        <span class="na">android:layout_height=</span><span class="s">"match_parent"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/RelativeLayout&gt;</span>
+</code></pre>
+
+<p>The AnylineOcrScanView can simply be included in the activity layout file, just like any other view. The view can be either configured via <a href="#configureViaXML">XML</a> or with a config json.</p>
+
+<p><a name="ibanViewConfig"> </a></p>
+
+<h6 id="example-view-config-for-the-iban-use-case">Example view config for the IBAN use case</h6>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"captureResolution"</span><span class="p">:</span><span class="s2">"1080"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"cutout"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"style"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rect"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"maxWidthPercent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"80%"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"maxHeightPercent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"80%"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"alignment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"top_half"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">870</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ratioFromSize"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"strokeWidth"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"cornerRadius"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"strokeColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FFFFFF"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"outerColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"outerAlpha"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.3</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"flash"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"mode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"manual"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"alignment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bottom_right"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"beepOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"vibrateOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"blinkAnimationOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"cancelOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>A detailed description of all available config items can be found in the section <a href="#anyline-config">Anyline Config</a>.</p>
+
+<h6 id="newline">&NewLine;</h6>
+
+<h5 id="other-examples">Other Examples</h5>
+
+<p>For more example use cases of the Anyline OCR module, check out the Examples app in the download package, available here: <a href="https://www.anyline.io/download/">https://www.anyline.io/download/</a></p>
+
+<h6 id="reporting">Reporting</h6>
+<pre class="highlight java"><code><span class="n">scanView</span><span class="o">.</span><span class="na">setReportingEnabled</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+</code></pre>
+
+<p>The reporting of results in the Community Edition (including an image)
+helps us to improve our product, and the customer experience.
+It is possible to turn off that feature by calling ​<em>setReportingEnabled(false)</em>​ on the AnylineOcrScanView.</p>
+
+<h3 id="ios">iOS</h3>
+
+<h4 id="example">Example</h4>
+
+<p>The following example illustrates an ISBN scanner use-case, realized with the Anyline OCR module.</p>
+
+<p>There are three simple steps necessary to get started:</p>
+
+<h6 id="1-initialize-the-module-in-viewdidload">1. Initialize the module in viewDidLoad</h6>
+
+<blockquote>
+<p>in <code class="prettyprint">viewDidLoad</code> lifecycle method</p>
+</blockquote>
+<pre class="highlight objective_c"><code><span class="c1">// The controller has to conform to &lt;AnylineOCRModuleDelegate&gt; to be able to receive results
+</span><span class="k">@interface</span> <span class="nc">ALISBNScanViewController</span> <span class="p">()</span><span class="o">&lt;</span><span class="n">AnylineOCRModuleDelegate</span><span class="o">&gt;</span>
+<span class="c1">// The Anyline module used for OCR
+</span><span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">strong</span><span class="p">)</span> <span class="n">AnylineOCRModuleView</span> <span class="o">*</span><span class="n">ocrModuleView</span><span class="p">;</span>
+
+<span class="k">@end</span>
+
+<span class="k">@implementation</span> <span class="nc">ALISBNScanViewController</span>
+<span class="cm">/*
+ We will do our main setup in viewDidLoad. Its called once the view controller is getting ready to be displayed.
+ */</span>
+<span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">viewDidLoad</span> <span class="p">{</span>
+    <span class="p">[</span><span class="n">super</span> <span class="nf">viewDidLoad</span><span class="p">];</span>
+
+    <span class="c1">// Initializing the module. Its a UIView subclass. We set the frame to fill the whole screen
+</span>    <span class="n">CGRect</span> <span class="n">frame</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIScreen</span> <span class="nf">mainScreen</span><span class="p">]</span> <span class="nf">applicationFrame</span><span class="p">];</span>
+    <span class="n">frame</span> <span class="o">=</span> <span class="n">CGRectMake</span><span class="p">(</span><span class="n">frame</span><span class="p">.</span><span class="n">origin</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">frame</span><span class="p">.</span><span class="n">origin</span><span class="p">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">self</span><span class="p">.</span><span class="n">navigationController</span><span class="p">.</span><span class="n">navigationBar</span><span class="p">.</span><span class="n">frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">height</span><span class="p">,</span> <span class="n">frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">width</span><span class="p">,</span> <span class="n">frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">height</span> <span class="o">-</span> <span class="n">self</span><span class="p">.</span><span class="n">navigationController</span><span class="p">.</span><span class="n">navigationBar</span><span class="p">.</span><span class="n">frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">height</span><span class="p">);</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">ocrModuleView</span> <span class="o">=</span> <span class="p">[[</span><span class="n">AnylineOCRModuleView</span> <span class="nf">alloc</span><span class="p">]</span> <span class="nf">initWithFrame</span><span class="p">:</span><span class="n">frame</span><span class="p">];</span>
+
+    <span class="n">ALOCRConfig</span> <span class="o">*</span><span class="n">config</span> <span class="o">=</span> <span class="p">[[</span><span class="n">ALOCRConfig</span> <span class="nf">alloc</span><span class="p">]</span> <span class="nf">init</span><span class="p">];</span>
+    <span class="n">config</span><span class="p">.</span><span class="n">charHeight</span> <span class="o">=</span> <span class="n">ALRangeMake</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">70</span><span class="p">);</span>
+    <span class="n">config</span><span class="p">.</span><span class="n">tesseractLanguages</span> <span class="o">=</span> <span class="p">@[</span><span class="s">@"eng"</span><span class="p">,</span> <span class="s">@"deu"</span><span class="p">];</span>
+    <span class="n">config</span><span class="p">.</span><span class="n">charWhiteList</span> <span class="o">=</span> <span class="s">@"ISBN0123456789&lt;&gt;-X"</span><span class="p">;</span>
+    <span class="n">config</span><span class="p">.</span><span class="n">minConfidence</span> <span class="o">=</span> <span class="mi">65</span><span class="p">;</span>
+    <span class="n">config</span><span class="p">.</span><span class="n">validationRegex</span> <span class="o">=</span> <span class="s">@"^ISBN</span><span class="se">\\</span><span class="s">s*((978|979){1}-?</span><span class="se">\\</span><span class="s">s*)*[0-9]{1,5}-?</span><span class="se">\\</span><span class="s">s*[0-9]{2,7}-?</span><span class="se">\\</span><span class="s">s*[0-9]{2,7}-?</span><span class="se">\\</span><span class="s">s*[0-9X]$"</span><span class="p">;</span>
+    <span class="n">config</span><span class="p">.</span><span class="n">removeSmallContours</span> <span class="o">=</span> <span class="nb">YES</span><span class="p">;</span>
+    <span class="n">config</span><span class="p">.</span><span class="n">scanMode</span> <span class="o">=</span> <span class="n">ALLine</span><span class="p">;</span>
+
+    <span class="n">NSError</span> <span class="o">*</span><span class="n">error</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
+    <span class="c1">// We tell the module to bootstrap itself with the license key and delegate. The delegate will later get called
+</span>    <span class="c1">// by the module once we start receiving results.
+</span>    <span class="n">BOOL</span> <span class="n">success</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">ocrModuleView</span> <span class="nf">setupWithLicenseKey</span><span class="p">:</span><span class="n">kISBNLicenseKey</span>
+                                                  <span class="nf">delegate</span><span class="p">:</span><span class="n">self</span>
+                                                 <span class="nf">ocrConfig</span><span class="p">:</span><span class="n">config</span>
+                                                     <span class="nf">error</span><span class="p">:</span><span class="o">&amp;</span><span class="n">error</span><span class="p">];</span>
+    <span class="c1">// setupWithLicenseKey:delegate:error returns true if everything went fine. In the case something wrong
+</span>    <span class="c1">// we have to check the error object for the error message.
+</span>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">success</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Something went wrong. The error object contains the error description
+</span>        <span class="n">NSAssert</span><span class="p">(</span><span class="n">success</span><span class="p">,</span> <span class="s">@"Setup Error: %@"</span><span class="p">,</span> <span class="n">error</span><span class="p">.</span><span class="n">debugDescription</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Load the UI Configuration from a json file
+</span>    <span class="n">NSString</span> <span class="o">*</span><span class="n">confPath</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSBundle</span> <span class="nf">mainBundle</span><span class="p">]</span> <span class="nf">pathForResource</span><span class="p">:</span><span class="s">@"isbn_config"</span> <span class="nf">ofType</span><span class="p">:</span><span class="s">@"json"</span><span class="p">];</span>
+    <span class="n">ALUIConfiguration</span> <span class="o">*</span><span class="n">ibanConf</span> <span class="o">=</span> <span class="p">[</span><span class="n">ALUIConfiguration</span> <span class="nf">cutoutConfigurationFromJsonFile</span><span class="p">:</span><span class="n">confPath</span><span class="p">];</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">ocrModuleView</span><span class="p">.</span><span class="n">currentConfiguration</span> <span class="o">=</span> <span class="n">ibanConf</span><span class="p">;</span>
+
+    <span class="c1">// After setup is complete we add the module to the view of this view controller
+</span>    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">view</span> <span class="nf">addSubview</span><span class="p">:</span><span class="n">self</span><span class="p">.</span><span class="n">ocrModuleView</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="cm">/*
+ This is the main delegate method Anyline uses to report its results
+ */</span>
+<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">anylineOCRModuleView</span><span class="o">:</span><span class="p">(</span><span class="n">AnylineOCRModuleView</span> <span class="o">*</span><span class="p">)</span><span class="n">anylineOCRModuleView</span>
+               <span class="n">didFindResult</span><span class="o">:</span><span class="p">(</span><span class="n">ALOCRResult</span> <span class="o">*</span><span class="p">)</span><span class="n">result</span> <span class="p">{</span>
+    <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Anyline reports result:"</span><span class="p">,</span> <span class="n">result</span><span class="p">.</span><span class="n">text</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">anylineOCRModuleView</span><span class="o">:</span><span class="p">(</span><span class="n">AnylineOCRModuleView</span> <span class="o">*</span><span class="p">)</span><span class="n">anylineOCRModuleView</span>
+             <span class="n">reportsVariable</span><span class="o">:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">variableName</span>
+                       <span class="n">value</span><span class="o">:</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="n">value</span> <span class="p">{</span>
+    <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Anyline reports varaible: %@ with value: %@"</span><span class="p">,</span> <span class="n">variableName</span><span class="p">,</span> <span class="n">value</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">anylineOCRModuleView</span><span class="o">:</span><span class="p">(</span><span class="n">AnylineOCRModuleView</span> <span class="o">*</span><span class="p">)</span><span class="n">anylineOCRModuleView</span>
+           <span class="n">reportsRunFailure</span><span class="o">:</span><span class="p">(</span><span class="n">ALOCRError</span><span class="p">)</span><span class="n">error</span> <span class="p">{</span>
+    <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Anyline reports varaible an error: %@"</span><span class="p">,</span> <span class="n">error</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">@end</span>
+</code></pre>
+
+<ul>
+<li>Create a <code class="prettyprint">ALUIConfiguration</code> object and use its properties to configure the user interface, or load a layout file. </li>
+<li>Create a <code class="prettyprint">ALOCRConfig</code> object and use its properties to configure the module. </li>
+<li>Initialize the module with a license key, a delegate and the <code class="prettyprint">ALOCRConfig</code> object. The delegate will be called once there is a result. </li>
+</ul>
+
+<h6 id="2-start-scanning-process-in-viewdidappear">2. Start scanning process in viewDidAppear</h6>
+
+<blockquote>
+<p>in viewDidAppear()</p>
+</blockquote>
+<pre class="highlight objective_c"><code><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">ocrModuleView</span> <span class="nf">startScanningAndReturnError</span><span class="p">:</span><span class="o">&amp;</span><span class="n">error</span><span class="p">];</span>
+</code></pre>
+
+<p>Call <code class="prettyprint">startScanningAndReturnError</code> in <code class="prettyprint">viewDidAppear</code>. If there is a problem while starting the scanning process, an error object will be set so the error can be handled.</p>
+
+<h6 id="3-implement-the-delegate-method-and-receive-results">3. Implement the delegate method and receive results</h6>
+<pre class="highlight objective_c"><code><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">anylineOCRModuleView</span><span class="p">:(</span><span class="n">AnylineOCRModuleView</span> <span class="o">*</span><span class="p">)</span><span class="nv">anylineOCRModuleView</span> <span class="nf">didFindResult</span><span class="p">:(</span><span class="n">ALOCRResult</span> <span class="o">*</span><span class="p">)</span><span class="nv">result</span> <span class="p">{</span>
+   <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Anyline has a result"</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>To receive results implement the delegate method as can be seen in the example.</p>
+
+<h6 id="newline">&NewLine;</h6>
+
+<blockquote>
+<p>in viewWillDisappear()</p>
+</blockquote>
+<pre class="highlight objective_c"><code><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">ocrModuleView</span> <span class="nf">cancelScanningAndReturnError</span><span class="p">:</span><span class="o">&amp;</span><span class="n">error</span><span class="p">];</span>
+</code></pre>
+
+<p>After you received a result, call <code class="prettyprint">cancelScanningAndReturnError</code>. This also has to be called in <code class="prettyprint">viewWillDisappear</code> to clean up the module. </p>
+
+<p><a name="isbnViewConfig"> </a></p>
+
+<h6 id="example-view-config-for-the-iban-use-case">Example view config for the IBAN use case</h6>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"captureResolution"</span><span class="p">:</span><span class="s2">"1080"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"cutout"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"style"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rect"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"maxWidthPercent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"80%"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"maxHeightPercent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"80%"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"alignment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"top_half"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">540</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"ratioFromSize"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"strokeWidth"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"cornerRadius"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"strokeColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FFFFFF"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"outerColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"outerAlpha"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.3</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"flash"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"mode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"manual"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"alignment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bottom_right"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"beepOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"vibrateOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"blinkAnimationOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"cancelOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>The OCR module can simply be added as a subview, just like any other view. The view can be either configured via <code class="prettyprint">ALUIConfiguration</code> or with a config json file.</p>
+
+<p>A detailed description of all available config items can be found in the section <a href="#anyline-config">Anyline Config</a></p>
+
+<h6 id="newline">&NewLine;</h6>
+
+<h5 id="other-examples">Other Examples</h5>
+
+<p>For more example use cases of the Anyline OCR Module, check out the Examples app in the download package, available here: <a href="https://www.anyline.io/download/">https://www.anyline.io/download/</a></p>
+
 <p><a name="ordercodeModule"> </a></p>
 
 <h2 id="order-code">Order Code</h2>
 
 <aside class="notice">
-<b>A first version of the Order Code Module for Epson is available on request. For a valid license please <a href="https://www.anyline.io/support-request/">contact</a> us </b>
+<b>A first version of the Order Code Module for smart glasses is available on request. For a valid license please <a href="https://www.anyline.io/support-request/">contact</a> us </b>
 </aside>
 
-<p>With the Anyline Order Code Module it is possible to scan a specific type of Ordercode with the Epson BT2000.
-The code consists of 11 alphanumeric characters in different font sizes. The result will simply be a <em>string</em> representation of the code. </p>
+<p>With the Anyline Order Code Module it is possible to scan a specific type of Ordercode.
+The code consists of 11 alphanumeric characters in different font sizes. The result will simply be a <em>string</em> representation of the code.</p>
 
 <h4 id="example">Example</h4>
 
