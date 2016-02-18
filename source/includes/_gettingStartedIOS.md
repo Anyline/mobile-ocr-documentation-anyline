@@ -47,7 +47,7 @@ After adding the libraries, it should look like this (notice the AnylineResource
 #### 3. Linker Flags
 
 In your project inspector switch to the *Build Settings* tab  and search for *Other Linker Flags*. Select
-*Other - Other Linker Flags* and add *-&nbsp;ObjC*.
+*Other - Other Linker Flags* and add *-ObjC*.
 This flag causes the linker to load every object file in the library that defines an Objective-C class or category.
 
 ![Linker Flags](images/LinkerFlags.jpg)
