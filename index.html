@@ -3537,7 +3537,7 @@ Notice that the custom script will override all settings made to the Anyline OCR
 In the <em>copyTrainedData</em> method specify the path of the file from relative to the assets folder. Additionally you can provide a md5 hash of the file or specify <em>null</em> as second parameter.
 If the hash is null, it will be calculated automatically, but this is slow and is therefor not recommended.</p>
 
-<p>If you have multiply traineddata files this method must be called for every traineddata file before startScanning is called.</p>
+<p>Important! If you have multiple traineddata files, this method must be called for every traineddata file before startScanning is called.</p>
 
 <h3 id="example">Example</h3>
 
