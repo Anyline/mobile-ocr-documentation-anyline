@@ -106,17 +106,17 @@ This API contains a <a href="#getting-started">Quick Start Guide</a> for all sup
 <p>The Android bundle contains the following parts:</p>
 
 <ul>
-<li><strong>AnylineSDK:</strong>      contains the anyline-android-release.aar library</li>
-<li><strong>AnylineSDKExamples:</strong>      contains a simple app where an example for each module is implemented - it can be installed right away</li>
-<li><strong>Documentation:</strong>    contains the java doc for the anyline-sdk, and this web documentation</li>
-<li><strong>LICENSE:</strong>          third party license agreements</li>
-<li><strong>README:</strong>           contains a quick start - setup and module description</li>
-<li><strong>RELEASE_NOTES:</strong>    information about any changes</li>
+<li><strong>AnylineSDK:</strong>           contains the anyline-android-release.aar library</li>
+<li><strong>AnylineSDKExamples:</strong>   contains a simple app where an example for each module is implemented - it can be installed right away</li>
+<li><strong>Documentation:</strong>        contains the java doc for the anyline-sdk, and this web documentation</li>
+<li><strong>LICENSE:</strong>              third party license agreements</li>
+<li><strong>README:</strong>               contains a quick start - setup and module description</li>
+<li><strong>RELEASE_NOTES:</strong>        information about any changes</li>
 </ul>
 
 <h3 id="sample-data">Sample Data</h3>
 
-<p>In order to try out our examples app yourself, you can download  <a href="https://anylinewebsiteresource.blob.core.windows.net/wordpressmedia/2016/02/Anyline-3.4-Use-Case-Samples.pdf">this file</a> with test images or scan things in the real world ;) </p>
+<p>In order to try out our examples app yourself, you can download <a href="https://anylinewebsiteresource.blob.core.windows.net/wordpressmedia/2016/02/Anyline-3.4-Use-Case-Samples.pdf">this file</a> with test images or scan things in the real world ;) </p>
 
 <h3 id="requirements">Requirements</h3>
 
@@ -226,7 +226,7 @@ A detailed description of all available attributes can be found in <a href="#any
 <aside class="notice">
 <b>Epson specific</b>
 <br/>
-The Epson BT2000 has no flash or vibration alarm integrated. Hence, all settings regarding flash and 'vibrateOnResult&rsquo; will be ignored. Furthermore the Epson has no built-in speakers, therfore the 'beepOnResult&rsquo; will only be played when the headset is connected
+The Epson BT2000 has no flash or vibration alarm integrated. Hence, all settings regarding flash and 'vibrateOnResult&rsquo; will be ignored. Furthermore the Epson has no built-in speakers, therefore the 'beepOnResult&rsquo; will only be played when the headset is connected
 </aside>
 
 <h6 id="json">JSON</h6>
@@ -356,7 +356,7 @@ The Epson BT2000 has no flash or vibration alarm integrated. Hence, all settings
 
 <p>You&rsquo;re all done and can jump to point 4. </p>
 
-<h5 id="or-via-local-copy-of-the-anyline-framework-amp-anylineresources-bundle">Or via local copy of the Anyline.framework &amp; AnylineResources.bundle</h5>
+<h5 id="or-via-local-copy-of-the-anyline-framework-amp-anylineresources-bundle">Or via local copy of the Anyline.framework &amp; AnylineResources.bundle #####</h5>
 
 <p>Simply drag &amp; drop Anyline.framework &amp; AnylineResources.bundle into your project tree.
 <img alt="Add Frameworks" src="images/AddFramework.jpg" /></p>
@@ -439,23 +439,16 @@ For more information about Cordova, how to use plugins, etc. see <a target="_bla
 
 <p>Copy the <i>anylinesdk-plugin</i> folder and add the plugin to your Cordova project. Make sure you have added at least on of the platforms (Android, iOS) to your project.</p>
 
-<h6 id="2-modify-the-config-xml">2. Modify the config.xml</h6>
-<pre class="highlight xml"><code><span class="nt">&lt;feature</span> <span class="na">name=</span><span class="s">"AnylineSDK"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"android-package"</span> <span class="na">value=</span><span class="s">"io.anyline.cordova.AnylinePlugin"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"onload"</span> <span class="na">value=</span><span class="s">"true"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"ios-package"</span> <span class="na">value=</span><span class="s">"AnylineSDKPlugin"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"id"</span> <span class="na">value=</span><span class="s">"io.anyline.cordova"</span> <span class="nt">/&gt;</span>
-<span class="nt">&lt;/feature&gt;</span>
+<p>Or use plugman. E.g. for android:  </p>
+<pre class="highlight plaintext"><code>plugman install --platform android --project platforms/android --plugin PATH_TO_DIR/anylinesdk-plugin
 </code></pre>
 
-<p>Add the following code to your (auto-generated) <i>config.xml</i> of your Cordova project, declaring the feature &ldquo;AnylineSDK&rdquo;.</p>
-
-<h6 id="3-copy-the-js-files-or-create-custom-js-file">3. Copy the js-files or create custom js-file</h6>
+<h6 id="2-copy-the-js-files-or-create-custom-js-file">2. Copy the js-files or create custom js-file</h6>
 
 <p>The <i>example</i> project provides sample scripts which are optimized for each module. The js-files can be found in <i>example/www/js/</i>.<p/>
 You can either reuse those sample scripts or create your own and adapt them to your needs. <br/>
 Just make sure the script is called in the <i>index.html</i> of the Cordova project.<p/></p>
-<pre class="highlight html"><code>cordova.exec(onResult, onError, "AnylineSDK", scanMode, config);
+<pre class="highlight plaintext"><code>cordova.exec(onResult, onError, "AnylineSDK", scanMode, config);
 </code></pre>
 
 <p><p/>
@@ -466,7 +459,7 @@ Basically, there is one simple exec-call to the AnylineSDK with the following pa
 <li><b>onResult</b>: a function that is called on a scan result</li>
 <li><b>onError</b>: a function that is called on error or when the user canceled the scanning</li>
 <li><b>AnylineSDK</b>: add this <em>string</em> to make sure the anyline-sdk plugin is called</li>
-<li><b>scanMode</b>: one of &ldquo;<i>scanMRZ</i>&rdquo;, &ldquo;<i>scanBarcode</i>&rdquo;, &ldquo;<i>scanElectricMeter</i>&rdquo;, &ldquo;<i>scanGasMeter</i>&rdquo;</li>
+<li><b>scanMode</b>: &ldquo;<i>MRZ</i>&rdquo;, &ldquo;<i>BARCODE</i>&rdquo;, &ldquo;<i>ANYLINE_OCR</i>&rdquo;, &ldquo;<i>ELECTRIC_METER</i>&rdquo;, &ldquo;<i>GAS_METER</i>&rdquo; (more Energy modes can be found <a href="#energyModule">here</a>)</li>
 <li><b>config</b>: an array
 
 <ul>
@@ -505,7 +498,7 @@ Basically, there is one simple exec-call to the AnylineSDK with the following pa
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
 
-<h6 id="4-run-your-cordova-project-enjoy-scanning-and-have-fun">4. Run your cordova project: Enjoy scanning and have fun :)</h6>
+<h6 id="3-run-your-cordova-project-enjoy-scanning-and-have-fun">3. Run your cordova project: Enjoy scanning and have fun :)</h6>
 
           <h1 id="xamarin-setup-guide">Xamarin Setup Guide</h1>
 
@@ -1587,26 +1580,25 @@ scanned.</p>
 
 <h5 id="style">style</h5>
 
-<p>The type of the cutout.</p>
+<p>The style parameter can either be rect or image. </p>
 
-<table><thead>
-<tr>
-<th>style</th>
-<th>description</th>
-<th>related parameters</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>rect</td>
-<td>a rectangle is drawn around the cutout-area</td>
-<td>strokeWidth, strokeColor, cornerRadius</td>
-</tr>
-<tr>
-<td>image</td>
-<td>a given image is drawn inside the cutout-area (resized to fit)</td>
-<td>image</td>
-</tr>
-</tbody></table>
+<p><em>rect</em></p>
+<pre class="highlight java"><code><span class="s">"style"</span><span class="o">:</span> <span class="s">"rect"</span><span class="o">,</span>
+<span class="s">"strokeWidth"</span><span class="o">:</span> <span class="mi">2</span><span class="o">,</span>
+<span class="s">"strokeColor"</span><span class="o">:</span> <span class="s">"FFFFFF"</span><span class="o">,</span>
+<span class="s">"cornerRadius"</span><span class="o">:</span> <span class="mi">4</span><span class="o">,</span>
+</code></pre>
+
+<p>In this case a rectangle is drawn around the cutout area. To customize the appearance of the rectangle utilize the parameters <a href="#cutout_strokeWidth">strokeWidth</a>, <a href="#cutout_strokeColor">strokeColor</a> and <a href="#cutout_cornerRadius">cornerRadius</a>.</p>
+
+<h6 id="newline">&NewLine;</h6>
+
+<p><em>image</em></p>
+<pre class="highlight java"><code><span class="s">"style"</span><span class="o">:</span> <span class="s">"image"</span><span class="o">,</span>
+<span class="s">"image"</span><span class="o">:</span> <span class="s">"image_name_without_extension"</span><span class="o">,</span>
+</code></pre>
+
+<p>With this option it is possible to display a custom image in the cutout area. Therefore it is necessary to provide an image file and place it within the <em>res/drawable</em> folder. Furthermore, you have to specify the image name without extension for the <a href="#cutout_image">image</a> parameter as can be seen in the example. </p>
 
 <p><a name="cutout_strokeColor"> </a></p>
 
@@ -1643,7 +1635,7 @@ scanned.</p>
 
 <h5 id="image">image</h5>
 
-<p>The name of the image resource (only used if type is image).</p>
+<p>The name of the image resource as string, without extension - only used if type is image.</p>
 
 <ul>
 <li><strong>Type:</strong> String</li>
@@ -2418,7 +2410,7 @@ In this example we add a view below the watermark. Therefore, we have to check w
 </code></pre>
 
 <ul>
-<li>Create a property, initialize the module in the viewDidLoad method and add it to the view of the ViewController. </li>
+<li>Create a property, initialize the module in the viewDidLoad method and add it to the view of the ViewController.</li>
 <li>Supply the license key and set the delegate, which will receive a call once a result is found. The boolean returned by the setup routine notifies you if the Anyline setup was successful. If an error occurred the error needs to be handled.</li>
 <li>After the succesful setup, set the barcode types that should be scanned.</li>
 </ul>
@@ -2480,38 +2472,38 @@ If there is a problem starting the scanning process an error object will be set,
 
 <h6 id="example-call-for-the-barcode-module">Example call for the Barcode Module</h6>
 
-<p>Call the exec method with <em>scanBarcode</em>. For a more detailed description of the config parameters used, see the <a href="#cordova-example">example</a> in Quick Start.</p>
-<pre class="highlight java"><code><span class="n">cordova</span><span class="o">.</span><span class="na">exec</span><span class="o">(</span><span class="n">onResult</span><span class="o">,</span> <span class="n">onError</span><span class="o">,</span> <span class="s">"AnylineSDK"</span><span class="o">,</span> <span class="s">"scanBarcode"</span><span class="o">,</span>
-    <span class="o">[</span>
-        <span class="s">"YOUR_LICENSE_KEY"</span><span class="o">,</span>
-        <span class="o">{</span>
-            <span class="s">"captureResolution"</span><span class="o">:</span> <span class="s">"720p"</span><span class="o">,</span>
-            <span class="s">"cutout"</span><span class="o">:</span> <span class="o">{</span>
-                <span class="s">"style"</span><span class="o">:</span> <span class="s">"rect"</span><span class="o">,</span>
-                <span class="s">"maxWidthPercent"</span><span class="o">:</span> <span class="s">"80%"</span><span class="o">,</span>
-                <span class="s">"maxHeightPercent"</span><span class="o">:</span> <span class="s">"80%"</span><span class="o">,</span>
-                <span class="s">"alignment"</span><span class="o">:</span> <span class="s">"center"</span><span class="o">,</span>
-                <span class="s">"ratioFromSize"</span><span class="o">:</span> <span class="o">{</span>
-                    <span class="s">"width"</span><span class="o">:</span> <span class="mi">100</span><span class="o">,</span>
-                    <span class="s">"height"</span><span class="o">:</span> <span class="mi">80</span>
-                <span class="o">},</span>
-                <span class="s">"strokeWidth"</span><span class="o">:</span> <span class="mi">4</span><span class="o">,</span>
-                <span class="s">"cornerRadius"</span><span class="o">:</span> <span class="mi">10</span><span class="o">,</span>
-                <span class="s">"strokeColor"</span><span class="o">:</span> <span class="s">"FFFFFF"</span><span class="o">,</span>
-                <span class="s">"outerColor"</span><span class="o">:</span> <span class="s">"000000"</span><span class="o">,</span>
-                <span class="s">"outerAlpha"</span><span class="o">:</span> <span class="mf">0.3</span>
-            <span class="o">},</span>
-            <span class="s">"flash"</span><span class="o">:</span> <span class="o">{</span>
-                <span class="s">"mode"</span><span class="o">:</span> <span class="s">"manual"</span><span class="o">,</span>
-                <span class="s">"alignment"</span><span class="o">:</span> <span class="s">"bottom_right"</span>
-            <span class="o">},</span>
-            <span class="s">"beepOnResult"</span><span class="o">:</span> <span class="kc">true</span><span class="o">,</span>
-            <span class="s">"vibrateOnResult"</span><span class="o">:</span> <span class="kc">true</span><span class="o">,</span>
-            <span class="s">"blinkAnimationOnResult"</span><span class="o">:</span> <span class="kc">true</span><span class="o">,</span>
-            <span class="s">"cancelOnResult"</span><span class="o">:</span> <span class="kc">false</span>
-        <span class="o">}</span>
-    <span class="o">]</span>
-<span class="o">);</span>
+<p>Call the exec method with <em>BARCODE</em>. For a more detailed description of the config parameters used, see the <a href="#cordova-example">example</a> in Quick Start.</p>
+<pre class="highlight plaintext"><code>cordova.exec(onResult, onError, "AnylineSDK", "BARCODE",
+    [
+        "YOUR_LICENSE_KEY",
+        {
+            "captureResolution": "720p",
+            "cutout": {
+                "style": "rect",
+                "maxWidthPercent": "80%",
+                "maxHeightPercent": "80%",
+                "alignment": "center",
+                "ratioFromSize": {
+                    "width": 100,
+                    "height": 80
+                },
+                "strokeWidth": 4,
+                "cornerRadius": 10,
+                "strokeColor": "FFFFFF",
+                "outerColor": "000000",
+                "outerAlpha": 0.3
+            },
+            "flash": {
+                "mode": "manual",
+                "alignment": "bottom_right"
+            },
+            "beepOnResult": true,
+            "vibrateOnResult": true,
+            "blinkAnimationOnResult": true,
+            "cancelOnResult": false
+        }
+    ]
+);
 </code></pre>
 
 <p><a name="energyModule"> </a></p>
@@ -2525,12 +2517,12 @@ Common digital meters and heat meters can also be scanned (but this is ALPHA).</
 <h4 id="all-the-possible-scan-modes">All the possible scan modes</h4>
 
 <p><strong>Electric Meter</strong><br/>
-Android: <em>ELECTRIC_METER</em>, iOS: <em>ALElectricMeter</em><br/>
+Android and Cordova: <em>ELECTRIC_METER</em>, iOS: <em>ALElectricMeter</em><br/>
 Scan analog electric meters with 5 or 6 main digits and one decimal digit.
 The digit count is detected automatically. The decimal place is not included in the result. The auto-detection requires the decimal area to be highlighted in red.</p>
 
 <p><strong>Electric Meter 5 main digits 1 decimal (ALPHA)</strong><br/>
-Android: <em>ELECTRIC_METER_5_1</em>, iOS: <em>ALElectricMeter5_1</em><br/>
+Android and Cordova: <em>ELECTRIC_METER_5_1</em>, iOS: <em>ALElectricMeter5_1</em><br/>
 Scan analog electric meters with 5 main digits and one decimal digit. If detected, the decimal is included in the result, otherwise the decimal place is omitted.
 The decimal is represented by a dot in the result, not a comma.
 This mode is useful if there is no red marking for the decimal place or the decimal place it self is relevant.</p>
@@ -2538,47 +2530,47 @@ This mode is useful if there is no red marking for the decimal place or the deci
 <p>This mode may be removed in the future, if the same can be achieved with the automatic mode.</p>
 
 <p><strong>Electric Meter 6 main digits 1 decimal (ALPHA)</strong><br/>
-Android: <em>ELECTRIC_METER_6_1</em>, iOS: <em>ALElectricMeter6_1</em><br/>
+Android and Cordova: <em>ELECTRIC_METER_6_1</em>, iOS: <em>ALElectricMeter6_1</em><br/>
 Same as above with 6 main digits.</p>
 
 <p><strong>Gas Meter</strong><br/>
-Android: <em>GAS_METER</em>, iOS: <em>ALGasMeter</em><br/>
+Android and Cordova: <em>GAS_METER</em>, iOS: <em>ALGasMeter</em><br/>
 Scan analog gas meters with 5 digits before the point. The decimal places are ignored.</p>
 
 <p><strong>Water Meter White (ALPHA)</strong><br/>
-Android: <em>WATER_METER_WHITE</em>, iOS: <em>ALWaterMeterWhite</em><br/>
+Android and Cordova: <em>WATER_METER_WHITE</em>, iOS: <em>ALWaterMeterWhite</em><br/>
 Scan analog water meters with white background (black digits) with 5 digits before the point.
 The decimal places are ignored.</p>
 
 <p><strong>Water Meter Black (ALPHA)</strong><br/>
-Android: <em>WATER_METER_BLACK</em>, iOS: <em>ALWaterMeterBlack</em><br/>
+Android and Cordova: <em>WATER_METER_BLACK</em>, iOS: <em>ALWaterMeterBlack</em><br/>
 Scan analog water meters with black background (white digits) with 5 digits before the point.
 The decimal places are ignored.</p>
 
 <p><strong>Digital Meter (ALPHA)</strong><br/>
-Android: <em>DIGITAL_METER</em>, iOS: <em>ALDigitalMeter</em><br/>
+Android and Cordova: <em>DIGITAL_METER</em>, iOS: <em>ALDigitalMeter</em><br/>
 Is a general scanner for digital meters with at least 5 digits. It will try to find the highest number of connected digits and return the result without decimal marker.</p>
 
 <p><strong>Heat Meter with 4 main (up to 3 decimal) digits (ALPHA)</strong><br/>
-Android: <em>HEAT_METER_4</em>, iOS: <em>ALHeatMeter4</em><br/>
+Android and Cordova: <em>HEAT_METER_4</em>, iOS: <em>ALHeatMeter4</em><br/>
 Scan digital heat meters with 4 main and up to 3 decimal digits. If detected, the decimal digits are included in the result, otherwise they are omitted.</p>
 
 <p>This mode may be replaced in the future with a mode that automatically detects the amount of digits.</p>
 
 <p><strong>Heat Meter with 5 main (up to 3 decimal) digits (ALPHA)</strong><br/>
-Android: <em>HEAT_METER_5</em>, iOS: <em>ALHeatMeter5</em><br/>
+Android and Cordova: <em>HEAT_METER_5</em>, iOS: <em>ALHeatMeter5</em><br/>
 Same as above with 5 digits before the point.</p>
 
 <p><strong>Heat Meter with 6 main (up to 3 decimal) digits (ALPHA)</strong><br/>
-Android: <em>HEAT_METER_6</em>, iOS: <em>ALHeatMeter6</em><br/>
+Android and Cordova: <em>HEAT_METER_6</em>, iOS: <em>ALHeatMeter6</em><br/>
 Same as above with 6 digits before the point.</p>
 
 <p><strong>Bar- and QR-Codes</strong><br/>
-Android: <em>BAR_CODE</em>, iOS: <em>ALBarcode</em><br/>
+Android and Cordova: <em>BARCODE</em>, iOS: <em>ALBarcode</em><br/>
 Scan bar and QR codes. This mode can be used to identify a meter. See the <a href="#available-barcode-formats">barcode module</a> for supported types.</p>
 
 <p><strong>Serial Numbers (ALPHA)</strong><br/>
-Android: <em>SERIAL_NUMBER</em>, iOS: <em>ALSerialNumber</em><br/>
+Android and Cordova: <em>SERIAL_NUMBER</em>, iOS: <em>ALSerialNumber</em><br/>
 Scan serial numbers that are engraved or printed onto a meter (consisting of numbers 0-9).</p>
 
 <h3 id="android">Android</h3>
@@ -2761,9 +2753,9 @@ It is possible to turn off this feature by calling <em>setReportingEnabled(false
 </code></pre>
 
 <ul>
-<li>Create a property, initialize the module in the viewDidLoad method and add it to the view of the ViewController. </li>
+<li>Create a property, initialize the module in the viewDidLoad method and add it to the view of the ViewController.</li>
 <li>Supply the license key and set the delegate, which will receive a call once a result is found. The boolean returned by the setup routine notifies you if the Anyline setup was successful. If an error occurred the error needs to be handled</li>
-<li>After the successful setup, set the scan mode utilizing <em>setScanMode</em> </li>
+<li>After the successful setup, set the scan mode utilizing <em>setScanMode</em></li>
 </ul>
 
 <h6 id="2-start-the-scanning-process-in-viewdidappear">2. Start the scanning process in viewDidAppear</h6>
@@ -2814,53 +2806,53 @@ It is possible to turn off this feature by calling <em>setReportingEnabled(false
 </code></pre>
 
 <p>The reporting of analog meter results in the Community Edition (including an image of the scanned meter) helps us to improve our product, and the customer experience.
-It is possible to turn off this feature by calling 
+It is possible to turn off this feature by calling
  <em>-(void)enableReporting:(BOOL)enable</em> on the AnylineEnergyModuleView.</p>
 
 <h3 id="cordova-plugin">Cordova Plugin</h3>
 
 <h6 id="example-call-for-the-energy-module">Example call for the Energy Module</h6>
-<pre class="highlight java"><code><span class="n">cordova</span><span class="o">.</span><span class="na">exec</span><span class="o">(</span><span class="n">onResult</span><span class="o">,</span> <span class="n">onError</span><span class="o">,</span> <span class="s">"AnylineSDK"</span><span class="o">,</span> <span class="s">"scanElectricMeter"</span><span class="o">,</span>
-    <span class="o">[</span>
-        <span class="s">"YOUR_LICENSE_KEY"</span><span class="o">,</span>
-        <span class="o">{</span>
-            <span class="s">"captureResolution"</span><span class="o">:</span> <span class="s">"720p"</span><span class="o">,</span>
-            <span class="s">"cutout"</span><span class="o">:</span> <span class="o">{</span>
-                <span class="s">"style"</span><span class="o">:</span> <span class="s">"rect"</span><span class="o">,</span>
-                <span class="s">"alignment"</span><span class="o">:</span> <span class="s">"top"</span><span class="o">,</span>
-                <span class="s">"offset"</span><span class="o">:</span> <span class="o">{</span>
-                    <span class="s">"x"</span><span class="o">:</span> <span class="mi">0</span><span class="o">,</span>
-                    <span class="s">"y"</span><span class="o">:</span> <span class="mi">120</span>
-                <span class="o">},</span>
-                <span class="s">"strokeWidth"</span><span class="o">:</span> <span class="mi">2</span><span class="o">,</span>
-                <span class="s">"cornerRadius"</span><span class="o">:</span> <span class="mi">4</span><span class="o">,</span>
-                <span class="s">"strokeColor"</span><span class="o">:</span> <span class="s">"FFFFFF"</span><span class="o">,</span>
-                <span class="s">"outerColor"</span><span class="o">:</span> <span class="s">"000000"</span><span class="o">,</span>
-                <span class="s">"outerAlpha"</span><span class="o">:</span> <span class="mf">0.3</span>
-            <span class="o">},</span>
-            <span class="s">"flash"</span><span class="o">:</span> <span class="o">{</span>
-                <span class="s">"mode"</span><span class="o">:</span> <span class="s">"manual"</span><span class="o">,</span>
-                <span class="s">"alignment"</span><span class="o">:</span> <span class="s">"bottom_right"</span>
-            <span class="o">},</span>
-            <span class="s">"beepOnResult"</span><span class="o">:</span> <span class="kc">true</span><span class="o">,</span>
-            <span class="s">"vibrateOnResult"</span><span class="o">:</span> <span class="kc">true</span><span class="o">,</span>
-            <span class="s">"blinkAnimationOnResult"</span><span class="o">:</span> <span class="kc">true</span><span class="o">,</span>
-            <span class="s">"cancelOnResult"</span><span class="o">:</span> <span class="kc">true</span>
-        <span class="o">}</span>
-    <span class="o">]</span>
-<span class="o">);</span>
+<pre class="highlight plaintext"><code>cordova.exec(onResult, onError, "AnylineSDK", "ELECTRIC_METER",
+    [
+        "YOUR_LICENSE_KEY",
+        {
+            "captureResolution": "720p",
+            "cutout": {
+                "style": "rect",
+                "alignment": "top",
+                "offset": {
+                    "x": 0,
+                    "y": 120
+                },
+                "strokeWidth": 2,
+                "cornerRadius": 4,
+                "strokeColor": "FFFFFF",
+                "outerColor": "000000",
+                "outerAlpha": 0.3
+            },
+            "flash": {
+                "mode": "manual",
+                "alignment": "bottom_right"
+            },
+            "beepOnResult": true,
+            "vibrateOnResult": true,
+            "blinkAnimationOnResult": true,
+            "cancelOnResult": true
+        }
+    ]
+);
 </code></pre>
 
-<p>It is possible to scan two different types of meters, electric and gas.
-Call the exec method either with <i><b>scanElectricMeter</b></i> or <i><b>scanGasMeter</b></i>. For more information about the config parameters set here, see the <a href="#cordova-example">example</a> in section Quick Start.</p>
+<p>For all possible scan modes see <a href="#energyModule">above</a>.
+For more information about the config parameters see the <a href="#cordova-example">example</a> in section Quick Start.</p>
 
 <h6 id="reporting">Reporting</h6>
-<pre class="highlight java"><code><span class="c1">//...</span>
-            <span class="s">"blinkAnimationOnResult"</span><span class="o">:</span> <span class="kc">true</span><span class="o">,</span>
-            <span class="s">"cancelOnResult"</span><span class="o">:</span> <span class="kc">true</span><span class="o">,</span>
-            <span class="s">"reportingEnabled"</span><span class="o">:</span> <span class="kc">false</span>
-        <span class="o">}</span>
-    <span class="o">]</span>
+<pre class="highlight plaintext"><code>//...
+            "blinkAnimationOnResult": true,
+            "cancelOnResult": true,
+            "reportingEnabled": false
+        }
+    ]
 </code></pre>
 
 <p>The reporting of analog meter results in the Community Edition (including an image of the scanned meter) helps us to improve our product, and the customer experience.
@@ -3125,36 +3117,36 @@ Furthermore its important to know, that the names may not be printed completely 
 <h3 id="cordova-plugin">Cordova Plugin</h3>
 
 <h6 id="example-call-for-the-mrz-module">Example call for the MRZ Module</h6>
-<pre class="highlight java"><code><span class="n">cordova</span><span class="o">.</span><span class="na">exec</span><span class="o">(</span><span class="n">onResult</span><span class="o">,</span> <span class="n">onError</span><span class="o">,</span> <span class="s">"AnylineSDK"</span><span class="o">,</span> <span class="s">"scanMRZ"</span><span class="o">,</span>
-    <span class="o">[</span>
-        <span class="s">"YOUR_LICENSE_KEY"</span><span class="o">,</span>
-        <span class="o">{</span>
-            <span class="s">"captureResolution"</span><span class="o">:</span> <span class="s">"1080p"</span><span class="o">,</span>
-            <span class="s">"cutout"</span><span class="o">:</span> <span class="o">{</span>
-                <span class="s">"style"</span><span class="o">:</span> <span class="s">"rect"</span><span class="o">,</span>
-                <span class="s">"maxWidthPercent"</span><span class="o">:</span> <span class="s">"90%"</span><span class="o">,</span>
-                <span class="s">"maxHeightPercent"</span><span class="o">:</span> <span class="s">"90%"</span><span class="o">,</span>
-                <span class="s">"alignment"</span><span class="o">:</span> <span class="s">"top_half"</span><span class="o">,</span>
-                <span class="s">"strokeWidth"</span><span class="o">:</span> <span class="mi">2</span><span class="o">,</span>
-                <span class="s">"cornerRadius"</span><span class="o">:</span> <span class="mi">4</span><span class="o">,</span>
-                <span class="s">"strokeColor"</span><span class="o">:</span> <span class="s">"FFFFFF"</span><span class="o">,</span>
-                <span class="s">"outerColor"</span><span class="o">:</span> <span class="s">"000000"</span><span class="o">,</span>
-                <span class="s">"outerAlpha"</span><span class="o">:</span> <span class="mf">0.3</span>
-            <span class="o">},</span>
-            <span class="s">"flash"</span><span class="o">:</span> <span class="o">{</span>
-                <span class="s">"mode"</span><span class="o">:</span> <span class="s">"manual"</span><span class="o">,</span>
-                <span class="s">"alignment"</span><span class="o">:</span> <span class="s">"bottom_right"</span>
-            <span class="o">},</span>
-            <span class="s">"beepOnResult"</span><span class="o">:</span> <span class="kc">true</span><span class="o">,</span>
-            <span class="s">"vibrateOnResult"</span><span class="o">:</span> <span class="kc">true</span><span class="o">,</span>
-            <span class="s">"blinkAnimationOnResult"</span><span class="o">:</span> <span class="kc">true</span><span class="o">,</span>
-            <span class="s">"cancelOnResult"</span><span class="o">:</span> <span class="kc">true</span>
-        <span class="o">}</span>
-    <span class="o">]</span>
-<span class="o">);</span>
+<pre class="highlight plaintext"><code>cordova.exec(onResult, onError, "AnylineSDK", "MRZ",
+    [
+        "YOUR_LICENSE_KEY",
+        {
+            "captureResolution": "1080p",
+            "cutout": {
+                "style": "rect",
+                "maxWidthPercent": "90%",
+                "maxHeightPercent": "90%",
+                "alignment": "top_half",
+                "strokeWidth": 2,
+                "cornerRadius": 4,
+                "strokeColor": "FFFFFF",
+                "outerColor": "000000",
+                "outerAlpha": 0.3
+            },
+            "flash": {
+                "mode": "manual",
+                "alignment": "bottom_right"
+            },
+            "beepOnResult": true,
+            "vibrateOnResult": true,
+            "blinkAnimationOnResult": true,
+            "cancelOnResult": true
+        }
+    ]
+);
 </code></pre>
 
-<p>Call the exec method with <i><b>scanMRZ</b></i>. For more detailed information about the config parameters, see the <a href="#cordova-example">example</a> in section Quick Start.</p>
+<p>Call the exec method with <i><b>MRZ</b></i>. For more detailed information about the config parameters, see the <a href="#cordova-example">example</a> in section Quick Start.</p>
 
 <p><a name="documentModule"> </a></p>
 
@@ -3359,7 +3351,7 @@ The additional configuration fields is:</p>
 </code></pre>
 
 <ul>
-<li>Create a <code class="prettyprint">ALUIConfiguration</code> object and use its properties to configure the user interface, or load a layout file. </li>
+<li>Create a <code class="prettyprint">ALUIConfiguration</code> object and use its properties to configure the user interface, or load a layout file.</li>
 <li>Initialize the module with a license key and delegate, which will receive a call once a result is found. The boolean returned by the setup routine notifies you if the Anyline setup was successful. If an error occurred the error needs to be handled.</li>
 </ul>
 
@@ -3416,7 +3408,9 @@ The GRID mode is optimal for characters with equal size laid out in a grid, with
 
 <p>If the provided settings are not enough to achieve great results, feel free to
 <a href="https://www.anyline.io/support-request/">contact us</a> and we will create a command file that is optimized
-for your use-case. This script can then be set as a parameter to this module, so minimal changes are required to your app.</p>
+for your use-case. This script can then be set as a parameter to this module, so minimal changes are required to your app. See section <a href="#OcrConig_customScript">Setting a Custom Script</a> for more details.</p>
+
+<p>Furthermore, it is possible to specify a custom traineddata file, which can improve results if you use a specific font for your use-case. See <a href="#OcrConig_customTraineddata">Setting custom traineddata files</a> for details.</p>
 
 <h4 id="settings-common">Settings Common</h4>
 
@@ -3472,6 +3466,10 @@ for your use-case. This script can then be set as a parameter to this module, so
 <td>removeSmallContours</td>
 <td>If this is <code class="prettyprint">true</code>, small contours will be ignored (This is useful for latin capital letters and numbers. This is detrimental if details are relevant, like the dot above the letter <code class="prettyprint">i</code>)</td>
 </tr>
+<tr>
+<td>minSharpness</td>
+<td>The minimum sharpness required to further process an image with a value between 0 and 100 (0 to turn off sharpness detection). It is used to avoid processing of blurry images which are unlikley to return a result in order to avoid the time consuming ocr step. It is recommended to set an initial sharpness of 50 and gradually increase the value to a threshold where you get satisfying results. This parameter is in alpha stage.</td>
+</tr>
 </tbody></table>
 
 <h4 id="settings-grid-mode-only">Settings GRID mode only</h4>
@@ -3504,9 +3502,46 @@ for your use-case. This script can then be set as a parameter to this module, so
 </tr>
 </tbody></table>
 
-<h3 id="android">Android</h3>
+<p><a name="OcrConig_customScript"> </a></p>
 
-<h4 id="example">Example</h4>
+<h4 id="setting-a-custom-script">Setting a Custom Script</h4>
+
+<p>As described above it is possible to set a custom command file which is optimized for your use-case scenario. </p>
+
+<aside class="notice">
+Notice that the custom script will override all settings made to the Anyline OCR Config.
+</aside>
+
+<h5 id="android">Android</h5>
+
+<p>It is possible to load a custom script via two different methods.</p>
+
+<p><em>1. setCustomCmdFile</em></p>
+<pre class="highlight java"><code><span class="n">anylineOcrConfig</span><span class="o">.</span><span class="na">setCustomCmdFile</span><span class="o">(</span><span class="s">"custom_script_filename.ale"</span><span class="o">);</span>
+</code></pre>
+
+<p>In this case we provide an <em>.ale</em> file which contains the encrypted script. Place this file in the assets folder and use the method <em>setCustomCmdFile</em> to specify the name of the custom script including the extension (see example). </p>
+
+<p><a name="OcrConig_customTraineddata"> </a></p>
+
+<h4 id="setting-traineddata-files">Setting traineddata files</h4>
+
+<p>In case you use a specific font it can improve results if you train this font and use the resulting traineddata files for the scanning process. To train your font you can either use the website <a href="http://ocr7.com/">ocr7.com</a> or feel free to <a href="https://www.anyline.io/support-request/">contact us</a>. </p>
+
+<h5 id="android">Android</h5>
+<pre class="highlight java"><code><span class="n">scanView</span><span class="o">.</span><span class="na">copyTrainedData</span><span class="o">(</span><span class="s">"tessdata/eng.traineddata"</span><span class="o">,</span> <span class="s">"f4b86e0b7eb03c682f0e5e6519e02d32"</span><span class="o">);</span>
+<span class="n">scanView</span><span class="o">.</span><span class="na">copyTrainedData</span><span class="o">(</span><span class="s">"tessdata/deu.traineddata"</span><span class="o">,</span> <span class="s">"2d5190b9b62e28fa6d17b728ca195776"</span><span class="o">);</span>
+</code></pre>
+
+<p>Once you have the traineddata file copy it to the assets directory. Place it either in the assets directory directly or in the sub directory <em>tessdata</em>. Other sub folders are not allowed. 
+In the <em>copyTrainedData</em> method specify the path of the file from relative to the assets folder. Additionally you can provide a md5 hash of the file or specify <em>null</em> as second parameter.
+If the hash is null, it will be calculated automatically, but this is slow and is therefor not recommended.</p>
+
+<p>If you have multiply traineddata files this method must be called for every traineddata file before startScanning is called.</p>
+
+<h3 id="example">Example</h3>
+
+<h4 id="android">Android</h4>
 
 <p>The following example illustrates an IBAN scanner use-case realized with the Anyline OCR module.</p>
 
@@ -3555,6 +3590,10 @@ for your use-case. This script can then be set as a parameter to this module, so
 <span class="n">anylineOcrConfig</span><span class="o">.</span><span class="na">setValidationRegex</span><span class="o">(</span><span class="s">"^[A-Z]{2}([0-9A-Z]\\s*){13,32}$"</span><span class="o">);</span>
 <span class="c1">// removes small contours (helpful in this case as no letters with small artifacts are allowed, like iöäü)</span>
 <span class="n">anylineOcrConfig</span><span class="o">.</span><span class="na">setRemoveSmallContours</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+<span class="c1">// Experimental parameter to set the minimum sharpness (value between 0-100; 0 to turn sharpness detection off)</span>
+<span class="c1">// The goal of the minimum sharpness is to avoid a time consuming ocr step,</span>
+<span class="c1">// if the image is blurry and good results are therefore not likely.</span>
+<span class="n">anylineOcrConfig</span><span class="o">.</span><span class="na">setMinSharpness</span><span class="o">(</span><span class="mi">60</span><span class="o">);</span>
 <span class="c1">// set the ocr config</span>
 <span class="n">scanView</span><span class="o">.</span><span class="na">setAnylineOcrConfig</span><span class="o">(</span><span class="n">anylineOcrConfig</span><span class="o">);</span>
 
@@ -3568,6 +3607,7 @@ for your use-case. This script can then be set as a parameter to this module, so
         <span class="c1">// $brightness - the brightness of the center region of the cutout as a float value</span>
         <span class="c1">// $confidence - the confidence, an Integer value between 0 and 100</span>
         <span class="c1">// $thresholdedImage - the current image transformed into black and white</span>
+        <span class="c1">// $sharpness - the detected sharpness value (only reported if minSharpness &gt; 0)</span>
     <span class="o">}</span>
 
     <span class="nd">@Override</span>
@@ -3670,9 +3710,7 @@ for your use-case. This script can then be set as a parameter to this module, so
 helps us to improve our product, and the customer experience.
 It is possible to turn off that feature by calling ​<em>setReportingEnabled(false)</em>​ on the AnylineOcrScanView.</p>
 
-<h3 id="ios">iOS</h3>
-
-<h4 id="example">Example</h4>
+<h4 id="ios">iOS</h4>
 
 <p>The following example illustrates an ISBN scanner use-case, realized with the Anyline OCR module.</p>
 
@@ -3757,9 +3795,9 @@ It is possible to turn off that feature by calling ​<em>setReportingEnabled(fa
 </code></pre>
 
 <ul>
-<li>Create a <code class="prettyprint">ALUIConfiguration</code> object and use its properties to configure the user interface, or load a layout file. </li>
-<li>Create a <code class="prettyprint">ALOCRConfig</code> object and use its properties to configure the module. </li>
-<li>Initialize the module with a license key, a delegate and the <code class="prettyprint">ALOCRConfig</code> object. The delegate will be called once there is a result. </li>
+<li>Create a <code class="prettyprint">ALUIConfiguration</code> object and use its properties to configure the user interface, or load a layout file.</li>
+<li>Create a <code class="prettyprint">ALOCRConfig</code> object and use its properties to configure the module.</li>
+<li>Initialize the module with a license key, a delegate and the <code class="prettyprint">ALOCRConfig</code> object. The delegate will be called once there is a result.</li>
 </ul>
 
 <h6 id="2-start-scanning-process-in-viewdidappear">2. Start scanning process in viewDidAppear</h6>
@@ -3788,7 +3826,7 @@ It is possible to turn off that feature by calling ​<em>setReportingEnabled(fa
 <pre class="highlight objective_c"><code><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">ocrModuleView</span> <span class="nf">cancelScanningAndReturnError</span><span class="p">:</span><span class="o">&amp;</span><span class="n">error</span><span class="p">];</span>
 </code></pre>
 
-<p>After you received a result, call <code class="prettyprint">cancelScanningAndReturnError</code>. This also has to be called in <code class="prettyprint">viewWillDisappear</code> to clean up the module. </p>
+<p>After you received a result, call <code class="prettyprint">cancelScanningAndReturnError</code>. This also has to be called in <code class="prettyprint">viewWillDisappear</code> to clean up the module.</p>
 
 <p><a name="isbnViewConfig"> </a></p>
 
@@ -3831,6 +3869,79 @@ It is possible to turn off that feature by calling ​<em>setReportingEnabled(fa
 <h5 id="other-examples">Other Examples</h5>
 
 <p>For more example use cases of the Anyline OCR Module, check out the Examples app in the download package, available here: <a href="https://www.anyline.io/download/">https://www.anyline.io/download/</a></p>
+
+<h4 id="cordova-plugin">Cordova Plugin</h4>
+
+<p>Cordova has two special options in the OCR-config:</p>
+
+<ul>
+<li>traineddataFiles: contains an array of traineddata files with path relative to the <em>www</em> directory. (This should be used instead of <em>tesseractLanguages</em>)</li>
+<li>drawTextOutline: true (default) if a visual feedback should be given in case a text area has been identified, false otherwise.</li>
+</ul>
+
+<h6 id="example-call-for-iban-scanning">Example call for IBAN scanning</h6>
+<pre class="highlight plaintext"><code>cordova.exec(onResult, onError, "AnylineSDK", "ANYLINE_OCR",
+    [
+        "YOUR_LICENSE_KEY",
+      {
+        "captureResolution": "1080",
+        "cutout": {
+            "style": "rect",
+            "maxWidthPercent": "80%",
+            "maxHeightPercent": "80%",
+            "alignment": "top_half",
+            "width": 870,
+            "ratioFromSize": {
+                "width": 5,
+                "height": 1
+            },
+            "strokeWidth": 2,
+            "cornerRadius": 10,
+            "strokeColor": "FFFFFF",
+            "outerColor": "000000",
+            "outerAlpha": 0.3
+        },
+        "flash": {
+            "mode": "manual",
+            "alignment": "bottom_right"
+        },
+        "beepOnResult": true,
+        "vibrateOnResult": true,
+        "blinkAnimationOnResult": true,
+        "cancelOnResult": true
+     },{
+        "scanMode": "LINE",
+        "minCharHeight": 30,
+        "maxCharHeight": 60,
+        "traineddataFiles": ["assets/eng_no_dict.traineddata"],
+        "charWhitelist": "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
+        "validationRegex": "^[A-Z]{2}([0-9A-Z]\\s*){13,32}$",
+        "minConfidence": 65,
+        "removeSmallContours": true,
+        "charCountX": 4,
+        "charCountY": 2,
+        "charPaddingXFactor": 1.0,
+        "charPaddingYFactor": 1.0,
+        "isBrightTextOnDark": false,
+        "drawTextOutline": true
+     }
+   ]
+);
+</code></pre>
+
+<p>For more detailed information about the config parameters, see the <a href="#cordova-example">example</a> in section Quick Start.</p>
+
+<h6 id="reporting">Reporting</h6>
+<pre class="highlight plaintext"><code>//...
+            "blinkAnimationOnResult": true,
+            "cancelOnResult": true,
+            "reportingEnabled": false
+        }
+    ]
+</code></pre>
+
+<p>The reporting of  results in the Community Edition (including an image) helps us to improve our product, and the customer experience.
+It is possible to turn off this feature by adding <em>&ldquo;reportingEnabled&rdquo;: false</em> to the above config.</p>
 
 <p><a name="ordercodeModule"> </a></p>
 
