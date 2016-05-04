@@ -116,7 +116,7 @@ This API contains a <a href="#getting-started">Quick Start Guide</a> for all sup
 
 <h3 id="sample-data">Sample Data</h3>
 
-<p>In order to try out our examples app yourself, you can download <a href="https://anylinewebsiteresource.blob.core.windows.net/wordpressmedia/2016/02/Anyline-3.4-Use-Case-Samples.pdf">this file</a> with test images or scan things in the real world ;) </p>
+<p>In order to try out our examples app yourself, you can download <a href="https://anylinewebsiteresource.blob.core.windows.net/wordpressmedia/2016/05/Anyline-3.5-Scan-Examples.pdf">this file</a> with test images or scan things in the real world ;)</p>
 
 <h3 id="requirements">Requirements</h3>
 
@@ -348,7 +348,7 @@ The Epson BT2000 has no flash or vibration alarm integrated. Hence, all settings
 <li>minimum iPhone4s</li>
 </ul>
 
-<h3 id="quick-start-setup">Quick Start - Setup</h3>
+<h3 id="quick-start-ios-setup">Quick Start iOS - Setup</h3>
 
 <h4 id="1-with-cocoapods">1. With Cocoapods</h4>
 
@@ -429,7 +429,7 @@ This flag causes the linker to load every object file in the library that define
 <li>minimum iPhone4s</li>
 </ul>
 
-<h3 id="quick-start-setup">Quick Start - Setup</h3>
+<h3 id="quick-start-cordova-setup">Quick Start Cordova - Setup</h3>
 
 <p>This is just a simple setup guide to integrate the anylinesdk-plugin in an existing Cordova project.<br/>
 For more information about Cordova, how to use plugins, etc. see <a target="_blank" href="https://cordova.apache.org/">https://cordova.apache.org/</a>.</p>
@@ -530,7 +530,7 @@ Basically, there is one simple exec-call to the AnylineSDK with the following pa
 <li><strong>README:</strong> contains a quick start - setup and module description</li>
 </ul>
 
-<h3 id="quick-start-setup">Quick Start - Setup</h3>
+<h3 id="quick-start-xamarin-android-setup">Quick Start Xamarin Android - Setup</h3>
 
 <p>In this section we will go through the basic process of creating and configuring a simple Anyline scanning application in Xamarin.Android. If you are not yet familiar with Xamarin.Android, follow <a href="https://developer.xamarin.com/guides/android/getting_started/hello,android/hello,android_quickstart/">this</a> guide to develop an understanding of the fundamentals of Android application development with Xamarin.</p>
 
@@ -947,7 +947,7 @@ In this example, let&rsquo;s create a .json file and fill it with properties:</p
 <li><strong>README:</strong> contains a quick start - setup</li>
 </ul>
 
-<h3 id="quick-start-setup">Quick Start - Setup</h3>
+<h3 id="quick-start-xamarin-ios-setup">Quick Start Xamarin iOS - Setup</h3>
 
 <p>In this section we will go through the basic process of creating and configuring a simple Anyline scanning application in Xamarin.iOS. If you are not yet familiar with Xamarin.iOS, follow <a href="https://developer.xamarin.com/guides/ios/getting_started/">this</a> guide to develop an understanding of the fundamentals of iOS application development with Xamarin.</p>
 
@@ -1229,9 +1229,9 @@ Because barcode scanning is too fast, the <b>DidFindScanResult</b> event is not 
 
 <p>With the config file the views can be configured in regard of position and looks of the <em>cutout</em> used for scanning, as well as the behavior of flash and feedback mechanisms for scanning. This section contains a detailed description of the configurable items, as well as two distinct ways for each platform to set up and configure the view.</p>
 
-<p><a name="itemDescription"> </a></p>
+<p><a name="configurable-parameters"> </a></p>
 
-<h3 id="item-description">Item description</h3>
+<h3 id="configurable-parameters">Configurable Parameters</h3>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
       </span><span class="nt">"captureResolution"</span><span class="p">:</span><span class="w"> </span><span class="s2">"720"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"pictureResolution"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1080"</span><span class="p">,</span><span class="w">
@@ -1252,6 +1252,7 @@ Because barcode scanning is too fast, the <b>DidFindScanResult</b> event is not 
           </span><span class="nt">"outerAlpha"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.3</span><span class="p">,</span><span class="w">
           </span><span class="nt">"style"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rect"</span><span class="p">,</span><span class="w">
           </span><span class="nt">"strokeColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FFFFFF"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"feedbackStrokeColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000066"</span><span class="p">,</span><span class="w">
           </span><span class="nt">"strokeWidth"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
           </span><span class="nt">"cornerRadius"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
           </span><span class="nt">"image"</span><span class="p">:</span><span class="s2">"Overlay"</span><span class="p">,</span><span class="w">
@@ -1278,7 +1279,16 @@ Because barcode scanning is too fast, the <b>DidFindScanResult</b> event is not 
       </span><span class="nt">"beepOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
       </span><span class="nt">"vibrateOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
       </span><span class="nt">"blinkAnimationOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"cancelOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="nt">"cancelOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"visualFeedback"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"style"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RECT"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"strokeColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0099FF"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"strokeWidth"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"fillColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AA0099FF"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"cornerRadius"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"redrawTimeout"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"animationDuration"</span><span class="p">:</span><span class="w"> </span><span class="mi">75</span><span class="w">
+      </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -1308,6 +1318,7 @@ Because barcode scanning is too fast, the <b>DidFindScanResult</b> event is not 
 <li><a href="#cutout_outerAlpha">outerAlpha</a>  <em>float</em></li>
 <li><a href="#cutout_style">style</a>  <em>String</em> </li>
 <li><a href="#cutout_strokeColor">strokeColor</a>  <em>Hex-String</em> - format: RRGGBB</li>
+<li><a href="#cutout_feedbackStrokeColor">feedbackStrokeColor</a>  <em>Hex-String</em> - format: RRGGBB</li>
 <li><a href="#cutout_strokeWidth">strokeWidth</a>  <em>int</em></li>
 <li><a href="#cutout_cornerRadius">cornerRadius</a>  <em>int</em></li>
 <li><a href="#cutout_image">image</a>  <em>String</em></li>
@@ -1343,6 +1354,17 @@ Because barcode scanning is too fast, the <b>DidFindScanResult</b> event is not 
 <li><a href="#vibrateOnResult">vibrateOnResult</a>  <em>boolean</em></li>
 <li><a href="#blinkAnimationOnResult">blinkAnimationOnResult</a>  <em>boolean</em></li>
 <li><a href="#cancelOnResult">cancelOnResult</a>  <em>boolean</em></li>
+<li><a href="#visualFeedback">visualFeedback</a>
+
+<ul>
+<li><a href="#visualFeedback_style">style</a> <em>String</em></li>
+<li><a href="#visualFeedback_strokeColor">strokeColor</a> <em>Hex-String</em> - format: AARRGGBB</li>
+<li><a href="#visualFeedback_strokeWidth">strokeWidth</a> <em>int</em></li>
+<li><a href="#visualFeedback_fillColor">fillColor</a> <em>Hex-String</em> - format: AARRGGBB</li>
+<li><a href="#visualFeedback_cornerRadius">cornerRadius</a> <em>int</em></li>
+<li><a href="#visualFeedback_redrawTimeout">redrawTimeout</a> <em>int</em></li>
+<li><a href="#visualFeedback_animationDuration">animationDuration</a> <em>int</em></li>
+</ul></li>
 </ul>
 
 <p><a name="captureResolution"> </a></p>
@@ -1381,8 +1403,8 @@ Because barcode scanning is too fast, the <b>DidFindScanResult</b> event is not 
 <aside class="notice">
 <b>Android specific</b>
 <br/>
-The capture resolution is more like a suggestion, because the available preview sizes vary from device to device. 
-If the &ldquo;suggested&rdquo; resolution is available, it will be used, if not a resolution that fits best within the views size will be used.
+The capture resolution is more like a suggestion, because the available preview resolutions vary from device to device. 
+If the preferred resolution is available, it is used. Otherwise the highest available resolution smaller than the desired value is used.
 </aside>
 
 <p><a name="pictureResolution"> </a></p>
@@ -1421,8 +1443,8 @@ If the &ldquo;suggested&rdquo; resolution is available, it will be used, if not 
 <aside class="notice">
 <b>Android specific</b>
 <br/>
-The picture resolution is more like a suggestion, because the available preview sizes vary from device to device. 
-If the &ldquo;suggested&rdquo; resolution is available, it will be used, if not, the smallest available resolution bigger than the suggested resolution will be used.
+The picture resolution is more like a suggestion, because the available picture resolutions vary from device to device. 
+If the preferred resolution is available, it is used. Otherwise the lowest available resolution bigger than the desired value is used.
 </aside>
 
 <aside class="notice">
@@ -1606,6 +1628,17 @@ scanned.</p>
 <h5 id="strokecolor">strokeColor</h5>
 
 <p>The color of the stroke (used by rect or vector style).</p>
+
+<ul>
+<li><strong>Type:</strong> Hex-String </li>
+<li><strong>Format:</strong> RRGGBB</li>
+</ul>
+
+<p><a name="cutout_feedbackStrokeColor"> </a></p>
+
+<h5 id="feedbackstrokecolor">feedbackStrokeColor</h5>
+
+<p>The color of the stroke when contours are found in the frame. When no contours are found the color of the cutout changes back to the <a href="#cutout_strokeColor">strokeColor</a>. This feedback option can be set in addition to a <a href="#visualFeedback">visualFeedback</a> style. </p>
 
 <ul>
 <li><strong>Type:</strong> Hex-String </li>
@@ -1865,6 +1898,128 @@ If another scan may be required later, leave this value <em>true</em> and just r
 <li><strong>Default:</strong> true (cancel scanning when result is found)</li>
 </ul>
 
+<p><a name="visualFeedback"></a></p>
+
+<h5 id="visualfeedback">visualFeedback</h5>
+
+<p>This parameters define the behaviour of the visual feedback presented to the user in the cutout.
+The feedback is used to present the detected symbols back to the user, which helps to improve the scanning experience and to ensure a correct positioning of the camera.</p>
+
+<p><a name="visualFeedback_style"></a></p>
+
+<h5 id="style">style</h5>
+
+<p>This defines the style of visual user feedback to be used.</p>
+
+<p>The possible values are:</p>
+
+<table><thead>
+<tr>
+<th>style</th>
+<th>description</th>
+<th>example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>RECT</td>
+<td>Displays one rectangle around all detected contours that are processed within this frame</td>
+<td><img alt="RECT" src="images/visualFeedback/rect.png" /></td>
+</tr>
+<tr>
+<td>CONTOUR_RECT</td>
+<td>Draws a rectangle around each detected contour within the currently processed frame</td>
+<td><img alt="CONTOUR_RECT" src="images/visualFeedback/contourrect.png" /></td>
+</tr>
+<tr>
+<td>CONTOUR_POINT</td>
+<td>Draws a point underneath each detected contour within the currently processed frame</td>
+<td><img alt="CONTOUR_POINT" src="images/visualFeedback/contourpoint.png" /></td>
+</tr>
+<tr>
+<td>CONTOUR_UNDERLINE</td>
+<td>Underlines each detected contour within the currently processed frame</td>
+<td><img alt="CONTOUR_UNDERLINE" src="images/visualFeedback/contourunderline.png" /></td>
+</tr>
+</tbody></table>
+
+<aside class="warning">
+For reasons of backward compatibility, this configuration correlates with the onTextOutlineDetected callback, as it can be seen in <a href="#anylineOcrExamples">AnylineOCR Examples</a>.<br/>If the callback returns true, this configuration is ignored, as it is expected that the feedback should not be drawn by the SDK.<br/>If the callback returns false, this configuration is used.
+</aside>
+
+<aside class="notice">
+In the feedback styles <b>CONTOUR_POINT</b> and <b>CONTOUR_UNDERLINE</b> the settings for the <b><a  href="#visualFeedback_fillColor">fillColor</a></b> and <b><a href="#visualFeedback_cornerRadius">cornerRadius</a></b> will be ignored. 
+ 
+In feedback style <b>CONTOUR_RECT</b> the setting for the <b><a href="#visualFeedback_cornerRadius">cornerRadius</a></b> will be ignored.
+</aside>
+
+<p><a name="visualFeedback_strokeColor"></a></p>
+
+<h5 id="strokecolor">strokeColor</h5>
+
+<p>This defines the stroke color that is used to draw the visual feedback.</p>
+
+<ul>
+<li><strong>Type:</strong> Hex-String</li>
+<li><strong>Format:</strong> AARRGGBB</li>
+<li><strong>Default:</strong> AA0099FF</li>
+</ul>
+
+<p><a name="visualFeedback_strokeWidth"></a></p>
+
+<h5 id="strokewidth">strokeWidth</h5>
+
+<p>This defines the width (in dip) of the stroke that is used to draw the visual feedback. </p>
+
+<ul>
+<li><strong>Type:</strong> int</li>
+<li><strong>Default:</strong> 2</li>
+</ul>
+
+<p><a name="visualFeedback_fillColor"></a></p>
+
+<h5 id="fillcolor">fillColor</h5>
+
+<p>This defines the color the rectangle is filled with in <code class="prettyprint">RECT</code> and <code class="prettyprint">CONTOUR_RECT</code> style mode. This setting is ignored for feedback styles <code class="prettyprint">CONTOUR_POINT</code> and <code class="prettyprint">CONTOUR_UNDERLINE</code>.</p>
+
+<ul>
+<li><strong>Type:</strong> Hex-String </li>
+<li><strong>Format:</strong> AARRGGBB</li>
+<li><strong>Default:</strong> <em>Transparent</em></li>
+</ul>
+
+<p><a name="visualFeedback_cornerRadius"></a></p>
+
+<h5 id="cornerradius">cornerRadius</h5>
+
+<p>This defines the corner radius (in dip) of the rect in style <code class="prettyprint">RECT</code>. This setting will be ignored for all other feedback styles.</p>
+
+<ul>
+<li><strong>Type:</strong> int</li>
+<li><strong>Default:</strong> The <a href="#cutout_cornerRadius">corner radius of the cutout</a></li>
+</ul>
+
+<p><a name="visualFeedback_redrawTimeout"></a></p>
+
+<h5 id="redrawtimeout">redrawTimeout</h5>
+
+<p>Defines the timeout between redrawing the updated detected contours. This is only used in style <code class="prettyprint">CONTOUR_RECT</code>, <code class="prettyprint">CONTOUR_UNDERLINE</code> and <code class="prettyprint">CONTOUR_POINT</code>.</p>
+
+<ul>
+<li><strong>Type:</strong> int</li>
+<li><strong>Default:</strong> 0</li>
+</ul>
+
+<p><a name="visualFeedback_animationDuration"></a></p>
+
+<h5 id="animationduration">animationDuration</h5>
+
+<p>Defines the duration of the animation when a rect is animated to the next detected rect. This is only used in style <code class="prettyprint">RECT</code>.</p>
+
+<ul>
+<li><strong>Type:</strong> int</li>
+<li><strong>Default:</strong> 75</li>
+</ul>
+
 <p><a name="androidSpecifics"> </a></p>
 
 <h3 id="android-config">Android Config</h3>
@@ -1873,14 +2028,24 @@ If another scan may be required later, leave this value <em>true</em> and just r
 
 <h4 id="1-configuration-via-json">1. Configuration via json</h4>
 
-<p>The view can be configured using a json config file like seen above in the <a href="#itemDescription">item description</a>. This file must be located in the assets folder of your Android project.</p>
+<blockquote>
+<p>JSON:<br/>in <code class="prettyprint">onCreate</code> or <code class="prettyprint">onActivityCreated</code> lifecycle methods of the Activity</p>
+</blockquote>
+<pre class="highlight java"><code><span class="n">scanView</span><span class="o">.</span><span class="na">setConfig</span><span class="o">(</span><span class="k">new</span> <span class="n">AnylineViewConfig</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="s">"view_config.json"</span><span class="o">));</span>
+</code></pre>
+
+<p>The view can be configured using a json config file like seen above in the <a href="#configurable-parameters">Configurable Parameters</a>. This file must be located in the assets folder of your Android project, and can be loaded via the snippet on the right.</p>
 
 <p><a name="configureViaXML"> </a></p>
 
 <h4 id="2-configuration-via-xml">2. Configuration via XML</h4>
 
+<p>The configuration can also be done via xml instead of json.</p>
+
+<p>A list of of all available xml options can be found in the example.</p>
+
 <blockquote>
-<p>Where app is xmlns:app=&ldquo;http://schemas.android.com/apk/res-auto&rdquo;</p>
+<p>XML:<br/>Where app is xmlns:app=&ldquo;http://schemas.android.com/apk/res-auto&rdquo;</p>
 </blockquote>
 <pre class="highlight xml"><code>app:preferred_preview_width="720"
 app:preferred_preview_height="1280"
@@ -1910,11 +2075,14 @@ app:beep_on_result="true"
 app:vibrate_on_result="true"
 app:blink_animation_on_result="true"
 app:cancel_on_result="true"
+app:visual_feedback_style="rect"
+app:visual_feedback_stroke_color="#0099AA"
+app:visual_feedback_stroke_width_in_dp="2"
+app:visual_feedback_fill_color="#AA0099AA"
+app:visual_feedback_corner_radius_in_dp="2"
+app:visual_feedback_redraw_timeout="200"
+app:visual_feedback_animation_duration="75"
 </code></pre>
-
-<p>The configuration can also be done via xml instead of json.</p>
-
-<p>A list of of all available xml options can be found in the example.</p>
 
 <p><a name="differencesToJson"> </a></p>
 
@@ -1931,13 +2099,31 @@ app:cancel_on_result="true"
 
 <h3 id="ios-config">iOS Config</h3>
 
-<p>There are two methods to add the view for the models available.</p>
+<p>There are two ways to configure the look and behavior of the scan view in iOS.</p>
+
+<h4 id="1-configuration-via-json">1. Configuration via json</h4>
+
+<blockquote>
+<p>JSON:<br/>in viewDidAppear</p>
+</blockquote>
+<pre class="highlight objective_c"><code>   <span class="n">NSString</span> <span class="o">*</span><span class="n">confPath</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSBundle</span> <span class="nf">mainBundle</span><span class="p">]</span> <span class="nf">pathForResource</span><span class="p">:</span><span class="s">@"view_config"</span> <span class="nf">ofType</span><span class="p">:</span><span class="s">@"json"</span><span class="p">];</span>
+   <span class="n">ALUIConfiguration</span> <span class="o">*</span><span class="n">viewConf</span> <span class="o">=</span> <span class="p">[</span><span class="n">ALUIConfiguration</span> <span class="nf">cutoutConfigurationFromJsonFile</span><span class="p">:</span><span class="n">confPath</span><span class="p">];</span>
+   <span class="n">self</span><span class="p">.</span><span class="n">ocrModuleView</span><span class="p">.</span><span class="n">currentConfiguration</span> <span class="o">=</span> <span class="n">viewConf</span><span class="p">;</span>
+</code></pre>
+
+<p>The view can be configured using a json config file like seen above in the <a href="#configurable-parameters">Configurable Parameters</a>. </p>
+
+<p>If you want to use the standard module-view-configs, you don&rsquo;t have to do anything, since it is loaded from the <strong>AnylineResources.bundle</strong> automatically.</p>
+
+<p>However, if you would like to override this with your own configuration, you can do so with the snippet on the right.</p>
+
+<h4 id="2-configure-on-the-view">2. Configure on the view</h4>
 
 <p><a name="iosConfigModuleViewCode"> </a></p>
 
-<h4 id="1-configure-in-code">1. Configure in Code</h4>
+<h5 id="a-configure-in-code">a) Configure in code</h5>
 
-<p>The view exposes the following properties:</p>
+<p>The view exposes the following properties, which can be set in the code:</p>
 
 <table><thead>
 <tr>
@@ -2035,7 +2221,7 @@ app:cancel_on_result="true"
 
 <p><a name="iosConfigModuleViewStoryboard"> </a></p>
 
-<h4 id="2-configure-with-storyboards">2. Configure with Storyboards</h4>
+<h5 id="b-configure-with-storyboards">b) Configure with Storyboards</h5>
 
 <ol>
 <li>Select <em>View</em> from the object library</li>
@@ -2187,15 +2373,607 @@ In this example we add a view below the watermark. Therefore, we have to check w
 <p>The Anyline modules are use-case specific abstractions for Anyline. Each module is designed to serve a specific purpose. Currently, the following modules are available:</p>
 
 <ul>
+<li><a href="#anylineOcrModule">AnylineOCR</a></li>
 <li><a href="#barcodeModule">Barcode</a></li>
 <li><a href="#energyModule">Energy</a></li>
 <li><a href="#mrzModule">MRZ (Machine Readable Zone)</a></li>
 <li><a href="#documentModule">Document</a></li>
-<li><a href="#anylineOcrModule">AnylineOCR</a></li>
 <li><a href="#ordercodeModule">Order Code</a> - only available for smart glasses (on request)</li>
 </ul>
 
-<p><a name="barcodeModule"> </a></p>
+          <p><a name="anylineOcrModule"> </a></p>
+
+<h2 id="anyline-ocr">Anyline OCR</h2>
+
+<p>With the Anyline OCR Module it is possible to set up scanning for custom use-cases.</p>
+
+<p>There are two different modes for this module: <strong>LINE</strong> and <strong>GRID</strong>.
+The LINE mode is optimal for scanning one or more lines of variable length and/or font (like IBANs or addresses).
+The GRID mode is optimal for characters with equal size laid out in a grid, with a constant font, background and character count (like loyalty codes inside bottle caps).</p>
+
+<p>If the provided settings are not enough to achieve great results, feel free to
+<a href="https://www.anyline.io/support-request/">contact us</a> and we will create a command file that is optimized
+for your use-case. This script can then be set as a parameter to this module, so minimal changes are required to your app. See section <a href="#OcrConig_customScript">Setting a Custom Script</a> for more details.</p>
+
+<p>Furthermore, it is possible to specify a custom traineddata file, which can improve results if you use a specific font for your use-case. See <a href="#OcrConig_customTraineddata">Setting custom traineddata files</a> for details.</p>
+
+<h4 id="settings-common">Settings Common</h4>
+
+<table><thead>
+<tr>
+<th>property</th>
+<th>type<br/>[range]</th>
+<th>description</th>
+<th>comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>scanMode</td>
+<td>Enum<br/>[LINE, GRID]</td>
+<td>The general scan mode</td>
+<td>See the introduction for the description of the modes</td>
+</tr>
+<tr>
+<td>customCmdFile</td>
+<td>String</td>
+<td>An optional custom command file</td>
+<td>If the custom command file is set, all other parameters are ignored</td>
+</tr>
+<tr>
+<td>minCharHeight</td>
+<td>Integer</td>
+<td>The minimum height of a character to scan in pixels</td>
+<td></td>
+</tr>
+<tr>
+<td>maxCharHeight</td>
+<td>Integer</td>
+<td>The maximum height of a character to scan in pixels</td>
+<td></td>
+</tr>
+<tr>
+<td>tesseractLanguages</td>
+<td>String&hellip;</td>
+<td>The languages to use for the OCR (e.g. to use custom.traineddata set this value &ldquo;custom&rdquo;)</td>
+<td>On Android, the languages must be copied first via <a href="#setting-traineddata-files">Setting Traineddata Files</a></td>
+</tr>
+<tr>
+<td>charWhitelist</td>
+<td>String</td>
+<td>Filter the recognized characters to only allow the ones included in this list (e.g. <code class="prettyprint">&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890&quot;</code> for capital letters and numbers only)</td>
+<td>If symbols are scanned that are not in the <code class="prettyprint">charWhitelist</code>, the performance of the scan may suffer</td>
+</tr>
+<tr>
+<td>validationRegex</td>
+<td>String</td>
+<td>A regex string to validate the result. Invalid results will not be returned</td>
+<td>Regex is in <a href="http://www.cplusplus.com/reference/regex/ECMAScript/">ECMAScript regular expressions pattern syntax</a></td>
+</tr>
+<tr>
+<td>minConfidence</td>
+<td>Integer<br/>[0-100]</td>
+<td>The minimum confidence required to return a result, a value between 0 and 100</td>
+<td>A higher confidence means it may take longer to get a result but it is more likely to be accurate</td>
+</tr>
+</tbody></table>
+
+<h4 id="settings-line-mode-only">Settings LINE mode only</h4>
+
+<table><thead>
+<tr>
+<th>property</th>
+<th>type<br/>[range]</th>
+<th>description</th>
+<th>comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>removeSmallContours</td>
+<td>boolean</td>
+<td>If this is <code class="prettyprint">true</code>, small contours will be ignored</td>
+<td>This is useful for latin capital letters and numbers. This is unfavorable if details are relevant, like the dot above the letter <em>i</em></td>
+</tr>
+<tr>
+<td>minSharpness <br/><em>experimental</em></td>
+<td>Integer<br/>[0-100]</td>
+<td>The minimum sharpness required to further process an image with a value between 0 and 100 (0 to turn off sharpness detection)</td>
+<td>It is used to avoid processing of blurry images which are unlikley to return a result in order to avoid the time consuming ocr step. It is recommended to set an initial sharpness of 50 and gradually increase the value to a threshold where you get satisfying results. This parameter is in alpha stage.</td>
+</tr>
+</tbody></table>
+
+<h4 id="settings-grid-mode-only">Settings GRID mode only</h4>
+
+<table><thead>
+<tr>
+<th>property</th>
+<th>type<br/>[range]</th>
+<th>description</th>
+<th>comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>charCountX</td>
+<td>Integer</td>
+<td>The number of horizontal characters</td>
+<td>E.g. if a code to scan consists of 2 rows with 4 symbols each, this would be set to 4</td>
+</tr>
+<tr>
+<td>charCountY</td>
+<td>Integer</td>
+<td>The number of vertical characters</td>
+<td>E.g. if a code to scan consists of 2 rows with 4 symbols each, this would be set to 2</td>
+</tr>
+<tr>
+<td>charPaddingXFactor</td>
+<td>Double</td>
+<td>The average horizontal distance between two characters, measured in percentage of the characters width</td>
+<td></td>
+</tr>
+<tr>
+<td>charPaddingYFactor</td>
+<td>Double</td>
+<td>The average vertical distance between two characters, measured in percentage of the character height</td>
+<td></td>
+</tr>
+<tr>
+<td>isBrightTextOnDark</td>
+<td>boolean</td>
+<td>If <code class="prettyprint">true</code>, this scans bright text on dark background. <br> If <code class="prettyprint">false</code>, this scans dark text on bright background</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<p><a name="OcrConig_customScript"> </a></p>
+
+<h4 id="setting-a-custom-script">Setting a Custom Script</h4>
+
+<p>As described above it is possible to set a custom command file which is optimized for your use-case scenario. This command file is provided to you by Anyline. The following snippets demonstrate how to load the custom command file.</p>
+
+<aside class="warning">
+Notice that the custom script will override all settings made to the Anyline OCR Config, so you don&rsquo;t have to set the parameters manually as they are optimized for your use-case.
+</aside>
+
+<h5 id="android">Android</h5>
+
+<p><em>setCustomCmdFile</em></p>
+<pre class="highlight java"><code><span class="n">anylineOcrConfig</span><span class="o">.</span><span class="na">setCustomCmdFile</span><span class="o">(</span><span class="s">"custom_script_filename.ale"</span><span class="o">);</span>
+</code></pre>
+
+<p>In this case we provide an <em>.ale</em> file which contains the encrypted script. Place this file in the assets folder and use the method <code class="prettyprint">setCustomCmdFile</code> to specify the name of the custom script including the extension (see the code snippet above). </p>
+
+<h5 id="ios">iOS</h5>
+
+<p><em>customCmdFilePath</em></p>
+<pre class="highlight objective_c"><code><span class="n">config</span><span class="p">.</span><span class="n">customCmdFilePath</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSBundle</span> <span class="nf">mainBundle</span><span class="p">]</span> <span class="nf">pathForResource</span><span class="p">:</span><span class="s">@"custom_script_filename"</span> <span class="nf">ofType</span><span class="p">:</span><span class="s">@"ale"</span><span class="p">];</span>
+</code></pre>
+
+<p><a name="OcrConig_customTraineddata"> </a></p>
+
+<h4 id="setting-traineddata-files">Setting traineddata files</h4>
+
+<p>In case you use a specific font it can improve results if you train this font and use the resulting traineddata files for the scanning process. To train your font you can either use the website <a href="http://ocr7.com/">ocr7.com</a> or feel free to <a href="https://www.anyline.io/support-request/">contact us</a>. </p>
+
+<h5 id="android">Android</h5>
+<pre class="highlight java"><code><span class="n">scanView</span><span class="o">.</span><span class="na">copyTrainedData</span><span class="o">(</span><span class="s">"tessdata/eng.traineddata"</span><span class="o">,</span> <span class="s">"f4b86e0b7eb03c682f0e5e6519e02d32"</span><span class="o">);</span>
+<span class="n">scanView</span><span class="o">.</span><span class="na">copyTrainedData</span><span class="o">(</span><span class="s">"tessdata/deu.traineddata"</span><span class="o">,</span> <span class="s">"2d5190b9b62e28fa6d17b728ca195776"</span><span class="o">);</span>
+</code></pre>
+
+<p>Once you have the traineddata file copy it to the assets directory. Place it either in the assets directory directly or in the sub directory <em>tessdata</em>. Other sub folders are not allowed. 
+In the <em>copyTrainedData</em> method specify the path of the file from <strong>relative to the assets folder</strong>. Additionally you can provide a md5 hash of the file or specify <em>null</em> as second parameter.
+If the hash is null, it will be calculated automatically, but this is slow and is therefore not recommended.</p>
+
+<aside class="notice">
+Important! If you have multiple traineddata files, this method must be called for every traineddata file before startScanning is called.
+</aside>
+
+<h5 id="ios">iOS</h5>
+
+<p>On iOS, copying the traineddata files first is not necessary, since they are usually added to the target automatically.</p>
+
+<p><a name="anylineOcrExamples"> </a></p>
+
+<h3 id="anylineocr-examples">AnylineOCR Examples</h3>
+
+<h4 id="android">Android</h4>
+
+<p>The following example illustrates an IBAN scanner use-case realized with the Anyline OCR module.</p>
+
+<h6 id="example-activity-for-the-iban-use-case">Example Activity for the IBAN use case</h6>
+
+<blockquote>
+<p>in <code class="prettyprint">onCreate</code> or <code class="prettyprint">onActivityCreated</code> lifecycle methods</p>
+</blockquote>
+<pre class="highlight java"><code><span class="c1">// Get the view from the layout</span>
+<span class="n">scanView</span> <span class="o">=</span> <span class="o">(</span><span class="n">AnylineOcrScanView</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">scan_view</span><span class="o">);</span>
+<span class="c1">// Configure the view (cutout, the camera resolution, etc.) via json (can also be done in xml in the layout)</span>
+<span class="n">scanView</span><span class="o">.</span><span class="na">setConfig</span><span class="o">(</span><span class="k">new</span> <span class="n">AnylineViewConfig</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="s">"iban_view_config.json"</span><span class="o">));</span>
+
+<span class="c1">// Copies given traineddata-file to a place where the core can access it.</span>
+<span class="c1">// This MUST be called for every traineddata file that is used (before startScanning() is called).</span>
+<span class="c1">// The file must be located directly in the assets directory (or in tessdata/ but no other folders are allowed)</span>
+<span class="n">scanView</span><span class="o">.</span><span class="na">copyTrainedData</span><span class="o">(</span><span class="s">"tessdata/eng.traineddata"</span><span class="o">,</span> <span class="s">"f4b86e0b7eb03c682f0e5e6519e02d32"</span><span class="o">);</span>
+<span class="n">scanView</span><span class="o">.</span><span class="na">copyTrainedData</span><span class="o">(</span><span class="s">"tessdata/deu.traineddata"</span><span class="o">,</span> <span class="s">"2d5190b9b62e28fa6d17b728ca195776"</span><span class="o">);</span>
+
+<span class="c1">//Configure the OCR for IBANs</span>
+<span class="n">AnylineOcrConfig</span> <span class="n">anylineOcrConfig</span> <span class="o">=</span> <span class="k">new</span> <span class="n">AnylineOcrConfig</span><span class="o">();</span>
+<span class="c1">// use the line mode (line length and font may vary)</span>
+<span class="n">anylineOcrConfig</span><span class="o">.</span><span class="na">setScanMode</span><span class="o">(</span><span class="n">AnylineOcrConfig</span><span class="o">.</span><span class="na">ScanMode</span><span class="o">.</span><span class="na">LINE</span><span class="o">);</span>
+<span class="c1">// set the languages used for OCR</span>
+<span class="n">anylineOcrConfig</span><span class="o">.</span><span class="na">setTesseractLanguages</span><span class="o">(</span><span class="s">"eng"</span><span class="o">,</span> <span class="s">"deu"</span><span class="o">);</span>
+<span class="c1">// allow only capital letters and numbers</span>
+<span class="n">anylineOcrConfig</span><span class="o">.</span><span class="na">setCharWhitelist</span><span class="o">(</span><span class="s">"ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"</span><span class="o">);</span>
+<span class="c1">// set the height range the text can have</span>
+<span class="n">anylineOcrConfig</span><span class="o">.</span><span class="na">setMinCharHeight</span><span class="o">(</span><span class="mi">30</span><span class="o">);</span>
+<span class="n">anylineOcrConfig</span><span class="o">.</span><span class="na">setMaxCharHeight</span><span class="o">(</span><span class="mi">60</span><span class="o">);</span>
+<span class="c1">// The minimum confidence required to return a result, a value between 0 and 100.</span>
+<span class="c1">// (higher confidence means less likely to get a wrong result, but may be slower to get a result)</span>
+<span class="n">anylineOcrConfig</span><span class="o">.</span><span class="na">setMinConfidence</span><span class="o">(</span><span class="mi">65</span><span class="o">);</span>
+<span class="c1">// a simple regex for a basic validation of the IBAN, results that don't match this, will not be returned</span>
+<span class="c1">// (full validation is more complex, as different countries have different formats)</span>
+<span class="n">anylineOcrConfig</span><span class="o">.</span><span class="na">setValidationRegex</span><span class="o">(</span><span class="s">"^[A-Z]{2}([0-9A-Z]\\s*){13,32}$"</span><span class="o">);</span>
+<span class="c1">// removes small contours (helpful in this case as no letters with small artifacts are allowed, like iöäü)</span>
+<span class="n">anylineOcrConfig</span><span class="o">.</span><span class="na">setRemoveSmallContours</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+
+<span class="c1">// set the ocr config</span>
+<span class="n">scanView</span><span class="o">.</span><span class="na">setAnylineOcrConfig</span><span class="o">(</span><span class="n">anylineOcrConfig</span><span class="o">);</span>
+
+<span class="c1">// initialize with the license and a listener</span>
+<span class="n">scanView</span><span class="o">.</span><span class="na">initAnyline</span><span class="o">(</span><span class="n">license</span><span class="o">,</span> <span class="k">new</span> <span class="n">AnylineOcrListener</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">onReport</span><span class="o">(</span><span class="n">String</span> <span class="n">identifier</span><span class="o">,</span> <span class="n">Object</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// Called with interesting values, that arise during processing.</span>
+        <span class="c1">// Some possibly reported values:</span>
+        <span class="c1">//</span>
+        <span class="c1">// $brightness - the brightness of the center region of the cutout as a float value</span>
+        <span class="c1">// $confidence - the confidence, an Integer value between 0 and 100</span>
+        <span class="c1">// $thresholdedImage - the current image transformed into black and white</span>
+        <span class="c1">// $sharpness - the detected sharpness value (only reported if minSharpness &gt; 0)</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="n">onTextOutlineDetected</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">PointF</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// Called when the outline of a possible text is detected.</span>
+        <span class="c1">// If false is returned, the outline is drawn automatically.</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">onResult</span><span class="o">(</span><span class="n">AnylineOcrResult</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// Called when a result is found (minimum confidence is exceeded and validation with regex was ok)</span>
+        <span class="n">ibanResultView</span><span class="o">.</span><span class="na">setResult</span><span class="o">(</span><span class="n">result</span><span class="o">.</span><span class="na">getText</span><span class="o">());</span>
+        <span class="n">ibanResultView</span><span class="o">.</span><span class="na">setVisibility</span><span class="o">(</span><span class="n">View</span><span class="o">.</span><span class="na">VISIBLE</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">onAbortRun</span><span class="o">(</span><span class="n">AnylineOcrError</span> <span class="n">code</span><span class="o">,</span> <span class="n">String</span> <span class="n">message</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// Is called when no result was found for the current image.</span>
+        <span class="c1">// E.g. if no text was found or the result is not valid.</span>
+    <span class="o">}</span>
+<span class="o">});</span>
+</code></pre>
+
+<blockquote>
+<p>in <code class="prettyprint">onResume()</code></p>
+</blockquote>
+<pre class="highlight java"><code><span class="n">scanView</span><span class="o">.</span><span class="na">startScanning</span><span class="o">();</span>
+</code></pre>
+
+<blockquote>
+<p>in <code class="prettyprint">onPause()</code></p>
+</blockquote>
+<pre class="highlight java"><code><span class="n">scanView</span><span class="o">.</span><span class="na">cancelScanning</span><span class="o">();</span>
+<span class="c1">//IMPORTANT: always release the camera in onPause</span>
+<span class="n">scanView</span><span class="o">.</span><span class="na">releaseCameraInBackground</span><span class="o">();</span>
+</code></pre>
+
+<p>There are five simple steps necessary to get started:</p>
+
+<ol>
+<li>Set the view config with <code class="prettyprint">setConfig</code> (or in the layout XML)</li>
+<li>Set OCR parameters with <code class="prettyprint">setOcrConfig</code></li>
+<li>Initialize the module with a license and a listener. The listener is called with the result (and other information) using <code class="prettyprint">initAnyline</code></li>
+<li>Call <code class="prettyprint">startScanning()</code></li>
+<li>When you are done, call <code class="prettyprint">cancelScanning()</code> and <code class="prettyprint">releaseCameraInBackground()</code> or <code class="prettyprint">releaseCamera()</code></li>
+</ol>
+
+<h6 id="example-activity-layout">Example Activity Layout</h6>
+<pre class="highlight xml"><code><span class="nt">&lt;RelativeLayout</span>
+    <span class="na">xmlns:android=</span><span class="s">"http://schemas.android.com/apk/res/android"</span>
+    <span class="na">xmlns:tools=</span><span class="s">"http://schemas.android.com/tools"</span>
+    <span class="na">android:layout_width=</span><span class="s">"match_parent"</span>
+    <span class="na">android:layout_height=</span><span class="s">"match_parent"</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;at.nineyards.anyline.modules.ocr.AnylineOcrScanView</span>
+        <span class="na">android:id=</span><span class="s">"@+id/scan_view"</span>
+        <span class="na">android:layout_width=</span><span class="s">"match_parent"</span>
+        <span class="na">android:layout_height=</span><span class="s">"match_parent"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/RelativeLayout&gt;</span>
+</code></pre>
+
+<p>The AnylineOcrScanView can simply be included in the activity layout file, just like any other view. The view can be either configured via <a href="#configureViaXML">XML</a> or with a config json.</p>
+
+<p><a name="ibanViewConfig"> </a></p>
+
+<h6 id="example-view-config-for-the-iban-use-case">Example view config for the IBAN use case</h6>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"captureResolution"</span><span class="p">:</span><span class="s2">"1080"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"cutout"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"style"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rect"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"maxWidthPercent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"80%"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"maxHeightPercent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"80%"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"alignment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"top_half"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">870</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ratioFromSize"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"strokeWidth"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"cornerRadius"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"strokeColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FFFFFF"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"outerColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"outerAlpha"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.3</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"flash"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"mode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"manual"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"alignment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bottom_right"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"beepOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"vibrateOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"blinkAnimationOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"cancelOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>A detailed description of all available config items can be found in the section <a href="#anyline-config">Anyline Config</a>.</p>
+
+<h6 id="newline">&NewLine;</h6>
+
+<h5 id="other-examples">Other Examples</h5>
+
+<p>For more example use cases of the Anyline OCR module, check out the Examples app in the download package, available here: <a href="https://www.anyline.io/download/">https://www.anyline.io/download/</a></p>
+
+<h6 id="reporting">Reporting</h6>
+<pre class="highlight java"><code><span class="n">scanView</span><span class="o">.</span><span class="na">setReportingEnabled</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+</code></pre>
+
+<p>The reporting of results in the Community Edition (including an image)
+helps us to improve our product, and the customer experience.
+It is possible to turn off that feature by calling ​<em>setReportingEnabled(false)</em>​ on the AnylineOcrScanView.</p>
+
+<h4 id="ios">iOS</h4>
+
+<p>The following example illustrates an ISBN scanner use-case, realized with the Anyline OCR module.</p>
+
+<p>There are three simple steps necessary to get started:</p>
+
+<h6 id="1-initialize-the-module-in-viewdidload">1. Initialize the module in viewDidLoad</h6>
+
+<blockquote>
+<p>in <code class="prettyprint">viewDidLoad</code> lifecycle method</p>
+</blockquote>
+<pre class="highlight objective_c"><code><span class="c1">// The controller has to conform to &lt;AnylineOCRModuleDelegate&gt; to be able to receive results
+</span><span class="k">@interface</span> <span class="nc">ALISBNScanViewController</span> <span class="p">()</span><span class="o">&lt;</span><span class="n">AnylineOCRModuleDelegate</span><span class="o">&gt;</span>
+<span class="c1">// The Anyline module used for OCR
+</span><span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">strong</span><span class="p">)</span> <span class="n">AnylineOCRModuleView</span> <span class="o">*</span><span class="n">ocrModuleView</span><span class="p">;</span>
+
+<span class="k">@end</span>
+
+<span class="k">@implementation</span> <span class="nc">ALISBNScanViewController</span>
+<span class="cm">/*
+ We will do our main setup in viewDidLoad. Its called once the view controller is getting ready to be displayed.
+ */</span>
+<span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">viewDidLoad</span> <span class="p">{</span>
+    <span class="p">[</span><span class="n">super</span> <span class="nf">viewDidLoad</span><span class="p">];</span>
+
+    <span class="c1">// Initializing the module. Its a UIView subclass. We set the frame to fill the whole screen
+</span>    <span class="n">CGRect</span> <span class="n">frame</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIScreen</span> <span class="nf">mainScreen</span><span class="p">]</span> <span class="nf">applicationFrame</span><span class="p">];</span>
+    <span class="n">frame</span> <span class="o">=</span> <span class="n">CGRectMake</span><span class="p">(</span><span class="n">frame</span><span class="p">.</span><span class="n">origin</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">frame</span><span class="p">.</span><span class="n">origin</span><span class="p">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">self</span><span class="p">.</span><span class="n">navigationController</span><span class="p">.</span><span class="n">navigationBar</span><span class="p">.</span><span class="n">frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">height</span><span class="p">,</span> <span class="n">frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">width</span><span class="p">,</span> <span class="n">frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">height</span> <span class="o">-</span> <span class="n">self</span><span class="p">.</span><span class="n">navigationController</span><span class="p">.</span><span class="n">navigationBar</span><span class="p">.</span><span class="n">frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">height</span><span class="p">);</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">ocrModuleView</span> <span class="o">=</span> <span class="p">[[</span><span class="n">AnylineOCRModuleView</span> <span class="nf">alloc</span><span class="p">]</span> <span class="nf">initWithFrame</span><span class="p">:</span><span class="n">frame</span><span class="p">];</span>
+
+    <span class="n">ALOCRConfig</span> <span class="o">*</span><span class="n">config</span> <span class="o">=</span> <span class="p">[[</span><span class="n">ALOCRConfig</span> <span class="nf">alloc</span><span class="p">]</span> <span class="nf">init</span><span class="p">];</span>
+    <span class="n">config</span><span class="p">.</span><span class="n">charHeight</span> <span class="o">=</span> <span class="n">ALRangeMake</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">70</span><span class="p">);</span>
+    <span class="n">config</span><span class="p">.</span><span class="n">tesseractLanguages</span> <span class="o">=</span> <span class="p">@[</span><span class="s">@"eng"</span><span class="p">,</span> <span class="s">@"deu"</span><span class="p">];</span>
+    <span class="n">config</span><span class="p">.</span><span class="n">charWhiteList</span> <span class="o">=</span> <span class="s">@"ISBN0123456789&lt;&gt;-X"</span><span class="p">;</span>
+    <span class="n">config</span><span class="p">.</span><span class="n">minConfidence</span> <span class="o">=</span> <span class="mi">65</span><span class="p">;</span>
+    <span class="n">config</span><span class="p">.</span><span class="n">validationRegex</span> <span class="o">=</span> <span class="s">@"^ISBN</span><span class="se">\\</span><span class="s">s*((978|979){1}-?</span><span class="se">\\</span><span class="s">s*)*[0-9]{1,5}-?</span><span class="se">\\</span><span class="s">s*[0-9]{2,7}-?</span><span class="se">\\</span><span class="s">s*[0-9]{2,7}-?</span><span class="se">\\</span><span class="s">s*[0-9X]$"</span><span class="p">;</span>
+    <span class="n">config</span><span class="p">.</span><span class="n">removeSmallContours</span> <span class="o">=</span> <span class="nb">YES</span><span class="p">;</span>
+    <span class="n">config</span><span class="p">.</span><span class="n">scanMode</span> <span class="o">=</span> <span class="n">ALLine</span><span class="p">;</span>
+
+    <span class="n">NSError</span> <span class="o">*</span><span class="n">error</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
+    <span class="c1">// We tell the module to bootstrap itself with the license key and delegate. The delegate will later get called
+</span>    <span class="c1">// by the module once we start receiving results.
+</span>    <span class="n">BOOL</span> <span class="n">success</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">ocrModuleView</span> <span class="nf">setupWithLicenseKey</span><span class="p">:</span><span class="n">kISBNLicenseKey</span>
+                                                  <span class="nf">delegate</span><span class="p">:</span><span class="n">self</span>
+                                                 <span class="nf">ocrConfig</span><span class="p">:</span><span class="n">config</span>
+                                                     <span class="nf">error</span><span class="p">:</span><span class="o">&amp;</span><span class="n">error</span><span class="p">];</span>
+    <span class="c1">// setupWithLicenseKey:delegate:error returns true if everything went fine. In the case something wrong
+</span>    <span class="c1">// we have to check the error object for the error message.
+</span>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">success</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Something went wrong. The error object contains the error description
+</span>        <span class="n">NSAssert</span><span class="p">(</span><span class="n">success</span><span class="p">,</span> <span class="s">@"Setup Error: %@"</span><span class="p">,</span> <span class="n">error</span><span class="p">.</span><span class="n">debugDescription</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Load the UI Configuration from a json file
+</span>    <span class="n">NSString</span> <span class="o">*</span><span class="n">confPath</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSBundle</span> <span class="nf">mainBundle</span><span class="p">]</span> <span class="nf">pathForResource</span><span class="p">:</span><span class="s">@"isbn_config"</span> <span class="nf">ofType</span><span class="p">:</span><span class="s">@"json"</span><span class="p">];</span>
+    <span class="n">ALUIConfiguration</span> <span class="o">*</span><span class="n">ibanConf</span> <span class="o">=</span> <span class="p">[</span><span class="n">ALUIConfiguration</span> <span class="nf">cutoutConfigurationFromJsonFile</span><span class="p">:</span><span class="n">confPath</span><span class="p">];</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">ocrModuleView</span><span class="p">.</span><span class="n">currentConfiguration</span> <span class="o">=</span> <span class="n">ibanConf</span><span class="p">;</span>
+
+    <span class="c1">// After setup is complete we add the module to the view of this view controller
+</span>    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">view</span> <span class="nf">addSubview</span><span class="p">:</span><span class="n">self</span><span class="p">.</span><span class="n">ocrModuleView</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="cm">/*
+ This is the main delegate method Anyline uses to report its results
+ */</span>
+<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">anylineOCRModuleView</span><span class="o">:</span><span class="p">(</span><span class="n">AnylineOCRModuleView</span> <span class="o">*</span><span class="p">)</span><span class="n">anylineOCRModuleView</span>
+               <span class="n">didFindResult</span><span class="o">:</span><span class="p">(</span><span class="n">ALOCRResult</span> <span class="o">*</span><span class="p">)</span><span class="n">result</span> <span class="p">{</span>
+    <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Anyline reports result:"</span><span class="p">,</span> <span class="n">result</span><span class="p">.</span><span class="n">text</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">anylineOCRModuleView</span><span class="o">:</span><span class="p">(</span><span class="n">AnylineOCRModuleView</span> <span class="o">*</span><span class="p">)</span><span class="n">anylineOCRModuleView</span>
+             <span class="n">reportsVariable</span><span class="o">:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">variableName</span>
+                       <span class="n">value</span><span class="o">:</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="n">value</span> <span class="p">{</span>
+    <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Anyline reports varaible: %@ with value: %@"</span><span class="p">,</span> <span class="n">variableName</span><span class="p">,</span> <span class="n">value</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">anylineOCRModuleView</span><span class="o">:</span><span class="p">(</span><span class="n">AnylineOCRModuleView</span> <span class="o">*</span><span class="p">)</span><span class="n">anylineOCRModuleView</span>
+           <span class="n">reportsRunFailure</span><span class="o">:</span><span class="p">(</span><span class="n">ALOCRError</span><span class="p">)</span><span class="n">error</span> <span class="p">{</span>
+    <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Anyline reports varaible an error: %@"</span><span class="p">,</span> <span class="n">error</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">@end</span>
+</code></pre>
+
+<ul>
+<li>Create a <code class="prettyprint">ALUIConfiguration</code> object and use its properties to configure the user interface, or load a layout file.</li>
+<li>Create a <code class="prettyprint">ALOCRConfig</code> object and use its properties to configure the module.</li>
+<li>Initialize the module with a license key, a delegate and the <code class="prettyprint">ALOCRConfig</code> object. The delegate will be called once there is a result.</li>
+</ul>
+
+<h6 id="2-start-scanning-process-in-viewdidappear">2. Start scanning process in viewDidAppear</h6>
+
+<blockquote>
+<p>in viewDidAppear()</p>
+</blockquote>
+<pre class="highlight objective_c"><code><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">ocrModuleView</span> <span class="nf">startScanningAndReturnError</span><span class="p">:</span><span class="o">&amp;</span><span class="n">error</span><span class="p">];</span>
+</code></pre>
+
+<p>Call <code class="prettyprint">startScanningAndReturnError</code> in <code class="prettyprint">viewDidAppear</code>. If there is a problem while starting the scanning process, an error object will be set so the error can be handled.</p>
+
+<h6 id="3-implement-the-delegate-method-and-receive-results">3. Implement the delegate method and receive results</h6>
+<pre class="highlight objective_c"><code><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">anylineOCRModuleView</span><span class="p">:(</span><span class="n">AnylineOCRModuleView</span> <span class="o">*</span><span class="p">)</span><span class="nv">anylineOCRModuleView</span> <span class="nf">didFindResult</span><span class="p">:(</span><span class="n">ALOCRResult</span> <span class="o">*</span><span class="p">)</span><span class="nv">result</span> <span class="p">{</span>
+   <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Anyline has a result"</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>To receive results implement the delegate method as can be seen in the example.</p>
+
+<h6 id="newline">&NewLine;</h6>
+
+<blockquote>
+<p>in viewWillDisappear()</p>
+</blockquote>
+<pre class="highlight objective_c"><code><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">ocrModuleView</span> <span class="nf">cancelScanningAndReturnError</span><span class="p">:</span><span class="o">&amp;</span><span class="n">error</span><span class="p">];</span>
+</code></pre>
+
+<p>After you received a result, call <code class="prettyprint">cancelScanningAndReturnError</code>. This also has to be called in <code class="prettyprint">viewWillDisappear</code> to clean up the module.</p>
+
+<p><a name="isbnViewConfig"> </a></p>
+
+<h6 id="example-view-config-for-the-iban-use-case">Example view config for the IBAN use case</h6>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"captureResolution"</span><span class="p">:</span><span class="s2">"1080"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"cutout"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"style"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rect"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"maxWidthPercent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"80%"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"maxHeightPercent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"80%"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"alignment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"top_half"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">540</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"ratioFromSize"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"strokeWidth"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"cornerRadius"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"strokeColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FFFFFF"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"outerColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"outerAlpha"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.3</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"flash"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"mode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"manual"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"alignment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bottom_right"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"beepOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"vibrateOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"blinkAnimationOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"cancelOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>The OCR module can simply be added as a subview, just like any other view. The view can be either configured via <code class="prettyprint">ALUIConfiguration</code> or with a config json file.</p>
+
+<p>A detailed description of all available config items can be found in the section <a href="#anyline-config">Anyline Config</a></p>
+
+<h6 id="newline">&NewLine;</h6>
+
+<h5 id="other-examples">Other Examples</h5>
+
+<p>For more example use cases of the Anyline OCR Module, check out the Examples app in the download package, available here: <a href="https://www.anyline.io/download/">https://www.anyline.io/download/</a></p>
+
+<h4 id="cordova-plugin">Cordova Plugin</h4>
+
+<p>Cordova has two special options in the OCR-config:</p>
+
+<ul>
+<li>traineddataFiles: contains an array of traineddata files with path relative to the <em>www</em> directory. (This should be used instead of <em>tesseractLanguages</em>)</li>
+<li>drawTextOutline: true (default) if a visual feedback should be given in case a text area has been identified, false otherwise.</li>
+</ul>
+
+<h6 id="example-call-for-iban-scanning">Example call for IBAN scanning</h6>
+<pre class="highlight plaintext"><code>cordova.exec(onResult, onError, "AnylineSDK", "ANYLINE_OCR",
+    [
+        "YOUR_LICENSE_KEY",
+      {
+        "captureResolution": "1080",
+        "cutout": {
+            "style": "rect",
+            "maxWidthPercent": "80%",
+            "maxHeightPercent": "80%",
+            "alignment": "top_half",
+            "width": 870,
+            "ratioFromSize": {
+                "width": 5,
+                "height": 1
+            },
+            "strokeWidth": 2,
+            "cornerRadius": 10,
+            "strokeColor": "FFFFFF",
+            "outerColor": "000000",
+            "outerAlpha": 0.3
+        },
+        "flash": {
+            "mode": "manual",
+            "alignment": "bottom_right"
+        },
+        "beepOnResult": true,
+        "vibrateOnResult": true,
+        "blinkAnimationOnResult": true,
+        "cancelOnResult": true
+     },{
+        "scanMode": "LINE",
+        "minCharHeight": 30,
+        "maxCharHeight": 60,
+        "traineddataFiles": ["assets/eng_no_dict.traineddata"],
+        "charWhitelist": "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
+        "validationRegex": "^[A-Z]{2}([0-9A-Z]\\s*){13,32}$",
+        "minConfidence": 65,
+        "removeSmallContours": true,
+        "charCountX": 4,
+        "charCountY": 2,
+        "charPaddingXFactor": 1.0,
+        "charPaddingYFactor": 1.0,
+        "isBrightTextOnDark": false,
+        "drawTextOutline": true
+     }
+   ]
+);
+</code></pre>
+
+<p>For more detailed information about the config parameters, see the <a href="#cordova-example">example</a> in section Quick Start.</p>
+
+<h6 id="reporting">Reporting</h6>
+<pre class="highlight plaintext"><code>//...
+            "blinkAnimationOnResult": true,
+            "cancelOnResult": true,
+            "reportingEnabled": false
+        }
+    ]
+</code></pre>
+
+<p>The reporting of  results in the Community Edition (including an image) helps us to improve our product, and the customer experience.
+It is possible to turn off this feature by adding <em>&ldquo;reportingEnabled&rdquo;: false</em> to the above config.</p>
+
+          <p><a name="barcodeModule"> </a></p>
 
 <h2 id="barcode">Barcode</h2>
 
@@ -2507,7 +3285,7 @@ If there is a problem starting the scanning process an error object will be set,
 );
 </code></pre>
 
-<p><a name="energyModule"> </a></p>
+          <p><a name="energyModule"> </a></p>
 
 <h2 id="energy">Energy</h2>
 
@@ -2517,26 +3295,33 @@ Common digital meters and heat meters can also be scanned (but this is ALPHA).</
 
 <h4 id="all-the-possible-scan-modes">All the possible scan modes</h4>
 
+<p>All analog meters where this is not mentioned specifically assume white digits on black background.</p>
+
 <p><strong>Electric Meter</strong><br/>
 Android and Cordova: <em>ELECTRIC_METER</em>, iOS: <em>ALElectricMeter</em><br/>
-Scan analog electric meters with 5 or 6 main digits and one decimal digit.
-The digit count is detected automatically. The decimal place is not included in the result. The auto-detection requires the decimal area to be highlighted in red.</p>
+Scan analog electric meters with 5 or 6 pre-decimal places.
+The digit count is detected automatically. No decimal places are included in the result.
+The auto-detection requires the decimal area to be highlighted in red.</p>
 
-<p><strong>Electric Meter 5 main digits 1 decimal (ALPHA)</strong><br/>
+<p><strong>Electric Meter 5 pre-decimal places (ALPHA)</strong><br/>
 Android and Cordova: <em>ELECTRIC_METER_5_1</em>, iOS: <em>ALElectricMeter5_1</em><br/>
-Scan analog electric meters with 5 main digits and one decimal digit. If detected, the decimal is included in the result, otherwise the decimal place is omitted.
+Scan analog electric meters with 5 pre-decimal places. If it can be detected, up to one decimal place is included in the result, otherwise the decimal places will be omitted.
 The decimal is represented by a dot in the result, not a comma.
-This mode is useful if there is no red marking for the decimal place or the decimal place it self is relevant.</p>
+This mode is useful if there is no red marking for the decimal place or if the first decimal place is relevant.</p>
 
 <p>This mode may be removed in the future, if the same can be achieved with the automatic mode.</p>
 
-<p><strong>Electric Meter 6 main digits 1 decimal (ALPHA)</strong><br/>
+<p><strong>Electric Meter 6 pre-decimal places (ALPHA)</strong><br/>
 Android and Cordova: <em>ELECTRIC_METER_6_1</em>, iOS: <em>ALElectricMeter6_1</em><br/>
-Same as above with 6 main digits.</p>
+Same as above with 6 pre-decimal places.</p>
 
 <p><strong>Gas Meter</strong><br/>
 Android and Cordova: <em>GAS_METER</em>, iOS: <em>ALGasMeter</em><br/>
 Scan analog gas meters with 5 digits before the point. The decimal places are ignored.</p>
+
+<p><strong>Gas Meter 6 pre-decimal places</strong><br/>
+Android and Cordova: <em>GAS_METER_6</em>, iOS: <em>ALGasMeter6</em><br/>
+Scan analog gas meters with 6 digits before the point. The decimal places are ignored.</p>
 
 <p><strong>Water Meter White (ALPHA)</strong><br/>
 Android and Cordova: <em>WATER_METER_WHITE</em>, iOS: <em>ALWaterMeterWhite</em><br/>
@@ -2548,21 +3333,36 @@ Android and Cordova: <em>WATER_METER_BLACK</em>, iOS: <em>ALWaterMeterBlack</em>
 Scan analog water meters with black background (white digits) with 5 digits before the point.
 The decimal places are ignored.</p>
 
+<p><strong>Analog Meter White (ALPHA)</strong><br/>
+Android and Cordova: <em>ANALOG_METER_WHITE</em>, iOS: <em>ALAnalogMeterWhite</em><br/>
+Scan any analog meters with white background (black digits) with 5 or 6 digits before the point.
+The decimal places are ignored.</p>
+
+<p><strong>Analog Meter with 4 pre-decimal places (ALPHA)</strong><br/>
+Android and Cordova: <em>ANALOG_METER_4</em>, iOS: <em>ALAnalogMeter4</em><br/>
+Scan any analog meters with 4 digits before the point.
+The decimal places are ignored.</p>
+
+<p><strong>Analog Meter with 7 pre-decimal places (ALPHA)</strong><br/>
+Android and Cordova: <em>ANALOG_METER_7</em>, iOS: <em>ALAnalogMeter7</em><br/>
+Scan any analog meters with 7 digits before the point.
+The decimal places are ignored.</p>
+
 <p><strong>Digital Meter (ALPHA)</strong><br/>
 Android and Cordova: <em>DIGITAL_METER</em>, iOS: <em>ALDigitalMeter</em><br/>
 Is a general scanner for digital meters with at least 5 digits. It will try to find the highest number of connected digits and return the result without decimal marker.</p>
 
-<p><strong>Heat Meter with 4 main (up to 3 decimal) digits (ALPHA)</strong><br/>
+<p><strong>Heat Meter with 4 pre-decimal (up to 3 decimal) places (ALPHA)</strong><br/>
 Android and Cordova: <em>HEAT_METER_4</em>, iOS: <em>ALHeatMeter4</em><br/>
-Scan digital heat meters with 4 main and up to 3 decimal digits. If detected, the decimal digits are included in the result, otherwise they are omitted.</p>
+Scan digital heat meters with 4 pre-decimal and up to 3 decimal places. If detected, the decimal digits are included in the result, otherwise they are omitted.</p>
 
 <p>This mode may be replaced in the future with a mode that automatically detects the amount of digits.</p>
 
-<p><strong>Heat Meter with 5 main (up to 3 decimal) digits (ALPHA)</strong><br/>
+<p><strong>Heat Meter with 5 pre-decimal (up to 3 decimal) places (ALPHA)</strong><br/>
 Android and Cordova: <em>HEAT_METER_5</em>, iOS: <em>ALHeatMeter5</em><br/>
 Same as above with 5 digits before the point.</p>
 
-<p><strong>Heat Meter with 6 main (up to 3 decimal) digits (ALPHA)</strong><br/>
+<p><strong>Heat Meter with 6 pre-decimal (up to 3 decimal) places (ALPHA)</strong><br/>
 Android and Cordova: <em>HEAT_METER_6</em>, iOS: <em>ALHeatMeter6</em><br/>
 Same as above with 6 digits before the point.</p>
 
@@ -2859,7 +3659,7 @@ For more information about the config parameters see the <a href="#cordova-examp
 <p>The reporting of analog meter results in the Community Edition (including an image of the scanned meter) helps us to improve our product, and the customer experience.
 It is possible to turn off this feature by adding <em>&ldquo;reportingEnabled&rdquo;: false</em> to the above config.</p>
 
-<p><a name="mrzModule"> </a></p>
+          <p><a name="mrzModule"> </a></p>
 
 <h2 id="mrz">MRZ</h2>
 
@@ -3149,7 +3949,7 @@ Furthermore its important to know, that the names may not be printed completely 
 
 <p>Call the exec method with <i><b>MRZ</b></i>. For more detailed information about the config parameters, see the <a href="#cordova-example">example</a> in section Quick Start.</p>
 
-<p><a name="documentModule"> </a></p>
+          <p><a name="documentModule"> </a></p>
 
 <h2 id="document">Document</h2>
 
@@ -3397,554 +4197,7 @@ The additional configuration fields is:</p>
 
 <p>For custom configuration (e.g. cutout, flash, feedback on successful scan, etc.) you can either use a json-file or configure it by accessing the properties of the module. If you need more detailed information about all available config items see <a href="#anyline-config">Anyline Config</a>.</p>
 
-<p><a name="anylineOcrModule"> </a></p>
-
-<h2 id="anyline-ocr">Anyline OCR</h2>
-
-<p>With the Anyline OCR Module it is possible to set up scanning for custom use-cases.</p>
-
-<p>There are two different modes for this module: <strong>LINE</strong> and <strong>GRID</strong>.
-The LINE mode is optimal for scanning one or more lines of variable length and/or font (like IBANs or addresses).
-The GRID mode is optimal for characters with equal size laid out in a grid, with a constant font, background and character count (like loyalty codes inside bottle caps).</p>
-
-<p>If the provided settings are not enough to achieve great results, feel free to
-<a href="https://www.anyline.io/support-request/">contact us</a> and we will create a command file that is optimized
-for your use-case. This script can then be set as a parameter to this module, so minimal changes are required to your app. See section <a href="#OcrConig_customScript">Setting a Custom Script</a> for more details.</p>
-
-<p>Furthermore, it is possible to specify a custom traineddata file, which can improve results if you use a specific font for your use-case. See <a href="#OcrConig_customTraineddata">Setting custom traineddata files</a> for details.</p>
-
-<h4 id="settings-common">Settings Common</h4>
-
-<table><thead>
-<tr>
-<th>property</th>
-<th>description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>scanMode</td>
-<td><code class="prettyprint">LINE</code> or <code class="prettyprint">GRID</code></td>
-</tr>
-<tr>
-<td>customCmdFile</td>
-<td>An optional custom command file</td>
-</tr>
-<tr>
-<td>minCharHeight</td>
-<td>The minimum height of a character to scan in pixels (relative to the configured capture resolution)</td>
-</tr>
-<tr>
-<td>maxCharHeight</td>
-<td>The maximum height of a character to scan in pixels (relative to the configured capture resolution)</td>
-</tr>
-<tr>
-<td>tesseractLanguages</td>
-<td>The languages to use for the OCR (e.g. to use custom.traineddata set this value &ldquo;custom&rdquo;)</td>
-</tr>
-<tr>
-<td>charWhitelist</td>
-<td>Filter the recognized characters to only allow the ones included in this list (e.g. <code class="prettyprint">&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890&quot;</code> for capital letters and numbers only)</td>
-</tr>
-<tr>
-<td>validationRegex</td>
-<td>A regex string to validate the result. Invalid results will not be returned. (regex is in <a href="http://www.cplusplus.com/reference/regex/ECMAScript/">ECMAScript regular expressions pattern syntax</a>)</td>
-</tr>
-<tr>
-<td>minConfidence</td>
-<td>The minimum confidence required to return a result, a value between 0 and 100. (higher confidence means it may take longer to get a result but it is more likely to be accurate)</td>
-</tr>
-</tbody></table>
-
-<h4 id="settings-line-mode-only">Settings LINE mode only</h4>
-
-<table><thead>
-<tr>
-<th>property</th>
-<th>description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>removeSmallContours</td>
-<td>If this is <code class="prettyprint">true</code>, small contours will be ignored (This is useful for latin capital letters and numbers. This is detrimental if details are relevant, like the dot above the letter <code class="prettyprint">i</code>)</td>
-</tr>
-<tr>
-<td>minSharpness</td>
-<td>The minimum sharpness required to further process an image with a value between 0 and 100 (0 to turn off sharpness detection). It is used to avoid processing of blurry images which are unlikley to return a result in order to avoid the time consuming ocr step. It is recommended to set an initial sharpness of 50 and gradually increase the value to a threshold where you get satisfying results. This parameter is in alpha stage.</td>
-</tr>
-</tbody></table>
-
-<h4 id="settings-grid-mode-only">Settings GRID mode only</h4>
-
-<table><thead>
-<tr>
-<th>property</th>
-<th>description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>charCountX</td>
-<td>The number of horizontal characters</td>
-</tr>
-<tr>
-<td>charCountY</td>
-<td>The number of vertical characters</td>
-</tr>
-<tr>
-<td>charPaddingXFactor</td>
-<td>The average horizontal distance between two characters, measured in percentage of the characters width</td>
-</tr>
-<tr>
-<td>charPaddingYFactor</td>
-<td>The average vertical distance between two characters, measured in percentage of the character height</td>
-</tr>
-<tr>
-<td>isBrightTextOnDark</td>
-<td>If <code class="prettyprint">true</code>, this scans bright text on dark background. <br> If <code class="prettyprint">false</code>, this scans dark text on bright background</td>
-</tr>
-</tbody></table>
-
-<p><a name="OcrConig_customScript"> </a></p>
-
-<h4 id="setting-a-custom-script">Setting a Custom Script</h4>
-
-<p>As described above it is possible to set a custom command file which is optimized for your use-case scenario. </p>
-
-<aside class="notice">
-Notice that the custom script will override all settings made to the Anyline OCR Config.
-</aside>
-
-<h5 id="android">Android</h5>
-
-<p>It is possible to load a custom script via two different methods.</p>
-
-<p><em>1. setCustomCmdFile</em></p>
-<pre class="highlight java"><code><span class="n">anylineOcrConfig</span><span class="o">.</span><span class="na">setCustomCmdFile</span><span class="o">(</span><span class="s">"custom_script_filename.ale"</span><span class="o">);</span>
-</code></pre>
-
-<p>In this case we provide an <em>.ale</em> file which contains the encrypted script. Place this file in the assets folder and use the method <em>setCustomCmdFile</em> to specify the name of the custom script including the extension (see example). </p>
-
-<p><a name="OcrConig_customTraineddata"> </a></p>
-
-<h4 id="setting-traineddata-files">Setting traineddata files</h4>
-
-<p>In case you use a specific font it can improve results if you train this font and use the resulting traineddata files for the scanning process. To train your font you can either use the website <a href="http://ocr7.com/">ocr7.com</a> or feel free to <a href="https://www.anyline.io/support-request/">contact us</a>. </p>
-
-<h5 id="android">Android</h5>
-<pre class="highlight java"><code><span class="n">scanView</span><span class="o">.</span><span class="na">copyTrainedData</span><span class="o">(</span><span class="s">"tessdata/eng.traineddata"</span><span class="o">,</span> <span class="s">"f4b86e0b7eb03c682f0e5e6519e02d32"</span><span class="o">);</span>
-<span class="n">scanView</span><span class="o">.</span><span class="na">copyTrainedData</span><span class="o">(</span><span class="s">"tessdata/deu.traineddata"</span><span class="o">,</span> <span class="s">"2d5190b9b62e28fa6d17b728ca195776"</span><span class="o">);</span>
-</code></pre>
-
-<p>Once you have the traineddata file copy it to the assets directory. Place it either in the assets directory directly or in the sub directory <em>tessdata</em>. Other sub folders are not allowed. 
-In the <em>copyTrainedData</em> method specify the path of the file from relative to the assets folder. Additionally you can provide a md5 hash of the file or specify <em>null</em> as second parameter.
-If the hash is null, it will be calculated automatically, but this is slow and is therefor not recommended.</p>
-
-<p>Important! If you have multiple traineddata files, this method must be called for every traineddata file before startScanning is called.</p>
-
-<h3 id="example">Example</h3>
-
-<h4 id="android">Android</h4>
-
-<p>The following example illustrates an IBAN scanner use-case realized with the Anyline OCR module.</p>
-
-<h6 id="example-activity-for-the-iban-use-case">Example Activity for the IBAN use case</h6>
-
-<blockquote>
-<p>in <code class="prettyprint">onCreate</code> or <code class="prettyprint">onActivityCreated</code> lifecycle methods</p>
-</blockquote>
-
-<p>There are five simple steps necessary to get started:</p>
-
-<ol>
-<li>Set the view config with <code class="prettyprint">setConfig</code> (or in the layout XML)</li>
-<li>Set OCR parameters with <code class="prettyprint">setOcrConfig</code></li>
-<li>Initialize the module with a license and a listener. The listener is called with the result (and other information) using <code class="prettyprint">initAnyline</code></li>
-<li>Call <code class="prettyprint">startScanning()</code></li>
-<li>When you are done, call <code class="prettyprint">cancelScanning()</code> and <code class="prettyprint">releaseCameraInBackground()</code> or <code class="prettyprint">releaseCamera()</code></li>
-</ol>
-<pre class="highlight java"><code><span class="c1">// Get the view from the layout</span>
-<span class="n">scanView</span> <span class="o">=</span> <span class="o">(</span><span class="n">AnylineOcrScanView</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">scan_view</span><span class="o">);</span>
-<span class="c1">// Configure the view (cutout, the camera resolution, etc.) via json (can also be done in xml in the layout)</span>
-<span class="n">scanView</span><span class="o">.</span><span class="na">setConfig</span><span class="o">(</span><span class="k">new</span> <span class="n">AnylineViewConfig</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="s">"iban_view_config.json"</span><span class="o">));</span>
-
-<span class="c1">// Copies given traineddata-file to a place where the core can access it.</span>
-<span class="c1">// This MUST be called for every traineddata file that is used (before startScanning() is called).</span>
-<span class="c1">// The file must be located directly in the assets directory (or in tessdata/ but no other folders are allowed)</span>
-<span class="n">scanView</span><span class="o">.</span><span class="na">copyTrainedData</span><span class="o">(</span><span class="s">"tessdata/eng.traineddata"</span><span class="o">,</span> <span class="s">"f4b86e0b7eb03c682f0e5e6519e02d32"</span><span class="o">);</span>
-<span class="n">scanView</span><span class="o">.</span><span class="na">copyTrainedData</span><span class="o">(</span><span class="s">"tessdata/deu.traineddata"</span><span class="o">,</span> <span class="s">"2d5190b9b62e28fa6d17b728ca195776"</span><span class="o">);</span>
-
-<span class="c1">//Configure the OCR for IBANs</span>
-<span class="n">AnylineOcrConfig</span> <span class="n">anylineOcrConfig</span> <span class="o">=</span> <span class="k">new</span> <span class="n">AnylineOcrConfig</span><span class="o">();</span>
-<span class="c1">// use the line mode (line length and font may vary)</span>
-<span class="n">anylineOcrConfig</span><span class="o">.</span><span class="na">setScanMode</span><span class="o">(</span><span class="n">AnylineOcrConfig</span><span class="o">.</span><span class="na">ScanMode</span><span class="o">.</span><span class="na">LINE</span><span class="o">);</span>
-<span class="c1">// set the languages used for OCR</span>
-<span class="n">anylineOcrConfig</span><span class="o">.</span><span class="na">setTesseractLanguages</span><span class="o">(</span><span class="s">"eng"</span><span class="o">,</span> <span class="s">"deu"</span><span class="o">);</span>
-<span class="c1">// allow only capital letters and numbers</span>
-<span class="n">anylineOcrConfig</span><span class="o">.</span><span class="na">setCharWhitelist</span><span class="o">(</span><span class="s">"ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"</span><span class="o">);</span>
-<span class="c1">// set the height range the text can have</span>
-<span class="n">anylineOcrConfig</span><span class="o">.</span><span class="na">setMinCharHeight</span><span class="o">(</span><span class="mi">30</span><span class="o">);</span>
-<span class="n">anylineOcrConfig</span><span class="o">.</span><span class="na">setMaxCharHeight</span><span class="o">(</span><span class="mi">60</span><span class="o">);</span>
-<span class="c1">// The minimum confidence required to return a result, a value between 0 and 100.</span>
-<span class="c1">// (higher confidence means less likely to get a wrong result, but may be slower to get a result)</span>
-<span class="n">anylineOcrConfig</span><span class="o">.</span><span class="na">setMinConfidence</span><span class="o">(</span><span class="mi">65</span><span class="o">);</span>
-<span class="c1">// a simple regex for a basic validation of the IBAN, results that don't match this, will not be returned</span>
-<span class="c1">// (full validation is more complex, as different countries have different formats)</span>
-<span class="n">anylineOcrConfig</span><span class="o">.</span><span class="na">setValidationRegex</span><span class="o">(</span><span class="s">"^[A-Z]{2}([0-9A-Z]\\s*){13,32}$"</span><span class="o">);</span>
-<span class="c1">// removes small contours (helpful in this case as no letters with small artifacts are allowed, like iöäü)</span>
-<span class="n">anylineOcrConfig</span><span class="o">.</span><span class="na">setRemoveSmallContours</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
-<span class="c1">// Experimental parameter to set the minimum sharpness (value between 0-100; 0 to turn sharpness detection off)</span>
-<span class="c1">// The goal of the minimum sharpness is to avoid a time consuming ocr step,</span>
-<span class="c1">// if the image is blurry and good results are therefore not likely.</span>
-<span class="n">anylineOcrConfig</span><span class="o">.</span><span class="na">setMinSharpness</span><span class="o">(</span><span class="mi">60</span><span class="o">);</span>
-<span class="c1">// set the ocr config</span>
-<span class="n">scanView</span><span class="o">.</span><span class="na">setAnylineOcrConfig</span><span class="o">(</span><span class="n">anylineOcrConfig</span><span class="o">);</span>
-
-<span class="c1">// initialize with the license and a listener</span>
-<span class="n">scanView</span><span class="o">.</span><span class="na">initAnyline</span><span class="o">(</span><span class="n">license</span><span class="o">,</span> <span class="k">new</span> <span class="n">AnylineOcrListener</span><span class="o">()</span> <span class="o">{</span>
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">onReport</span><span class="o">(</span><span class="n">String</span> <span class="n">identifier</span><span class="o">,</span> <span class="n">Object</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
-        <span class="c1">// Called with interesting values, that arise during processing.</span>
-        <span class="c1">// Some possibly reported values:</span>
-        <span class="c1">//</span>
-        <span class="c1">// $brightness - the brightness of the center region of the cutout as a float value</span>
-        <span class="c1">// $confidence - the confidence, an Integer value between 0 and 100</span>
-        <span class="c1">// $thresholdedImage - the current image transformed into black and white</span>
-        <span class="c1">// $sharpness - the detected sharpness value (only reported if minSharpness &gt; 0)</span>
-    <span class="o">}</span>
-
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">boolean</span> <span class="n">onTextOutlineDetected</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">PointF</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>
-        <span class="c1">// Called when the outline of a possible text is detected.</span>
-        <span class="c1">// If false is returned, the outline is drawn automatically.</span>
-        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">onResult</span><span class="o">(</span><span class="n">AnylineOcrResult</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
-        <span class="c1">// Called when a result is found (minimum confidence is exceeded and validation with regex was ok)</span>
-        <span class="n">ibanResultView</span><span class="o">.</span><span class="na">setResult</span><span class="o">(</span><span class="n">result</span><span class="o">.</span><span class="na">getText</span><span class="o">());</span>
-        <span class="n">ibanResultView</span><span class="o">.</span><span class="na">setVisibility</span><span class="o">(</span><span class="n">View</span><span class="o">.</span><span class="na">VISIBLE</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">onAbortRun</span><span class="o">(</span><span class="n">AnylineOcrError</span> <span class="n">code</span><span class="o">,</span> <span class="n">String</span> <span class="n">message</span><span class="o">)</span> <span class="o">{</span>
-        <span class="c1">// Is called when no result was found for the current image.</span>
-        <span class="c1">// E.g. if no text was found or the result is not valid.</span>
-    <span class="o">}</span>
-<span class="o">});</span>
-</code></pre>
-
-<blockquote>
-<p>in onResume()</p>
-</blockquote>
-<pre class="highlight java"><code><span class="n">scanView</span><span class="o">.</span><span class="na">startScanning</span><span class="o">();</span>
-</code></pre>
-
-<blockquote>
-<p>in onPause()</p>
-</blockquote>
-<pre class="highlight java"><code><span class="n">scanView</span><span class="o">.</span><span class="na">cancelScanning</span><span class="o">();</span>
-<span class="c1">//IMPORTANT: always release the camera in onPause</span>
-<span class="n">scanView</span><span class="o">.</span><span class="na">releaseCameraInBackground</span><span class="o">();</span>
-</code></pre>
-
-<h6 id="example-activity-layout">Example Activity Layout</h6>
-<pre class="highlight xml"><code><span class="nt">&lt;RelativeLayout</span>
-    <span class="na">xmlns:android=</span><span class="s">"http://schemas.android.com/apk/res/android"</span>
-    <span class="na">xmlns:tools=</span><span class="s">"http://schemas.android.com/tools"</span>
-    <span class="na">android:layout_width=</span><span class="s">"match_parent"</span>
-    <span class="na">android:layout_height=</span><span class="s">"match_parent"</span><span class="nt">&gt;</span>
-
-    <span class="nt">&lt;at.nineyards.anyline.modules.ocr.AnylineOcrScanView</span>
-        <span class="na">android:id=</span><span class="s">"@+id/scan_view"</span>
-        <span class="na">android:layout_width=</span><span class="s">"match_parent"</span>
-        <span class="na">android:layout_height=</span><span class="s">"match_parent"</span><span class="nt">/&gt;</span>
-<span class="nt">&lt;/RelativeLayout&gt;</span>
-</code></pre>
-
-<p>The AnylineOcrScanView can simply be included in the activity layout file, just like any other view. The view can be either configured via <a href="#configureViaXML">XML</a> or with a config json.</p>
-
-<p><a name="ibanViewConfig"> </a></p>
-
-<h6 id="example-view-config-for-the-iban-use-case">Example view config for the IBAN use case</h6>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"captureResolution"</span><span class="p">:</span><span class="s2">"1080"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"cutout"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"style"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rect"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"maxWidthPercent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"80%"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"maxHeightPercent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"80%"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"alignment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"top_half"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">870</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"ratioFromSize"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"strokeWidth"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"cornerRadius"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"strokeColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FFFFFF"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"outerColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"outerAlpha"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.3</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"flash"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"mode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"manual"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"alignment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bottom_right"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"beepOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"vibrateOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"blinkAnimationOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"cancelOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<p>A detailed description of all available config items can be found in the section <a href="#anyline-config">Anyline Config</a>.</p>
-
-<h6 id="newline">&NewLine;</h6>
-
-<h5 id="other-examples">Other Examples</h5>
-
-<p>For more example use cases of the Anyline OCR module, check out the Examples app in the download package, available here: <a href="https://www.anyline.io/download/">https://www.anyline.io/download/</a></p>
-
-<h6 id="reporting">Reporting</h6>
-<pre class="highlight java"><code><span class="n">scanView</span><span class="o">.</span><span class="na">setReportingEnabled</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
-</code></pre>
-
-<p>The reporting of results in the Community Edition (including an image)
-helps us to improve our product, and the customer experience.
-It is possible to turn off that feature by calling ​<em>setReportingEnabled(false)</em>​ on the AnylineOcrScanView.</p>
-
-<h4 id="ios">iOS</h4>
-
-<p>The following example illustrates an ISBN scanner use-case, realized with the Anyline OCR module.</p>
-
-<p>There are three simple steps necessary to get started:</p>
-
-<h6 id="1-initialize-the-module-in-viewdidload">1. Initialize the module in viewDidLoad</h6>
-
-<blockquote>
-<p>in <code class="prettyprint">viewDidLoad</code> lifecycle method</p>
-</blockquote>
-<pre class="highlight objective_c"><code><span class="c1">// The controller has to conform to &lt;AnylineOCRModuleDelegate&gt; to be able to receive results
-</span><span class="k">@interface</span> <span class="nc">ALISBNScanViewController</span> <span class="p">()</span><span class="o">&lt;</span><span class="n">AnylineOCRModuleDelegate</span><span class="o">&gt;</span>
-<span class="c1">// The Anyline module used for OCR
-</span><span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">strong</span><span class="p">)</span> <span class="n">AnylineOCRModuleView</span> <span class="o">*</span><span class="n">ocrModuleView</span><span class="p">;</span>
-
-<span class="k">@end</span>
-
-<span class="k">@implementation</span> <span class="nc">ALISBNScanViewController</span>
-<span class="cm">/*
- We will do our main setup in viewDidLoad. Its called once the view controller is getting ready to be displayed.
- */</span>
-<span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">viewDidLoad</span> <span class="p">{</span>
-    <span class="p">[</span><span class="n">super</span> <span class="nf">viewDidLoad</span><span class="p">];</span>
-
-    <span class="c1">// Initializing the module. Its a UIView subclass. We set the frame to fill the whole screen
-</span>    <span class="n">CGRect</span> <span class="n">frame</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIScreen</span> <span class="nf">mainScreen</span><span class="p">]</span> <span class="nf">applicationFrame</span><span class="p">];</span>
-    <span class="n">frame</span> <span class="o">=</span> <span class="n">CGRectMake</span><span class="p">(</span><span class="n">frame</span><span class="p">.</span><span class="n">origin</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">frame</span><span class="p">.</span><span class="n">origin</span><span class="p">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">self</span><span class="p">.</span><span class="n">navigationController</span><span class="p">.</span><span class="n">navigationBar</span><span class="p">.</span><span class="n">frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">height</span><span class="p">,</span> <span class="n">frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">width</span><span class="p">,</span> <span class="n">frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">height</span> <span class="o">-</span> <span class="n">self</span><span class="p">.</span><span class="n">navigationController</span><span class="p">.</span><span class="n">navigationBar</span><span class="p">.</span><span class="n">frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">height</span><span class="p">);</span>
-    <span class="n">self</span><span class="p">.</span><span class="n">ocrModuleView</span> <span class="o">=</span> <span class="p">[[</span><span class="n">AnylineOCRModuleView</span> <span class="nf">alloc</span><span class="p">]</span> <span class="nf">initWithFrame</span><span class="p">:</span><span class="n">frame</span><span class="p">];</span>
-
-    <span class="n">ALOCRConfig</span> <span class="o">*</span><span class="n">config</span> <span class="o">=</span> <span class="p">[[</span><span class="n">ALOCRConfig</span> <span class="nf">alloc</span><span class="p">]</span> <span class="nf">init</span><span class="p">];</span>
-    <span class="n">config</span><span class="p">.</span><span class="n">charHeight</span> <span class="o">=</span> <span class="n">ALRangeMake</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">70</span><span class="p">);</span>
-    <span class="n">config</span><span class="p">.</span><span class="n">tesseractLanguages</span> <span class="o">=</span> <span class="p">@[</span><span class="s">@"eng"</span><span class="p">,</span> <span class="s">@"deu"</span><span class="p">];</span>
-    <span class="n">config</span><span class="p">.</span><span class="n">charWhiteList</span> <span class="o">=</span> <span class="s">@"ISBN0123456789&lt;&gt;-X"</span><span class="p">;</span>
-    <span class="n">config</span><span class="p">.</span><span class="n">minConfidence</span> <span class="o">=</span> <span class="mi">65</span><span class="p">;</span>
-    <span class="n">config</span><span class="p">.</span><span class="n">validationRegex</span> <span class="o">=</span> <span class="s">@"^ISBN</span><span class="se">\\</span><span class="s">s*((978|979){1}-?</span><span class="se">\\</span><span class="s">s*)*[0-9]{1,5}-?</span><span class="se">\\</span><span class="s">s*[0-9]{2,7}-?</span><span class="se">\\</span><span class="s">s*[0-9]{2,7}-?</span><span class="se">\\</span><span class="s">s*[0-9X]$"</span><span class="p">;</span>
-    <span class="n">config</span><span class="p">.</span><span class="n">removeSmallContours</span> <span class="o">=</span> <span class="nb">YES</span><span class="p">;</span>
-    <span class="n">config</span><span class="p">.</span><span class="n">scanMode</span> <span class="o">=</span> <span class="n">ALLine</span><span class="p">;</span>
-
-    <span class="n">NSError</span> <span class="o">*</span><span class="n">error</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
-    <span class="c1">// We tell the module to bootstrap itself with the license key and delegate. The delegate will later get called
-</span>    <span class="c1">// by the module once we start receiving results.
-</span>    <span class="n">BOOL</span> <span class="n">success</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">ocrModuleView</span> <span class="nf">setupWithLicenseKey</span><span class="p">:</span><span class="n">kISBNLicenseKey</span>
-                                                  <span class="nf">delegate</span><span class="p">:</span><span class="n">self</span>
-                                                 <span class="nf">ocrConfig</span><span class="p">:</span><span class="n">config</span>
-                                                     <span class="nf">error</span><span class="p">:</span><span class="o">&amp;</span><span class="n">error</span><span class="p">];</span>
-    <span class="c1">// setupWithLicenseKey:delegate:error returns true if everything went fine. In the case something wrong
-</span>    <span class="c1">// we have to check the error object for the error message.
-</span>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">success</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// Something went wrong. The error object contains the error description
-</span>        <span class="n">NSAssert</span><span class="p">(</span><span class="n">success</span><span class="p">,</span> <span class="s">@"Setup Error: %@"</span><span class="p">,</span> <span class="n">error</span><span class="p">.</span><span class="n">debugDescription</span><span class="p">);</span>
-    <span class="p">}</span>
-
-    <span class="c1">// Load the UI Configuration from a json file
-</span>    <span class="n">NSString</span> <span class="o">*</span><span class="n">confPath</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSBundle</span> <span class="nf">mainBundle</span><span class="p">]</span> <span class="nf">pathForResource</span><span class="p">:</span><span class="s">@"isbn_config"</span> <span class="nf">ofType</span><span class="p">:</span><span class="s">@"json"</span><span class="p">];</span>
-    <span class="n">ALUIConfiguration</span> <span class="o">*</span><span class="n">ibanConf</span> <span class="o">=</span> <span class="p">[</span><span class="n">ALUIConfiguration</span> <span class="nf">cutoutConfigurationFromJsonFile</span><span class="p">:</span><span class="n">confPath</span><span class="p">];</span>
-    <span class="n">self</span><span class="p">.</span><span class="n">ocrModuleView</span><span class="p">.</span><span class="n">currentConfiguration</span> <span class="o">=</span> <span class="n">ibanConf</span><span class="p">;</span>
-
-    <span class="c1">// After setup is complete we add the module to the view of this view controller
-</span>    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">view</span> <span class="nf">addSubview</span><span class="p">:</span><span class="n">self</span><span class="p">.</span><span class="n">ocrModuleView</span><span class="p">];</span>
-<span class="p">}</span>
-
-<span class="cm">/*
- This is the main delegate method Anyline uses to report its results
- */</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">anylineOCRModuleView</span><span class="o">:</span><span class="p">(</span><span class="n">AnylineOCRModuleView</span> <span class="o">*</span><span class="p">)</span><span class="n">anylineOCRModuleView</span>
-               <span class="n">didFindResult</span><span class="o">:</span><span class="p">(</span><span class="n">ALOCRResult</span> <span class="o">*</span><span class="p">)</span><span class="n">result</span> <span class="p">{</span>
-    <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Anyline reports result:"</span><span class="p">,</span> <span class="n">result</span><span class="p">.</span><span class="n">text</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">anylineOCRModuleView</span><span class="o">:</span><span class="p">(</span><span class="n">AnylineOCRModuleView</span> <span class="o">*</span><span class="p">)</span><span class="n">anylineOCRModuleView</span>
-             <span class="n">reportsVariable</span><span class="o">:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">variableName</span>
-                       <span class="n">value</span><span class="o">:</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="n">value</span> <span class="p">{</span>
-    <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Anyline reports varaible: %@ with value: %@"</span><span class="p">,</span> <span class="n">variableName</span><span class="p">,</span> <span class="n">value</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">anylineOCRModuleView</span><span class="o">:</span><span class="p">(</span><span class="n">AnylineOCRModuleView</span> <span class="o">*</span><span class="p">)</span><span class="n">anylineOCRModuleView</span>
-           <span class="n">reportsRunFailure</span><span class="o">:</span><span class="p">(</span><span class="n">ALOCRError</span><span class="p">)</span><span class="n">error</span> <span class="p">{</span>
-    <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Anyline reports varaible an error: %@"</span><span class="p">,</span> <span class="n">error</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="k">@end</span>
-</code></pre>
-
-<ul>
-<li>Create a <code class="prettyprint">ALUIConfiguration</code> object and use its properties to configure the user interface, or load a layout file.</li>
-<li>Create a <code class="prettyprint">ALOCRConfig</code> object and use its properties to configure the module.</li>
-<li>Initialize the module with a license key, a delegate and the <code class="prettyprint">ALOCRConfig</code> object. The delegate will be called once there is a result.</li>
-</ul>
-
-<h6 id="2-start-scanning-process-in-viewdidappear">2. Start scanning process in viewDidAppear</h6>
-
-<blockquote>
-<p>in viewDidAppear()</p>
-</blockquote>
-<pre class="highlight objective_c"><code><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">ocrModuleView</span> <span class="nf">startScanningAndReturnError</span><span class="p">:</span><span class="o">&amp;</span><span class="n">error</span><span class="p">];</span>
-</code></pre>
-
-<p>Call <code class="prettyprint">startScanningAndReturnError</code> in <code class="prettyprint">viewDidAppear</code>. If there is a problem while starting the scanning process, an error object will be set so the error can be handled.</p>
-
-<h6 id="3-implement-the-delegate-method-and-receive-results">3. Implement the delegate method and receive results</h6>
-<pre class="highlight objective_c"><code><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">anylineOCRModuleView</span><span class="p">:(</span><span class="n">AnylineOCRModuleView</span> <span class="o">*</span><span class="p">)</span><span class="nv">anylineOCRModuleView</span> <span class="nf">didFindResult</span><span class="p">:(</span><span class="n">ALOCRResult</span> <span class="o">*</span><span class="p">)</span><span class="nv">result</span> <span class="p">{</span>
-   <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Anyline has a result"</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre>
-
-<p>To receive results implement the delegate method as can be seen in the example.</p>
-
-<h6 id="newline">&NewLine;</h6>
-
-<blockquote>
-<p>in viewWillDisappear()</p>
-</blockquote>
-<pre class="highlight objective_c"><code><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">ocrModuleView</span> <span class="nf">cancelScanningAndReturnError</span><span class="p">:</span><span class="o">&amp;</span><span class="n">error</span><span class="p">];</span>
-</code></pre>
-
-<p>After you received a result, call <code class="prettyprint">cancelScanningAndReturnError</code>. This also has to be called in <code class="prettyprint">viewWillDisappear</code> to clean up the module.</p>
-
-<p><a name="isbnViewConfig"> </a></p>
-
-<h6 id="example-view-config-for-the-iban-use-case">Example view config for the IBAN use case</h6>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"captureResolution"</span><span class="p">:</span><span class="s2">"1080"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"cutout"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"style"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rect"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"maxWidthPercent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"80%"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"maxHeightPercent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"80%"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"alignment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"top_half"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">540</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"ratioFromSize"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nt">"strokeWidth"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"cornerRadius"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"strokeColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FFFFFF"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"outerColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"outerAlpha"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.3</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"flash"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"mode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"manual"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"alignment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bottom_right"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"beepOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"vibrateOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"blinkAnimationOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"cancelOnResult"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<p>The OCR module can simply be added as a subview, just like any other view. The view can be either configured via <code class="prettyprint">ALUIConfiguration</code> or with a config json file.</p>
-
-<p>A detailed description of all available config items can be found in the section <a href="#anyline-config">Anyline Config</a></p>
-
-<h6 id="newline">&NewLine;</h6>
-
-<h5 id="other-examples">Other Examples</h5>
-
-<p>For more example use cases of the Anyline OCR Module, check out the Examples app in the download package, available here: <a href="https://www.anyline.io/download/">https://www.anyline.io/download/</a></p>
-
-<h4 id="cordova-plugin">Cordova Plugin</h4>
-
-<p>Cordova has two special options in the OCR-config:</p>
-
-<ul>
-<li>traineddataFiles: contains an array of traineddata files with path relative to the <em>www</em> directory. (This should be used instead of <em>tesseractLanguages</em>)</li>
-<li>drawTextOutline: true (default) if a visual feedback should be given in case a text area has been identified, false otherwise.</li>
-</ul>
-
-<h6 id="example-call-for-iban-scanning">Example call for IBAN scanning</h6>
-<pre class="highlight plaintext"><code>cordova.exec(onResult, onError, "AnylineSDK", "ANYLINE_OCR",
-    [
-        "YOUR_LICENSE_KEY",
-      {
-        "captureResolution": "1080",
-        "cutout": {
-            "style": "rect",
-            "maxWidthPercent": "80%",
-            "maxHeightPercent": "80%",
-            "alignment": "top_half",
-            "width": 870,
-            "ratioFromSize": {
-                "width": 5,
-                "height": 1
-            },
-            "strokeWidth": 2,
-            "cornerRadius": 10,
-            "strokeColor": "FFFFFF",
-            "outerColor": "000000",
-            "outerAlpha": 0.3
-        },
-        "flash": {
-            "mode": "manual",
-            "alignment": "bottom_right"
-        },
-        "beepOnResult": true,
-        "vibrateOnResult": true,
-        "blinkAnimationOnResult": true,
-        "cancelOnResult": true
-     },{
-        "scanMode": "LINE",
-        "minCharHeight": 30,
-        "maxCharHeight": 60,
-        "traineddataFiles": ["assets/eng_no_dict.traineddata"],
-        "charWhitelist": "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
-        "validationRegex": "^[A-Z]{2}([0-9A-Z]\\s*){13,32}$",
-        "minConfidence": 65,
-        "removeSmallContours": true,
-        "charCountX": 4,
-        "charCountY": 2,
-        "charPaddingXFactor": 1.0,
-        "charPaddingYFactor": 1.0,
-        "isBrightTextOnDark": false,
-        "drawTextOutline": true
-     }
-   ]
-);
-</code></pre>
-
-<p>For more detailed information about the config parameters, see the <a href="#cordova-example">example</a> in section Quick Start.</p>
-
-<h6 id="reporting">Reporting</h6>
-<pre class="highlight plaintext"><code>//...
-            "blinkAnimationOnResult": true,
-            "cancelOnResult": true,
-            "reportingEnabled": false
-        }
-    ]
-</code></pre>
-
-<p>The reporting of  results in the Community Edition (including an image) helps us to improve our product, and the customer experience.
-It is possible to turn off this feature by adding <em>&ldquo;reportingEnabled&rdquo;: false</em> to the above config.</p>
-
-<p><a name="ordercodeModule"> </a></p>
+          <p><a name="ordercodeModule"> </a></p>
 
 <h2 id="order-code">Order Code</h2>
 
