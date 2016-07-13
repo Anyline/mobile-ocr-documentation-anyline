@@ -125,6 +125,26 @@ This API contains a <a href="#getting-started">Quick Start Guide</a> for all sup
 <li>decent camera functionality (recommended: 720p and adequate auto focus)</li>
 </ul>
 
+<aside class="warning">
+<b>Android API Level 23 and the x86 architecture</b>
+<br/>
+At the moment, the x86 architecture of the Anyline SDK requires an Android targetSDKVersion < 23.
+<br/><br/>
+If you want to build your app against targetSDKVersion >= 23, you can exclude the x86 by adding the following to your build.gradle:
+<br/>
+<code style="white-space: pre; background: transparent;">
+android {
+....
+    defaultConfig {
+    ....
+        ndk {
+            abiFilters "armeabi-v7a"
+        }
+    }
+}
+</code>
+</aside>
+
 <h3 id="quick-start-guide">Quick Start Guide</h3>
 
 <h4 id="1-add-anylinesdk-as-dependency">1. Add AnylineSDK as dependency</h4>
@@ -142,7 +162,7 @@ This API contains a <a href="#getting-started">Quick Start Guide</a> for all sup
 
 <span class="n">dependencies</span> <span class="o">{</span>
     <span class="c1">//add the anyline sdk as dependency (maybe adapt version name)
-</span>    <span class="n">compile</span> <span class="s1">'io.anyline:anylinesdk:3.5.0@aar'</span>
+</span>    <span class="n">compile</span> <span class="s1">'io.anyline:anylinesdk:3.6.0@aar'</span>
     <span class="c1">//... your other dependencies
 </span><span class="o">}</span>
 </code></pre>
@@ -173,7 +193,7 @@ compile &lsquo;io.anyline:anylinesdk:3.3.0-epson@aar&rsquo;
 <span class="o">}</span>
 
 <span class="n">dependencies</span> <span class="o">{</span>
-    <span class="n">compile</span><span class="o">(</span><span class="nl">name:</span><span class="s1">'anylinesdk-3.5.0'</span><span class="o">,</span> <span class="nl">ext:</span><span class="s1">'aar'</span><span class="o">)</span>
+    <span class="n">compile</span><span class="o">(</span><span class="nl">name:</span><span class="s1">'anylinesdk-3.6.0'</span><span class="o">,</span> <span class="nl">ext:</span><span class="s1">'aar'</span><span class="o">)</span>
     <span class="c1">//... your other dependencies
 </span><span class="o">}</span>
 </code></pre>
@@ -352,7 +372,7 @@ The Epson BT2000 has no flash or vibration alarm integrated. Hence, all settings
 
 <h4 id="1-with-cocoapods">1. With Cocoapods</h4>
 
-<p>Simply add <em>pod &lsquo;Anyline&rsquo;, &rsquo;~&gt; 3.5&rsquo;</em> to your Podfile and run <em>pod install</em> or <em>pod update</em>.
+<p>Simply add <em>pod &lsquo;Anyline&rsquo;, &rsquo;~&gt; 3.6&rsquo;</em> to your Podfile and run <em>pod install</em> or <em>pod update</em>.
 (Please make sure you are on the latest version of CocoaPods)</p>
 
 <p>You&rsquo;re all done and can jump to point 3.1. </p>
@@ -381,8 +401,12 @@ The Epson BT2000 has no flash or vibration alarm integrated. Hence, all settings
 
 <h4 id="3-linker-flags">3. Linker Flags</h4>
 
+<aside class="notice">
+<b>This changed from -ObjC to -all_load in Aynline SDK version 3.6</b>
+</aside>
+
 <p>In your project inspector switch to the <em>Build Settings</em> tab  and search for <em>Other Linker Flags</em>. Select
-<em>Other - Other Linker Flags</em> and add <em>-ObjC</em>.
+<em>Other - Other Linker Flags</em> and add <em>-all_load</em>.
 This flag causes the linker to load every object file in the library that defines an Objective-C class or category.</p>
 
 <p><img alt="Linker Flags" src="images/LinkerFlags.jpg" /></p>
@@ -1945,7 +1969,7 @@ The feedback is used to present the detected symbols back to the user, which hel
 </tbody></table>
 
 <aside class="warning">
-For reasons of backward compatibility, this configuration correlates with the onTextOutlineDetected callback, as it can be seen in <a href="#anylineOcrExamples">AnylineOCR Examples</a>.<br/>If the callback returns true, this configuration is ignored, as it is expected that the feedback should not be drawn by the SDK.<br/>If the callback returns false, this configuration is used.
+For reasons of backward compatibility, this configuration correlates with the onTextOutlineDetected callback, as it can be seen in <a href="#anylineOcrExamples">AnylineOCR Examples</a>.<br/>If the callback returns true and no visual feedback was defined in the config, nothing will be drawn. If the callback returns true and a visualFeedback is defined, the feedback will be drawn anyways, since the feedback config was explicitly added. <br/>If the callback returns false and there is no visual feedback config, the standard RECT will be drawn. When there is a feedback config defined, the specified config will be drawn.
 </aside>
 
 <aside class="notice">
@@ -2095,6 +2119,7 @@ app:visual_feedback_animation_duration="75"
 <li>captureResolution is defined by preferred_preview_width and preferred_preview_height</li>
 <li>pictureResolution is defined by preferred_picture_width and preferred_picture_height</li>
 <li>colors contain alpha value, so there is no extra option for alpha</li>
+<li>color strings must include the &rsquo;#&rsquo; at the beginning. For example: <code class="prettyprint">app:cutout_stroke_color=&quot;#FFFFFFFF&quot;</code></li>
 </ul>
 
 <p><a name="iosConfig"> </a></p>
@@ -2325,11 +2350,22 @@ In the Community Edition of the SDK a watermark is displayed. Depending on the c
 
 <p>The example shows how to use the getWatermarkRect function to add a TextView with a top margin of 8dp under the watermark view</p>
 
-<aside class="notice">
-<b>Use functions postDelayed</b>
-<br/>
-Both functions can only be used after the ScanView is drawn, therefore use postDelayed otherwise the Rect will be null.
-</aside>
+<h6 id="how-to-know-when-the-rectangles-are-available">How to know when the rectangles are available?</h6>
+
+<p>Both, the position of the cutout, and the position of the watermark, can only be used after the ScanView is drawn. Otherwise the corresponding rects will not be known yet and be null.
+An OnGlobalLayoutListener can be used to add the custom views after the rects are available.</p>
+<pre class="highlight plaintext"><code>scanView.getViewTreeObserver().addOnGlobalLayoutListener(
+        new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+
+                if (scanView.getCutoutRect() != null) {
+                    // layout your views around the cutout here
+                }
+
+            }
+        });
+</code></pre>
 
 <h3 id="ios">iOS</h3>
 <pre class="highlight objective_c"><code><span class="c1">// get the cutout rect from the scan view
@@ -2481,6 +2517,12 @@ for your use-case. This script can then be set as a parameter to this module, so
 <td>The minimum sharpness required to further process an image with a value between 0 and 100 (0 to turn off sharpness detection)</td>
 <td>It is used to avoid processing of blurry images which are unlikley to return a result in order to avoid the time consuming ocr step. It is recommended to set an initial sharpness of 50 and gradually increase the value to a threshold where you get satisfying results. This parameter is in alpha stage.</td>
 </tr>
+<tr>
+<td>removeWhitespaces</td>
+<td>boolean</td>
+<td>If set to <code class="prettyprint">true</code>, whitespaces will be removed in the returned result. Default is <code class="prettyprint">false</code></td>
+<td>If you want the result not to contain any whitespaces, as in an IBAN for example, set this parameter to true</td>
+</tr>
 </tbody></table>
 
 <h4 id="settings-grid-mode-only">Settings GRID mode only</h4>
@@ -2524,6 +2566,10 @@ for your use-case. This script can then be set as a parameter to this module, so
 <td></td>
 </tr>
 </tbody></table>
+
+<aside class="notice">
+<code class="prettyprint">removeWhitespace</code> is set to true in GRID mode. This cannot be changed.
+</aside>
 
 <p><a name="OcrConig_customScript"> </a></p>
 
@@ -2615,6 +2661,8 @@ Important! If you have multiple traineddata files, this method must be called fo
 <span class="n">anylineOcrConfig</span><span class="o">.</span><span class="na">setValidationRegex</span><span class="o">(</span><span class="s">"^[A-Z]{2}([0-9A-Z]\\s*){13,32}$"</span><span class="o">);</span>
 <span class="c1">// removes small contours (helpful in this case as no letters with small artifacts are allowed, like iöäü)</span>
 <span class="n">anylineOcrConfig</span><span class="o">.</span><span class="na">setRemoveSmallContours</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+<span class="c1">// removes possible whitespaces in the result</span>
+<span class="n">anylineOcrConfig</span><span class="o">.</span><span class="na">setRemoveWhitespaces</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
 
 <span class="c1">// set the ocr config</span>
 <span class="n">scanView</span><span class="o">.</span><span class="na">setAnylineOcrConfig</span><span class="o">(</span><span class="n">anylineOcrConfig</span><span class="o">);</span>
@@ -2779,6 +2827,7 @@ It is possible to turn off that feature by calling ​<em>setReportingEnabled(fa
     <span class="n">config</span><span class="p">.</span><span class="n">minConfidence</span> <span class="o">=</span> <span class="mi">65</span><span class="p">;</span>
     <span class="n">config</span><span class="p">.</span><span class="n">validationRegex</span> <span class="o">=</span> <span class="s">@"^ISBN</span><span class="se">\\</span><span class="s">s*((978|979){1}-?</span><span class="se">\\</span><span class="s">s*)*[0-9]{1,5}-?</span><span class="se">\\</span><span class="s">s*[0-9]{2,7}-?</span><span class="se">\\</span><span class="s">s*[0-9]{2,7}-?</span><span class="se">\\</span><span class="s">s*[0-9X]$"</span><span class="p">;</span>
     <span class="n">config</span><span class="p">.</span><span class="n">removeSmallContours</span> <span class="o">=</span> <span class="nb">YES</span><span class="p">;</span>
+    <span class="n">config</span><span class="p">.</span><span class="n">removeWhitespaces</span> <span class="o">=</span> <span class="nb">YES</span><span class="p">;</span>
     <span class="n">config</span><span class="p">.</span><span class="n">scanMode</span> <span class="o">=</span> <span class="n">ALLine</span><span class="p">;</span>
 
     <span class="n">NSError</span> <span class="o">*</span><span class="n">error</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
@@ -4198,6 +4247,50 @@ The additional configuration fields is:</p>
 <p>The AnylineDocumentModuleView can simply be added as a subview.</p>
 
 <p>For custom configuration (e.g. cutout, flash, feedback on successful scan, etc.) you can either use a json-file or configure it by accessing the properties of the module. If you need more detailed information about all available config items see <a href="#anyline-config">Anyline Config</a>.</p>
+
+<h3 id="cordova-plugin">Cordova Plugin</h3>
+
+<p>This is in ALPHA stage and usage may change in the future.</p>
+
+<h4 id="example">Example</h4>
+<pre class="highlight plaintext"><code>cordova.exec(onResult, onError, "AnylineSDK", "DOCUMENT",
+    [
+        "YOUR_LICENSE_KEY",
+        {
+            "captureResolution":"720p",
+            "pictureResolution":"1080p",
+            "cutout": {
+                "style": "rect",
+                "maxWidthPercent": "100%",
+                "maxHeightPercent": "100%",
+                "width": 720,
+                "ratioFromSize": {
+                    "width": 10,
+                    "height": 15
+                },
+                "alignment": "center",
+                "strokeWidth": 2,
+                "cornerRadius": 0,
+                "strokeColor": "00000000"
+            },
+            "flash": {
+                "mode": "manual",
+                "alignment": "bottom_left",
+                "offset": {
+                    "x": 10,
+                    "y": 0
+                }
+            },
+            "beepOnResult": true,
+            "vibrateOnResult": true,
+            "blinkAnimationOnResult": true,
+            "cancelOnResult": true
+        }
+    ]
+);
+</code></pre>
+
+<p>The result returned in onResult contains an attribute &ldquo;imagePath&rdquo; that holds the path to the cropped and transformed image.</p>
 
           <p><a name="ordercodeModule"> </a></p>
 
