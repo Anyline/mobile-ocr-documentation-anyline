@@ -106,6 +106,7 @@ This API contains a <a href="#getting-started">Quick Start Guide</a> for all sup
 <p>The Android bundle contains the following parts:</p>
 
 <ul>
+<li><strong>Anyline-Font:</strong>         contains a beautiful Machine-Readable Font to delight computers and humans alike</li>
 <li><strong>AnylineSDK:</strong>           contains the anyline-android-release.aar library</li>
 <li><strong>AnylineSDKExamples:</strong>   contains a simple app where an example for each module is implemented - it can be installed right away</li>
 <li><strong>Documentation:</strong>        contains the java doc for the anyline-sdk, and this web documentation</li>
@@ -142,7 +143,7 @@ This API contains a <a href="#getting-started">Quick Start Guide</a> for all sup
 
 <span class="n">dependencies</span> <span class="o">{</span>
     <span class="c1">//add the anyline sdk as dependency (maybe adapt version name)
-</span>    <span class="n">compile</span> <span class="s1">'io.anyline:anylinesdk:3.6.0@aar'</span>
+</span>    <span class="n">compile</span> <span class="s1">'io.anyline:anylinesdk:3.7.0@aar'</span>
     <span class="c1">//... your other dependencies
 </span><span class="o">}</span>
 </code></pre>
@@ -173,7 +174,7 @@ compile &lsquo;io.anyline:anylinesdk:3.3.0-epson@aar&rsquo;
 <span class="o">}</span>
 
 <span class="n">dependencies</span> <span class="o">{</span>
-    <span class="n">compile</span><span class="o">(</span><span class="nl">name:</span><span class="s1">'anylinesdk-3.6.0'</span><span class="o">,</span> <span class="nl">ext:</span><span class="s1">'aar'</span><span class="o">)</span>
+    <span class="n">compile</span><span class="o">(</span><span class="nl">name:</span><span class="s1">'anylinesdk-3.7.0'</span><span class="o">,</span> <span class="nl">ext:</span><span class="s1">'aar'</span><span class="o">)</span>
     <span class="c1">//... your other dependencies
 </span><span class="o">}</span>
 </code></pre>
@@ -1245,6 +1246,10 @@ Because barcode scanning is too fast, the <b>DidFindScanResult</b> event is not 
 <h4 id="8-test-your-app-on-an-ios-device">8. Test your app on an iOS device</h4>
 
 <p>Build your project and deploy your application on your iOS device. Make sure you choose your storyboard and an adequate deployment target in your Info.plist (&gt;= 7.1 - but not higher than your device target).</p>
+
+<aside class="notice">
+<b>Important: </b> Make sure that you added additional mtouch options <b>-gcc_flags -all_load</b> in the iOS Build settings! Also ensure that you have selected <b>Link all assemblies</b> in the Linker Options! Otherwise, the build will fail!
+</aside>
 
 <p>For module-specific documentation, please check <a href="#modules">this section</a> for more information. </p>
 
